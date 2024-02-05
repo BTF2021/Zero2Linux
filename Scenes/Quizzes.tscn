@@ -1,0 +1,95 @@
+[gd_scene load_steps=4 format=3 uid="uid://dkrwuagt06eee"]
+
+[ext_resource type="Script" path="res://Scripts/Quizzes.cs" id="1_2xhny"]
+[ext_resource type="Texture2D" uid="uid://b1vo0cklpefq" path="res://Sprites/Back.png" id="1_fvxpi"]
+[ext_resource type="Texture2D" uid="uid://rsq42q4qde3" path="res://Sprites/BackHighlight.png" id="2_wrlhq"]
+
+[node name="Quizzes" type="Node2D"]
+script = ExtResource("1_2xhny")
+
+[node name="Tint" type="ColorRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 649.0
+color = Color(0.0313726, 0.0313726, 0.0313726, 0.576471)
+
+[node name="Settings" type="Panel" parent="."]
+self_modulate = Color(0.152941, 0.152941, 0.152941, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 66.0
+offset_top = 55.0
+offset_right = 1079.0
+offset_bottom = 590.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+
+[node name="Title" type="Label" parent="Settings"]
+layout_mode = 0
+offset_left = 348.0
+offset_top = 6.0
+offset_right = 636.0
+offset_bottom = 75.0
+theme_override_font_sizes/font_size = 50
+text = "Intrebari"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Back" type="TextureButton" parent="Settings"]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+scale = Vector2(0.25, 0.25)
+texture_normal = ExtResource("1_fvxpi")
+texture_pressed = ExtResource("2_wrlhq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings"]
+layout_mode = 0
+offset_left = 328.0
+offset_top = 159.0
+offset_right = 656.0
+offset_bottom = 341.0
+
+[node name="Random" type="Button" parent="Settings/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+tooltip_text = "Genereaza un chestionar din lectiile deja parcurse"
+text = "Chestionar aleator"
+
+[node name="Select" type="Button" parent="Settings/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+tooltip_text = "Alege un chestionar dintr-o lectie"
+disabled = true
+text = "Selectare lectie"
+
+[node name="Custom" type="Button" parent="Settings/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+tooltip_text = "Alege lectiile din care vrei sa fi intrebat"
+disabled = true
+text = "Chestionar personalizat"
+
+[node name="Description" type="Label" parent="."]
+offset_left = 178.0
+offset_top = 448.0
+offset_right = 943.0
+offset_bottom = 488.0
+theme_override_font_sizes/font_size = 20
+text = "Testeaza-ti cunostiintele dobandite pe parcursul lectiilor cu aceste chestionare"
+
+[node name="Stats" type="Label" parent="."]
+offset_left = 72.0
+offset_top = 531.0
+offset_right = 1076.0
+offset_bottom = 590.0
+theme_override_font_sizes/font_size = 20
+text = "Chestionare terminate: 0
+Lectii terminate: 4"
+
+[connection signal="pressed" from="Settings/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Settings/VBoxContainer/Random" to="." method="_on_random_pressed"]

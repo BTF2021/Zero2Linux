@@ -1,0 +1,153 @@
+[gd_scene load_steps=4 format=3 uid="uid://1phgnjaru1ou"]
+
+[ext_resource type="Script" path="res://Scripts/Settings.cs" id="1_5tuin"]
+[ext_resource type="Texture2D" uid="uid://b1vo0cklpefq" path="res://Sprites/Back.png" id="2_l5hj0"]
+[ext_resource type="Texture2D" uid="uid://rsq42q4qde3" path="res://Sprites/BackHighlight.png" id="3_swqnr"]
+
+[node name="Settings" type="Node2D"]
+script = ExtResource("1_5tuin")
+
+[node name="Tint" type="ColorRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 649.0
+color = Color(0.0313726, 0.0313726, 0.0313726, 0.294118)
+
+[node name="Settings" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 152.0
+offset_top = 96.0
+offset_right = 1009.0
+offset_bottom = 555.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+
+[node name="TabContainer" type="TabContainer" parent="Settings"]
+layout_mode = 2
+offset_left = 52.0
+offset_top = 2.0
+offset_right = 859.0
+offset_bottom = 458.0
+clip_tabs = false
+
+[node name="Video" type="Control" parent="Settings/TabContainer"]
+layout_mode = 2
+
+[node name="Fullscreen" type="Label" parent="Settings/TabContainer/Video"]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 21.0
+offset_right = 120.0
+offset_bottom = 48.0
+theme_override_font_sizes/font_size = 19
+text = "Fullscren"
+
+[node name="FullscreenButton" type="CheckButton" parent="Settings/TabContainer/Video/Fullscreen"]
+layout_mode = 0
+offset_left = 350.0
+offset_right = 394.0
+offset_bottom = 24.0
+
+[node name="Antialiasing" type="Label" parent="Settings/TabContainer/Video"]
+self_modulate = Color(1, 1, 1, 0.431373)
+layout_mode = 2
+offset_left = 37.0
+offset_top = 55.0
+offset_right = 150.0
+offset_bottom = 82.0
+theme_override_font_sizes/font_size = 19
+text = "Anti aliasing"
+
+[node name="AntialiasingButton" type="OptionButton" parent="Settings/TabContainer/Video/Antialiasing"]
+layout_mode = 0
+offset_left = 350.0
+offset_right = 395.0
+offset_bottom = 20.0
+scale = Vector2(0.845, 0.845)
+disabled = true
+item_count = 4
+selected = 0
+popup/item_0/text = "Disabled"
+popup/item_0/id = 0
+popup/item_1/text = "2x"
+popup/item_1/id = 1
+popup/item_2/text = "4x"
+popup/item_2/id = 2
+popup/item_3/text = "8x"
+popup/item_3/id = 3
+
+[node name="VSync" type="Label" parent="Settings/TabContainer/Video"]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 89.0
+offset_right = 150.0
+offset_bottom = 116.0
+theme_override_font_sizes/font_size = 19
+text = "VSync"
+
+[node name="VSyncButton" type="CheckButton" parent="Settings/TabContainer/Video/VSync"]
+layout_mode = 0
+offset_left = 350.0
+offset_right = 394.0
+offset_bottom = 24.0
+button_pressed = true
+
+[node name="Misc" type="Control" parent="Settings/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="DeleteSave" type="Label" parent="Settings/TabContainer/Misc"]
+self_modulate = Color(1, 1, 1, 0.431373)
+layout_mode = 2
+offset_left = 37.0
+offset_top = 21.0
+offset_right = 150.0
+offset_bottom = 48.0
+theme_override_font_sizes/font_size = 19
+text = "Delete saved data"
+
+[node name="Button" type="Button" parent="Settings/TabContainer/Misc/DeleteSave"]
+layout_mode = 0
+offset_left = 350.0
+offset_right = 413.0
+offset_bottom = 30.0
+disabled = true
+text = "Delete"
+
+[node name="Back" type="TextureButton" parent="Settings"]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+scale = Vector2(0.25, 0.25)
+texture_normal = ExtResource("2_l5hj0")
+texture_pressed = ExtResource("3_swqnr")
+
+[node name="Lessons" type="Control" parent="Settings"]
+visible = false
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 52.0
+offset_top = 33.0
+offset_right = 52.0
+offset_bottom = 2.0
+
+[node name="Demo" type="Label" parent="."]
+visible = false
+offset_left = 496.0
+offset_top = 503.0
+offset_right = 697.0
+offset_bottom = 538.0
+theme_override_font_sizes/font_size = 25
+text = "Setari in progres"
+
+[connection signal="pressed" from="Settings/TabContainer/Video/Fullscreen/FullscreenButton" to="." method="_on_fullscreen_pressed"]
+[connection signal="item_selected" from="Settings/TabContainer/Video/Antialiasing/AntialiasingButton" to="." method="_on_antialiasing_selected"]
+[connection signal="pressed" from="Settings/TabContainer/Video/VSync/VSyncButton" to="." method="_on_v_sync_button_pressed"]
+[connection signal="pressed" from="Settings/Back" to="." method="_on_back_pressed"]

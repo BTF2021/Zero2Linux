@@ -1,0 +1,123 @@
+[gd_scene load_steps=4 format=3 uid="uid://uv2j0b6x3fqu"]
+
+[ext_resource type="Script" path="res://Courses/Lesson_1/Lesson.cs" id="1_to23w"]
+[ext_resource type="Texture2D" uid="uid://b1vo0cklpefq" path="res://Sprites/Back.png" id="2_5h18x"]
+[ext_resource type="Texture2D" uid="uid://rsq42q4qde3" path="res://Sprites/BackHighlight.png" id="3_mqu3o"]
+
+[node name="Lesson" type="Node2D"]
+script = ExtResource("1_to23w")
+
+[node name="Back" type="TextureButton" parent="."]
+offset_right = 200.0
+offset_bottom = 200.0
+scale = Vector2(0.25, 0.25)
+texture_normal = ExtResource("2_5h18x")
+texture_pressed = ExtResource("3_mqu3o")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 105.0
+offset_top = 2.0
+offset_right = 1054.0
+offset_bottom = 648.0
+size_flags_vertical = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
+layout_direction = 1
+layout_mode = 0
+offset_left = 8.0
+offset_top = -1.0
+offset_right = 940.0
+offset_bottom = 646.0
+follow_focus = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Content" type="VBoxContainer" parent="Panel/ScrollContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Panel/ScrollContainer/MarginContainer/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Introducere"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator4" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Content"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/ScrollContainer/MarginContainer/Content"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 20
+theme_override_font_sizes/italics_font_size = 20
+theme_override_font_sizes/bold_italics_font_size = 20
+theme_override_font_sizes/mono_font_size = 20
+text = "Nu vreau pur si simplu sa copiez de pe wikipedia, asa ca o sa explic cum va fi o lectie
+
+Aici va fi o parte din lectie, urmata de o intrebare legata de sectiunea aceasta
+"
+fit_content = true
+
+[node name="HSeparator" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Content"]
+layout_mode = 2
+
+[node name="Title3" type="Label" parent="Panel/ScrollContainer/MarginContainer/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 37
+text = "Insereaza o intrebare aici"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Content"]
+layout_mode = 2
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Panel/ScrollContainer/MarginContainer/Content"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 20
+theme_override_font_sizes/italics_font_size = 20
+theme_override_font_sizes/bold_italics_font_size = 20
+theme_override_font_sizes/mono_font_size = 20
+text = "Apoi urmeaza restul lectiei si asa mai departe pana la finalul lectiei
+
+Se pot introduce si imagini. De ex:"
+fit_content = true
+drag_and_drop_selection_enabled = false
+
+[node name="Back2" type="TextureRect" parent="Panel/ScrollContainer/MarginContainer/Content"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("2_5h18x")
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Panel/ScrollContainer/MarginContainer/Content"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 20
+theme_override_font_sizes/italics_font_size = 20
+theme_override_font_sizes/bold_italics_font_size = 20
+theme_override_font_sizes/mono_font_size = 20
+text = "                                                               O imagine:  ^
+                                                                                     |
+
+Marimea lectiilor nu sunt limitate de acest dreptunghi. Daca e mai mare de atat, o sa apara un scrollbar la dreapta.
+
+Recapitulare mai jos"
+fit_content = true
+drag_and_drop_selection_enabled = false
+
+[node name="HSeparator3" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Content"]
+layout_mode = 2
+
+[node name="Title2" type="Label" parent="Panel/ScrollContainer/MarginContainer/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 37
+text = "Recapitulare"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Quiz" type="VBoxContainer" parent="Panel/ScrollContainer/MarginContainer/Content"]
+layout_mode = 2
+
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

@@ -1,0 +1,4 @@
+Alpha 0.1;
+- Acest changelog este pentru a testa notificarea pentru o noua versiune
+- In curand in Alpha 0.2
+- Nimic nou

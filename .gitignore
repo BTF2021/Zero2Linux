@@ -1,7 +1,0 @@
-# Godot 4+ specific ignores
-.godot/
-addons/debug_menu/debug_menu.gd
-addons/debug_menu/debug_menu.tscn
-addons/debug_menu/plugin.cfg
-addons/debug_menu/plugin.gd
-addons/debug_menu/LICENSE.md

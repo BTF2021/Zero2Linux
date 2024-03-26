@@ -1,11 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://cseipsy3u81k3"]
+[gd_scene load_steps=6 format=3 uid="uid://cseipsy3u81k3"]
 
 [ext_resource type="Texture2D" uid="uid://b1vo0cklpefq" path="res://Sprites/Back.png" id="1_0rts7"]
-[ext_resource type="Script" path="res://Courses/Lesson_1/Lesson.cs" id="1_b618v"]
+[ext_resource type="Script" path="res://Scripts/Lesson.cs" id="1_4ktg6"]
 [ext_resource type="Texture2D" uid="uid://rsq42q4qde3" path="res://Sprites/BackHighlight.png" id="2_y1bgk"]
+[ext_resource type="Texture2D" uid="uid://cjf5iw2rvyax1" path="res://Sprites/debugBg.png" id="4_cg4kx"]
+[ext_resource type="Material" uid="uid://bl5ra5x2dyfgr" path="res://Sprites/Blur.material" id="5_wtb56"]
 
 [node name="Lesson" type="Node2D"]
-script = ExtResource("1_b618v")
+script = ExtResource("1_4ktg6")
+lessonid = 1
 
 [node name="Back" type="TextureButton" parent="."]
 offset_right = 200.0
@@ -15,10 +18,9 @@ texture_normal = ExtResource("1_0rts7")
 texture_pressed = ExtResource("2_y1bgk")
 
 [node name="Panel" type="Panel" parent="."]
-offset_left = 105.0
-offset_top = 2.0
-offset_right = 1054.0
-offset_bottom = 648.0
+offset_left = 168.0
+offset_right = 1117.0
+offset_bottom = 719.0
 size_flags_vertical = 0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
@@ -26,28 +28,67 @@ layout_direction = 1
 layout_mode = 0
 offset_left = 8.0
 offset_top = -1.0
-offset_right = 940.0
-offset_bottom = 646.0
+offset_right = 949.0
+offset_bottom = 718.0
 follow_focus = true
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Content" type="VBoxContainer" parent="Panel/ScrollContainer/MarginContainer"]
+[node name="Body" type="VBoxContainer" parent="Panel/ScrollContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="Panel/ScrollContainer/MarginContainer/Content"]
+[node name="Title" type="Label" parent="Panel/ScrollContainer/MarginContainer/Body"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "Introducere"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HSeparator4" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Content"]
+[node name="HSeparator" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Body"]
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Panel/ScrollContainer/MarginContainer/Content"]
+[node name="VideoPreview" type="TextureRect" parent="Panel/ScrollContainer/MarginContainer/Body"]
+layout_mode = 2
+texture = ExtResource("4_cg4kx")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="Spoiler" type="ColorRect" parent="Panel/ScrollContainer/MarginContainer/Body/VideoPreview"]
+material = ExtResource("5_wtb56")
+layout_mode = 0
+offset_right = 933.0
+offset_bottom = 524.0
+
+[node name="Watch" type="Button" parent="Panel/ScrollContainer/MarginContainer/Body/VideoPreview"]
+layout_mode = 2
+offset_left = 261.0
+offset_top = 331.0
+offset_right = 666.0
+offset_bottom = 381.0
+theme_override_font_sizes/font_size = 30
+text = "Urmareste Videoul"
+
+[node name="Atentie" type="Label" parent="Panel/ScrollContainer/MarginContainer/Body/VideoPreview"]
+visible = false
+layout_mode = 0
+offset_left = 197.0
+offset_top = 83.0
+offset_right = 743.0
+offset_bottom = 184.0
+theme_override_font_sizes/font_size = 35
+text = "Videoclipul nu poate fi redat
+FFmpeg static nu este instalat"
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Body"]
+layout_mode = 2
+
+[node name="Content" type="VBoxContainer" parent="Panel/ScrollContainer/MarginContainer/Body"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/ScrollContainer/MarginContainer/Body/Content"]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 20
 theme_override_font_sizes/bold_font_size = 20
@@ -60,20 +101,20 @@ Aici va fi o parte din lectie, urmata de o intrebare legata de sectiunea aceasta
 "
 fit_content = true
 
-[node name="HSeparator" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Content"]
+[node name="HSeparator" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Body/Content"]
 layout_mode = 2
 
-[node name="Title3" type="Label" parent="Panel/ScrollContainer/MarginContainer/Content"]
+[node name="Title3" type="Label" parent="Panel/ScrollContainer/MarginContainer/Body/Content"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 37
 text = "Insereaza o intrebare aici"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HSeparator2" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Content"]
+[node name="HSeparator2" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Body/Content"]
 layout_mode = 2
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="Panel/ScrollContainer/MarginContainer/Content"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="Panel/ScrollContainer/MarginContainer/Body/Content"]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 20
 theme_override_font_sizes/bold_font_size = 20
@@ -86,12 +127,12 @@ Se pot introduce si imagini. De ex:"
 fit_content = true
 drag_and_drop_selection_enabled = false
 
-[node name="Back2" type="TextureRect" parent="Panel/ScrollContainer/MarginContainer/Content"]
+[node name="Back2" type="TextureRect" parent="Panel/ScrollContainer/MarginContainer/Body/Content"]
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("1_0rts7")
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="Panel/ScrollContainer/MarginContainer/Content"]
+[node name="RichTextLabel3" type="RichTextLabel" parent="Panel/ScrollContainer/MarginContainer/Body/Content"]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 20
 theme_override_font_sizes/bold_font_size = 20
@@ -107,17 +148,18 @@ Recapitulare mai jos"
 fit_content = true
 drag_and_drop_selection_enabled = false
 
-[node name="HSeparator3" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Content"]
+[node name="HSeparator3" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Body"]
 layout_mode = 2
 
-[node name="Title2" type="Label" parent="Panel/ScrollContainer/MarginContainer/Content"]
+[node name="Test" type="Label" parent="Panel/ScrollContainer/MarginContainer/Body"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 37
+theme_override_font_sizes/font_size = 50
 text = "Recapitulare"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Quiz" type="VBoxContainer" parent="Panel/ScrollContainer/MarginContainer/Content"]
+[node name="Quiz" type="VBoxContainer" parent="Panel/ScrollContainer/MarginContainer/Body"]
 layout_mode = 2
 
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Panel/ScrollContainer/MarginContainer/Body/VideoPreview/Watch" to="." method="_on_watch_pressed"]

@@ -13,8 +13,8 @@ public partial class Quizzes : Node2D
 	{
 	}
 	private void _on_back_pressed()
-	{	Hide();
-		//GetTree().ChangeSceneToFile("res://Scenes/Main.tscn");
+	{	//Hide();
+		QueueFree();
 	}
 	private void _on_random_pressed()
 	{

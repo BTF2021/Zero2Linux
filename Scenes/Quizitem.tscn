@@ -1,0 +1,82 @@
+[gd_scene load_steps=2 format=3 uid="uid://duiw5l0ody1l"]
+
+[ext_resource type="Script" path="res://Scripts/Quizitem.cs" id="1_hrfcq"]
+
+[node name="Quizitem" type="PanelContainer"]
+offset_right = 676.0
+offset_bottom = 153.0
+script = ExtResource("1_hrfcq")
+
+[node name="PanelContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+theme_override_constants/margin_left = 20
+
+[node name="Name" type="Label" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 27
+text = "Care dintre acestea este raspunsul corect?"
+
+[node name="Raspuns1" type="CheckBox" parent="PanelContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 20
+text = "Raspuns 1"
+
+[node name="Raspuns2" type="CheckBox" parent="PanelContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 20
+text = "Nu face nimic"
+
+[node name="Raspuns3" type="CheckBox" parent="PanelContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 20
+text = "Raspuns gresit"
+
+[node name="Raspuns4" type="CheckBox" parent="PanelContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 20
+text = "Un raspuns scris pentru a fi foarte foarte foarte foarte foarte lung"
+
+[node name="MarginContainer3" type="MarginContainer" parent="PanelContainer"]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Send" type="Button" parent="PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Trimite"
+
+[node name="Skip" type="Button" parent="PanelContainer/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+disabled = true
+text = "Sari peste"
+
+[node name="MarginContainer4" type="MarginContainer" parent="PanelContainer"]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 0
+
+[connection signal="pressed" from="PanelContainer/HBoxContainer/Send" to="." method="_on_send_pressed"]

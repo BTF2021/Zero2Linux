@@ -1,22 +1,22 @@
 using Godot;
 using System;
-using System.Linq;
 
 public partial class Courses : Node2D
 {
 	// Called when the node enters the scene tree for the first time.
 	private DefaultData _data;
 	private VBoxContainer _VBoxContainer;
+	private PackedScene _courseitem;
+	private CourseItem _panel;
+	public int selected;
 	public override async void _Ready()
 	{	_data = (DefaultData)GetNode("/root/DefaultData");
 		_VBoxContainer = (VBoxContainer)GetNode("Panel/ScrollContainer/VBoxContainer");
-		GD.Print(_VBoxContainer.GetChildCount());
-		for(int i = 1; i<=_VBoxContainer.GetChildCount(); i++)
-		{
-			GetNode<CourseItem>("Panel/ScrollContainer/VBoxContainer/CourseItem" + i).lesson = i;
-			//Nu stiu cum sa iau o valoare din vector intr-un dicitonar
-			//GetNode<CourseItem>("Panel/ScrollContainer/VBoxContainer/CourseItem" + i).complete = _data.lessonList.ElementAt(i);
-			//GetNode<CourseItem>("Panel/ScrollContainer/VBoxContainer/CourseItem" + i).lessonTag = i;
+		_courseitem = GD.Load<PackedScene>("res://Scenes/CourseItem.tscn");
+		int i=1;
+		while(_data.lessonList.ContainsKey(i))
+		{	AddItem(i);
+			i++;
 		}
 		GD.Print("Left");
 	}
@@ -25,7 +25,30 @@ public partial class Courses : Node2D
 	public override void _Process(double delta)
 	{	
 	}
+	//Daca pui aceasta functie in while, toate CourseItem o sa redirectioneze in Lesson_16 sau in _panel.lesson (Lesson_15)
+	private void AddItem(int i)
+	{	_panel =  _courseitem.Instantiate<CourseItem>();
+		_panel.lesson = i;
+		_panel.Name = "CourseItem" + i;
+		_panel.lessonName = (string)_data.lessonList[i][0];
+		_panel.GetNode<Label>("PanelContainer/Name").Text = _panel.lessonName;
+		_panel.complete = (int)_data.lessonList[i][1];
+		_panel.GetNode<ProgressBar>("PanelContainer/Percentage").Value = _panel.complete;
+		_panel.lessonTag = (int)_data.lessonList[i][2];
+		if(!_data.includeadvanced && (_panel.lessonTag == 1 || _panel.lessonTag == 3)) return;
+		if(!_data.includespecial && (_panel.lessonTag == 2 || _panel.lessonTag == 3)) return;
+		_VBoxContainer.AddChild(_panel);
+		//Daca lectia cu nr i exista, conecteaza semnalul Pressed la functie. Altfel dezactiveaza
+		if(FileAccess.FileExists("res://Courses/Lesson_" + i + "/Lesson.tscn")) _panel.GetNode<Button>("Panel").Pressed += () => PanelPressed(i);
+		else
+		{	_panel.GetNode<Button>("Panel").Disabled = true;
+			_panel.Modulate = new Color((float)0.6, (float)0.6, (float)0.6, 1);
+		}
+		GD.Print("Adaugat " + _panel.lessonName);
+	}
 	private void _on_back_pressed() => GetTree().ChangeSceneToFile("res://Scenes/Main.tscn");
-	
-	private void _on_pressed1() => GetTree().ChangeSceneToFile("res://Courses/Lesson_1/Lesson.tscn");
+	private void PanelPressed(int index)
+	{	_data.currentLesson = index;
+		GetTree().ChangeSceneToFile("res://Courses/Lesson_" + index + "/Lesson.tscn");
+	}
 }

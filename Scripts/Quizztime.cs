@@ -3,6 +3,7 @@ using System;
 
 public partial class Quizztime : Node2D
 {
+	int total = 15;
 	int intrebari = 0;
 	int corecte = 0;
 	int gresite = 0;
@@ -16,7 +17,7 @@ public partial class Quizztime : Node2D
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
-	{	GetNode<Label>("Status/Number").Text = intrebari + "/20";
+	{	GetNode<Label>("Status/Number").Text = intrebari + "/" + total;
 		GetNode<Label>("Status/Correct").Text = "Corecte: " + corecte;
 		GetNode<Label>("Status/Wrong").Text = "Gresite: " + gresite;
 	}
@@ -25,10 +26,11 @@ public partial class Quizztime : Node2D
 	{	GD.Print("Pressed");
 		GetTree().ChangeSceneToFile("res://Scenes/Main.tscn");
 	}
+	//Functie temporara pana cand fac lista de intrebari si generez un Quizzitem
 	public void Answer(bool a1, bool a2, bool a3, bool a4)
 	{
 		if(a1 && !a2 && !a3 && !a4)corecte++;
 		else gresite++;
-		if(intrebari<20)intrebari++;
+		if(intrebari<total)intrebari++;
 	}
 }

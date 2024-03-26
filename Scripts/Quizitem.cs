@@ -13,7 +13,7 @@ public partial class Quizitem : PanelContainer
 	{
 	}
 	private void _on_send_pressed()
-	{
+	{	//temporar
 		GetParent().EmitSignal("GetAnswers", GetNode<CheckBox>("PanelContainer/Raspuns1").ButtonPressed, GetNode<CheckBox>("PanelContainer/Raspuns2").ButtonPressed, GetNode<CheckBox>("PanelContainer/Raspuns3").ButtonPressed, GetNode<CheckBox>("PanelContainer/Raspuns4").ButtonPressed);
 	}
 }

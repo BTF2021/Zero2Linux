@@ -1,14 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://bcd574anctpct"]
+[gd_scene load_steps=4 format=3 uid="uid://bcd574anctpct"]
 
 [ext_resource type="Script" path="res://Scripts/Courses.cs" id="1_bnupo"]
 [ext_resource type="Texture2D" uid="uid://b1vo0cklpefq" path="res://Sprites/Back.png" id="1_wpwfx"]
 [ext_resource type="Texture2D" uid="uid://rsq42q4qde3" path="res://Sprites/BackHighlight.png" id="2_aibod"]
-[ext_resource type="PackedScene" uid="uid://dcjtshva2o7of" path="res://Courses/Lesson_2/CourseItem2.tscn" id="4_aqhmi"]
-[ext_resource type="PackedScene" uid="uid://ce7ug3a0rijh4" path="res://Courses/Lesson_1/CourseItem1.tscn" id="5_ru0n6"]
-[ext_resource type="PackedScene" uid="uid://bw2q600jo4fk0" path="res://Courses/Lesson_3/CourseItem3.tscn" id="6_gjs5q"]
-[ext_resource type="PackedScene" uid="uid://dyaib3ag0dx2p" path="res://Courses/Lesson_4/CourseItem4.tscn" id="7_tei2f"]
-[ext_resource type="PackedScene" uid="uid://b424i6yhpqoya" path="res://Courses/Lesson_5/CourseItem5.tscn" id="8_lb587"]
-[ext_resource type="PackedScene" uid="uid://cr022adpn3o38" path="res://Courses/LessonTemplate/CourseItem6.tscn" id="9_2jt6u"]
 
 [node name="Courses" type="Node2D"]
 script = ExtResource("1_bnupo")
@@ -21,24 +15,24 @@ texture_normal = ExtResource("1_wpwfx")
 texture_pressed = ExtResource("2_aibod")
 
 [node name="Label" type="Label" parent="."]
-offset_left = 401.0
-offset_top = 5.0
-offset_right = 752.0
-offset_bottom = 60.0
+offset_left = 464.0
+offset_top = 8.0
+offset_right = 815.0
+offset_bottom = 63.0
 theme_override_font_sizes/font_size = 40
 text = "Selecteaza o lectie"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Panel" type="Panel" parent="."]
-offset_left = 283.0
-offset_top = 63.0
-offset_right = 877.0
-offset_bottom = 602.0
+offset_left = 272.0
+offset_top = 104.0
+offset_right = 1002.0
+offset_bottom = 643.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
 layout_mode = 0
-offset_right = 594.0
+offset_right = 730.0
 offset_bottom = 540.0
 follow_focus = true
 horizontal_scroll_mode = 0
@@ -48,30 +42,12 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 1
 
-[node name="CourseItem1" parent="Panel/ScrollContainer/VBoxContainer" instance=ExtResource("5_ru0n6")]
-layout_mode = 2
-
-[node name="CourseItem2" parent="Panel/ScrollContainer/VBoxContainer" instance=ExtResource("4_aqhmi")]
-layout_mode = 2
-
-[node name="CourseItem3" parent="Panel/ScrollContainer/VBoxContainer" instance=ExtResource("6_gjs5q")]
-layout_mode = 2
-
-[node name="CourseItem4" parent="Panel/ScrollContainer/VBoxContainer" instance=ExtResource("7_tei2f")]
-layout_mode = 2
-
-[node name="CourseItem5" parent="Panel/ScrollContainer/VBoxContainer" instance=ExtResource("8_lb587")]
-layout_mode = 2
-
-[node name="CourseItem6" parent="Panel/ScrollContainer/VBoxContainer" instance=ExtResource("9_2jt6u")]
-layout_mode = 2
-
 [node name="Demo" type="Label" parent="."]
 visible = false
-offset_left = 335.0
-offset_top = 607.0
-offset_right = 821.0
-offset_bottom = 642.0
+offset_left = 400.0
+offset_top = 656.0
+offset_right = 886.0
+offset_bottom = 691.0
 theme_override_font_sizes/font_size = 25
 text = "Demo. Nu reprezinta totalitatea lectiilor"
 

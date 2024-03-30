@@ -32,11 +32,13 @@ public partial class Courses : Node2D
 		_panel.Name = "CourseItem" + i;
 		_panel.lessonName = (string)_data.lessonList[i][0];
 		_panel.GetNode<Label>("PanelContainer/Name").Text = _panel.lessonName;
-		_panel.complete = (int)_data.lessonList[i][1];
+		_panel.complete = (int)_data.currentStats.LessonCompletion[i];
 		_panel.GetNode<ProgressBar>("PanelContainer/Percentage").Value = _panel.complete;
-		_panel.lessonTag = (int)_data.lessonList[i][2];
-		if(!_data.includeadvanced && (_panel.lessonTag == 1 || _panel.lessonTag == 3)) return;
-		if(!_data.includespecial && (_panel.lessonTag == 2 || _panel.lessonTag == 3)) return;
+		_panel.lessonTag = (int)_data.lessonList[i][1];
+		if(!_data.currentStats.Adv && (_panel.lessonTag == 1 || _panel.lessonTag == 3)) return;
+		if(!_data.currentStats.Spc && (_panel.lessonTag == 2 || _panel.lessonTag == 3)) return;
+		if(_panel.lessonTag == 1 || _panel.lessonTag == 3) _panel.GetNode<TextureRect>("PanelContainer/Adv").Show();
+		if(_panel.lessonTag == 2 || _panel.lessonTag == 3) _panel.GetNode<TextureRect>("PanelContainer/Spc").Show();
 		_VBoxContainer.AddChild(_panel);
 		//Daca lectia cu nr i exista, conecteaza semnalul Pressed la functie. Altfel dezactiveaza
 		if(FileAccess.FileExists("res://Courses/Lesson_" + i + "/Lesson.tscn")) _panel.GetNode<Button>("Panel").Pressed += () => PanelPressed(i);
@@ -48,7 +50,7 @@ public partial class Courses : Node2D
 	}
 	private void _on_back_pressed() => GetTree().ChangeSceneToFile("res://Scenes/Main.tscn");
 	private void PanelPressed(int index)
-	{	_data.currentLesson = index;
+	{	_data.currentStats.CurrentLesson = index;
 		GetTree().ChangeSceneToFile("res://Courses/Lesson_" + index + "/Lesson.tscn");
 	}
 }

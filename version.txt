@@ -1,8 +1,4 @@
-Alpha 0.2;
-- Daca exista o noua versiune, o sa apara o fereastra care anunta acest lucru
-- In jur de 80% din interfata este disponibila
-  (Doar ultimele 2 butoane din Chestionare, butonul pentru stergerea progresului
-  si butoanele pentru lectiile care nu exista sunt inca dezactivate)
-- La inceputul lectiei, exista optiunea de a urmari un video 
-  (experimental)
-- Si alte modificari din punct de vedere al layout si al performantei
+Alpha 0.2.1;
+- Setarile sunt acum salvate
+- Setarile si progresul se pot sterge din setari > Altele
+- O schimbare minora in legatura cu imaginile pentru cursuri (Adv si Spc)

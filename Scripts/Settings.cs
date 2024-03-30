@@ -9,16 +9,16 @@ public partial class Settings : Node2D
 	public override void _Ready()
 	{	_data = (DefaultData)GetNode("/root/DefaultData");
 		_slider = (HSlider)GetNode("Settings/TabContainer/Lectii/VBoxContainer/VideoVolume/VideoVolumeSlide");
-		_slider.Value = _data.videovolume;
+		_slider.Value = _data.currentStats.VideoVolume;
 		if(!_data.isvideoavailable)
 		{	GetNode<Label>("Settings/TabContainer/Lectii/VBoxContainer/VideoVolume").Modulate = new Color((float)0.6, (float)0.6, (float)0.6, 1);
 			GetNode<HSlider>("Settings/TabContainer/Lectii/VBoxContainer/VideoVolume/VideoVolumeSlide").Editable = false;
 		}
-		if(DisplayServer.WindowGetMode() == DisplayServer.WindowMode.Fullscreen) GetNode<CheckButton>("Settings/TabContainer/Grafica/VBoxContainer/Fullscreen/FullscreenButton").SetPressedNoSignal(true);
-		if(DisplayServer.WindowGetVsyncMode() == DisplayServer.VSyncMode.Enabled) GetNode<CheckButton>("Settings/TabContainer/Grafica/VBoxContainer/VSync/VSyncButton").SetPressedNoSignal(true);
-		if(_data.includeadvanced) GetNode<CheckButton>("Settings/TabContainer/Lectii/VBoxContainer/Advanced/AdvancedButton").SetPressedNoSignal(true);
-		if(_data.includespecial) GetNode<CheckButton>("Settings/TabContainer/Lectii/VBoxContainer/Special/SpecialButton").SetPressedNoSignal(true);
-		if(_data.checkupdates) GetNode<CheckButton>("Settings/TabContainer/Altele/VBoxContainer/GetUpdates/GetUpdatesButton").SetPressedNoSignal(true);
+		if(_data.currentStats.FullScr) GetNode<CheckButton>("Settings/TabContainer/Grafica/VBoxContainer/Fullscreen/FullscreenButton").SetPressedNoSignal(true);
+		if(_data.currentStats.VSync) GetNode<CheckButton>("Settings/TabContainer/Grafica/VBoxContainer/VSync/VSyncButton").SetPressedNoSignal(true);
+		if(_data.currentStats.Adv) GetNode<CheckButton>("Settings/TabContainer/Lectii/VBoxContainer/Advanced/AdvancedButton").SetPressedNoSignal(true);
+		if(_data.currentStats.Spc) GetNode<CheckButton>("Settings/TabContainer/Lectii/VBoxContainer/Special/SpecialButton").SetPressedNoSignal(true);
+		if(_data.currentStats.ChkUpdates) GetNode<CheckButton>("Settings/TabContainer/Altele/VBoxContainer/GetUpdates/GetUpdatesButton").SetPressedNoSignal(true);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -29,33 +29,36 @@ public partial class Settings : Node2D
 	}
 
 	private void _on_back_pressed()
-	{	//Hide();
+	{	_data.WriteSave();
 		QueueFree();
 	}
 
 	private void _on_fullscreen_pressed()
 	{	GD.Print("Pressed");
-		if(GetNode<CheckButton>("Settings/TabContainer/Grafica/VBoxContainer/Fullscreen/FullscreenButton").ButtonPressed) DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
+		_data.currentStats.FullScr = !_data.currentStats.FullScr;
+		if(_data.currentStats.FullScr) DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
 		else DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
 	}
 
 	private void _on_v_sync_button_pressed()
 	{
 		GD.Print("Pressed");
-		if(GetNode<CheckButton>("Settings/TabContainer/Grafica/VBoxContainer/VSync/VSyncButton").ButtonPressed) DisplayServer.WindowSetVsyncMode(DisplayServer.VSyncMode.Enabled);
+		_data.currentStats.VSync = !_data.currentStats.VSync;
+		if(_data.currentStats.VSync) DisplayServer.WindowSetVsyncMode(DisplayServer.VSyncMode.Enabled);
 		else DisplayServer.WindowSetVsyncMode(DisplayServer.VSyncMode.Disabled);
 	}
 
 	private void _on_video_volume_value_changed(float value)
-	{	_data.videovolume = value;
+	{	_data.currentStats.VideoVolume = value;
 	}
-	private void _on_advanced_pressed() => _data.includeadvanced = !_data.includeadvanced;
-	private void _on_special_pressed() => _data.includespecial = !_data.includespecial;
+	private void _on_advanced_pressed() => _data.currentStats.Adv = !_data.currentStats.Adv;
+	private void _on_special_pressed() => _data.currentStats.Spc = !_data.currentStats.Spc;
 
 	private void _on_updates_button_pressed()
 	{
 		GD.Print("Pressed");
-		_data.checkupdates = !_data.checkupdates;
-		GetNode<CheckButton>("Settings/TabContainer/Altele/VBoxContainer/GetUpdates/GetUpdatesButton").SetPressedNoSignal(_data.checkupdates);
+		_data.currentStats.ChkUpdates = !_data.currentStats.ChkUpdates;
+		GetNode<CheckButton>("Settings/TabContainer/Altele/VBoxContainer/GetUpdates/GetUpdatesButton").SetPressedNoSignal(_data.currentStats.ChkUpdates);
 	}
+	private void _on_delete_pressed() => GetNode<Node2D>("Confirma").Show();
 }

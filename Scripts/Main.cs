@@ -9,7 +9,7 @@ public partial class Main : Node
 	public override void _Ready()
 	{	_data = (DefaultData)GetNode("/root/DefaultData");
 		GetNode<Label>("UI/Version").Text = "Ver " + (String)ProjectSettings.GetSetting("application/config/version");
-		if(!_data.verifiedver && _data.checkupdates)
+		if(!_data.verifiedver && _data.currentStats.ChkUpdates)
 		{	request = new HttpRequest();
 			AddChild(request);
         	request.RequestCompleted += OnRequestCompleted;                                           //Cand se apeleaza Request => functia OnRequestCompleted

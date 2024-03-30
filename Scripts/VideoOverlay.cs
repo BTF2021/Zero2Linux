@@ -18,7 +18,7 @@ public partial class VideoOverlay : Node2D
 		_stream.Stop();
 		videotime = _stream.GetStreamLength();
 		_slider.MaxValue = videotime;
-		_volume.Value = _data.videovolume;
+		_volume.Value = _data.currentStats.VideoVolume;
 		if(DisplayServer.WindowGetMode() == DisplayServer.WindowMode.Fullscreen) GetNode<TextureButton>("Controls/Fullscr").TextureNormal = GD.Load<Texture2D>("res://Sprites/winscr.png");
 		vt = TimeSpan.FromSeconds(videotime);
 		paused = true;
@@ -28,7 +28,7 @@ public partial class VideoOverlay : Node2D
 	public override void _Process(double delta)
 	{	videocurrenttime = _stream.StreamPosition;
 		//Pentru volum. NU DA MAI MULT DE 10db
-		if(_data.videovolume != -11) _stream.VolumeDb = _data.videovolume;
+		if(_data.currentStats.VideoVolume != -11) _stream.VolumeDb = _data.currentStats.VideoVolume;
 		else _stream.VolumeDb = -100;
 		vct = TimeSpan.FromSeconds(videocurrenttime);
 		if(_stream.IsPlaying())
@@ -84,7 +84,7 @@ public partial class VideoOverlay : Node2D
 	{	if(!paused)_stream.Paused = false;
 	}
 	private void _on_volume_changed(float value)
-	{	_data.videovolume = value;
+	{	_data.currentStats.VideoVolume = value;
 	}
 	//Butonul de fullscreen
 	private void _on_fullscr_pressed()

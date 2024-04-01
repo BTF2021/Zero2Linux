@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://duiw5l0ody1l"]
+[gd_scene load_steps=3 format=3 uid="uid://duiw5l0ody1l"]
 
 [ext_resource type="Script" path="res://Scripts/Quizitem.cs" id="1_hrfcq"]
+[ext_resource type="StyleBox" uid="uid://c8ip85nk5v8ds" path="res://Sprites/UIButtons.stylebox" id="2_p2qk2"]
 
 [node name="Quizitem" type="PanelContainer"]
 offset_right = 676.0
@@ -63,6 +64,7 @@ size_flags_horizontal = 4
 custom_minimum_size = Vector2(120, 30)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_styles/normal = ExtResource("2_p2qk2")
 text = "Trimite"
 
 [node name="Skip" type="Button" parent="PanelContainer/HBoxContainer"]
@@ -70,6 +72,7 @@ visible = false
 custom_minimum_size = Vector2(120, 30)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_styles/normal = ExtResource("2_p2qk2")
 disabled = true
 text = "Sari peste"
 

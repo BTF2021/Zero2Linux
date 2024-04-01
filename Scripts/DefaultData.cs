@@ -58,18 +58,45 @@ public partial class DefaultData : Node
     //valori care nu ar trebui schimbate
     public bool verifiedver = false;
 	public bool isvideoavailable = false;
+	//Vector pentru retinerea informatiilor privind versiunea noua de pe Github
+	public Godot.Collections.Array<String> newversion = new Godot.Collections.Array<String>{};
 
     public override void _Ready()
 	{	
 		if(SaveExists()) ReadSave();
 		else WriteSave();
 		
-		#if TOOLS && GODOT_LINUXBSD
-			if(DirAccess.DirExistsAbsolute("res://addons/ffmpeg/linux64"))isvideoavailable=true;
-		#elif TOOLS && GODOT_WINDOWS
-			if(DirAccess.DirExistsAbsolute("res://addons/ffmpeg/win64"))isvideoavailable=true;
+		#if GODOT_LINUXBSD
+			#if TOOLS
+				if(DirAccess.DirExistsAbsolute("res://addons/ffmpeg/linux64"))isvideoavailable=true;
+			#else
+				GD.Print(OS.GetExecutablePath().GetBaseDir());
+				if(FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("libavcodec.so.60"))
+				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("libavfilter.so.9"))
+				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("libavformat.so.60"))
+				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("libavutil.so.58"))
+				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("libgdffmpeg.linux.template_debug.x86_64.so"))
+				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("libswresample.so.4"))
+				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("libswscale.so.7"))
+				)isvideoavailable=true;
+			#endif
+		#elif GODOT_WINDOWS
+			#if TOOLS
+				if(DirAccess.DirExistsAbsolute("res://addons/ffmpeg/win64"))isvideoavailable=true;
+			#else
+				GD.Print(OS.GetExecutablePath().GetBaseDir());
+				if(FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("avcodec-60.dll"))
+				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("avfilter-9.dll"))
+				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("avformat-60.dll"))
+				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("avutil-58.dll"))
+				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("libgdffmpeg.windows.template_debug.x86_64.dll"))
+				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("swresample-4.dll"))
+				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("swscale-7.dll"))
+				)isvideoavailable=true;
+			#endif
 		#endif
-		GD.Print(isvideoavailable);
+
+		GD.Print("Videouri disponibile: " + isvideoavailable);
 	}
 
 	public bool SaveExists()

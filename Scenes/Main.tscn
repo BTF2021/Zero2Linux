@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b4gdupblxidyf"]
+[gd_scene load_steps=4 format=3 uid="uid://b4gdupblxidyf"]
 
 [ext_resource type="Script" path="res://Scripts/Main.cs" id="1_c7d67"]
 [ext_resource type="Texture2D" uid="uid://cjf5iw2rvyax1" path="res://Sprites/debugBg.png" id="2_ld8bt"]
+[ext_resource type="StyleBox" uid="uid://c8ip85nk5v8ds" path="res://Sprites/UIButtons.stylebox" id="3_ebplr"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_c7d67")
@@ -56,6 +57,7 @@ theme_override_constants/separation = -1
 layout_mode = 2
 size_flags_vertical = 3
 tooltip_text = "Incepe o lectie"
+theme_override_styles/normal = ExtResource("3_ebplr")
 text = "Lectii"
 
 [node name="Quizzes" type="Button" parent="UI/Panel/Buttons"]
@@ -63,18 +65,21 @@ layout_mode = 2
 size_flags_vertical = 3
 tooltip_text = "Testeaza-ti cunostiintele dobandite pe parcursul lectiilor.
 Necesita terminarea a minim 5 lectii"
+theme_override_styles/normal = ExtResource("3_ebplr")
 text = "Chestionare"
 
 [node name="Settings" type="Button" parent="UI/Panel/Buttons"]
 layout_mode = 2
 size_flags_vertical = 3
 tooltip_text = "Regleaza-ti setarile legate de imagine, lectii, etc"
+theme_override_styles/normal = ExtResource("3_ebplr")
 text = "Setari"
 
 [node name="Quit" type="Button" parent="UI/Panel/Buttons"]
 layout_mode = 2
 size_flags_vertical = 3
 tooltip_text = "Iesi din aplicatie. Mai clar de atat nu se poate"
+theme_override_styles/normal = ExtResource("3_ebplr")
 text = "Iesire"
 
 [node name="Version" type="Label" parent="UI"]

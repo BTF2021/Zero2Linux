@@ -41,7 +41,7 @@ public partial class Courses : Node2D
 		if(_panel.lessonTag == 2 || _panel.lessonTag == 3) _panel.GetNode<TextureRect>("PanelContainer/Spc").Show();
 		_VBoxContainer.AddChild(_panel);
 		//Daca lectia cu nr i exista, conecteaza semnalul Pressed la functie. Altfel dezactiveaza
-		if(FileAccess.FileExists("res://Courses/Lesson_" + i + "/Lesson.tscn")) _panel.GetNode<Button>("Panel").Pressed += () => PanelPressed(i);
+		if(ResourceLoader.Exists("res://Courses/Lesson_" + i + "/Lesson.tscn")) _panel.GetNode<Button>("Panel").Pressed += () => PanelPressed(i);
 		else
 		{	_panel.GetNode<Button>("Panel").Disabled = true;
 			_panel.Modulate = new Color((float)0.6, (float)0.6, (float)0.6, 1);

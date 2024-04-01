@@ -33,16 +33,15 @@ public partial class Main : Node
 	}
 	private void OnRequestCompleted(long result, long responseCode, string[] headers, byte[] body)
     {	if(result == 0)
-		{	Godot.Collections.Array<String> returnedData = new Godot.Collections.Array<String>{};             //nou vector
-			string data = System.Text.Encoding.UTF8.GetString(body);                                          //tot ce este in version.txt
-			returnedData.Add(data.Substring(0, data.IndexOf(";", 0)));                                        //Versiunea programului
-			returnedData.Add(data.Substring(data.IndexOf("-", 0)));                                           //Textul fara versiunea programului
-			if(!((String)ProjectSettings.GetSetting("application/config/version")).Contains(returnedData[0])) //Daca versiunea programului corespunde cu versiunea din version.txt
+		{	string data = System.Text.Encoding.UTF8.GetString(body);                                              //tot ce este in version.txt
+			_data.newversion.Add(data.Substring(0, data.IndexOf(";", 0)));                                        //Versiunea programului
+			_data.newversion.Add(data.Substring(data.IndexOf("-", 0)));                                           //Textul fara versiunea programului
+			if(!((String)ProjectSettings.GetSetting("application/config/version")).Contains(_data.newversion[0])) //Daca versiunea programului corespunde cu versiunea din version.txt
 			{
 				GD.Print("Versiune veche");
 				var newver = (GD.Load<PackedScene>("res://Scenes/NewVer.tscn")).Instantiate();
-				newver.GetNode<Label>("Panel/ScrollContainer/VBoxContainer/Title2").Text = newver.GetNode<Label>("Panel/ScrollContainer/VBoxContainer/Title2").Text + returnedData[0];
-				newver.GetNode<Label>("Panel/ScrollContainer/VBoxContainer/Title3").Text = returnedData[1];
+				newver.GetNode<Label>("Panel/ScrollContainer/VBoxContainer/Title2").Text = newver.GetNode<Label>("Panel/ScrollContainer/VBoxContainer/Title2").Text + (String)ProjectSettings.GetSetting("application/config/version") + "\nVersiunea actuala este: " + _data.newversion[0] + "\n ";
+				newver.GetNode<Label>("Panel/ScrollContainer/VBoxContainer/Title3").Text = _data.newversion[1];
 				AddChild(newver);
 				GD.Print("Gata");
 			}

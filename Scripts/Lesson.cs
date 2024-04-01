@@ -12,7 +12,6 @@ public partial class Lesson : Node2D
 		_data = (DefaultData)GetNode("/root/DefaultData");
 		if(!_data.isvideoavailable)           //Temporar
 		{
-			GetNode<Node2D>("VideoOverlay").QueueFree();
 			GetNode<TextureRect>("Panel/ScrollContainer/MarginContainer/Body/VideoPreview").SelfModulate = new Color((float)0.6, (float)0.6, (float)0.6, 1);
 			GetNode<Button>("Panel/ScrollContainer/MarginContainer/Body/VideoPreview/Watch").Disabled = true;
 			GetNode<Label>("Panel/ScrollContainer/MarginContainer/Body/VideoPreview/Atentie").Show();
@@ -28,7 +27,7 @@ public partial class Lesson : Node2D
 		GetTree().ChangeSceneToFile("res://Scenes/Courses.tscn");
 	}
 	private void _on_watch_pressed()
-	{	var _video = (GD.Load<PackedScene>("res://Scenes/VideoOverlay.tscn")).Instantiate();
+	{	var _video = (ResourceLoader.Load<PackedScene>("res://Scenes/VideoOverlay.tscn")).Instantiate();
 		_video.GetNode<VideoStreamPlayer>("Panel/VideoStreamPlayer").Stream.File = "res://Courses/Lesson_" + lessonid + "/Video.webm";
 		AddChild(_video);
 	}

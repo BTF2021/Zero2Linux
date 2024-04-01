@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcwekq6etxbvn"
-path="res://.godot/imported/fullscr.png-2a6303578b60f1bb9c767065ea210033.ctex"
+uid="uid://r41ql0axdccc"
+path="res://.godot/imported/Winscr.png-4f4d97f21d5304033cc7baa0b58cc6e2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/fullscr.png"
-dest_files=["res://.godot/imported/fullscr.png-2a6303578b60f1bb9c767065ea210033.ctex"]
+source_file="res://Sprites/Winscr.png"
+dest_files=["res://.godot/imported/Winscr.png-4f4d97f21d5304033cc7baa0b58cc6e2.ctex"]
 
 [params]
 

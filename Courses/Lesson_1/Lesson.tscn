@@ -1,41 +1,38 @@
-[gd_scene load_steps=7 format=3 uid="uid://cseipsy3u81k3"]
+[gd_scene load_steps=9 format=3 uid="uid://cseipsy3u81k3"]
 
 [ext_resource type="Texture2D" uid="uid://b1vo0cklpefq" path="res://Sprites/Back.png" id="1_0rts7"]
 [ext_resource type="Script" path="res://Scripts/Lesson.cs" id="1_4ktg6"]
+[ext_resource type="Theme" uid="uid://c3r51fw2bo66h" path="res://Sprites/CourseUI.theme" id="2_3hak8"]
 [ext_resource type="Texture2D" uid="uid://rsq42q4qde3" path="res://Sprites/BackHighlight.png" id="2_y1bgk"]
 [ext_resource type="Texture2D" uid="uid://cjf5iw2rvyax1" path="res://Sprites/debugBg.png" id="4_cg4kx"]
 [ext_resource type="Material" uid="uid://bl5ra5x2dyfgr" path="res://Sprites/Blur.material" id="5_wtb56"]
 [ext_resource type="StyleBox" uid="uid://c8ip85nk5v8ds" path="res://Sprites/UIButtons.stylebox" id="6_m0tuk"]
+[ext_resource type="PackedScene" uid="uid://duiw5l0ody1l" path="res://Scenes/Quizitem.tscn" id="7_mfwjb"]
 
 [node name="Lesson" type="Node2D"]
 script = ExtResource("1_4ktg6")
 lessonid = 1
 
-[node name="Back" type="TextureButton" parent="."]
-offset_right = 200.0
-offset_bottom = 200.0
-scale = Vector2(0.25, 0.25)
-texture_normal = ExtResource("1_0rts7")
-texture_pressed = ExtResource("2_y1bgk")
-
 [node name="Panel" type="Panel" parent="."]
-offset_left = 168.0
-offset_right = 1117.0
+offset_left = 173.0
+offset_right = 1078.0
 offset_bottom = 719.0
 size_flags_vertical = 0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
-layout_direction = 1
 layout_mode = 0
-offset_left = 8.0
+offset_left = -173.0
 offset_top = -1.0
-offset_right = 949.0
-offset_bottom = 718.0
+offset_right = 1107.0
+offset_bottom = 719.0
+theme = ExtResource("2_3hak8")
 follow_focus = true
+horizontal_scroll_mode = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/ScrollContainer"]
+custom_minimum_size = Vector2(880, 0)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 6
 theme_override_constants/margin_right = 9
 
 [node name="Body" type="VBoxContainer" parent="Panel/ScrollContainer/MarginContainer"]
@@ -60,18 +57,18 @@ stretch_mode = 4
 [node name="Spoiler" type="ColorRect" parent="Panel/ScrollContainer/MarginContainer/Body/VideoPreview"]
 material = ExtResource("5_wtb56")
 layout_mode = 0
-offset_right = 933.0
-offset_bottom = 524.0
+offset_right = 871.0
+offset_bottom = 489.0
 
 [node name="Watch" type="Button" parent="Panel/ScrollContainer/MarginContainer/Body/VideoPreview"]
 layout_mode = 2
-offset_left = 261.0
-offset_top = 331.0
-offset_right = 666.0
-offset_bottom = 381.0
+offset_left = 226.0
+offset_top = 328.0
+offset_right = 631.0
+offset_bottom = 378.0
 theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = ExtResource("6_m0tuk")
-text = "Urmareste Videoul"
+text = "Play"
 
 [node name="Atentie" type="Label" parent="Panel/ScrollContainer/MarginContainer/Body/VideoPreview"]
 visible = false
@@ -113,6 +110,12 @@ theme_override_font_sizes/font_size = 37
 text = "Insereaza o intrebare aici"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Quizitem" parent="Panel/ScrollContainer/MarginContainer/Body/Content" instance=ExtResource("7_mfwjb")]
+layout_mode = 2
+type = 1
+answ = 1
+answer1 = "Raspuns corect"
 
 [node name="HSeparator2" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Body/Content"]
 layout_mode = 2
@@ -170,15 +173,43 @@ text = "In timpul lectiei, o sa mai fie si niste intrebari pentru a trece mai de
 fit_content = true
 drag_and_drop_selection_enabled = false
 
-[node name="HSeparator4" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Body"]
+[node name="Quizitem2" parent="Panel/ScrollContainer/MarginContainer/Body/Content" instance=ExtResource("7_mfwjb")]
+layout_mode = 2
+type = 1
+answ = 3
+question = "Care a fost raspunsul la prima intrebare?"
+answer1 = "Nr 3"
+answer2 = "Nr 2"
+answer3 = "Nr 1"
+answer4 = "Nr 4"
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="Panel/ScrollContainer/MarginContainer/Body/Content"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 20
+theme_override_font_sizes/italics_font_size = 20
+theme_override_font_sizes/bold_italics_font_size = 20
+theme_override_font_sizes/mono_font_size = 20
+text = "Asta a fost tot."
+fit_content = true
+drag_and_drop_selection_enabled = false
+
+[node name="HSeparator4" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Body/Content"]
 layout_mode = 2
 
-[node name="Test" type="Label" parent="Panel/ScrollContainer/MarginContainer/Body"]
+[node name="End" type="Label" parent="Panel/ScrollContainer/MarginContainer/Body/Content"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "Finalul lectiei"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
+[node name="Back" type="TextureButton" parent="."]
+offset_right = 200.0
+offset_bottom = 200.0
+scale = Vector2(0.25, 0.25)
+texture_normal = ExtResource("1_0rts7")
+texture_pressed = ExtResource("2_y1bgk")
+
 [connection signal="pressed" from="Panel/ScrollContainer/MarginContainer/Body/VideoPreview/Watch" to="." method="_on_watch_pressed"]
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

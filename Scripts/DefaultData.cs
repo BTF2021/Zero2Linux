@@ -95,7 +95,7 @@ public partial class DefaultData : Node
 				)isvideoavailable=true;
 			#endif
 		#endif
-
+		
 		GD.Print("Videouri disponibile: " + isvideoavailable);
 	}
 

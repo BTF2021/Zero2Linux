@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://b4gdupblxidyf"]
+[gd_scene load_steps=7 format=3 uid="uid://b4gdupblxidyf"]
 
 [ext_resource type="Script" path="res://Scripts/Main.cs" id="1_c7d67"]
-[ext_resource type="Texture2D" uid="uid://cjf5iw2rvyax1" path="res://Sprites/debugBg.png" id="2_ld8bt"]
-[ext_resource type="StyleBox" uid="uid://c8ip85nk5v8ds" path="res://Sprites/UIButtons.stylebox" id="3_ebplr"]
+[ext_resource type="StyleBox" uid="uid://di87pu5wmffgt" path="res://Sprites/UINoHover.stylebox" id="2_0hv5f"]
+[ext_resource type="Texture2D" uid="uid://c311u78gq8dn" path="res://Sprites/Bg.png" id="2_lj8l1"]
+[ext_resource type="Texture2D" uid="uid://bid2ssfeh2pfy" path="res://Sprites/Bar.png" id="3_ocyen"]
+[ext_resource type="Texture2D" uid="uid://2k0tqngjaab8" path="res://Sprites/Power.png" id="4_q207a"]
+
+[sub_resource type="FFmpegVideoStream" id="FFmpegVideoStream_pjdxv"]
+file = "res://Sprites/bgvid.webm"
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_c7d67")
@@ -10,41 +15,56 @@ script = ExtResource("1_c7d67")
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 1152.0
-offset_bottom = 647.0
+offset_right = 1280.0
+offset_bottom = 720.0
 
 [node name="Bg" type="Node2D" parent="UI"]
-position = Vector2(576, 326)
-scale = Vector2(0.598958, 0.593981)
+position = Vector2(640, 360)
 
-[node name="Photo" type="Sprite2D" parent="UI/Bg"]
-position = Vector2(106.852, 57.2407)
-scale = Vector2(0.556522, 0.561185)
-texture = ExtResource("2_ld8bt")
+[node name="Sprite2D" type="Sprite2D" parent="UI/Bg"]
+visible = false
+texture = ExtResource("2_lj8l1")
+
+[node name="Bg" type="VideoStreamPlayer" parent="UI/Bg"]
+offset_left = -640.0
+offset_top = -360.0
+offset_right = 640.0
+offset_bottom = 360.0
+stream = SubResource("FFmpegVideoStream_pjdxv")
+volume_db = -80.0
+autoplay = true
+loop = true
 
 [node name="Tint" type="ColorRect" parent="UI/Bg"]
-offset_left = -960.0
-offset_top = -547.0
-offset_right = 1175.0
-offset_bottom = 663.0
+visible = false
+offset_left = -640.0
+offset_top = -360.0
+offset_right = 640.0
+offset_bottom = 360.0
 color = Color(0.0313726, 0.0313726, 0.0313726, 0.345098)
 
-[node name="Name" type="Label" parent="UI"]
+[node name="Name" type="RichTextLabel" parent="UI"]
 layout_mode = 0
-offset_left = 425.0
-offset_top = 132.0
-offset_right = 855.0
-offset_bottom = 187.0
-theme_override_font_sizes/font_size = 40
-text = "Invata Linux de la zero"
-horizontal_alignment = 1
+offset_left = 421.0
+offset_top = 131.0
+offset_right = 856.0
+offset_bottom = 186.0
+theme_override_font_sizes/normal_font_size = 40
+theme_override_font_sizes/bold_font_size = 40
+theme_override_font_sizes/italics_font_size = 40
+theme_override_font_sizes/bold_italics_font_size = 40
+theme_override_font_sizes/mono_font_size = 40
+bbcode_enabled = true
+text = "[rainbow freq=0.2 sat=0.8 val=0.8][wave amp=50.0 freq=2.0 connected=1]Invata Linux de la zero[/wave][/rainbow]"
+fit_content = true
+scroll_active = false
 
 [node name="Panel" type="Panel" parent="UI"]
 layout_mode = 2
 offset_left = 490.0
-offset_top = 427.0
+offset_top = 337.0
 offset_right = 794.0
-offset_bottom = 682.0
+offset_bottom = 592.0
 
 [node name="Buttons" type="VBoxContainer" parent="UI/Panel"]
 layout_mode = 0
@@ -57,7 +77,7 @@ theme_override_constants/separation = -1
 layout_mode = 2
 size_flags_vertical = 3
 tooltip_text = "Incepe o lectie"
-theme_override_styles/normal = ExtResource("3_ebplr")
+theme_override_styles/focus = ExtResource("2_0hv5f")
 text = "Lectii"
 
 [node name="Quizzes" type="Button" parent="UI/Panel/Buttons"]
@@ -65,33 +85,99 @@ layout_mode = 2
 size_flags_vertical = 3
 tooltip_text = "Testeaza-ti cunostiintele dobandite pe parcursul lectiilor.
 Necesita terminarea a minim 5 lectii"
-theme_override_styles/normal = ExtResource("3_ebplr")
+theme_override_styles/focus = ExtResource("2_0hv5f")
 text = "Chestionare"
 
 [node name="Settings" type="Button" parent="UI/Panel/Buttons"]
 layout_mode = 2
 size_flags_vertical = 3
 tooltip_text = "Regleaza-ti setarile legate de imagine, lectii, etc"
-theme_override_styles/normal = ExtResource("3_ebplr")
+theme_override_styles/focus = ExtResource("2_0hv5f")
 text = "Setari"
 
+[node name="Progress" type="Button" parent="UI/Panel/Buttons"]
+layout_mode = 2
+size_flags_vertical = 3
+tooltip_text = "Regleaza-ti setarile legate de imagine, lectii, etc"
+theme_override_styles/focus = ExtResource("2_0hv5f")
+disabled = true
+text = "Progres"
+
 [node name="Quit" type="Button" parent="UI/Panel/Buttons"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 tooltip_text = "Iesi din aplicatie. Mai clar de atat nu se poate"
-theme_override_styles/normal = ExtResource("3_ebplr")
+theme_override_styles/focus = ExtResource("2_0hv5f")
 text = "Iesire"
 
 [node name="Version" type="Label" parent="UI"]
-top_level = true
+visible = false
 layout_mode = 0
-offset_left = 7.0
-offset_top = 691.0
-offset_right = 1275.0
-offset_bottom = 714.0
+offset_left = 950.0
+offset_top = 624.0
+offset_right = 1230.0
+offset_bottom = 647.0
 text = "Ver"
+vertical_alignment = 1
+
+[node name="Bar" type="Sprite2D" parent="UI"]
+top_level = true
+position = Vector2(643, 681)
+texture = ExtResource("3_ocyen")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Bar"]
+offset_left = -574.0
+offset_top = -21.0
+offset_right = 575.0
+offset_bottom = 11.0
+scale = Vector2(1.25, 1.25)
+theme_override_constants/separation = 5
+
+[node name="Power" type="TextureButton" parent="UI/Bar/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("4_q207a")
+
+[node name="vSeparator" type="VSeparator" parent="UI/Bar/HBoxContainer"]
+layout_mode = 2
+
+[node name="Course" type="Button" parent="UI/Bar/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+tooltip_text = "Incepe o lectie"
+theme_override_styles/focus = ExtResource("2_0hv5f")
+text = "Lectii"
+
+[node name="Quizzes" type="Button" parent="UI/Bar/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+tooltip_text = "Testeaza-ti cunostiintele dobandite pe parcursul lectiilor.
+Necesita terminarea a minim 5 lectii"
+theme_override_styles/focus = ExtResource("2_0hv5f")
+text = "Chestionare"
+
+[node name="Settings" type="Button" parent="UI/Bar/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+tooltip_text = "Regleaza-ti setarile legate de imagine, lectii, etc"
+theme_override_styles/focus = ExtResource("2_0hv5f")
+text = "Setari"
+
+[node name="panelContainer" type="MarginContainer" parent="UI/Bar/HBoxContainer"]
+custom_minimum_size = Vector2(440, 0)
+layout_mode = 2
+
+[node name="Time" type="Label" parent="UI/Bar/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "yyyy-mm-dd hh-mm-ss"
+horizontal_alignment = 2
 
 [connection signal="pressed" from="UI/Panel/Buttons/Course" to="." method="_on_course_pressed"]
 [connection signal="pressed" from="UI/Panel/Buttons/Quizzes" to="." method="_on_quizzes_pressed"]
 [connection signal="pressed" from="UI/Panel/Buttons/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="UI/Panel/Buttons/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="UI/Bar/HBoxContainer/Power" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="UI/Bar/HBoxContainer/Course" to="." method="_on_course_pressed"]
+[connection signal="pressed" from="UI/Bar/HBoxContainer/Quizzes" to="." method="_on_quizzes_pressed"]
+[connection signal="pressed" from="UI/Bar/HBoxContainer/Settings" to="." method="_on_settings_pressed"]

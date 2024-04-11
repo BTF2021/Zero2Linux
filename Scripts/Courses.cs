@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Courses : Node2D
+public partial class Courses : Control
 {
 	// Called when the node enters the scene tree for the first time.
 	private DefaultData _data;
@@ -9,6 +9,9 @@ public partial class Courses : Node2D
 	private PackedScene _courseitem;
 	private CourseItem _panel;
 	public int selected;
+	private Vector2 mousepos;
+	private bool inputgrab;
+	private Vector2 dif;
 	public override async void _Ready()
 	{	_data = (DefaultData)GetNode("/root/DefaultData");
 		_VBoxContainer = (VBoxContainer)GetNode("Panel/ScrollContainer/VBoxContainer");
@@ -19,11 +22,30 @@ public partial class Courses : Node2D
 			i++;
 		}
 		GD.Print("Left");
-	}
 
+		if(_data.currentStats.Anims)
+		{
+			var tween = GetTree().CreateTween();
+			GetNode<Sprite2D>("Panel").Modulate = new Color(1, 1, 1, 0);
+			var pos = Position;
+			pos.X = 645;
+			pos.Y = 354;
+			GetNode<Sprite2D>("Panel").Position = pos;
+			pos.Y = 369;
+			tween.TweenProperty(GetNode<Sprite2D>("Panel"), "modulate", new Color(1, 1, 1, 1), 0.15);
+			tween.Parallel().TweenProperty(GetNode<Sprite2D>("Panel"), "position", pos, 0.15);
+		}
+	}
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
-	{	
+	{	mousepos = GetViewport().GetMousePosition();
+		var winpos = GetNode<Sprite2D>("Panel").Position;
+		var newpos = Position;
+		newpos.X = Mathf.Lerp(winpos.X, mousepos.X + dif.X, 1);
+		newpos.Y = Mathf.Lerp(winpos.Y, mousepos.Y + dif.Y, 1);
+		if(inputgrab)
+		{	GetNode<Sprite2D>("Panel").Position = newpos;
+		}
 	}
 	//Daca pui aceasta functie in while, toate CourseItem o sa redirectioneze in Lesson_16 sau in _panel.lesson (Lesson_15)
 	private void AddItem(int i)
@@ -48,9 +70,23 @@ public partial class Courses : Node2D
 		}
 		GD.Print("Adaugat " + _panel.lessonName);
 	}
-	private void _on_back_pressed() => GetTree().ChangeSceneToFile("res://Scenes/Main.tscn");
+	private void _on_back_pressed()
+	{	QueueFree();
+	}
 	private void PanelPressed(int index)
 	{	_data.currentStats.CurrentLesson = index;
 		GetTree().ChangeSceneToFile("res://Courses/Lesson_" + index + "/Lesson.tscn");
+	}
+	private void _on_drag_down()
+	{	GD.Print("Hi");
+		inputgrab = true;
+		var winpos = GetNode<Sprite2D>("Panel").Position;
+		dif.X = winpos.X - mousepos.X;
+		dif.Y = winpos.Y - mousepos.Y;
+		GD.Print(dif);
+	}
+	private void _on_drag_up()
+	{	GD.Print("Bye");
+		inputgrab = false;
 	}
 }

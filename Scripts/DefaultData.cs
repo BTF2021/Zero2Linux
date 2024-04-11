@@ -8,8 +8,9 @@ public class stats
 	public int version = 1;
 	public bool FullScr = false;
 	public bool VSync = true;
+	public bool Anims = true;
 	public int CurrentLesson = 0;
-	public Godot.Collections.Dictionary<int, int> LessonCompletion = new Godot.Collections.Dictionary<int, int>() 
+	public Godot.Collections.Dictionary<int, double> LessonCompletion = new Godot.Collections.Dictionary<int, double>() 
 	{
 		{1, 0},
 		{2, 0},

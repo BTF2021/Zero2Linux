@@ -1,3 +1,5 @@
-Alpha 0.2.3;
-- In lectii pot exista intrebari necesare continuarii lectiei
-- (Din nou) Alte modificari cu privire la UI
+Alpha 0.2.4;
+- Progresul lectiei este implementat
+- Schimbari la UI
+- Unele submeniuri sunt acum ferestre interactive
+- Cateva animatii

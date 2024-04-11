@@ -24,9 +24,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 232.0
-offset_top = 88.0
+offset_top = 53.0
 offset_right = 1048.0
-offset_bottom = 632.0
+offset_bottom = 597.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6
@@ -77,9 +77,9 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-offset_top = 636.0
+offset_top = 601.0
 offset_right = 1280.0
-offset_bottom = 679.0
+offset_bottom = 644.0
 theme_override_constants/separation = 3
 alignment = 1
 

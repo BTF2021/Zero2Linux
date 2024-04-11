@@ -1,157 +1,141 @@
-[gd_scene load_steps=11 format=3 uid="uid://1phgnjaru1ou"]
+[gd_scene load_steps=6 format=3 uid="uid://1phgnjaru1ou"]
 
 [ext_resource type="Script" path="res://Scripts/Settings.cs" id="1_5tuin"]
-[ext_resource type="Shader" path="res://Scripts/Simple blur.gdshader" id="2_g5qmx"]
-[ext_resource type="Texture2D" uid="uid://b1vo0cklpefq" path="res://Sprites/Back.png" id="2_l5hj0"]
-[ext_resource type="Texture2D" uid="uid://rsq42q4qde3" path="res://Sprites/BackHighlight.png" id="3_swqnr"]
-[ext_resource type="Script" path="res://Scripts/Confirma.cs" id="5_2a3fr"]
+[ext_resource type="Texture2D" uid="uid://dherg8j0a21h2" path="res://Sprites/CoursePanel.png" id="2_wmyog"]
 [ext_resource type="StyleBox" uid="uid://c8ip85nk5v8ds" path="res://Sprites/UIButtons.stylebox" id="6_c4yel"]
-[ext_resource type="StyleBox" uid="uid://di87pu5wmffgt" path="res://Sprites/UINoHover.stylebox" id="7_1hyb4"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_v230m"]
-shader = ExtResource("2_g5qmx")
-shader_parameter/lod = 3.3
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ijpad"]
+bg_color = Color(0, 0, 0, 0.611765)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3myx1"]
-bg_color = Color(0.364706, 0, 0, 0.917647)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_64lay"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3x8ak"]
-bg_color = Color(0.670588, 0, 0, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-
-[node name="Settings" type="Node2D"]
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_5tuin")
 
-[node name="Blur" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_v230m")
-offset_right = 1281.0
-offset_bottom = 720.0
-color = Color(0, 0, 0, 0.576471)
+[node name="Panel" type="Sprite2D" parent="."]
+position = Vector2(615, 338)
+scale = Vector2(0.816107, 0.816092)
+texture = ExtResource("2_wmyog")
 
-[node name="Settings" type="Panel" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 312.0
-offset_top = 128.0
-offset_right = 968.0
-offset_bottom = 586.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-
-[node name="TabContainer" type="TabContainer" parent="Settings"]
-layout_mode = 2
-offset_right = 656.0
-offset_bottom = 458.0
-theme_override_constants/side_margin = 30
+[node name="Settings" type="TabContainer" parent="Panel"]
+offset_left = -371.0
+offset_top = -289.0
+offset_right = 371.0
+offset_bottom = 303.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ijpad")
+theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_64lay")
 clip_tabs = false
 
-[node name="Grafica" type="Control" parent="Settings/TabContainer"]
+[node name="Grafica" type="Control" parent="Panel/Settings"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Settings/TabContainer/Grafica"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Settings/Grafica"]
 layout_mode = 0
 offset_left = 13.0
-offset_right = 656.0
-offset_bottom = 427.0
+offset_right = 732.0
+offset_bottom = 558.0
 theme_override_constants/separation = 8
 
-[node name="MarginContainer" type="MarginContainer" parent="Settings/TabContainer/Grafica/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/Settings/Grafica/VBoxContainer"]
 custom_minimum_size = Vector2(0, 5)
 layout_mode = 2
 
-[node name="Text" type="Label" parent="Settings/TabContainer/Grafica/VBoxContainer"]
+[node name="Text" type="Label" parent="Panel/Settings/Grafica/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Setari legate de grafica"
 horizontal_alignment = 1
 
-[node name="Fullscreen" type="Label" parent="Settings/TabContainer/Grafica/VBoxContainer"]
+[node name="Fullscreen" type="Label" parent="Panel/Settings/Grafica/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 19
 text = "Fullscreen"
 
-[node name="FullscreenButton" type="CheckButton" parent="Settings/TabContainer/Grafica/VBoxContainer/Fullscreen"]
+[node name="FullscreenButton" type="CheckButton" parent="Panel/Settings/Grafica/VBoxContainer/Fullscreen"]
 layout_mode = 0
 offset_left = 500.0
 offset_top = 3.5
 offset_right = 544.0
 offset_bottom = 27.5
 
-[node name="VSync" type="Label" parent="Settings/TabContainer/Grafica/VBoxContainer"]
+[node name="VSync" type="Label" parent="Panel/Settings/Grafica/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 19
 text = "VSync"
 
-[node name="VSyncButton" type="CheckButton" parent="Settings/TabContainer/Grafica/VBoxContainer/VSync"]
+[node name="VSyncButton" type="CheckButton" parent="Panel/Settings/Grafica/VBoxContainer/VSync"]
 layout_mode = 0
 offset_left = 500.0
 offset_top = 3.5
 offset_right = 544.0
 offset_bottom = 27.5
 
-[node name="Lectii" type="Control" parent="Settings/TabContainer"]
+[node name="Animations" type="Label" parent="Panel/Settings/Grafica/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 19
+text = "Animatii"
+
+[node name="AnimationsButton" type="CheckButton" parent="Panel/Settings/Grafica/VBoxContainer/Animations"]
+layout_mode = 0
+offset_left = 500.0
+offset_top = 3.5
+offset_right = 544.0
+offset_bottom = 27.5
+
+[node name="Lectii" type="Control" parent="Panel/Settings"]
 visible = false
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Settings/TabContainer/Lectii"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Settings/Lectii"]
 layout_mode = 0
 offset_left = 13.0
-offset_right = 656.0
-offset_bottom = 427.0
+offset_right = 731.0
+offset_bottom = 560.0
 theme_override_constants/separation = 8
 
-[node name="MarginContainer" type="MarginContainer" parent="Settings/TabContainer/Lectii/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/Settings/Lectii/VBoxContainer"]
 custom_minimum_size = Vector2(0, 5)
 layout_mode = 2
 
-[node name="Text" type="Label" parent="Settings/TabContainer/Lectii/VBoxContainer"]
+[node name="Text" type="Label" parent="Panel/Settings/Lectii/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Setari legate de lectii"
 horizontal_alignment = 1
 
-[node name="Advanced" type="Label" parent="Settings/TabContainer/Lectii/VBoxContainer"]
+[node name="Advanced" type="Label" parent="Panel/Settings/Lectii/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 19
 text = "Include lectiile avansate"
 
-[node name="AdvancedButton" type="CheckButton" parent="Settings/TabContainer/Lectii/VBoxContainer/Advanced"]
+[node name="AdvancedButton" type="CheckButton" parent="Panel/Settings/Lectii/VBoxContainer/Advanced"]
 layout_mode = 0
 offset_left = 500.0
 offset_top = 3.5
 offset_right = 544.0
 offset_bottom = 27.5
 
-[node name="Special" type="Label" parent="Settings/TabContainer/Lectii/VBoxContainer"]
+[node name="Special" type="Label" parent="Panel/Settings/Lectii/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 19
 text = "Include lectiile speciale"
 
-[node name="SpecialButton" type="CheckButton" parent="Settings/TabContainer/Lectii/VBoxContainer/Special"]
+[node name="SpecialButton" type="CheckButton" parent="Panel/Settings/Lectii/VBoxContainer/Special"]
 layout_mode = 0
 offset_left = 500.0
 offset_top = 3.5
 offset_right = 544.0
 offset_bottom = 27.5
 
-[node name="VideoVolume" type="Label" parent="Settings/TabContainer/Lectii/VBoxContainer"]
+[node name="VideoVolume" type="Label" parent="Panel/Settings/Lectii/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 19
 text = "Volum video"
 
-[node name="VideoVolumeSlide" type="HSlider" parent="Settings/TabContainer/Lectii/VBoxContainer/VideoVolume"]
+[node name="VideoVolumeSlide" type="HSlider" parent="Panel/Settings/Lectii/VBoxContainer/VideoVolume"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 0
 offset_left = 400.0
@@ -162,7 +146,7 @@ min_value = -11.0
 max_value = 10.0
 rounded = true
 
-[node name="VideoVolumeText" type="Label" parent="Settings/TabContainer/Lectii/VBoxContainer/VideoVolume"]
+[node name="VideoVolumeText" type="Label" parent="Panel/Settings/Lectii/VBoxContainer/VideoVolume"]
 layout_mode = 0
 offset_left = 600.0
 offset_top = 4.0
@@ -170,33 +154,33 @@ offset_right = 635.0
 offset_bottom = 27.0
 text = "11"
 
-[node name="Altele" type="Control" parent="Settings/TabContainer"]
+[node name="Altele" type="Control" parent="Panel/Settings"]
 visible = false
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Settings/TabContainer/Altele"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Settings/Altele"]
 layout_mode = 0
 offset_left = 13.0
-offset_right = 656.0
-offset_bottom = 427.0
+offset_right = 730.0
+offset_bottom = 560.0
 theme_override_constants/separation = 8
 
-[node name="MarginContainer" type="MarginContainer" parent="Settings/TabContainer/Altele/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/Settings/Altele/VBoxContainer"]
 custom_minimum_size = Vector2(0, 5)
 layout_mode = 2
 
-[node name="Text" type="Label" parent="Settings/TabContainer/Altele/VBoxContainer"]
+[node name="Text" type="Label" parent="Panel/Settings/Altele/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Alte setari"
 horizontal_alignment = 1
 
-[node name="GetUpdates" type="Label" parent="Settings/TabContainer/Altele/VBoxContainer"]
+[node name="GetUpdates" type="Label" parent="Panel/Settings/Altele/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 19
 text = "Primeste actualizari"
 
-[node name="GetUpdatesButton" type="CheckButton" parent="Settings/TabContainer/Altele/VBoxContainer/GetUpdates"]
+[node name="GetUpdatesButton" type="CheckButton" parent="Panel/Settings/Altele/VBoxContainer/GetUpdates"]
 layout_mode = 0
 offset_left = 499.0
 offset_top = -3.0
@@ -204,12 +188,12 @@ offset_right = 543.0
 offset_bottom = 28.0
 tooltip_text = "Setarile nu sunt salvate"
 
-[node name="DeleteSave" type="Label" parent="Settings/TabContainer/Altele/VBoxContainer"]
+[node name="DeleteSave" type="Label" parent="Panel/Settings/Altele/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 19
 text = "Sterge progersul"
 
-[node name="DeleteSaveButton" type="Button" parent="Settings/TabContainer/Altele/VBoxContainer/DeleteSave"]
+[node name="DeleteSaveButton" type="Button" parent="Panel/Settings/Altele/VBoxContainer/DeleteSave"]
 layout_mode = 0
 offset_left = 499.0
 offset_top = -3.0
@@ -218,15 +202,15 @@ offset_bottom = 28.0
 theme_override_styles/normal = ExtResource("6_c4yel")
 text = "Sterge"
 
-[node name="hSeparator" type="HSeparator" parent="Settings/TabContainer/Altele/VBoxContainer"]
+[node name="hSeparator" type="HSeparator" parent="Panel/Settings/Altele/VBoxContainer"]
 layout_mode = 2
 
-[node name="Version" type="Label" parent="Settings/TabContainer/Altele/VBoxContainer"]
+[node name="Version" type="Label" parent="Panel/Settings/Altele/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 19
 text = "Ver"
 
-[node name="VersionButton" type="Button" parent="Settings/TabContainer/Altele/VBoxContainer/Version"]
+[node name="VersionButton" type="Button" parent="Panel/Settings/Altele/VBoxContainer/Version"]
 layout_mode = 0
 offset_left = 499.0
 offset_top = -3.0
@@ -235,115 +219,31 @@ offset_bottom = 28.0
 theme_override_styles/normal = ExtResource("6_c4yel")
 text = "Github"
 
-[node name="Back" type="TextureButton" parent="Settings"]
-layout_mode = 0
-offset_right = 200.0
-offset_bottom = 207.0
+[node name="Back" type="Button" parent="Panel"]
+offset_left = 326.0
+offset_top = -300.0
+offset_right = 596.0
+offset_bottom = -48.0
 scale = Vector2(0.15, 0.15)
-texture_normal = ExtResource("2_l5hj0")
-texture_pressed = ExtResource("3_swqnr")
-
-[node name="Demo" type="Label" parent="."]
-visible = false
-offset_left = 544.0
-offset_top = 640.0
-offset_right = 745.0
-offset_bottom = 675.0
-theme_override_font_sizes/font_size = 25
-text = "Setari in progres"
-
-[node name="Confirma" type="Node2D" parent="."]
-visible = false
-script = ExtResource("5_2a3fr")
-
-[node name="Blur" type="ColorRect" parent="Confirma"]
-material = SubResource("ShaderMaterial_v230m")
-offset_right = 1281.0
-offset_bottom = 720.0
-
-[node name="Settings" type="Panel" parent="Confirma"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 480.0
-offset_top = 256.0
-offset_right = 808.0
-offset_bottom = 485.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-
-[node name="Text" type="Label" parent="Confirma/Settings"]
-layout_mode = 0
-offset_left = 34.0
-offset_top = 28.0
-offset_right = 294.0
-offset_bottom = 51.0
-text = "Esti sigur ca doresti sa stergi totul"
-
-[node name="Subtext" type="Label" parent="Confirma/Settings"]
-self_modulate = Color(1, 1, 1, 0.423529)
-layout_mode = 0
-offset_left = 66.0
-offset_top = 56.0
-offset_right = 257.0
-offset_bottom = 74.0
-theme_override_font_sizes/font_size = 12
-text = "Aceasta actiune este ireversibila"
-
-[node name="Cancel" type="Button" parent="Confirma/Settings"]
-layout_mode = 0
-offset_left = 120.0
-offset_top = 128.0
-offset_right = 199.0
-offset_bottom = 168.0
-theme_override_styles/normal = ExtResource("6_c4yel")
-text = "Anuleaza"
-
-[node name="Bar" type="ProgressBar" parent="Confirma/Settings"]
-layout_mode = 0
-offset_left = 54.0
-offset_top = 176.0
-offset_right = 274.0
-offset_bottom = 216.0
-theme_override_styles/background = SubResource("StyleBoxFlat_3myx1")
-theme_override_styles/fill = SubResource("StyleBoxFlat_3x8ak")
-max_value = 3.0
-show_percentage = false
-
-[node name="Hold" type="Button" parent="Confirma/Settings/Bar"]
-layout_mode = 0
-offset_right = 220.0
-offset_bottom = 40.0
-theme_override_styles/focus = ExtResource("7_1hyb4")
-action_mode = 0
 flat = true
 
-[node name="Text" type="Label" parent="Confirma/Settings/Bar"]
-layout_mode = 0
-offset_left = 4.0
-offset_top = 8.0
-offset_right = 216.0
-offset_bottom = 31.0
-text = "Tine apasat pentru a sterge"
-horizontal_alignment = 1
+[node name="Drag" type="Button" parent="Panel"]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = -159.0
+offset_top = -304.0
+offset_right = 326.0
+offset_bottom = -259.0
+flat = true
 
-[node name="timer" type="Timer" parent="Confirma"]
-one_shot = true
-
-[connection signal="pressed" from="Settings/TabContainer/Grafica/VBoxContainer/Fullscreen/FullscreenButton" to="." method="_on_fullscreen_pressed"]
-[connection signal="pressed" from="Settings/TabContainer/Grafica/VBoxContainer/VSync/VSyncButton" to="." method="_on_v_sync_button_pressed"]
-[connection signal="pressed" from="Settings/TabContainer/Lectii/VBoxContainer/Advanced/AdvancedButton" to="." method="_on_advanced_pressed"]
-[connection signal="pressed" from="Settings/TabContainer/Lectii/VBoxContainer/Special/SpecialButton" to="." method="_on_special_pressed"]
-[connection signal="value_changed" from="Settings/TabContainer/Lectii/VBoxContainer/VideoVolume/VideoVolumeSlide" to="." method="_on_video_volume_value_changed"]
-[connection signal="pressed" from="Settings/TabContainer/Altele/VBoxContainer/GetUpdates/GetUpdatesButton" to="." method="_on_updates_button_pressed"]
-[connection signal="pressed" from="Settings/TabContainer/Altele/VBoxContainer/DeleteSave/DeleteSaveButton" to="." method="_on_delete_pressed"]
-[connection signal="pressed" from="Settings/TabContainer/Altele/VBoxContainer/Version/VersionButton" to="." method="_on_version_pressed"]
-[connection signal="pressed" from="Settings/Back" to="." method="_on_back_pressed"]
-[connection signal="pressed" from="Confirma/Settings/Cancel" to="Confirma" method="_on_cancel_pressed"]
-[connection signal="button_down" from="Confirma/Settings/Bar/Hold" to="Confirma" method="_on_hold_down"]
-[connection signal="button_up" from="Confirma/Settings/Bar/Hold" to="Confirma" method="_on_hold_up"]
-[connection signal="timeout" from="Confirma/timer" to="Confirma" method="_on_timeout"]
+[connection signal="pressed" from="Panel/Settings/Grafica/VBoxContainer/Fullscreen/FullscreenButton" to="." method="_on_fullscreen_pressed"]
+[connection signal="pressed" from="Panel/Settings/Grafica/VBoxContainer/VSync/VSyncButton" to="." method="_on_v_sync_button_pressed"]
+[connection signal="pressed" from="Panel/Settings/Grafica/VBoxContainer/Animations/AnimationsButton" to="." method="_on_animations_pressed"]
+[connection signal="pressed" from="Panel/Settings/Lectii/VBoxContainer/Advanced/AdvancedButton" to="." method="_on_advanced_pressed"]
+[connection signal="pressed" from="Panel/Settings/Lectii/VBoxContainer/Special/SpecialButton" to="." method="_on_special_pressed"]
+[connection signal="value_changed" from="Panel/Settings/Lectii/VBoxContainer/VideoVolume/VideoVolumeSlide" to="." method="_on_video_volume_value_changed"]
+[connection signal="pressed" from="Panel/Settings/Altele/VBoxContainer/GetUpdates/GetUpdatesButton" to="." method="_on_updates_button_pressed"]
+[connection signal="pressed" from="Panel/Settings/Altele/VBoxContainer/DeleteSave/DeleteSaveButton" to="." method="_on_delete_pressed"]
+[connection signal="pressed" from="Panel/Settings/Altele/VBoxContainer/Version/VersionButton" to="." method="_on_version_pressed"]
+[connection signal="pressed" from="Panel/Back" to="." method="_on_back_pressed"]
+[connection signal="button_down" from="Panel/Drag" to="." method="_on_drag_down"]
+[connection signal="button_up" from="Panel/Drag" to="." method="_on_drag_up"]

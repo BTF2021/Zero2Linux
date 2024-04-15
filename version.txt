@@ -1,5 +1,10 @@
-Alpha 0.2.4;
-- Progresul lectiei este implementat
-- Schimbari la UI
-- Unele submeniuri sunt acum ferestre interactive
-- Cateva animatii
+Alpha 0.3.0;
+- Nou UI (Acum pare a interfata unui sistem de operare)
+- Toate submeniurile sunt ferestre separate ce pot fi trase
+- Animatii
+- Utilizatori: se pot crea utilizatori cu nume si culori de
+fundal diferite, iar progresul fiecarui utilizator este
+salvat individual
+- Butoanele din Video player se ascund daca cursorul nu este
+deasupra acestora pentru un timp
+- Progresul fiecarei lectii este salvat

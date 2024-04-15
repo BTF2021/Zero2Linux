@@ -1,89 +1,89 @@
-[gd_scene load_steps=6 format=3 uid="uid://dkrwuagt06eee"]
+[gd_scene load_steps=5 format=3 uid="uid://dkrwuagt06eee"]
 
 [ext_resource type="Script" path="res://Scripts/Quizzes.cs" id="1_2xhny"]
-[ext_resource type="Texture2D" uid="uid://b1vo0cklpefq" path="res://Sprites/Back.png" id="1_fvxpi"]
-[ext_resource type="Material" uid="uid://bl5ra5x2dyfgr" path="res://Sprites/Blur.material" id="2_l00w8"]
-[ext_resource type="Texture2D" uid="uid://rsq42q4qde3" path="res://Sprites/BackHighlight.png" id="2_wrlhq"]
+[ext_resource type="Texture2D" uid="uid://dherg8j0a21h2" path="res://Sprites/CoursePanel.png" id="2_l88yu"]
+[ext_resource type="Texture2D" uid="uid://bqd1321xxqoej" path="res://Sprites/CloseButton.png" id="3_1ijik"]
 [ext_resource type="StyleBox" uid="uid://c8ip85nk5v8ds" path="res://Sprites/UIButtons.stylebox" id="5_6ssof"]
 
-[node name="Quizzes" type="Node2D"]
+[node name="Quizzes" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_2xhny")
 
-[node name="Tint" type="ColorRect" parent="."]
-material = ExtResource("2_l00w8")
-offset_right = 1281.0
-offset_bottom = 721.0
-color = Color(0.0313726, 0.0313726, 0.0313726, 0.576471)
+[node name="Panel" type="Sprite2D" parent="."]
+position = Vector2(645, 339)
+scale = Vector2(1.04564, 1)
+texture = ExtResource("2_l88yu")
 
-[node name="Settings" type="Panel" parent="."]
-self_modulate = Color(1, 0.909804, 1, 1)
+[node name="Drag" type="Button" parent="Panel"]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = -364.0
+offset_top = -303.0
+offset_right = 364.0
+offset_bottom = -258.0
+flat = true
+
+[node name="Back" type="TextureButton" parent="Panel"]
+offset_left = 327.0
+offset_top = -299.0
+offset_right = 367.0
+offset_bottom = -261.0
+texture_normal = ExtResource("3_1ijik")
+
+[node name="Settings" type="Panel" parent="Panel"]
+self_modulate = Color(1, 1, 1, 0.25098)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 136.0
-offset_top = 104.0
-offset_right = 1149.0
-offset_bottom = 639.0
+offset_left = -743.5
+offset_top = -560.5
+offset_right = -1.5
+offset_bottom = -1.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 
-[node name="Title" type="Label" parent="Settings"]
+[node name="Description" type="Label" parent="Panel/Settings"]
 layout_mode = 0
-offset_left = 348.0
-offset_top = 6.0
-offset_right = 636.0
-offset_bottom = 75.0
-theme_override_font_sizes/font_size = 50
-text = "Intrebari"
+offset_left = -1.0
+offset_top = 217.0
+offset_right = 742.0
+offset_bottom = 241.0
+theme_override_font_sizes/font_size = 17
+text = "Testeaza-ti cunostiintele dobandite pe parcursul lectiilor cu aceste chestionare"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Back" type="TextureButton" parent="Settings"]
+[node name="Stats" type="Label" parent="Panel/Settings"]
 layout_mode = 0
-offset_right = 200.0
-offset_bottom = 200.0
-scale = Vector2(0.25, 0.25)
-texture_normal = ExtResource("1_fvxpi")
-texture_pressed = ExtResource("2_wrlhq")
-
-[node name="Description" type="Label" parent="Settings"]
-layout_mode = 0
-offset_left = 129.0
-offset_top = 358.0
-offset_right = 894.0
-offset_bottom = 398.0
-theme_override_font_sizes/font_size = 20
-text = "Testeaza-ti cunostiintele dobandite pe parcursul lectiilor cu aceste chestionare"
-
-[node name="Stats" type="Label" parent="Settings"]
-layout_mode = 0
-offset_left = 6.0
-offset_top = 463.0
-offset_right = 1010.0
-offset_bottom = 522.0
+offset_left = 15.7144
+offset_top = 500.0
+offset_right = 741.714
+offset_bottom = 559.0
 theme_override_font_sizes/font_size = 20
 text = "Chestionare terminate: 0
 Lectii terminate: 4"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Settings"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Settings"]
 layout_mode = 0
-offset_left = 328.0
-offset_top = 159.0
-offset_right = 656.0
-offset_bottom = 341.0
+offset_left = 212.723
+offset_top = 19.0
+offset_right = 540.723
+offset_bottom = 201.0
 
-[node name="Random" type="Button" parent="Settings/VBoxContainer"]
+[node name="Random" type="Button" parent="Panel/Settings/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 tooltip_text = "Genereaza un chestionar din lectiile deja parcurse"
 theme_override_styles/normal = ExtResource("5_6ssof")
 text = "Chestionar aleator"
 
-[node name="Select" type="Button" parent="Settings/VBoxContainer"]
+[node name="Select" type="Button" parent="Panel/Settings/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 tooltip_text = "Alege un chestionar dintr-o lectie"
@@ -91,7 +91,7 @@ theme_override_styles/normal = ExtResource("5_6ssof")
 disabled = true
 text = "Selectare lectie"
 
-[node name="Custom" type="Button" parent="Settings/VBoxContainer"]
+[node name="Custom" type="Button" parent="Panel/Settings/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 tooltip_text = "Alege lectiile din care vrei sa fi intrebat"
@@ -99,5 +99,17 @@ theme_override_styles/normal = ExtResource("5_6ssof")
 disabled = true
 text = "Chestionar personalizat"
 
-[connection signal="pressed" from="Settings/Back" to="." method="_on_back_pressed"]
-[connection signal="pressed" from="Settings/VBoxContainer/Random" to="." method="_on_random_pressed"]
+[node name="Label" type="Label" parent="Panel"]
+offset_left = -68.3793
+offset_top = -291.0
+offset_right = 73.6207
+offset_bottom = -268.0
+theme_override_font_sizes/font_size = 16
+text = "intrebari"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="button_down" from="Panel/Drag" to="." method="_on_drag_down"]
+[connection signal="button_up" from="Panel/Drag" to="." method="_on_drag_up"]
+[connection signal="pressed" from="Panel/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Panel/Settings/VBoxContainer/Random" to="." method="_on_random_pressed"]

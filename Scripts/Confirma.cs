@@ -25,10 +25,7 @@ public partial class Confirma : Node2D
 	{	timer.Start(3.0);
 	}
 	private void _on_hold_up()
-	{	if(timer.IsStopped() && timeout)
-		{	_data.PurgeSave();
-			GetParent().QueueFree();
-		}
+	{	if(timer.IsStopped() && timeout) _data.PurgeSave(_data.LoggedUser);
 		else timer.Stop();
 	}
 	private void _on_timeout()

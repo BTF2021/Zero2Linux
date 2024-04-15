@@ -5,23 +5,27 @@ public partial class VideoOverlay : Node2D
 {
 	double videocurrenttime, videotime;          //Simpilficate VideoStreamPlayer.StreamPosition si  VideoStreamPlayer.GetStreamLength()
 	bool paused;                                 //Pentru a verifica daca utilizatorul a pus pauza
+	bool dragging;                               //Pentru a verifica daca utilizatorul foloseste oricare slider (Mai mult pentru animatie)
 	TimeSpan vct, vt;                            //Pentru formatare text
 	private DefaultData _data;                   //DefaultData
 	private VideoStreamPlayer _stream;           //Video
 	private HSlider _slider;                     //Seekbar
 	private HSlider _volume;                     //Volum
+	private Timer _timer;
 	public override void _Ready()
 	{	_data = (DefaultData)GetNode("/root/DefaultData");
 		_stream = (VideoStreamPlayer)GetNode("Panel/VideoStreamPlayer");
-		_slider = (HSlider)GetNode("Controls/Seekbar");
-		_volume = (HSlider)GetNode("Controls/Volum/Volume");
+		_slider = (HSlider)GetNode("ControlsTint/Controls/Seekbar");
+		_volume = (HSlider)GetNode("ControlsTint/Controls/Volum/Volume");
+		_timer = GetNode<Timer>("Timer");
 		_stream.Stop();
 		videotime = _stream.GetStreamLength();
 		_slider.MaxValue = videotime;
 		_volume.Value = _data.currentStats.VideoVolume;
-		if(DisplayServer.WindowGetMode() == DisplayServer.WindowMode.Fullscreen) GetNode<TextureButton>("Controls/Fullscr").TextureNormal = GD.Load<CompressedTexture2D>("res://Sprites/Winscr.png");
+		if(DisplayServer.WindowGetMode() == DisplayServer.WindowMode.Fullscreen) GetNode<TextureButton>("ControlsTint/Controls/Fullscr").TextureNormal = GD.Load<CompressedTexture2D>("res://Sprites/Winscr.png");
 		vt = TimeSpan.FromSeconds(videotime);
 		paused = true;
+		dragging = false;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -34,15 +38,15 @@ public partial class VideoOverlay : Node2D
 		if(_stream.IsPlaying())
 			if(!_stream.Paused) _slider.Value = videocurrenttime;
 			else _stream.StreamPosition = _slider.Value;
-		else GetNode<TextureButton>("Controls/Play").TextureNormal = GD.Load<CompressedTexture2D>("res://Sprites/Play.png");
+		else GetNode<TextureButton>("ControlsTint/Controls/Play").TextureNormal = GD.Load<CompressedTexture2D>("res://Sprites/Play.png");
 		//Text
-		if(_stream.GetStreamLength() >= 3600) GetNode<Label>("Controls/Time").Text = vct.ToString("hh\\:mm\\:ss") + "/" + vt.ToString("hh\\:mm\\:ss");
-		else GetNode<Label>("Controls/Time").Text = vct.ToString("mm\\:ss") + "/" + vt.ToString("mm\\:ss");
+		if(_stream.GetStreamLength() >= 3600) GetNode<Label>("ControlsTint/Controls/Time").Text = vct.ToString("hh\\:mm\\:ss") + "/" + vt.ToString("hh\\:mm\\:ss");
+		else GetNode<Label>("ControlsTint/Controls/Time").Text = vct.ToString("mm\\:ss") + "/" + vt.ToString("mm\\:ss");
 
 		//Pnetru volum
-		if(_volume.Value == -11) GetNode<Label>("Controls/Volum/VolumeNum").Text = "Volum: Mut";
-		else if(_volume.Value == 10)GetNode<Label>("Controls/Volum/VolumeNum").Text = "Volum: Max";
-		else GetNode<Label>("Controls/Volum/VolumeNum").Text = "Volum: " + (_volume.Value + 11).ToString();
+		if(_volume.Value == -11) GetNode<Label>("ControlsTint/Controls/Volum/VolumeNum").Text = "Volum: Mut";
+		else if(_volume.Value == 10)GetNode<Label>("ControlsTint/Controls/Volum/VolumeNum").Text = "Volum: Max";
+		else GetNode<Label>("ControlsTint/Controls/Volum/VolumeNum").Text = "Volum: " + (_volume.Value + 11).ToString();
 	}
 	private void _on_play_pressed()
 	{
@@ -50,12 +54,13 @@ public partial class VideoOverlay : Node2D
 		if(!_stream.IsPlaying())
 		{	_stream.Stop();
 			_stream.Play();
-			GetNode<TextureButton>("Controls/Play").TextureNormal = GD.Load<CompressedTexture2D>("res://Sprites/Pause.png");
+			GetNode<TextureButton>("ControlsTint/Controls/Play").TextureNormal = GD.Load<CompressedTexture2D>("res://Sprites/Pause.png");
+			_on_mouse_exited();
 		}
 		else _stream.Paused = !_stream.Paused;
 		paused = _stream.Paused;
-		if(!_stream.Paused) GetNode<TextureButton>("Controls/Play").TextureNormal = GD.Load<CompressedTexture2D>("res://Sprites/Pause.png");
-		else GetNode<TextureButton>("Controls/Play").TextureNormal = GD.Load<CompressedTexture2D>("res://Sprites/Play.png");
+		if(!_stream.Paused) GetNode<TextureButton>("ControlsTint/Controls/Play").TextureNormal = GD.Load<CompressedTexture2D>("res://Sprites/Pause.png");
+		else GetNode<TextureButton>("ControlsTint/Controls/Play").TextureNormal = GD.Load<CompressedTexture2D>("res://Sprites/Play.png");
 	}
 	//Scade StreamPosition cu 10s
 	private void _on_backward_pressed()
@@ -71,31 +76,73 @@ public partial class VideoOverlay : Node2D
 	{	_slider.Value = 0; //Daca nu-l setezi la 0, cand iesi si reintrii, o sa inceapa de unde a ramas
 		_stream.Stop();
 		_stream.Paused = false;
-		GetNode<TextureButton>("Controls/Play").TextureNormal = GD.Load<CompressedTexture2D>("res://Sprites/Play.png");
-		GetNode<TextureButton>("Controls/Play").SetPressedNoSignal(false);
+		GetNode<TextureButton>("ControlsTint/Controls/Play").TextureNormal = GD.Load<CompressedTexture2D>("res://Sprites/Play.png");
+		GetNode<TextureButton>("ControlsTint/Controls/Play").SetPressedNoSignal(false);
 		QueueFree();
 	}
 	//Cand tii apasat pe Seekbar...
 	private void _on_drag_started()
 	{	_stream.Paused = true;
+		dragging = true;
+		_timer.Stop();
+	}
+	private void _on_volume_drag_started()
+	{	dragging = true;
+		_timer.Stop();
 	}
 	//...si cand te opresti
 	private void _on_drag_ended(bool value_changed)
 	{	if(!paused)_stream.Paused = false;
+		dragging = false;
 	}
+
 	private void _on_volume_changed(float value)
-	{	_data.currentStats.VideoVolume = value;
-		_data.WriteSave();
+	{	dragging = false;
+		_data.currentStats.VideoVolume = value;
+		_data.WriteSave(_data.LoggedUser);
 	}
 	//Butonul de fullscreen
 	private void _on_fullscr_pressed()
 	{	if(DisplayServer.WindowGetMode() == DisplayServer.WindowMode.Windowed)
 		{	DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
-			GetNode<TextureButton>("Controls/Fullscr").TextureNormal = GD.Load<CompressedTexture2D>("res://Sprites/Winscr.png");
+			_data.currentStats.FullScr = true;
+			GetNode<TextureButton>("ControlsTint/Controls/Fullscr").TextureNormal = GD.Load<CompressedTexture2D>("res://Sprites/Winscr.png");
 		}
 		else
 		{	DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
-			GetNode<TextureButton>("Controls/Fullscr").TextureNormal = GD.Load<CompressedTexture2D>("res://Sprites/Fullscr.png");
+			_data.currentStats.FullScr = false;
+			GetNode<TextureButton>("ControlsTint/Controls/Fullscr").TextureNormal = GD.Load<CompressedTexture2D>("res://Sprites/Fullscr.png");
 		}
+		_data.WriteSave(_data.LoggedUser);
+	}
+	private void _on_timer_timeout()
+	{	var pos = Position;
+		pos.X = 0;
+		pos.Y = 50;
+		var tween = GetTree().CreateTween();
+		tween.Parallel().TweenProperty(GetNode<HBoxContainer>("ControlsTint/Controls"), "position", pos, 0.25);
+		pos.X = -50;
+		pos.Y = 0;
+		tween.Parallel().TweenProperty(GetNode<TextureButton>("BackTint/Back"), "position", pos, 0.25);
+		tween.Parallel().TweenProperty(GetNode<ColorRect>("ControlsTint"), "self_modulate", new Color(1, 1, 1, 0), 0.25);
+		tween.Parallel().TweenProperty(GetNode<ColorRect>("BackTint"), "self_modulate", new Color(1, 1, 1, 0), 0.25);
+	}
+	private async void _on_mouse_exited()
+	{	GD.Print("Bye");
+		if(!paused && !dragging) _timer.Start(1.5);
+	}
+	private void _on_mouse_entered()
+	{	GD.Print("Hi");
+		_timer.Stop();
+		var pos = Position;
+		pos.X = 0;
+		pos.Y = 8;
+		var tween = GetTree().CreateTween();
+		tween.Parallel().TweenProperty(GetNode<HBoxContainer>("ControlsTint/Controls"), "position", pos, 0.25);
+		pos.X = -5;
+		pos.Y = 0;
+		tween.Parallel().TweenProperty(GetNode<TextureButton>("BackTint/Back"), "position", pos, 0.25);
+		tween.Parallel().TweenProperty(GetNode<ColorRect>("ControlsTint"), "self_modulate", new Color(1, 1, 1, 1), 0.25);
+		tween.Parallel().TweenProperty(GetNode<ColorRect>("BackTint"), "self_modulate", new Color(1, 1, 1, 1), 0.25);
 	}
 }

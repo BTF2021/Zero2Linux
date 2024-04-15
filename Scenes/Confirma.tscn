@@ -48,13 +48,14 @@ grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 
-[node name="Text" type="Label" parent="Settings"]
+[node name="Text" type="RichTextLabel" parent="Settings"]
 layout_mode = 0
-offset_left = 34.0
+offset_left = 29.0
 offset_top = 28.0
-offset_right = 294.0
+offset_right = 302.0
 offset_bottom = 51.0
-text = "Esti sigur ca doresti sa stergi totul"
+bbcode_enabled = true
+text = "[shake rate=20.0 level=1 connected=1]Esti sigur ca doresti sa stergi totul?[/shake]"
 
 [node name="Subtext" type="Label" parent="Settings"]
 self_modulate = Color(1, 1, 1, 0.423529)

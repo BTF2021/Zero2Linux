@@ -11,8 +11,8 @@ config_version=5
 [application]
 
 config/name="Zero2Linux"
-config/version="Alpha 0.2.4"
-run/main_scene="res://Scenes/Main.tscn"
+config/version="Alpha 0.3.0"
+run/main_scene="res://Scenes/Logare.tscn"
 config/features=PackedStringArray("4.2", "C#", "Mobile")
 config/icon="res://icon.svg"
 

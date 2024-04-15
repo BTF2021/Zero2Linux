@@ -5,7 +5,9 @@ using Newtonsoft.Json;
 //clasa pentru a salva setari si progres. De ce am facut asta? Ca sa se salveze frumos in format JSON
 public class stats
 {
-	public int version = 1;
+	public int version = 2;
+	public string UsrName = " ";
+	public Color FavColor = new Color(1, 1, 1, 1);
 	public bool FullScr = false;
 	public bool VSync = true;
 	public bool Anims = true;
@@ -57,6 +59,7 @@ public partial class DefaultData : Node
 		{15, new Godot.Collections.Array{"Lectia 8:", 0}}
 	};
     //valori care nu ar trebui schimbate
+	public string LoggedUser = " ";
     public bool verifiedver = false;
 	public bool isvideoavailable = false;
 	//Vector pentru retinerea informatiilor privind versiunea noua de pe Github
@@ -64,9 +67,6 @@ public partial class DefaultData : Node
 
     public override void _Ready()
 	{	
-		if(SaveExists()) ReadSave();
-		else WriteSave();
-		
 		#if GODOT_LINUXBSD
 			#if TOOLS
 				if(DirAccess.DirExistsAbsolute("res://addons/ffmpeg/linux64"))isvideoavailable=true;
@@ -101,17 +101,38 @@ public partial class DefaultData : Node
 	}
 
 	public bool SaveExists()
-	{	GD.Print("Exista fisier: " + FileAccess.FileExists("user://save.json"));
-		return FileAccess.FileExists("user://save.json");
+	{	System.Array filearray = DirAccess.GetFilesAt("user://");
+		for (int i = 0; i < filearray.Length; i++)
+		{	if(((string)(filearray.GetValue(i))).EndsWith("_save.json"))     //Ceva stupid. filearray.GetValue(i) trebuie sa fie string ca sa poate folosi EndsWith()
+			{	GD.Print("Exista fisier: true");
+				return true;
+			}
+		}
+		GD.Print("Exista fisier: false. Creaza un nou save.json");
+		return false;
 	}
-	public void WriteSave()
-	{	var file = FileAccess.Open("user://save.json", FileAccess.ModeFlags.Write);
+	public System.Array GetSaves()
+	{	System.Array filearray = DirAccess.GetFilesAt("user://");
+		var length = filearray.Length;
+		if(length > 7) length = 7;
+		System.Array savenames = new string[7];
+		if(!SaveExists()) return null;
+		for (int i = 0; i < length; i++)
+			if(((string)(filearray.GetValue(i))).EndsWith("_save.json"))     					 //Ceva stupid. filearray.GetValue(i) trebuie sa fie string ca sa poate folosi Contains()
+			{	var pos = ((string)(filearray.GetValue(i))).Find("_save.json");					 //Aflam pozitia _save.json
+				savenames.SetValue(((string)(filearray.GetValue(i))).Substr(0, pos), i);         //Facem un subsir pana la _save.json si-l bagam in vector
+				GD.Print(savenames.GetValue(i));
+			}
+		return savenames;
+	}
+	public void WriteSave(string user)
+	{	var file = FileAccess.Open("user://" + user + "_save.json", FileAccess.ModeFlags.Write);
 		if (file == null) GD.Print("Nu se poate deschide fisierul. Eroare: " + FileAccess.GetOpenError());
 		file.StoreString(JsonConvert.SerializeObject(currentStats));
 		file.Close();
 	}
-	public void ReadSave()
-	{	var file = FileAccess.Open("user://save.json", FileAccess.ModeFlags.Read);
+	public void ReadSave(string user)
+	{	var file = FileAccess.Open("user://" + user + "_save.json", FileAccess.ModeFlags.Read);
 		if (file == null) GD.Print("Nu se poate deschide fisierul. Eroare: " + FileAccess.GetOpenError());
 		stats content = JsonConvert.DeserializeObject<stats>(file.GetAsText());
 		file.Close();
@@ -121,10 +142,13 @@ public partial class DefaultData : Node
 		if(currentStats.VSync) DisplayServer.WindowSetVsyncMode(DisplayServer.VSyncMode.Enabled);
 		else DisplayServer.WindowSetVsyncMode(DisplayServer.VSyncMode.Disabled);
 	}
-	public void PurgeSave()
+	public void PurgeSave(string user)
 	{
+		DirAccess.RemoveAbsolute("user://" + user + "_save.json");             //Trebuie sa fie functie statica
+		LoggedUser = " ";
+		DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
+		DisplayServer.WindowSetVsyncMode(DisplayServer.VSyncMode.Enabled);
 		currentStats = new stats();
-		WriteSave();
-		ReadSave();
+		GetTree().ChangeSceneToFile("res://Scenes/Logare.tscn");
 	}
 }

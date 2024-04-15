@@ -117,7 +117,7 @@ public partial class Lesson : Node2D
 				}
 				GD.Print(questionansw + "/" + totalquestioncount + " " + blocksread + "/" + totallessonblocks + " " + ((questionansw + blocksread) * 100 / (totalquestioncount + totallessonblocks)));
 				_data.currentStats.LessonCompletion[lessonid] = (questionansw + blocksread) * 100 / (totalquestioncount + totallessonblocks);
-				_data.WriteSave();
+				_data.WriteSave(_data.LoggedUser);
 			}
 			else
 			{	_node.GetChild<Quizitem>(index)._disable();

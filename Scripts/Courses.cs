@@ -29,9 +29,9 @@ public partial class Courses : Control
 			GetNode<Sprite2D>("Panel").Modulate = new Color(1, 1, 1, 0);
 			var pos = Position;
 			pos.X = 645;
-			pos.Y = 354;
+			pos.Y = 339 - 25;
 			GetNode<Sprite2D>("Panel").Position = pos;
-			pos.Y = 369;
+			pos.Y = 339;
 			tween.TweenProperty(GetNode<Sprite2D>("Panel"), "modulate", new Color(1, 1, 1, 1), 0.15);
 			tween.Parallel().TweenProperty(GetNode<Sprite2D>("Panel"), "position", pos, 0.15);
 		}
@@ -70,9 +70,7 @@ public partial class Courses : Control
 		}
 		GD.Print("Adaugat " + _panel.lessonName);
 	}
-	private void _on_back_pressed()
-	{	QueueFree();
-	}
+	private void _on_back_pressed() => QueueFree();
 	private void PanelPressed(int index)
 	{	_data.currentStats.CurrentLesson = index;
 		GetTree().ChangeSceneToFile("res://Courses/Lesson_" + index + "/Lesson.tscn");

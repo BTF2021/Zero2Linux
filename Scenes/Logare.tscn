@@ -1,0 +1,337 @@
+[gd_scene load_steps=8 format=3 uid="uid://bkx0p2po0iq6n"]
+
+[ext_resource type="Texture2D" uid="uid://c311u78gq8dn" path="res://Sprites/Bg.png" id="1_acc6r"]
+[ext_resource type="Script" path="res://Scripts/Logare.cs" id="1_avx0j"]
+[ext_resource type="StyleBox" uid="uid://di87pu5wmffgt" path="res://Sprites/UINoHover.stylebox" id="3_rxovc"]
+[ext_resource type="Texture2D" uid="uid://ddhgftxfvqe6s" path="res://Sprites/Profile.png" id="4_f0vrj"]
+[ext_resource type="StyleBox" uid="uid://c8ip85nk5v8ds" path="res://Sprites/UIButtons.stylebox" id="5_c51ni"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y087x"]
+bg_color = Color(0.215686, 0.215686, 0.215686, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b6rum"]
+bg_color = Color(0.215427, 0.215427, 0.215427, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="Logare" type="Node2D"]
+script = ExtResource("1_avx0j")
+
+[node name="Bg" type="Node2D" parent="."]
+position = Vector2(640, 360)
+
+[node name="Sprite2D" type="Sprite2D" parent="Bg"]
+texture = ExtResource("1_acc6r")
+
+[node name="Time" type="Label" parent="Bg"]
+offset_left = -640.0
+offset_top = -359.0
+offset_right = 640.0
+offset_bottom = -300.0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 40
+text = "Timp"
+horizontal_alignment = 1
+
+[node name="Version" type="Label" parent="Bg"]
+offset_left = -633.0
+offset_top = 330.0
+offset_right = -353.0
+offset_bottom = 353.0
+text = "Ver"
+vertical_alignment = 1
+
+[node name="Profiles" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_top = 254.0
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="Title" type="RichTextLabel" parent="Profiles"]
+layout_mode = 0
+offset_left = 574.0
+offset_top = -168.0
+offset_right = 707.0
+offset_bottom = -109.0
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 40
+theme_override_font_sizes/bold_font_size = 40
+theme_override_font_sizes/italics_font_size = 40
+theme_override_font_sizes/bold_italics_font_size = 40
+theme_override_font_sizes/mono_font_size = 40
+bbcode_enabled = true
+text = "[wave amp=50.0 freq=1.9 connected=1]Logare[/wave]"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="List" type="HBoxContainer" parent="Profiles"]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 181.0
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name=">,,<" type="Button" parent="Profiles/List"]
+visible = false
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+tooltip_text = "Logheaza-te ca "
+theme_override_styles/focus = ExtResource("3_rxovc")
+flat = true
+
+[node name="Bg" type="Sprite2D" parent="Profiles/List/>,,<"]
+position = Vector2(80, 100)
+texture = ExtResource("4_f0vrj")
+
+[node name="Name" type="Label" parent="Profiles/List/>,,<"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 186.0
+offset_right = 168.0
+offset_bottom = 221.0
+theme_override_font_sizes/font_size = 25
+text = "123456789abc"
+horizontal_alignment = 1
+
+[node name="BigLetter" type="Label" parent="Profiles/List/>,,<"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 24.0
+offset_right = 156.0
+offset_bottom = 177.0
+theme_override_font_sizes/font_size = 70
+text = "T"
+horizontal_alignment = 1
+vertical_alignment = 1
+visible_characters = 1
+
+[node name="Create" type="Button" parent="Profiles"]
+layout_mode = 0
+offset_left = 482.0
+offset_top = 318.0
+offset_right = 789.0
+offset_bottom = 361.0
+theme_override_font_sizes/font_size = 25
+text = "Creeaza un nou utilizator"
+
+[node name="Create" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_top = 87.0
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="Title" type="RichTextLabel" parent="Create"]
+layout_mode = 0
+offset_left = 439.0
+offset_top = -2.0
+offset_right = 845.0
+offset_bottom = 57.0
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 40
+theme_override_font_sizes/bold_font_size = 40
+theme_override_font_sizes/italics_font_size = 40
+theme_override_font_sizes/bold_italics_font_size = 40
+theme_override_font_sizes/mono_font_size = 40
+bbcode_enabled = true
+text = "[wave amp=50.0 freq=1.9 connected=1]Creeaza un nou user[/wave]"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="Nume" type="Label" parent="Create"]
+layout_mode = 0
+offset_left = 531.0
+offset_top = 160.0
+offset_right = 663.0
+offset_bottom = 209.0
+theme_override_font_sizes/font_size = 35
+text = "Numele"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Nume" type="LineEdit" parent="Create/Nume"]
+layout_mode = 0
+offset_left = 142.0
+offset_right = 404.0
+offset_bottom = 50.0
+tooltip_text = "Introdu aici numele.
+Numarul maxim de caractere este de 12
+si nu poate contine spatiu si urmatoarele
+caractere:
+ / . :  , @ ' %"
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_y087x")
+theme_override_styles/focus = ExtResource("3_rxovc")
+placeholder_text = "John_1233453"
+alignment = 1
+max_length = 12
+context_menu_enabled = false
+clear_button_enabled = true
+shortcut_keys_enabled = false
+caret_blink = true
+
+[node name="Culoare" type="Label" parent="Create"]
+layout_mode = 0
+offset_left = 531.0
+offset_top = 219.0
+offset_right = 663.0
+offset_bottom = 268.0
+theme_override_font_sizes/font_size = 35
+text = "Culoarea favorita"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="Create/Culoare"]
+layout_mode = 0
+offset_left = 294.0
+offset_top = -3.0
+offset_right = 597.0
+offset_bottom = 266.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_b6rum")
+
+[node name="CuloarePicker" type="ColorPicker" parent="Create/Culoare/Panel"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 301.0
+offset_bottom = 275.0
+alignment = 1
+edit_alpha = false
+can_add_swatches = false
+sampler_visible = false
+color_modes_visible = false
+sliders_visible = false
+hex_visible = false
+presets_visible = false
+
+[node name="Preview" type="Control" parent="Create"]
+custom_minimum_size = Vector2(160, 0)
+anchors_preset = 0
+offset_left = 261.0
+offset_top = 154.0
+offset_right = 421.0
+offset_bottom = 378.0
+scale = Vector2(1.5, 1.5)
+tooltip_text = "Logheaza-te ca "
+
+[node name="Bg" type="Sprite2D" parent="Create/Preview"]
+position = Vector2(80, 100)
+texture = ExtResource("4_f0vrj")
+
+[node name="Name" type="Label" parent="Create/Preview"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 186.0
+offset_right = 168.0
+offset_bottom = 221.0
+theme_override_font_sizes/font_size = 25
+text = "Test"
+horizontal_alignment = 1
+
+[node name="BigLetter" type="Label" parent="Create/Preview"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 24.0
+offset_right = 156.0
+offset_bottom = 177.0
+theme_override_font_sizes/font_size = 70
+text = "T"
+horizontal_alignment = 1
+vertical_alignment = 1
+visible_characters = 1
+
+[node name="Eroare" type="Label" parent="Create"]
+visible = false
+layout_mode = 0
+offset_left = 288.0
+offset_top = 497.0
+offset_right = 984.0
+offset_bottom = 519.0
+theme_override_font_sizes/font_size = 15
+text = "Nu se poate creea acel user:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Create" type="Button" parent="Create"]
+layout_mode = 0
+offset_left = 512.0
+offset_top = 521.0
+offset_right = 770.0
+offset_bottom = 564.0
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = ExtResource("5_c51ni")
+text = "Creeaza"
+
+[node name="Back" type="Button" parent="Create"]
+layout_mode = 0
+offset_left = 458.0
+offset_top = 520.0
+offset_right = 502.0
+offset_bottom = 563.0
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = ExtResource("5_c51ni")
+text = "<"
+
+[node name="NoUser" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_top = 78.0
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="Hi" type="RichTextLabel" parent="NoUser"]
+layout_mode = 0
+offset_left = 268.0
+offset_top = 5.0
+offset_right = 1045.0
+offset_bottom = 204.0
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 40
+theme_override_font_sizes/bold_font_size = 40
+theme_override_font_sizes/italics_font_size = 40
+theme_override_font_sizes/bold_italics_font_size = 40
+theme_override_font_sizes/mono_font_size = 40
+bbcode_enabled = true
+text = "[rainbow freq=0.1 sat=0.7 val=0.8][wave amp=50.0 freq=2 connected=1]                                Salut
+     Multumim ca ai ales (Insereaza un nume fictional de sistem de operare)[/wave][/rainbow]"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="Text" type="Label" parent="NoUser"]
+layout_mode = 0
+offset_left = 403.0
+offset_top = 239.0
+offset_right = 880.0
+offset_bottom = 387.0
+theme_override_font_sizes/font_size = 30
+text = "Pentru a finaliza instalarea,
+Un nou utilizator trebuie creat.
+Apasa butonul pentru a continua"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Continue" type="Button" parent="NoUser"]
+layout_mode = 0
+offset_left = 478.0
+offset_top = 504.0
+offset_right = 805.0
+offset_bottom = 546.0
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = ExtResource("5_c51ni")
+text = "Continua ->"
+
+[connection signal="pressed" from="Profiles/Create" to="." method="_on_createuser_pressed"]
+[connection signal="text_changed" from="Create/Nume/Nume" to="." method="_on_nume_text_changed"]
+[connection signal="pressed" from="Create/Create" to="." method="_on_create_pressed"]
+[connection signal="pressed" from="Create/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="NoUser/Continue" to="." method="_on_intro_pressed"]

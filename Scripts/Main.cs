@@ -8,14 +8,14 @@ public partial class Main : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{	_data = (DefaultData)GetNode("/root/DefaultData");
-		GetNode<Label>("UI/Version").Text = "Ver " + (String)ProjectSettings.GetSetting("application/config/version");
+		_data.ReadSave(_data.LoggedUser);
 		if(!_data.verifiedver)
 		{	request = new HttpRequest();
 			AddChild(request);
         	request.RequestCompleted += OnRequestCompleted;                                           //Cand se apeleaza Request => functia OnRequestCompleted
         	request.Request("https://raw.githubusercontent.com/BTF2021/Zero2Linux/main/version.txt"); //version.txt de pe Github
 		}
-
+		
 		if(_data.currentStats.Anims)
 		{	var pos = Position;
 			pos.X = 490;
@@ -24,21 +24,34 @@ public partial class Main : Node2D
 			pos.Y = 337;
 			GetNode<Panel>("UI/Panel").Modulate = new Color(1, 1, 1, 0);
 			var tween = GetTree().CreateTween();
-			tween.TweenProperty(GetNode<Panel>("UI/Panel"), "modulate", new Color(1, 1, 1, 1), 0.35);
-			tween.Parallel().TweenProperty(GetNode<Panel>("UI/Panel"), "position", pos, 0.5);
+			tween.TweenProperty(GetNode<Panel>("UI/Panel"), "modulate", new Color(1, 1, 1, 1), 0.25);
+			tween.Parallel().TweenProperty(GetNode<Panel>("UI/Panel"), "position", pos, 0.25);
+			pos.X = 643;
+			pos.Y = 740;
+			GetNode<Sprite2D>("UI/Bar").Position = pos;
+			pos.Y = 686;
+			tween.TweenProperty(GetNode<Sprite2D>("UI/Bar"), "position", pos, 0.25);
 		}
-		else
-		{	GetNode<Sprite2D>("UI/Bg/Sprite2D").Show();
-			GetNode<VideoStreamPlayer>("UI/Bg/Bg").Paused = true;
-		}
+		else GetNode<VideoStreamPlayer>("UI/Bg/Bg").Paused = true;
+		if(!_data.isvideoavailable) GetNode<VideoStreamPlayer>("UI/Bg/Bg").QueueFree();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
-	{	GetNode<Label>("UI/Bar/HBoxContainer/Time").Text = Time.GetDateStringFromSystem() + " " + Time.GetTimeStringFromSystem();
+	{	GetNode<Label>("UI/Bar/HBoxContainer/Time").Text = Time.GetTimeStringFromSystem() + " " + Time.GetDateStringFromSystem();
 	}
 
     private void _on_quit_pressed() => GetTree().Quit(0);
+	private void _on_logout_pressed()
+	{
+		GD.Print("Delogare: " + _data.LoggedUser);
+		_data.WriteSave(_data.LoggedUser);
+		_data.LoggedUser = " ";
+		_data.currentStats = new stats();
+		DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
+		DisplayServer.WindowSetVsyncMode(DisplayServer.VSyncMode.Enabled);
+		GetTree().ChangeSceneToFile("res://Scenes/Logare.tscn");
+	}	
     private void _on_course_pressed()
 	{	//GetTree().ChangeSceneToFile("res://Scenes/Courses.tscn");
 		GetNode<Control>("UI").AddChild((GD.Load<PackedScene>("res://Scenes/Courses.tscn")).Instantiate());
@@ -53,15 +66,16 @@ public partial class Main : Node2D
 	private void OnRequestCompleted(long result, long responseCode, string[] headers, byte[] body)
     {	if(result == 0)
 		{	string data = System.Text.Encoding.UTF8.GetString(body);                                                                               //tot ce este in version.txt
+			_data.newversion.Clear();
 			_data.newversion.Add(data.Substring(0, data.IndexOf(";", 0)));                                                                         //Versiunea programului
 			_data.newversion.Add(data.Substring(data.IndexOf("-", 0)));                                                                            //Textul fara versiunea programului
 			if(!((String)ProjectSettings.GetSetting("application/config/version")).Contains(_data.newversion[0]) && _data.currentStats.ChkUpdates) //Daca versiunea programului corespunde cu versiunea din version.txt
 			{
 				GD.Print("Versiune veche");
 				var newver = (GD.Load<PackedScene>("res://Scenes/NewVer.tscn")).Instantiate();
-				newver.GetNode<Label>("Panel/ScrollContainer/VBoxContainer/Title2").Text = newver.GetNode<Label>("Panel/ScrollContainer/VBoxContainer/Title2").Text + (String)ProjectSettings.GetSetting("application/config/version") + "\nVersiunea actuala este: " + _data.newversion[0] + "\n ";
-				newver.GetNode<Label>("Panel/ScrollContainer/VBoxContainer/Title3").Text = _data.newversion[1];
-				AddChild(newver);
+				newver.GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/Title2").Text = newver.GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/Title2").Text + (String)ProjectSettings.GetSetting("application/config/version") + "\nVersiunea actuala este: " + _data.newversion[0] + "\n ";
+				newver.GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/Title3").Text = _data.newversion[1];
+				GetNode<Control>("UI").AddChild(newver);
 				GD.Print("Gata");
 			}
 			else GD.Print("Mergem in continuare");

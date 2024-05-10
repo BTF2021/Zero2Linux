@@ -9,11 +9,19 @@ public partial class Main : Node2D
 	public override void _Ready()
 	{	_data = (DefaultData)GetNode("/root/DefaultData");
 		_data.ReadSave(_data.LoggedUser);
+		#if GODOT_WINDOWS || GODOT_LINUXBSD
+			if(_data.isvideoavailable)
+			{	var bg = (ResourceLoader.Load<PackedScene>("res://Scenes/MainBg.tscn")).Instantiate();
+				GetNode<Node2D>("UI/Bg").AddChild(bg);
+			}
+		#elif GODOT_ANDROID
+			GetNode<TextureButton>("UI/Bar/HBoxContainer/Power").QueueFree();
+		#endif
 		if(!_data.verifiedver)
 		{	request = new HttpRequest();
 			AddChild(request);
-        	request.RequestCompleted += OnRequestCompleted;                                           //Cand se apeleaza Request => functia OnRequestCompleted
-        	request.Request("https://raw.githubusercontent.com/BTF2021/Zero2Linux/main/version.txt"); //version.txt de pe Github
+			request.RequestCompleted += OnRequestCompleted;                                           //Cand se apeleaza Request => functia OnRequestCompleted
+			request.Request("https://raw.githubusercontent.com/BTF2021/Zero2Linux/main/version.txt"); //version.txt de pe Github
 		}
 		
 		if(_data.currentStats.Anims)
@@ -32,8 +40,12 @@ public partial class Main : Node2D
 			pos.Y = 686;
 			tween.TweenProperty(GetNode<Sprite2D>("UI/Bar"), "position", pos, 0.25);
 		}
-		else GetNode<VideoStreamPlayer>("UI/Bg/Bg").Paused = true;
-		if(!_data.isvideoavailable) GetNode<VideoStreamPlayer>("UI/Bg/Bg").QueueFree();
+		else 
+		{	
+			#if GODOT_WINDOWS || GODOT_LINUXBSD
+				GetNode<VideoStreamPlayer>("UI/Bg/Bg").Paused = true;
+			#endif
+		}
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -41,10 +53,11 @@ public partial class Main : Node2D
 	{	GetNode<Label>("UI/Bar/HBoxContainer/Time").Text = Time.GetTimeStringFromSystem() + " " + Time.GetDateStringFromSystem();
 	}
 
-    private void _on_quit_pressed() => GetTree().Quit(0);
+	private void _on_quit_pressed() => GetTree().Quit(0);
 	private void _on_logout_pressed()
 	{
 		GD.Print("Delogare: " + _data.LoggedUser);
+		_data.verifiedver = false;
 		_data.WriteSave(_data.LoggedUser);
 		_data.LoggedUser = " ";
 		_data.currentStats = new stats();
@@ -52,19 +65,15 @@ public partial class Main : Node2D
 		DisplayServer.WindowSetVsyncMode(DisplayServer.VSyncMode.Enabled);
 		GetTree().ChangeSceneToFile("res://Scenes/Logare.tscn");
 	}	
-    private void _on_course_pressed()
-	{	//GetTree().ChangeSceneToFile("res://Scenes/Courses.tscn");
-		GetNode<Control>("UI").AddChild((GD.Load<PackedScene>("res://Scenes/Courses.tscn")).Instantiate());
-	}
+	private void _on_course_pressed() => GetNode<Control>("UI").AddChild((GD.Load<PackedScene>("res://Scenes/Courses.tscn")).Instantiate());
 
-	private void _on_settings_pressed()
-	{	GetNode<Control>("UI").AddChild((GD.Load<PackedScene>("res://Scenes/Settings.tscn")).Instantiate());
-	}
-	private void _on_quizzes_pressed()
-	{	AddChild((GD.Load<PackedScene>("res://Scenes/Quizzes.tscn")).Instantiate());
-	}
+	private void _on_settings_pressed() => GetNode<Control>("UI").AddChild((GD.Load<PackedScene>("res://Scenes/Settings.tscn")).Instantiate());
+
+	private void _on_quizzes_pressed() => GetNode<Control>("UI").AddChild((GD.Load<PackedScene>("res://Scenes/Quizzes.tscn")).Instantiate());
+	private void _on_progress_pressed() => GetNode<Control>("UI").AddChild((GD.Load<PackedScene>("res://Scenes/Progress.tscn")).Instantiate());
+
 	private void OnRequestCompleted(long result, long responseCode, string[] headers, byte[] body)
-    {	if(result == 0)
+	{	if(result == 0)
 		{	string data = System.Text.Encoding.UTF8.GetString(body);                                                                               //tot ce este in version.txt
 			_data.newversion.Clear();
 			_data.newversion.Add(data.Substring(0, data.IndexOf(";", 0)));                                                                         //Versiunea programului
@@ -74,7 +83,7 @@ public partial class Main : Node2D
 				GD.Print("Versiune veche");
 				var newver = (GD.Load<PackedScene>("res://Scenes/NewVer.tscn")).Instantiate();
 				newver.GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/Title2").Text = newver.GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/Title2").Text + (String)ProjectSettings.GetSetting("application/config/version") + "\nVersiunea actuala este: " + _data.newversion[0] + "\n ";
-				newver.GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/Title3").Text = _data.newversion[1];
+				newver.GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/HBoxContainer2/Title3").Text = _data.newversion[1];
 				GetNode<Control>("UI").AddChild(newver);
 				GD.Print("Gata");
 			}
@@ -87,5 +96,5 @@ public partial class Main : Node2D
 		}
 		_data.verifiedver = true;
 		request.QueueFree();       //Nu mai e nevoie de HttpRequest. Putem sterge
-    }
+	}
 }

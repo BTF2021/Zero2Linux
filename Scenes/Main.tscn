@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b4gdupblxidyf"]
+[gd_scene load_steps=7 format=3 uid="uid://b4gdupblxidyf"]
 
 [ext_resource type="Script" path="res://Scripts/Main.cs" id="1_c7d67"]
 [ext_resource type="StyleBox" uid="uid://di87pu5wmffgt" path="res://Sprites/UINoHover.stylebox" id="2_0hv5f"]
@@ -6,9 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://bid2ssfeh2pfy" path="res://Sprites/Bar.png" id="3_ocyen"]
 [ext_resource type="Texture2D" uid="uid://2k0tqngjaab8" path="res://Sprites/Power.png" id="4_q207a"]
 [ext_resource type="Texture2D" uid="uid://hbrqsdt4laac" path="res://Sprites/Logout.png" id="6_8su00"]
-
-[sub_resource type="FFmpegVideoStream" id="FFmpegVideoStream_pjdxv"]
-file = "res://Sprites/bgvid.webm"
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_c7d67")
@@ -24,16 +21,6 @@ position = Vector2(640, 360)
 
 [node name="Sprite2D" type="Sprite2D" parent="UI/Bg"]
 texture = ExtResource("2_lj8l1")
-
-[node name="Bg" type="VideoStreamPlayer" parent="UI/Bg"]
-offset_left = -640.0
-offset_top = -360.0
-offset_right = 640.0
-offset_bottom = 360.0
-stream = SubResource("FFmpegVideoStream_pjdxv")
-volume_db = -80.0
-autoplay = true
-loop = true
 
 [node name="Tint" type="ColorRect" parent="UI/Bg"]
 visible = false
@@ -85,9 +72,16 @@ text = "Lectii"
 layout_mode = 2
 size_flags_vertical = 3
 tooltip_text = "Testeaza-ti cunostiintele dobandite pe parcursul lectiilor.
-Necesita terminarea a minim 5 lectii"
+Necesita terminarea a cel putin o lectie."
 theme_override_styles/focus = ExtResource("2_0hv5f")
 text = "Chestionare"
+
+[node name="Progress" type="Button" parent="UI/Panel/Buttons"]
+layout_mode = 2
+size_flags_vertical = 3
+tooltip_text = "Regleaza-ti setarile legate de imagine, lectii, etc"
+theme_override_styles/focus = ExtResource("2_0hv5f")
+text = "Progres"
 
 [node name="Settings" type="Button" parent="UI/Panel/Buttons"]
 layout_mode = 2
@@ -95,22 +89,6 @@ size_flags_vertical = 3
 tooltip_text = "Regleaza-ti setarile legate de imagine, lectii, etc"
 theme_override_styles/focus = ExtResource("2_0hv5f")
 text = "Setari"
-
-[node name="Progress" type="Button" parent="UI/Panel/Buttons"]
-layout_mode = 2
-size_flags_vertical = 3
-tooltip_text = "Regleaza-ti setarile legate de imagine, lectii, etc"
-theme_override_styles/focus = ExtResource("2_0hv5f")
-disabled = true
-text = "Progres"
-
-[node name="Quit" type="Button" parent="UI/Panel/Buttons"]
-visible = false
-layout_mode = 2
-size_flags_vertical = 3
-tooltip_text = "Iesi din aplicatie. Mai clar de atat nu se poate"
-theme_override_styles/focus = ExtResource("2_0hv5f")
-text = "Iesire"
 
 [node name="Bar" type="Sprite2D" parent="UI"]
 top_level = true
@@ -121,7 +99,7 @@ texture = ExtResource("3_ocyen")
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/Bar"]
 offset_left = -574.0
 offset_top = -21.0
-offset_right = 575.0
+offset_right = 355.0
 offset_bottom = 11.0
 scale = Vector2(1.25, 1.25)
 theme_override_constants/separation = 5
@@ -142,8 +120,8 @@ layout_mode = 2
 
 [node name="Windows" type="MarginContainer" parent="UI/Bar/HBoxContainer"]
 self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(615, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Time" type="Label" parent="UI/Bar/HBoxContainer"]
 layout_mode = 2
@@ -153,7 +131,7 @@ horizontal_alignment = 2
 
 [connection signal="pressed" from="UI/Panel/Buttons/Course" to="." method="_on_course_pressed"]
 [connection signal="pressed" from="UI/Panel/Buttons/Quizzes" to="." method="_on_quizzes_pressed"]
+[connection signal="pressed" from="UI/Panel/Buttons/Progress" to="." method="_on_progress_pressed"]
 [connection signal="pressed" from="UI/Panel/Buttons/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="UI/Panel/Buttons/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="UI/Bar/HBoxContainer/Power" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="UI/Bar/HBoxContainer/Logout" to="." method="_on_logout_pressed"]

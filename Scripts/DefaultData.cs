@@ -5,13 +5,13 @@ using Newtonsoft.Json;
 //clasa pentru a salva setari si progres. De ce am facut asta? Ca sa se salveze frumos in format JSON
 public class stats
 {
-	public int version = 2;
+	public int version = 3;
 	public string UsrName = " ";
 	public Color FavColor = new Color(1, 1, 1, 1);
 	public bool FullScr = false;
 	public bool VSync = true;
 	public bool Anims = true;
-	public int CurrentLesson = 0;
+	public int FinishedLes = 0;
 	public Godot.Collections.Dictionary<int, double> LessonCompletion = new Godot.Collections.Dictionary<int, double>() 
 	{
 		{1, 0},
@@ -30,9 +30,11 @@ public class stats
 		{14, 0},
 		{15, 0}
 	};
+	public int Questionaires = 0;     //Nr chestionare facute
 	public bool Adv = false;
 	public bool Spc = true;
 	public float VideoVolume = 0;
+	public bool QNumOnly = false;
 	public bool ChkUpdates = true;
 }
 public partial class DefaultData : Node
@@ -47,21 +49,23 @@ public partial class DefaultData : Node
 		{3, new Godot.Collections.Array{"Lectia a1: Desktop environments", 1}},
 		{4, new Godot.Collections.Array{"Lectia a2: GPU de la NVidia", 1}},
 		{5, new Godot.Collections.Array{"Lectia 3: Repos si Package Managers", 0}},
-		{6, new Godot.Collections.Array{"Lectia a3:", 1}},
+		{6, new Godot.Collections.Array{"Lectia a3: Pachete", 1}},
 		{7, new Godot.Collections.Array{"Lectia 4: Test", 0}},
 		{8, new Godot.Collections.Array{"Lectia 5: Test 2", 0}},
 		{9, new Godot.Collections.Array{"Lectia s1: Teste", 2}},
 		{10, new Godot.Collections.Array{"Lectia 6: Gol", 0}},
-		{11, new Godot.Collections.Array{"Lectia a4:", 1}},
-		{12, new Godot.Collections.Array{"Lectia 7:", 0}},
-		{13, new Godot.Collections.Array{"Lectia s2:", 2}},
-		{14, new Godot.Collections.Array{"Lectia s3:", 2}},
-		{15, new Godot.Collections.Array{"Lectia 8:", 0}}
+		{11, new Godot.Collections.Array{"Lectia a4: Tot gol", 1}},
+		{12, new Godot.Collections.Array{"Lectia 7: Mai multe teste", 0}},
+		{13, new Godot.Collections.Array{"Lectia s2: Test special", 2}},
+		{14, new Godot.Collections.Array{"Lectia s3: Test special 2", 2}},
+		{15, new Godot.Collections.Array{"Lectia 8: Ultima lectie", 0}}
 	};
     //valori care nu ar trebui schimbate
 	public string LoggedUser = " ";
     public bool verifiedver = false;
 	public bool isvideoavailable = false;
+	public int CurrentLesson = 0;
+	public int questiontype = 0;
 	//Vector pentru retinerea informatiilor privind versiunea noua de pe Github
 	public Godot.Collections.Array<String> newversion = new Godot.Collections.Array<String>{};
 
@@ -95,6 +99,8 @@ public partial class DefaultData : Node
 				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("swscale-7.dll"))
 				)isvideoavailable=true;
 			#endif
+		#elif GODOT_ANDROID
+			isvideoavailable=false;
 		#endif
 		
 		GD.Print("Videouri disponibile: " + isvideoavailable);
@@ -126,7 +132,12 @@ public partial class DefaultData : Node
 		return savenames;
 	}
 	public void WriteSave(string user)
-	{	var file = FileAccess.Open("user://" + user + "_save.json", FileAccess.ModeFlags.Write);
+	{	int i = 1;
+		while(lessonList.ContainsKey(i))
+		{	if((int)currentStats.LessonCompletion[i] == 100 && (int)lessonList[i][1] != 2) currentStats.FinishedLes++;
+			i++;
+		}
+		var file = FileAccess.Open("user://" + user + "_save.json", FileAccess.ModeFlags.Write);
 		if (file == null) GD.Print("Nu se poate deschide fisierul. Eroare: " + FileAccess.GetOpenError());
 		file.StoreString(JsonConvert.SerializeObject(currentStats));
 		file.Close();

@@ -15,6 +15,16 @@ position = Vector2(645, 339)
 scale = Vector2(1.04564, 1)
 texture = ExtResource("2_l88yu")
 
+[node name="Label" type="Label" parent="Panel"]
+offset_left = -68.3793
+offset_top = -291.0
+offset_right = 73.6207
+offset_bottom = -268.0
+theme_override_font_sizes/font_size = 16
+text = "intrebari"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Drag" type="Button" parent="Panel"]
 self_modulate = Color(1, 1, 1, 0)
 offset_left = -364.0
@@ -29,6 +39,18 @@ offset_top = -299.0
 offset_right = 367.0
 offset_bottom = -261.0
 texture_normal = ExtResource("3_1ijik")
+
+[node name="Requirement" type="Label" parent="Panel"]
+visible = false
+offset_left = -371.065
+offset_top = -83.0
+offset_right = 371.935
+offset_bottom = -17.0
+theme_override_font_sizes/font_size = 25
+text = "Momentan, chestionarele nu sunt disponibile
+Termina cel putin o lectie pentru a accesa"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Settings" type="Panel" parent="Panel"]
 self_modulate = Color(1, 1, 1, 0.25098)
@@ -48,14 +70,22 @@ size_flags_vertical = 6
 
 [node name="Description" type="Label" parent="Panel/Settings"]
 layout_mode = 0
-offset_left = -1.0
-offset_top = 217.0
-offset_right = 742.0
-offset_bottom = 241.0
+offset_left = -0.0646031
+offset_top = 229.0
+offset_right = 742.935
+offset_bottom = 253.0
 theme_override_font_sizes/font_size = 17
-text = "Testeaza-ti cunostiintele dobandite pe parcursul lectiilor cu aceste chestionare"
+text = "Testeaza-ti cunostiintele dobandite  cu 10 intrebari."
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Description2" type="Label" parent="Panel/Settings"]
+layout_mode = 0
+offset_top = 254.0
+offset_right = 743.0
+offset_bottom = 500.0
+theme_override_font_sizes/font_size = 17
+horizontal_alignment = 1
 
 [node name="Stats" type="Label" parent="Panel/Settings"]
 layout_mode = 0
@@ -71,27 +101,27 @@ vertical_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/Settings"]
 layout_mode = 0
-offset_left = 212.723
-offset_top = 19.0
-offset_right = 540.723
-offset_bottom = 201.0
+offset_left = 205.551
+offset_top = 29.0
+offset_right = 533.551
+offset_bottom = 160.0
 
-[node name="Random" type="Button" parent="Panel/Settings/VBoxContainer"]
+[node name="Training" type="Button" parent="Panel/Settings/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 tooltip_text = "Genereaza un chestionar din lectiile deja parcurse"
 theme_override_styles/normal = ExtResource("5_6ssof")
-text = "Chestionar aleator"
+text = "Antrenament"
 
-[node name="Select" type="Button" parent="Panel/Settings/VBoxContainer"]
+[node name="Test" type="Button" parent="Panel/Settings/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 tooltip_text = "Alege un chestionar dintr-o lectie"
 theme_override_styles/normal = ExtResource("5_6ssof")
-disabled = true
-text = "Selectare lectie"
+text = "Test"
 
 [node name="Custom" type="Button" parent="Panel/Settings/VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 tooltip_text = "Alege lectiile din care vrei sa fi intrebat"
@@ -99,17 +129,10 @@ theme_override_styles/normal = ExtResource("5_6ssof")
 disabled = true
 text = "Chestionar personalizat"
 
-[node name="Label" type="Label" parent="Panel"]
-offset_left = -68.3793
-offset_top = -291.0
-offset_right = 73.6207
-offset_bottom = -268.0
-theme_override_font_sizes/font_size = 16
-text = "intrebari"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [connection signal="button_down" from="Panel/Drag" to="." method="_on_drag_down"]
 [connection signal="button_up" from="Panel/Drag" to="." method="_on_drag_up"]
 [connection signal="pressed" from="Panel/Back" to="." method="_on_back_pressed"]
-[connection signal="pressed" from="Panel/Settings/VBoxContainer/Random" to="." method="_on_random_pressed"]
+[connection signal="mouse_entered" from="Panel/Settings/VBoxContainer/Training" to="." method="_on_training_mouse_entered"]
+[connection signal="pressed" from="Panel/Settings/VBoxContainer/Training" to="." method="_on_training_pressed"]
+[connection signal="mouse_entered" from="Panel/Settings/VBoxContainer/Test" to="." method="_on_test_entered"]
+[connection signal="pressed" from="Panel/Settings/VBoxContainer/Test" to="." method="_on_test_pressed"]

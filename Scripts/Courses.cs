@@ -72,16 +72,32 @@ public partial class Courses : Control
 	}
 	private void _on_back_pressed() => QueueFree();
 	private void PanelPressed(int index)
-	{	_data.currentStats.CurrentLesson = index;
+	{	if(_data.currentStats.Anims)
+		{
+		GetParent().GetParent().AddChild((GD.Load<PackedScene>("res://Scenes/Incarcare.tscn")).Instantiate());
+		var timer = GetTree().CreateTimer(3.5);
+		GetParent<CanvasItem>().Hide();
+		timer.Timeout += () => _timeout(index);
+		}
+		else _timeout(index);
+	}
+	private void _timeout(int index)
+	{	_data.CurrentLesson = index;
 		GetTree().ChangeSceneToFile("res://Courses/Lesson_" + index + "/Lesson.tscn");
 	}
 	private void _on_drag_down()
 	{	GD.Print("Hi");
-		inputgrab = true;
+		#if GODOT_ANDROID
+			//Desi mousepos este preluat in _Proccess(), mousepos ramane aceeasi valoare dupa ce ecranul a fost atins
+			//Presupun ca ii ia un frame ca sa proceseze noua pozitie, ceea ce nu este de ajuns pentru aceasta functie
+			//Asa ca il actualizam acum mousepos
+			mousepos = GetViewport().GetMousePosition();
+		#endif
 		var winpos = GetNode<Sprite2D>("Panel").Position;
 		dif.X = winpos.X - mousepos.X;
 		dif.Y = winpos.Y - mousepos.Y;
 		GD.Print(dif);
+		inputgrab = true;
 	}
 	private void _on_drag_up()
 	{	GD.Print("Bye");

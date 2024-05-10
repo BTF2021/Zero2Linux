@@ -11,8 +11,9 @@ config_version=5
 [application]
 
 config/name="Zero2Linux"
-config/version="Alpha 0.3.0"
+config/version="Beta 0.4"
 run/main_scene="res://Scenes/Logare.tscn"
+config/quit_on_go_back=false
 config/features=PackedStringArray("4.2", "C#", "Mobile")
 config/icon="res://icon.svg"
 
@@ -24,7 +25,7 @@ DefaultData="*res://Scripts/DefaultData.cs"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
-window/stretch/mode="canvas_items"
+window/stretch/mode="viewport"
 
 [dotnet]
 
@@ -45,3 +46,4 @@ click={
 [rendering]
 
 renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true

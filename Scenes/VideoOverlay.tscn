@@ -50,20 +50,24 @@ layout_mode = 2
 [node name="Backward" type="TextureButton" parent="ControlsTint/Controls"]
 layout_mode = 2
 tooltip_text = "Inapoi cu 10 secunde"
+mouse_filter = 1
 texture_normal = ExtResource("2_m5ft7")
 
 [node name="Play" type="TextureButton" parent="ControlsTint/Controls"]
 layout_mode = 2
 size_flags_horizontal = 4
+mouse_filter = 1
 texture_normal = ExtResource("2_mb415")
 
 [node name="Forward" type="TextureButton" parent="ControlsTint/Controls"]
 layout_mode = 2
 tooltip_text = "Inainte cu 10 secunde"
+mouse_filter = 1
 texture_normal = ExtResource("4_0c7my")
 
 [node name="VSeparator" type="VSeparator" parent="ControlsTint/Controls"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Volum" type="VBoxContainer" parent="ControlsTint/Controls"]
 layout_mode = 2
@@ -77,18 +81,22 @@ horizontal_alignment = 1
 [node name="Volume" type="HSlider" parent="ControlsTint/Controls/Volum"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
+mouse_filter = 1
 min_value = -11.0
 max_value = 10.0
 
 [node name="VSeparator2" type="VSeparator" parent="ControlsTint/Controls"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Seekbar" type="HSlider" parent="ControlsTint/Controls"]
 custom_minimum_size = Vector2(820, 36)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="VSeparator3" type="VSeparator" parent="ControlsTint/Controls"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Time" type="Label" parent="ControlsTint/Controls"]
 custom_minimum_size = Vector2(175, 0)
@@ -99,6 +107,7 @@ vertical_alignment = 1
 
 [node name="Fullscr" type="TextureButton" parent="ControlsTint/Controls"]
 layout_mode = 2
+mouse_filter = 1
 texture_normal = ExtResource("5_4p4g7")
 
 [node name="BackTint" type="ColorRect" parent="."]

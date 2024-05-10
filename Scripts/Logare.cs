@@ -19,41 +19,19 @@ public partial class Logare : Node2D
 		GetNode<Control>("NoUser").Visible = false;
 		GetNode<Control>("Create").Visible = false;
 		if(!profilespresent)
-		{	//Creaza un nou profil
-			if(!FileAccess.FileExists("user://defaults.json"))              //secret :)
-			{	/*var file = FileAccess.Open("user://defaults.json", FileAccess.ModeFlags.Write);
-				if (file == null) GD.Print("Nu se poate deschide fisierul. Eroare: " + FileAccess.GetOpenError());
-				file.StoreString(JsonConvert.SerializeObject(_data.currentStats));
-				file.Close();*/
+		{
+			GetNode<Control>("Profiles").Visible = false;
+			GetNode<Control>("NoUser").Visible = true;
 
-				GetNode<Control>("Profiles").Visible = false;
-				GetNode<Control>("NoUser").Visible = true;
-
-				var pos = Position;
-				pos.X = 0;
-				pos.Y = 78 - 30;
-				GetNode<Control>("NoUser").Position = pos;
-				pos.Y = 78;
-				GetNode<Control>("NoUser").SelfModulate = new Color(1, 1, 1, 0);
-				var tween = GetTree().CreateTween();
-				tween.TweenProperty(GetNode<Control>("NoUser"), "modulate", new Color(1, 1, 1, 1), 0.25);
-				tween.Parallel().TweenProperty(GetNode<Control>("NoUser"), "position", pos, 0.25);
-			}
-			else 
-			{	GetNode<Control>("Create").Visible = true;
-				var pos = Position;
-				pos.X = 0 + 30;
-				pos.Y = 87;
-				GetNode<Control>("Create").Position = pos;
-				pos.X = 0;
-				GetNode<Control>("Create").Modulate = new Color(1, 1, 1, 0);
-				var tween = GetTree().CreateTween();
-				GetNode<Button>("Create/Back").Disabled = true;
-				GetNode<Button>("Create/Back").Hide();
-				GetNode<Label>("Create/Eroare").Hide();
-				tween.TweenProperty(GetNode<Control>("Create"), "modulate", new Color(1, 1, 1, 1), 0.25);
-				tween.Parallel().TweenProperty(GetNode<Control>("Create"), "position", pos, 0.25);
-			}
+			var pos = Position;
+			pos.X = 0;
+			pos.Y = 78 - 30;
+			GetNode<Control>("NoUser").Position = pos;
+			pos.Y = 78;
+			GetNode<Control>("NoUser").SelfModulate = new Color(1, 1, 1, 0);
+			var tween = GetTree().CreateTween();
+			tween.TweenProperty(GetNode<Control>("NoUser"), "modulate", new Color(1, 1, 1, 1), 0.25);
+			tween.Parallel().TweenProperty(GetNode<Control>("NoUser"), "position", pos, 0.25);
 		}
 		else
 		{	GetNode<Control>("Profiles").Visible = true;
@@ -79,14 +57,15 @@ public partial class Logare : Node2D
 		}
 	}
 	private void _on_nume_text_changed(string new_text)
-	{	new_text = new_text.Replace(" ", "_");
-		new_text = new_text.Replace("/", "_");
-		new_text = new_text.Replace(".", "_");
-		new_text = new_text.Replace(":", "_");
-		new_text = new_text.Replace(",", "_");
-		new_text = new_text.Replace("@", "_");
-		new_text = new_text.Replace("'", "_");
-		new_text = new_text.Replace("%", "_");
+	{	if(new_text.IndexOf(" ") >= 0) new_text = new_text.Remove(new_text.IndexOf(" "));
+		if(new_text.IndexOf("/") >= 0) new_text = new_text.Remove(new_text.IndexOf("/"));
+		if(new_text.IndexOf(".") >= 0) new_text = new_text.Remove(new_text.IndexOf("."));
+		if(new_text.IndexOf(":") >= 0) new_text = new_text.Remove(new_text.IndexOf(":"));
+		if(new_text.IndexOf(",") >= 0) new_text = new_text.Remove(new_text.IndexOf(","));
+		if(new_text.IndexOf("@") >= 0) new_text = new_text.Remove(new_text.IndexOf("@"));
+		if(new_text.IndexOf("'") >= 0) new_text = new_text.Remove(new_text.IndexOf("'"));
+		if(new_text.IndexOf("%") >= 0) new_text = new_text.Remove(new_text.IndexOf("%"));
+		if(new_text.IndexOf('"') >= 0) new_text = new_text.Remove(new_text.IndexOf('"'));
 		GetNode<LineEdit>("Create/Nume/Nume").Text = new_text;
 		GetNode<LineEdit>("Create/Nume/Nume").CaretColumn = new_text.Length;
 	}
@@ -101,7 +80,8 @@ public partial class Logare : Node2D
 		else
 		{	var ok = true;
 			var names = _data.GetSaves();
-			for (int i = 0; i< names.Length; i++) if(GetNode<LineEdit>("Create/Nume/Nume").Text == (string)names.GetValue(i)) ok = false;
+			if(names != null)
+				for (int i = 0; i< names.Length; i++) if(GetNode<LineEdit>("Create/Nume/Nume").Text == (string)names.GetValue(i)) ok = false;
 			GD.Print(ok);
 			if(ok)
 			{	_data.currentStats.UsrName = GetNode<LineEdit>("Create/Nume/Nume").Text;

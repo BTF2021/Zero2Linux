@@ -1,10 +1,21 @@
-Alpha 0.3.0;
-- Nou UI (Acum pare a interfata unui sistem de operare)
-- Toate submeniurile sunt ferestre separate ce pot fi trase
-- Animatii
-- Utilizatori: se pot crea utilizatori cu nume si culori de
-fundal diferite, iar progresul fiecarui utilizator este
-salvat individual
-- Butoanele din Video player se ascund daca cursorul nu este
-deasupra acestora pentru un timp
-- Progresul fiecarei lectii este salvat
+Beta 0.4.0;
+- Suport pentru android 
+(Nota: Experimental. Videourile si fundalurile animate nu sunt disponibile)
+(Minim android 10)
+- Un ecran de incarcare inainte de o lectie
+- O tranzitie la inceputul lectiei
+- Doua moduri de chestionare: antrenament si test (in modul test nu se pot vedea numarul raspunsurilor corecte si gresite)
+- O setare pentru ascunderea numarului de raspunsuri corecte si gresite cand este modul test
+- O fereastra pentru progres
+- Daca raspunsul este corect (si nu este modul test), se va arata si o explicatie
+
+[Imbunatatiri]
+- calculul procentului lectiei
+- intrebarile pot avea 2, 3 si 4 intrebari posibile
+- se poate bifa doar o caseta la intrebari
+- Cand se insereaza un text pentru nume, caracterele invalide sunt sterse in loc sa fie inlocuite cu _
+
+[Rezolvat]
+- Nu se poate loga pe Windows si Linux fara fisierele necesare pentru video
+- Nu se poate creea un user daca nu exista deja alt user
+- Nu se poate raspunde la mai mult de 10 chestionare 

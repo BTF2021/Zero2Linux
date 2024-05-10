@@ -1,31 +1,36 @@
 using Godot;
 using System;
 
-public partial class Quizzes : Control
+public partial class Progress : Control
 {
 	private DefaultData _data;
+	private Label _text;
 	private Vector2 mousepos;
 	private bool inputgrab;
 	private Vector2 dif;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{	_data = (DefaultData)GetNode("/root/DefaultData");
+		_text = GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Stats");
+		GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/Player/Account/Name").Text = _data.currentStats.UsrName;
+		GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/Player/Account/BigLetter").Text = _data.currentStats.UsrName;
+		GetNode<Sprite2D>("Panel/Panel/ScrollContainer/VBoxContainer/Player/Account/Bg").SelfModulate = _data.currentStats.FavColor;
+
 		_data.currentStats.FinishedLes = 0;
 		int i = 1;
 		while(_data.lessonList.ContainsKey(i))
 		{	if((int)_data.currentStats.LessonCompletion[i] == 100 && (int)_data.lessonList[i][1] != 2) _data.currentStats.FinishedLes++;
 			i++;
 		}
-		GD.Print(_data.currentStats.FinishedLes);
-		if(_data.currentStats.FinishedLes >= 1) 
-		{	GetNode<Label>("Panel/Requirement").Hide();
-			GetNode<Panel>("Panel/Settings").Show();
+
+		_text.Text = "Lectii finalizate: " + _data.currentStats.FinishedLes +
+		"\nChestionare facute: " + _data.currentStats.Questionaires +
+		"\nLista lectiilor finalizate: ";
+		i=1;
+		while(_data.lessonList.ContainsKey(i))
+		{	if((int)_data.currentStats.LessonCompletion[i] == 100) _text.Text = _text.Text + "\n   " + (string)_data.lessonList[i][0];
+			i++;
 		}
-		else
-		{	GetNode<Label>("Panel/Requirement").Show();
-			GetNode<Panel>("Panel/Settings").Hide();
-		}
-		GetNode<Label>("Panel/Settings/Stats").Text = "Chestionare terminate: " + _data.currentStats.Questionaires + "\nLectii terminate: " + _data.currentStats.FinishedLes;
 		if(_data.currentStats.Anims)
 		{
 			var tween = GetTree().CreateTween();
@@ -50,16 +55,6 @@ public partial class Quizzes : Control
 		if(inputgrab) GetNode<Sprite2D>("Panel").Position = newpos;
 	}
 	private void _on_back_pressed() => QueueFree();
-	private void _on_training_pressed()
-	{	_data.questiontype = 0;
-		GetTree().ChangeSceneToFile("res://Scenes/Quizztime.tscn");
-	}
-	private void _on_training_mouse_entered() => GetNode<Label>("Panel/Settings/Description2").Text = "In modul antrenament, se genereaza un chestionar aleatoriu.\nNu conteaza daca ai raspuns corect sau gresit.";
-	private void _on_test_pressed()
-	{	_data.questiontype = 1;
-		GetTree().ChangeSceneToFile("res://Scenes/Quizztime.tscn");
-	}
-	private void _on_test_entered() => GetNode<Label>("Panel/Settings/Description2").Text = "In modul test, se genereaza un chestionar aleatoriu.\nPentru a trece testul, se poate gresi de maxim 3 ori!\nNumarul raspunsurilor corecte si gresite se vor afla la finalul testului";
 	private void _on_drag_down()
 	{	GD.Print("Hi");
 		#if GODOT_ANDROID

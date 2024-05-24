@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 //clasa pentru a salva setari si progres. De ce am facut asta? Ca sa se salveze frumos in format JSON
 public class stats
 {
-	public int version = 3;
+	public int version = 4;
 	public string UsrName = " ";
 	public Color FavColor = new Color(1, 1, 1, 1);
 	public bool FullScr = false;
@@ -19,16 +19,7 @@ public class stats
 		{3, 0},
 		{4, 0},
 		{5, 0},
-		{6, 0},
-		{7, 0},
-		{8, 0},
-		{9, 0},
-		{10, 0},
-		{11, 0},
-		{12, 0},
-		{13, 0},
-		{14, 0},
-		{15, 0}
+		{6, 0}
 	};
 	public int Questionaires = 0;     //Nr chestionare facute
 	public bool Adv = false;
@@ -44,21 +35,12 @@ public partial class DefaultData : Node
 
 	public Godot.Collections.Dictionary<int, Godot.Collections.Array> lessonList = new Godot.Collections.Dictionary<int, Godot.Collections.Array>() 
 	{	//structura vectorului este urmatoarea: numele lectiei, tipul lectiei(tag). Progresul a fost mutat in clasa stats
-		{1, new Godot.Collections.Array{"Lectia 1: Introducere", 0}},
-		{2, new Godot.Collections.Array{"Lectia 2: Ce sunt distrourile", 0}},
-		{3, new Godot.Collections.Array{"Lectia a1: Desktop environments", 1}},
-		{4, new Godot.Collections.Array{"Lectia a2: GPU de la NVidia", 1}},
-		{5, new Godot.Collections.Array{"Lectia 3: Repos si Package Managers", 0}},
-		{6, new Godot.Collections.Array{"Lectia a3: Pachete", 1}},
-		{7, new Godot.Collections.Array{"Lectia 4: Test", 0}},
-		{8, new Godot.Collections.Array{"Lectia 5: Test 2", 0}},
-		{9, new Godot.Collections.Array{"Lectia s1: Teste", 2}},
-		{10, new Godot.Collections.Array{"Lectia 6: Gol", 0}},
-		{11, new Godot.Collections.Array{"Lectia a4: Tot gol", 1}},
-		{12, new Godot.Collections.Array{"Lectia 7: Mai multe teste", 0}},
-		{13, new Godot.Collections.Array{"Lectia s2: Test special", 2}},
-		{14, new Godot.Collections.Array{"Lectia s3: Test special 2", 2}},
-		{15, new Godot.Collections.Array{"Lectia 8: Ultima lectie", 0}}
+		{1, new Godot.Collections.Array{"Lectia 1: Ce este Linux?", 0}},
+		{2, new Godot.Collections.Array{"Lectia 2: Ce sunt distrourile?", 0}},
+		{3, new Godot.Collections.Array{"Special: Linux pe masina virtuala", 2}},
+		{4, new Godot.Collections.Array{"Avansat: Desktop environments", 1}},
+		{5, new Godot.Collections.Array{"Avansat: GPU de la NVidia", 1}},
+		{6, new Godot.Collections.Array{"Lectia 3: Repos si Package Managers", 0}}
 	};
     //valori care nu ar trebui schimbate
 	public string LoggedUser = " ";
@@ -80,7 +62,8 @@ public partial class DefaultData : Node
 				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("libavfilter.so.9"))
 				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("libavformat.so.60"))
 				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("libavutil.so.58"))
-				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("libgdffmpeg.linux.template_debug.x86_64.so"))
+				&& (FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("libgdffmpeg.linux.template_debug.x86_64.so"))
+				|| FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("libgdffmpeg.linux.template_release.x86_64.so")))
 				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("libswresample.so.4"))
 				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("libswscale.so.7"))
 				)isvideoavailable=true;
@@ -94,7 +77,8 @@ public partial class DefaultData : Node
 				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("avfilter-9.dll"))
 				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("avformat-60.dll"))
 				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("avutil-58.dll"))
-				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("libgdffmpeg.windows.template_debug.x86_64.dll"))
+				&& (FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("libgdffmpeg.windows.template_debug.x86_64.dll"))
+				|| FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("libgdffmpeg.windows.template_release.x86_64.dll")))
 				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("swresample-4.dll"))
 				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("swscale-7.dll"))
 				)isvideoavailable=true;
@@ -109,7 +93,7 @@ public partial class DefaultData : Node
 	public bool SaveExists()
 	{	System.Array filearray = DirAccess.GetFilesAt("user://");
 		for (int i = 0; i < filearray.Length; i++)
-		{	if(((string)(filearray.GetValue(i))).EndsWith("_save.json"))     //Ceva stupid. filearray.GetValue(i) trebuie sa fie string ca sa poate folosi EndsWith()
+		{	if(((string)(filearray.GetValue(i))).EndsWith("_save.json"))     //filearray.GetValue(i) trebuie sa fie string ca sa poate folosi EndsWith()
 			{	GD.Print("Exista fisier: true");
 				return true;
 			}

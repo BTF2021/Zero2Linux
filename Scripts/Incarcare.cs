@@ -57,11 +57,11 @@ public partial class Incarcare : Node2D
 		GetNode<ProgressBar>("Bara").Value = 0;
 		Modulate = new Color(1, 1, 1, (float)0.5);
 		var tween = GetTree().CreateTween();
-		tween.TweenProperty(GetNode<Node2D>("."), "modulate", new Color(1, 1, 1, 1), 0.5);
-		var timer = GetTree().CreateTimer(0.5);
+		tween.TweenProperty(GetNode<Node2D>("."), "modulate", new Color(1, 1, 1, 1), 0.2);
+		var timer = GetTree().CreateTimer(0.3);
 		await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
 		tween = GetTree().CreateTween();
-		tween.TweenProperty(GetNode<ProgressBar>("Bara"), "value", 100, GD.RandRange(2, 2.5));
+		tween.TweenProperty(GetNode<ProgressBar>("Bara"), "value", 100, GD.RandRange(1.5, 2)).SetTrans(Tween.TransitionType.Quad);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

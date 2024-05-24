@@ -6,19 +6,22 @@ public partial class Lesson : Node2D
 	private DefaultData _data;
 	public Node _node;
 	public Godot.Collections.Array<Quizitem> _questions;
-	[Export] public int lessonid = 0;
+	public int lessonid = 0;
 	private int totalquestioncount;    //Nr total de intrebari din lectie
 	private int totallessonblocks;	   //Nr total de blocuri din lectie
 	private int questionansw;          //Nr de intrebari deja raspunse
 	private int blocksread;			   //Nr de blocuri deja vazute
 	private int percent;               //Procentul progresului
 	[Signal] public delegate void GetAnswersEventHandler(bool correct, int index);
+
+	public async void _Treeentered() => _Ready();
 	// Called when the node enters the scene tree for the first time.
 	public override async void _Ready()
 	{
 		_data = (DefaultData)GetNode("/root/DefaultData");
 		_node = GetNode<VBoxContainer>("Panel/ScrollContainer/MarginContainer/Body/Content");
 		_questions = new Godot.Collections.Array<Quizitem>{};
+		lessonid = _data.CurrentLesson;
 		GetAnswers += SendAnswers;
 		#if GODOT_ANDROID
 			GetNode<HSeparator>("Panel/ScrollContainer/MarginContainer/Body/HSeparator2").QueueFree();
@@ -53,12 +56,12 @@ public partial class Lesson : Node2D
 		//Cred ca se putea si mai bine
 		if(_data.currentStats.LessonCompletion[lessonid] < 100)
 		{
-			var calc = (questionansw + blocksread) * 100 / (totalquestioncount + totallessonblocks);
 			//Luam tot ce este in Content si adaugam nr de intrebari si blocuri si calculam progresul
 			//Pana cand acesta este egal cu progresul salvat (Daca nu a fost modificat save.json folosind surse externe)
-			GD.Print(questionansw + "/" + totalquestioncount + " " + blocksread + "/" + totallessonblocks + " " + calc);
+			//GD.Print(questionansw + "/" + totalquestioncount + " " + blocksread + "/" + totallessonblocks + " " + calc);
 			for (int i = 0; i <= _node.GetChildCount()-1; i++)
-			{	//Daca am ajuns la progresul din save.json
+			{	var calc = (questionansw + blocksread) * 100 / (totalquestioncount + totallessonblocks);
+				//Daca am ajuns la progresul din save.json
 				if(calc == _data.currentStats.LessonCompletion[lessonid])
 				{
 					showobjects(i);
@@ -75,7 +78,7 @@ public partial class Lesson : Node2D
 		}
 		//100%
 		//Mai mult ca sa nu trecem prin toate calculele de mai sus
-		else
+		else if (_data.currentStats.LessonCompletion[lessonid] == 100)
 		{
 			for (int i = 0; i <= _node.GetChildCount()-1; i++)
 				if(_node.GetChild(i).Name.ToString().Match("Quizitem")) 
@@ -124,9 +127,9 @@ public partial class Lesson : Node2D
 			GetNode<Panel>("Panel").Modulate = new Color(1, 1, 1, 0);
 			GetNode<TextureButton>("Back").Modulate = new Color(1, 1, 1, 0);
 			GetNode<Label>("Panel/ScrollContainer/MarginContainer/Body/Title").SelfModulate = new Color(1, 1, 1, 0);
-			tween.TweenProperty(GetNode<Label>("Transition/Title"), "position", pos, 0.75);
-			tween.Parallel().TweenProperty(GetNode<Label>("Transition/Title"), "scale", scale, 0.75);
-			tween.Parallel().TweenProperty(GetNode<Label>("Transition/Title"), "size", size, 0.75);
+			tween.TweenProperty(GetNode<Label>("Transition/Title"), "position", pos, 0.75).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+			tween.Parallel().TweenProperty(GetNode<Label>("Transition/Title"), "scale", scale, 0.75).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+			tween.Parallel().TweenProperty(GetNode<Label>("Transition/Title"), "size", size, 0.75).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
 			tween.Parallel().TweenProperty(GetNode<Panel>("Panel"), "modulate", new Color(1, 1, 1, 1), 0.75);
 			tween.Parallel().TweenProperty(GetNode<TextureButton>("Back"), "modulate", new Color(1, 1, 1, 1), 0.75);
 			timer = GetTree().CreateTimer(0.75);
@@ -134,8 +137,8 @@ public partial class Lesson : Node2D
 			tween.Stop();
 			pos.X = -173;
 			pos.Y = -1;
-			GetNode<ScrollContainer>("Panel/ScrollContainer").Position = pos;
 			GetNode<ScrollContainer>("Panel/ScrollContainer").VerticalScrollMode = (ScrollContainer.ScrollMode)1;
+			GetNode<ScrollContainer>("Panel/ScrollContainer").Position = pos;
 			GetNode<Label>("Panel/ScrollContainer/MarginContainer/Body/Title").SelfModulate = new Color(1, 1, 1, 1);
 			GetNode<Label>("Transition/Title").Hide();
 			GetNode<Node2D>("Transition").QueueFree();
@@ -206,4 +209,5 @@ public partial class Lesson : Node2D
 		_video.GetNode<VideoStreamPlayer>("Panel/VideoStreamPlayer").Stream.File = "res://Courses/Lesson_" + lessonid + "/Video.webm";
 		AddChild(_video);
 	}
+	private void _on_text_link(Variant meta) => OS.ShellOpen((string)meta); //Pentru linkurile din text
 }

@@ -12,7 +12,6 @@ script = ExtResource("1_udx85")
 
 [node name="Panel" type="Sprite2D" parent="."]
 position = Vector2(636, 325)
-scale = Vector2(1.07785, 1)
 texture = ExtResource("2_e1pjj")
 
 [node name="Drag" type="Button" parent="Panel"]
@@ -42,47 +41,39 @@ vertical_alignment = 1
 
 [node name="Panel" type="Panel" parent="Panel"]
 self_modulate = Color(1, 1, 1, 0.34902)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -743.5
-offset_top = -560.5
-offset_right = -1.5
-offset_bottom = -1.5
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = -372.0
+offset_top = -258.0
+offset_right = 373.0
+offset_bottom = 305.0
 size_flags_horizontal = 6
 size_flags_vertical = 6
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/Panel"]
 layout_mode = 0
-offset_left = 2.0
-offset_right = 742.0
-offset_bottom = 559.0
+offset_left = -1.0
+offset_right = 751.0
+offset_bottom = 563.0
+scale = Vector2(0.990243, 0.997076)
 horizontal_scroll_mode = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/Panel/ScrollContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(744, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 theme_override_constants/separation = 1
 
 [node name="Title" type="Label" parent="Panel/Panel/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 49
+theme_override_font_sizes/font_size = 44
 text = "Zero2Linux poate fi actualizat"
 horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Title2" type="Label" parent="Panel/Panel/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 20
 text = "Exista o noua versiune a programului disponibila pe Github. 
 Versiunea instalata este: "
 horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Panel/Panel/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -94,19 +85,17 @@ layout_mode = 2
 [node name="Title3" type="Label" parent="Panel/Panel/ScrollContainer/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(728, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 25
-vertical_alignment = 1
+theme_override_font_sizes/font_size = 20
 autowrap_mode = 3
 
 [node name="Title4" type="Label" parent="Panel/Panel/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 20
 text = "
 Toate schimbarile sunt pe Github.
 Apasa butonul \"Github\" de mai jos pentru a vedea schimbarile sau inchide fereastra pentru a continua.
 Pentru a nu mai primi acest mesaj in viitor, dezactiveaza \"Primeste actualizari\" in seatari."
 horizontal_alignment = 1
-vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/Panel/ScrollContainer/VBoxContainer"]
@@ -124,10 +113,6 @@ text = "Github"
 
 [node name="marginContainer" type="MarginContainer" parent="Panel/Panel/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-
-[node name="Margins" type="MarginContainer" parent="Panel/Panel/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 
 [connection signal="button_down" from="Panel/Drag" to="." method="_on_drag_down"]

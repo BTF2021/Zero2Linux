@@ -24,13 +24,17 @@ public partial class Progress : Control
 		}
 
 		_text.Text = "Lectii finalizate: " + _data.currentStats.FinishedLes +
-		"\nChestionare facute: " + _data.currentStats.Questionaires +
-		"\nLista lectiilor finalizate: ";
-		i=1;
-		while(_data.lessonList.ContainsKey(i))
-		{	if((int)_data.currentStats.LessonCompletion[i] == 100) _text.Text = _text.Text + "\n   " + (string)_data.lessonList[i][0];
-			i++;
+		"\nChestionare facute: " + _data.currentStats.Questionaires;
+		if(_data.currentStats.FinishedLes > 0)
+		{
+			_text.Text = _text.Text + "\nLista lectiilor finalizate: ";
+			i=1;
+			while(_data.lessonList.ContainsKey(i))
+			{	if((int)_data.currentStats.LessonCompletion[i] == 100) _text.Text = _text.Text + "\n   " + (string)_data.lessonList[i][0];
+				i++;
+			}
 		}
+		else _text.Text = _text.Text + "\nNu ai nicio lectie terminata...";
 		if(_data.currentStats.Anims)
 		{
 			var tween = GetTree().CreateTween();
@@ -40,8 +44,8 @@ public partial class Progress : Control
 			pos.Y = 339 - 25;
 			GetNode<Sprite2D>("Panel").Position = pos;
 			pos.Y = 339;
-			tween.TweenProperty(GetNode<Sprite2D>("Panel"), "modulate", new Color(1, 1, 1, 1), 0.15);
-			tween.Parallel().TweenProperty(GetNode<Sprite2D>("Panel"), "position", pos, 0.15);
+			tween.TweenProperty(GetNode<Sprite2D>("Panel"), "modulate", new Color(1, 1, 1, 1), 0.15).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.Out);
+			tween.Parallel().TweenProperty(GetNode<Sprite2D>("Panel"), "position", pos, 0.15).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.Out);
 		}
 	}
 

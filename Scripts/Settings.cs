@@ -16,7 +16,8 @@ public partial class Settings : Control
 		GetNode<LineEdit>("Panel/Settings/Altele/VBoxContainer/Name/NameEdit").Text = _data.currentStats.UsrName;
 		GetNode<ColorPickerButton>("Panel/Settings/Altele/VBoxContainer/FavColour/ColorButton").Color = _data.currentStats.FavColor;
 
-		if(!((String)ProjectSettings.GetSetting("application/config/version")).Contains(_data.newversion[0])) GetNode<Label>("Panel/Settings/Altele/VBoxContainer/Version").Text = GetNode<Label>("Panel/Settings/Altele/VBoxContainer/Version").Text;
+		if(_data.newversion == null)
+			if(!((String)ProjectSettings.GetSetting("application/config/version")).Contains(_data.newversion[0])) GetNode<Label>("Panel/Settings/Altele/VBoxContainer/Version").Text = GetNode<Label>("Panel/Settings/Altele/VBoxContainer/Version").Text;
 
 		if(!_data.isvideoavailable)
 		{	GetNode<Label>("Panel/Settings/Lectii/VBoxContainer/VideoVolume").Modulate = new Color((float)0.6, (float)0.6, (float)0.6, 1);
@@ -46,8 +47,8 @@ public partial class Settings : Control
 			pos.Y = 339 - 25;
 			GetNode<Sprite2D>("Panel").Position = pos;
 			pos.Y = 339;
-			tween.TweenProperty(GetNode<Sprite2D>("Panel"), "modulate", new Color(1, 1, 1, 1), 0.15);
-			tween.Parallel().TweenProperty(GetNode<Sprite2D>("Panel"), "position", pos, 0.15);
+			tween.TweenProperty(GetNode<Sprite2D>("Panel"), "modulate", new Color(1, 1, 1, 1), 0.15).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.Out);
+			tween.Parallel().TweenProperty(GetNode<Sprite2D>("Panel"), "position", pos, 0.15).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.Out);
 		}
 	}
 

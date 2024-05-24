@@ -32,17 +32,34 @@ color = Color(0.0313726, 0.0313726, 0.0313726, 0.345098)
 
 [node name="Name" type="RichTextLabel" parent="UI"]
 layout_mode = 0
-offset_left = 421.0
-offset_top = 131.0
-offset_right = 856.0
-offset_bottom = 186.0
+offset_left = 508.0
+offset_top = 96.0
+offset_right = 782.0
+offset_bottom = 165.0
+theme_override_font_sizes/normal_font_size = 50
+theme_override_font_sizes/bold_font_size = 50
+theme_override_font_sizes/italics_font_size = 50
+theme_override_font_sizes/bold_italics_font_size = 50
+theme_override_font_sizes/mono_font_size = 50
+bbcode_enabled = true
+text = "[rainbow freq=0.2 sat=0.8 val=0.8][wave amp=65.0 freq=2.0 connected=1]Zero2Linux[/wave][/rainbow]"
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="Subtitle" type="RichTextLabel" parent="UI"]
+layout_mode = 0
+offset_left = 428.0
+offset_top = 151.0
+offset_right = 861.0
+offset_bottom = 220.0
 theme_override_font_sizes/normal_font_size = 40
 theme_override_font_sizes/bold_font_size = 40
 theme_override_font_sizes/italics_font_size = 40
 theme_override_font_sizes/bold_italics_font_size = 40
 theme_override_font_sizes/mono_font_size = 40
 bbcode_enabled = true
-text = "[rainbow freq=0.2 sat=0.8 val=0.8][wave amp=50.0 freq=2.0 connected=1]Invata Linux de la zero[/wave][/rainbow]"
+text = "[wave amp=25.0 freq=2.0 connected=1]Invata Linux de la zero[/wave]"
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
@@ -65,6 +82,7 @@ theme_override_constants/separation = -1
 layout_mode = 2
 size_flags_vertical = 3
 tooltip_text = "Incepe o lectie"
+theme_override_font_sizes/font_size = 20
 theme_override_styles/focus = ExtResource("2_0hv5f")
 text = "Lectii"
 
@@ -73,6 +91,7 @@ layout_mode = 2
 size_flags_vertical = 3
 tooltip_text = "Testeaza-ti cunostiintele dobandite pe parcursul lectiilor.
 Necesita terminarea a cel putin o lectie."
+theme_override_font_sizes/font_size = 20
 theme_override_styles/focus = ExtResource("2_0hv5f")
 text = "Chestionare"
 
@@ -80,6 +99,7 @@ text = "Chestionare"
 layout_mode = 2
 size_flags_vertical = 3
 tooltip_text = "Regleaza-ti setarile legate de imagine, lectii, etc"
+theme_override_font_sizes/font_size = 20
 theme_override_styles/focus = ExtResource("2_0hv5f")
 text = "Progres"
 
@@ -87,6 +107,7 @@ text = "Progres"
 layout_mode = 2
 size_flags_vertical = 3
 tooltip_text = "Regleaza-ti setarile legate de imagine, lectii, etc"
+theme_override_font_sizes/font_size = 20
 theme_override_styles/focus = ExtResource("2_0hv5f")
 text = "Setari"
 
@@ -99,7 +120,7 @@ texture = ExtResource("3_ocyen")
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/Bar"]
 offset_left = -574.0
 offset_top = -21.0
-offset_right = 355.0
+offset_right = 349.0
 offset_bottom = 11.0
 scale = Vector2(1.25, 1.25)
 theme_override_constants/separation = 5

@@ -3,7 +3,7 @@ using System;
 
 public partial class Quizitem : PanelContainer
 {
-	[Export(PropertyHint.Range, "0,2,")] public int type = 0;         //0: Lectie,        1: Normal,       2: Test
+	public int type = 0;         //0: Lectie,        1: Normal,       2: Test
 	[Export(PropertyHint.Range, "2,4,")] public int answnum = 4;      //Nr de raspunsuri posibile (intre 2 si 4)
 	[Export(PropertyHint.Range, "1,4,")] public int answ = 1;
 	public bool Complete = false;

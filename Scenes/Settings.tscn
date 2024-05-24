@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://Scripts/Settings.cs" id="1_5tuin"]
 [ext_resource type="Texture2D" uid="uid://dherg8j0a21h2" path="res://Sprites/CoursePanel.png" id="2_wmyog"]
 [ext_resource type="StyleBox" uid="uid://di87pu5wmffgt" path="res://Sprites/UINoHover.stylebox" id="3_yiypy"]
+[ext_resource type="StyleBox" uid="uid://drod6m1sbtikq" path="res://Sprites/UISettingsButton.stylebox" id="4_rkad0"]
 [ext_resource type="Texture2D" uid="uid://bqd1321xxqoej" path="res://Sprites/CloseButton.png" id="5_7cisg"]
-[ext_resource type="StyleBox" uid="uid://c8ip85nk5v8ds" path="res://Sprites/UIButtons.stylebox" id="6_c4yel"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ijpad"]
 bg_color = Color(0, 0, 0, 0.611765)
@@ -13,7 +13,7 @@ bg_color = Color(0, 0, 0, 0.611765)
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_idgcd"]
-bg_color = Color(0.215686, 0.215686, 0.215686, 1)
+bg_color = Color(0.262932, 0.262932, 0.262932, 1)
 corner_radius_top_left = 6
 corner_radius_top_right = 6
 corner_radius_bottom_right = 6
@@ -76,10 +76,10 @@ text = "Fullscreen"
 
 [node name="FullscreenButton" type="CheckButton" parent="Panel/Settings/Grafica/VBoxContainer/Fullscreen"]
 layout_mode = 0
-offset_left = 500.0
-offset_top = 3.5
-offset_right = 544.0
-offset_bottom = 27.5
+offset_left = 498.913
+offset_top = 3.0
+offset_right = 542.913
+offset_bottom = 27.0
 tooltip_text = "Daca este activat, aceasta fereastra va fi in fullscreen"
 
 [node name="VSync" type="Label" parent="Panel/Settings/Grafica/VBoxContainer"]
@@ -90,9 +90,9 @@ text = "VSync"
 [node name="VSyncButton" type="CheckButton" parent="Panel/Settings/Grafica/VBoxContainer/VSync"]
 layout_mode = 0
 offset_left = 500.0
-offset_top = 3.5
+offset_top = 3.0
 offset_right = 544.0
-offset_bottom = 27.5
+offset_bottom = 27.0
 tooltip_text = "Daca este activat, numarul de cadre pe secuda (framerate) va fi la maximul frecventei monitorului (in cele mai multe cazuri 60 FPS)"
 
 [node name="Animations" type="Label" parent="Panel/Settings/Grafica/VBoxContainer"]
@@ -103,9 +103,9 @@ text = "Animatii"
 [node name="AnimationsButton" type="CheckButton" parent="Panel/Settings/Grafica/VBoxContainer/Animations"]
 layout_mode = 0
 offset_left = 500.0
-offset_top = 3.5
+offset_top = 3.0
 offset_right = 544.0
-offset_bottom = 27.5
+offset_bottom = 27.0
 tooltip_text = "Daca este activat, unele elemente de UI vor fi animate"
 
 [node name="Lectii" type="Control" parent="Panel/Settings"]
@@ -140,9 +140,9 @@ text = "Include lectiile avansate"
 [node name="AdvancedButton" type="CheckButton" parent="Panel/Settings/Lectii/VBoxContainer/Advanced"]
 layout_mode = 0
 offset_left = 500.0
-offset_top = 3.5
+offset_top = 3.0
 offset_right = 544.0
-offset_bottom = 27.5
+offset_bottom = 27.0
 tooltip_text = "Daca este activat, in lista de lectii vor aparea si lectiile marcate ca fiind avansate"
 
 [node name="Special" type="Label" parent="Panel/Settings/Lectii/VBoxContainer"]
@@ -153,9 +153,9 @@ text = "Include lectiile speciale"
 [node name="SpecialButton" type="CheckButton" parent="Panel/Settings/Lectii/VBoxContainer/Special"]
 layout_mode = 0
 offset_left = 500.0
-offset_top = 3.5
+offset_top = 3.0
 offset_right = 544.0
-offset_bottom = 27.5
+offset_bottom = 27.0
 tooltip_text = "Daca este activat, in lista de lectii vor aparea si lectiile marcate ca fiind avansate"
 
 [node name="VideoVolume" type="Label" parent="Panel/Settings/Lectii/VBoxContainer"]
@@ -167,9 +167,9 @@ text = "Volum video"
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 0
 offset_left = 400.0
-offset_top = 3.5
+offset_top = 3.0
 offset_right = 600.001
-offset_bottom = 27.5
+offset_bottom = 27.0
 tooltip_text = "Regleaza volumul videoclipurilor"
 min_value = -11.0
 max_value = 10.0
@@ -178,9 +178,9 @@ rounded = true
 [node name="VideoVolumeText" type="Label" parent="Panel/Settings/Lectii/VBoxContainer/VideoVolume"]
 layout_mode = 0
 offset_left = 600.0
-offset_top = 4.0
+offset_top = 3.0
 offset_right = 635.0
-offset_bottom = 27.0
+offset_bottom = 26.0
 text = "11"
 
 [node name="MarginContainer2" type="MarginContainer" parent="Panel/Settings/Lectii/VBoxContainer"]
@@ -204,9 +204,9 @@ text = "Arata doar nr de intrebari in modul test"
 [node name="SNTButton" type="CheckButton" parent="Panel/Settings/Lectii/VBoxContainer/ShowNumOnlyTest"]
 layout_mode = 0
 offset_left = 500.0
-offset_top = 3.5
+offset_top = 3.0
 offset_right = 544.0
-offset_bottom = 27.5
+offset_bottom = 27.0
 tooltip_text = "Daca este activat, nu vor fi aratate numarul de raspunsuri corecte si gresite in modul test"
 
 [node name="Altele" type="Control" parent="Panel/Settings"]
@@ -267,9 +267,9 @@ text = "Numele utilizatorului"
 [node name="NameEdit" type="LineEdit" parent="Panel/Settings/Altele/VBoxContainer/Name"]
 layout_mode = 0
 offset_left = 496.0
-offset_top = 2.0
+offset_top = 3.0
 offset_right = 605.0
-offset_bottom = 25.0
+offset_bottom = 26.0
 tooltip_text = "Introdu aici numele.
 Numarul maxim de caractere este de 12
 si nu poate contine spatiu si urmatoarele
@@ -294,9 +294,9 @@ text = "Culoare"
 [node name="ColorButton" type="ColorPickerButton" parent="Panel/Settings/Altele/VBoxContainer/FavColour"]
 layout_mode = 0
 offset_left = 498.913
-offset_top = -2.33804
+offset_top = -3.0
 offset_right = 561.913
-offset_bottom = 28.662
+offset_bottom = 28.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_fflmj")
 toggle_mode = false
 color = Color(1, 1, 1, 1)
@@ -314,7 +314,7 @@ offset_top = -0.577492
 offset_right = 561.913
 offset_bottom = 30.4225
 tooltip_text = "Sterge profilul curent"
-theme_override_styles/normal = ExtResource("6_c4yel")
+theme_override_styles/normal = ExtResource("4_rkad0")
 text = "Sterge"
 
 [node name="MarginContainer3" type="MarginContainer" parent="Panel/Settings/Altele/VBoxContainer"]
@@ -329,7 +329,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="Name2" type="RichTextLabel" parent="Panel/Settings/Altele/VBoxContainer/vBoxContainer"]
-custom_minimum_size = Vector2(324, 0)
+custom_minimum_size = Vector2(161, 0)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 30
 theme_override_font_sizes/bold_font_size = 30
@@ -337,7 +337,7 @@ theme_override_font_sizes/italics_font_size = 30
 theme_override_font_sizes/bold_italics_font_size = 30
 theme_override_font_sizes/mono_font_size = 30
 bbcode_enabled = true
-text = "[wave amp=50.0 freq=2.0 connected=1]Invata Linux de la zero[/wave]"
+text = "[wave amp=50.0 freq=2.0 connected=1]Zero2Linux[/wave]"
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
@@ -354,16 +354,16 @@ layout_mode = 2
 [node name="Github" type="Label" parent="Panel/Settings/Altele/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 19
-text = "Pagina proiect"
+text = "Pagina proiectului"
 
 [node name="GithubButton" type="Button" parent="Panel/Settings/Altele/VBoxContainer/Github"]
 layout_mode = 2
 offset_left = 498.913
-offset_top = -0.577
+offset_top = -2.0
 offset_right = 561.913
-offset_bottom = 30.423
+offset_bottom = 29.0
 tooltip_text = "Acceseaza pagina de Github al proiectului"
-theme_override_styles/normal = ExtResource("6_c4yel")
+theme_override_styles/normal = ExtResource("4_rkad0")
 text = "Github"
 
 [node name="Issue" type="Label" parent="Panel/Settings/Altele/VBoxContainer"]
@@ -374,11 +374,11 @@ text = "Raporteaza un bug"
 [node name="IssueButton" type="Button" parent="Panel/Settings/Altele/VBoxContainer/Issue"]
 layout_mode = 2
 offset_left = 498.913
-offset_top = -0.577
+offset_top = -2.0
 offset_right = 561.913
-offset_bottom = 30.423
+offset_bottom = 29.0
 tooltip_text = "Acceseaza pagina de Github al proiectului"
-theme_override_styles/normal = ExtResource("6_c4yel")
+theme_override_styles/normal = ExtResource("4_rkad0")
 text = "Issues"
 
 [node name="Drag" type="Button" parent="Panel"]

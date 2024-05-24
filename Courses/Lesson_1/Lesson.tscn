@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cseipsy3u81k3"]
+[gd_scene load_steps=12 format=3 uid="uid://cseipsy3u81k3"]
 
 [ext_resource type="Texture2D" uid="uid://b1vo0cklpefq" path="res://Sprites/Back.png" id="1_0rts7"]
 [ext_resource type="Script" path="res://Scripts/Lesson.cs" id="1_4ktg6"]
@@ -9,10 +9,11 @@
 [ext_resource type="Texture2D" uid="uid://bgdcdehp7orv6" path="res://Sprites/Circle.png" id="5_pxwpu"]
 [ext_resource type="Material" uid="uid://bl5ra5x2dyfgr" path="res://Sprites/Blur.material" id="5_wtb56"]
 [ext_resource type="PackedScene" uid="uid://duiw5l0ody1l" path="res://Scenes/Quizitem.tscn" id="7_mfwjb"]
+[ext_resource type="Texture2D" uid="uid://ch1aetyhqjmhj" path="res://Courses/Lesson_1/Mint.png" id="7_qddyr"]
+[ext_resource type="Texture2D" uid="uid://dnugkvxgg62jg" path="res://Courses/Lesson_1/Linus.jpg" id="9_rtxw6"]
 
 [node name="Lesson" type="Node2D"]
 script = ExtResource("1_4ktg6")
-lessonid = 1
 
 [node name="Panel" type="Panel" parent="."]
 offset_left = 173.0
@@ -28,6 +29,7 @@ offset_right = 1107.0
 offset_bottom = 719.0
 theme = ExtResource("2_3hak8")
 horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/ScrollContainer"]
 custom_minimum_size = Vector2(880, 0)
@@ -41,7 +43,7 @@ layout_mode = 2
 [node name="Title" type="Label" parent="Panel/ScrollContainer/MarginContainer/Body"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
-text = "Lectia 1: Introducere"
+text = "Lectia 1: Ce este Linux?"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -61,7 +63,7 @@ offset_right = 871.0
 offset_bottom = 489.0
 
 [node name="textureRect" type="Sprite2D" parent="Panel/ScrollContainer/MarginContainer/Body/VideoPreview"]
-self_modulate = Color(0, 0, 0, 0.396078)
+self_modulate = Color(0, 0, 0, 0.588235)
 position = Vector2(432, 263)
 scale = Vector2(4, 4)
 texture = ExtResource("5_pxwpu")
@@ -76,13 +78,11 @@ texture_normal = ExtResource("5_edb0t")
 [node name="Atentie" type="Label" parent="Panel/ScrollContainer/MarginContainer/Body/VideoPreview"]
 visible = false
 layout_mode = 0
-offset_left = 155.0
-offset_top = 83.0
-offset_right = 701.0
-offset_bottom = 184.0
+offset_right = 871.0
+offset_bottom = 101.0
 theme_override_font_sizes/font_size = 35
 text = "Videoclipul nu poate fi redat
-FFmpeg static nu este instalat"
+FFmpeg static nu este prezent in folder"
 horizontal_alignment = 1
 
 [node name="HSeparator2" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Body"]
@@ -96,31 +96,52 @@ layout_mode = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block"]
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 20
-theme_override_font_sizes/bold_font_size = 20
-theme_override_font_sizes/italics_font_size = 20
-theme_override_font_sizes/bold_italics_font_size = 20
-theme_override_font_sizes/mono_font_size = 20
-text = "Nu vreau pur si simplu sa copiez de pe wikipedia, asa ca o sa explic cum va fi o lectie
-
-Aici va fi o parte din lectie, urmata de o intrebare legata de sectiunea aceasta
-"
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+bbcode_enabled = true
+text = "	Probabil ai auzit cel putin de Linux, fie ca esti in domeniul IT, fie pe Internet. Probabil ti-a fost recomandat Linux, deoarece este foarte stabil, nu colecteaza date personale sau pentru personalizarea desktopului.
+	De fapt, Linux nu este un sistem de operare propriu-zis. Este o combinatie intre kernel (Acesta este Linux) si aplicatiile software, majoritatea fiind parte de la GNU (Prescurtat din GNU's Not Linux) Project. De aceea este de preferat sa ii se spuna GNU/Linux.
+	[color=ffffff99][i]De-a lungul lectiilor, noi o sa ne referim la GNU/Linux prin Linux.[/i][/color]
+	
+	[i]Ok. Atunci cum instalez Linux?[/i]
+	
+	Kernelul este de obicei inclus intr-o distributie (distro), impreuna cu alte programe si librari. Tot ce trebuie sa faci este sa instalezi o distributie. (O sa fie discutat in detalui in lectiile urmatoare)."
 fit_content = true
 
-[node name="HSeparator" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block"]
+[node name="Back2" type="TextureRect" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block"]
+custom_minimum_size = Vector2(600, 400)
 layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("7_qddyr")
+expand_mode = 1
 
-[node name="Title3" type="Label" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 37
-text = "Insereaza o intrebare aici"
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+bbcode_enabled = true
+text = "[center][color=ffffff99][i]Un exemplu de distributie (Linux Mint). Nu toate distributiile au aceleasi programe si librarii[/i][/color][/center]"
+fit_content = true
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block"]
+layout_mode = 2
 
 [node name="Quizitem" parent="Panel/ScrollContainer/MarginContainer/Body/Content" instance=ExtResource("7_mfwjb")]
 layout_mode = 2
-answer1 = "Raspuns corect"
-explanation = "Aici este partea unde explic de ce este \"Raspuns corect\" raspunsul corect"
+answnum = 3
+answ = 2
+question = "Ce este Linux?"
+answer1 = "Un program"
+answer2 = "Un kernel"
+answer3 = "O aplicatie web"
+answer4 = ""
+explanation = "Linux este kernelul. Majoritatea programelor sunt parte din GNU Project"
 
 [node name="Block2" type="VBoxContainer" parent="Panel/ScrollContainer/MarginContainer/Body/Content"]
 layout_mode = 2
@@ -128,82 +149,74 @@ layout_mode = 2
 [node name="HSeparator2" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block2"]
 layout_mode = 2
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block2"]
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 20
-theme_override_font_sizes/bold_font_size = 20
-theme_override_font_sizes/italics_font_size = 20
-theme_override_font_sizes/bold_italics_font_size = 20
-theme_override_font_sizes/mono_font_size = 20
-text = "Apoi urmeaza restul lectiei si asa mai departe pana la finalul lectiei
-
-Se pot introduce si imagini. De ex:"
-fit_content = true
-drag_and_drop_selection_enabled = false
-
-[node name="Back2" type="TextureRect" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block2"]
-layout_mode = 2
-size_flags_horizontal = 4
-texture = ExtResource("1_0rts7")
-
-[node name="RichTextLabel3" type="RichTextLabel" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block2"]
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 20
-theme_override_font_sizes/bold_font_size = 20
-theme_override_font_sizes/italics_font_size = 20
-theme_override_font_sizes/bold_italics_font_size = 20
-theme_override_font_sizes/mono_font_size = 20
-text = "                                                               O imagine:  ^
-                                                                                     |
-
-Marimea lectiilor nu sunt limitate de acest dreptunghi. Daca e mai mare de atat, o sa apara un scrollbar la dreapta."
-fit_content = true
-drag_and_drop_selection_enabled = false
-
 [node name="Test2" type="Label" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block2"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 50
-text = "Mai avem si teste"
+theme_override_font_sizes/font_size = 45
+text = "O istorie foarte scurta"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="HSeparator3" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block2"]
 layout_mode = 2
 
-[node name="RichTextLabel4" type="RichTextLabel" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block2"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block2"]
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 20
-theme_override_font_sizes/bold_font_size = 20
-theme_override_font_sizes/italics_font_size = 20
-theme_override_font_sizes/bold_italics_font_size = 20
-theme_override_font_sizes/mono_font_size = 20
-text = "In timpul lectiei, o sa mai fie si niste intrebari pentru a trece mai departe. Aceste intrebari vor fi si in chestionare."
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+bbcode_enabled = true
+text = "	Linux fost creeat de Linus Torvalds pe 17 Septembrie 1991, initial pentru calculatoarele personale bazate pe arhitectura x86, dar de atunci a fost portat pe mai multe platforme, inclusiv sisteme incorporate (Rutere, dispozitive smart, console de jocuri video, televizoare, dispozitive de entertainment din automobile) [i]si telefoane[/i] (Android).
+	Acest lucru a fost posibil datorita limbajului de programare in care este scris (C), dar si de faptul ca Linux este open-source (codul este valabil publicului si se poate contribui la acesta), fiind sub termenii licentei [url=https://ro.wikipedia.org/wiki/Licen%C8%9Ba_Public%C4%83_General%C4%83_GNU]Licenta Publica Generala GNU (GPL)[/url]."
 fit_content = true
 drag_and_drop_selection_enabled = false
+
+[node name="Back2" type="TextureRect" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block2"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("9_rtxw6")
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block2"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+bbcode_enabled = true
+text = "[center][color=ffffff99][i]Linus Torvalds, dezvoltatorul principal al Linux[/i][/color][/center]"
+fit_content = true
+drag_and_drop_selection_enabled = false
+
+[node name="HSeparator4" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block2"]
+layout_mode = 2
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block2"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+bbcode_enabled = true
+text = "	In Martie 2024, Linux ocupa in jur de 4% din cota de piata a calculatoarelor desktop (De aceea Linux nu este prea cunoscut), dar ocupa in jur de 97% din cota de piata a sistemelor de operare pentru servere.
+	De aceea sunt importante cunostiintele de baza legate de utilizarea unui server Linux. Desi noi o sa lucram pe desktop, majoritatatea conceptelor (in special comenzile) se aplica si pentru servere."
+fit_content = true
+drag_and_drop_selection_enabled = false
+
+[node name="HSeparator5" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block2"]
+layout_mode = 2
 
 [node name="Quizitem2" parent="Panel/ScrollContainer/MarginContainer/Body/Content" instance=ExtResource("7_mfwjb")]
 layout_mode = 2
 answ = 3
-question = "Care a fost raspunsul la prima intrebare?"
-answer1 = "Nr 3"
-answer2 = "Nr 2"
-answer3 = "Nr 1"
-answer4 = "Nr 4"
-explanation = "In intrebarea anterioara, raspunsul corect era \"Raspuns corect\", care era primul raspuns"
-
-[node name="Block3" type="VBoxContainer" parent="Panel/ScrollContainer/MarginContainer/Body/Content"]
-layout_mode = 2
-
-[node name="RichTextLabel5" type="RichTextLabel" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block3"]
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 20
-theme_override_font_sizes/bold_font_size = 20
-theme_override_font_sizes/italics_font_size = 20
-theme_override_font_sizes/bold_italics_font_size = 20
-theme_override_font_sizes/mono_font_size = 20
-text = "Asta a fost tot."
-fit_content = true
-drag_and_drop_selection_enabled = false
+question = "In ce an a fost lansat Linux?"
+answer1 = "1990"
+answer2 = "1899"
+answer3 = "1991"
+answer4 = "1992"
+explanation = "Prima versiune de Linux a fost lansata pe 17 Septembrie 1991"
 
 [node name="HSeparator4" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Body"]
 visible = false
@@ -236,4 +249,5 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [connection signal="pressed" from="Panel/ScrollContainer/MarginContainer/Body/VideoPreview/textureRect/Watch" to="." method="_on_watch_pressed"]
+[connection signal="meta_clicked" from="Panel/ScrollContainer/MarginContainer/Body/Content/Block2/RichTextLabel2" to="." method="_on_text_link"]
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

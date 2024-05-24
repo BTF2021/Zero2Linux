@@ -13,7 +13,7 @@ public partial class Logare : Node2D
 	{	_data = (DefaultData)GetNode("/root/DefaultData");
 		_profile = GetNode<Button>("Profiles/List/>,,<");
 		_names = new string[7];
-		GetNode<Label>("Bg/Version").Text = "Ver " + (String)ProjectSettings.GetSetting("application/config/version");
+		GetNode<Label>("Bg/Version").Text = "Zero2Linux Ver " + (String)ProjectSettings.GetSetting("application/config/version");
 		CheckUsers();
 		GetNode<Control>("Profiles").Visible = false;
 		GetNode<Control>("NoUser").Visible = false;

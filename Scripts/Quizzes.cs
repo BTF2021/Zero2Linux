@@ -35,8 +35,8 @@ public partial class Quizzes : Control
 			pos.Y = 339 - 25;
 			GetNode<Sprite2D>("Panel").Position = pos;
 			pos.Y = 339;
-			tween.TweenProperty(GetNode<Sprite2D>("Panel"), "modulate", new Color(1, 1, 1, 1), 0.15);
-			tween.Parallel().TweenProperty(GetNode<Sprite2D>("Panel"), "position", pos, 0.15);
+			tween.TweenProperty(GetNode<Sprite2D>("Panel"), "modulate", new Color(1, 1, 1, 1), 0.15).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.Out);
+			tween.Parallel().TweenProperty(GetNode<Sprite2D>("Panel"), "position", pos, 0.15).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.Out);
 		}
 	}
 
@@ -50,16 +50,34 @@ public partial class Quizzes : Control
 		if(inputgrab) GetNode<Sprite2D>("Panel").Position = newpos;
 	}
 	private void _on_back_pressed() => QueueFree();
-	private void _on_training_pressed()
+	private async void _on_training_pressed()
 	{	_data.questiontype = 0;
-		GetTree().ChangeSceneToFile("res://Scenes/Quizztime.tscn");
+		if(_data.currentStats.Anims)
+		{	GetParent().GetParent().AddChild((GD.Load<PackedScene>("res://Scenes/Incarcare.tscn")).Instantiate());
+			var timer = GetTree().CreateTimer(3.5);
+			GetParent<CanvasItem>().Hide();
+			timer.Timeout += () => GetTree().ChangeSceneToFile("res://Scenes/Quizztime.tscn");
+		}
+		else GetTree().ChangeSceneToFile("res://Scenes/Quizztime.tscn");
 	}
-	private void _on_training_mouse_entered() => GetNode<Label>("Panel/Settings/Description2").Text = "In modul antrenament, se genereaza un chestionar aleatoriu.\nNu conteaza daca ai raspuns corect sau gresit.";
+	private void _on_training_mouse_entered() => GetNode<Label>("Panel/Settings/Description2").Text = "In modul antrenament, se genereaza un chestionar aleatoriu." + 
+	"\nNu conteaza daca ai raspuns corect sau gresit.";
 	private void _on_test_pressed()
 	{	_data.questiontype = 1;
-		GetTree().ChangeSceneToFile("res://Scenes/Quizztime.tscn");
+		if(_data.currentStats.Anims)
+		{	GetParent().GetParent().AddChild((GD.Load<PackedScene>("res://Scenes/Incarcare.tscn")).Instantiate());
+			var timer = GetTree().CreateTimer(3);
+			GetParent<CanvasItem>().Hide();
+			timer.Timeout += () => GetTree().ChangeSceneToFile("res://Scenes/Quizztime.tscn");
+		}
+		else GetTree().ChangeSceneToFile("res://Scenes/Quizztime.tscn");
 	}
-	private void _on_test_entered() => GetNode<Label>("Panel/Settings/Description2").Text = "In modul test, se genereaza un chestionar aleatoriu.\nPentru a trece testul, se poate gresi de maxim 3 ori!\nNumarul raspunsurilor corecte si gresite se vor afla la finalul testului";
+	private void _on_test_entered() => GetNode<Label>("Panel/Settings/Description2").Text = "In modul test, se genereaza un chestionar aleatoriu." +
+	"\nAi un minut pentru rezolvare" +
+	"\nPentru a trece testul, se poate gresi de maxim 3 ori!" + 
+	"\nNumarul raspunsurilor corecte si gresite se vor arata la finalul testului" + 
+	"\nMult noroc";
+	
 	private void _on_drag_down()
 	{	GD.Print("Hi");
 		#if GODOT_ANDROID

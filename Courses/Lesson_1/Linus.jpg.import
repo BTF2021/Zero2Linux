@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rruu3471o0k7"
-path="res://.godot/imported/VidBg.png-91fa7f192b286bfb7111e153b6ad1d4c.ctex"
+uid="uid://dnugkvxgg62jg"
+path="res://.godot/imported/Linus.jpg-b73229d6c1118674dd6526a73a3d5218.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Courses/Lesson_1/VidBg.png"
-dest_files=["res://.godot/imported/VidBg.png-91fa7f192b286bfb7111e153b6ad1d4c.ctex"]
+source_file="res://Courses/Lesson_1/Linus.jpg"
+dest_files=["res://.godot/imported/Linus.jpg-b73229d6c1118674dd6526a73a3d5218.ctex"]
 
 [params]
 

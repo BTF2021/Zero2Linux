@@ -22,6 +22,7 @@ public partial class Courses : Control
 			i++;
 		}
 		GD.Print("Left");
+		GetNode<Node>("Panel/ScrollContainer/VBoxContainer").MoveChild(GetNode<Node>("Panel/ScrollContainer/VBoxContainer/End"), -1);
 
 		if(_data.currentStats.Anims)
 		{
@@ -32,8 +33,8 @@ public partial class Courses : Control
 			pos.Y = 339 - 25;
 			GetNode<Sprite2D>("Panel").Position = pos;
 			pos.Y = 339;
-			tween.TweenProperty(GetNode<Sprite2D>("Panel"), "modulate", new Color(1, 1, 1, 1), 0.15);
-			tween.Parallel().TweenProperty(GetNode<Sprite2D>("Panel"), "position", pos, 0.15);
+			tween.TweenProperty(GetNode<Sprite2D>("Panel"), "modulate", new Color(1, 1, 1, 1), 0.15).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.Out);
+			tween.Parallel().TweenProperty(GetNode<Sprite2D>("Panel"), "position", pos, 0.15).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.Out);
 		}
 	}
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -66,7 +67,7 @@ public partial class Courses : Control
 		if(ResourceLoader.Exists("res://Courses/Lesson_" + i + "/Lesson.tscn")) _panel.GetNode<Button>("Panel").Pressed += () => PanelPressed(i);
 		else
 		{	_panel.GetNode<Button>("Panel").Disabled = true;
-			_panel.Modulate = new Color((float)0.6, (float)0.6, (float)0.6, 1);
+			_panel.Modulate = new Color((float)0.6, (float)0.6, (float)0.6, (float)0.5);
 		}
 		GD.Print("Adaugat " + _panel.lessonName);
 	}
@@ -74,10 +75,10 @@ public partial class Courses : Control
 	private void PanelPressed(int index)
 	{	if(_data.currentStats.Anims)
 		{
-		GetParent().GetParent().AddChild((GD.Load<PackedScene>("res://Scenes/Incarcare.tscn")).Instantiate());
-		var timer = GetTree().CreateTimer(3.5);
-		GetParent<CanvasItem>().Hide();
-		timer.Timeout += () => _timeout(index);
+			GetParent().GetParent().AddChild((GD.Load<PackedScene>("res://Scenes/Incarcare.tscn")).Instantiate());
+			var timer = GetTree().CreateTimer(3);
+			GetParent<CanvasItem>().Hide();
+			timer.Timeout += () => _timeout(index);
 		}
 		else _timeout(index);
 	}

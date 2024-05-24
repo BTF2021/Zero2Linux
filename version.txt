@@ -1,21 +1,12 @@
-Beta 0.4.0;
-- Suport pentru android 
-(Nota: Experimental. Videourile si fundalurile animate nu sunt disponibile)
-(Minim android 10)
-- Un ecran de incarcare inainte de o lectie
-- O tranzitie la inceputul lectiei
-- Doua moduri de chestionare: antrenament si test (in modul test nu se pot vedea numarul raspunsurilor corecte si gresite)
-- O setare pentru ascunderea numarului de raspunsuri corecte si gresite cand este modul test
-- O fereastra pentru progres
-- Daca raspunsul este corect (si nu este modul test), se va arata si o explicatie
+Beta 0.4.1;
+- Prima lectie (Dar fara video momentan :( )
+- Acum in modul test exista un timp limitat pentru rezolvarea intrebarilor
 
 [Imbunatatiri]
-- calculul procentului lectiei
-- intrebarile pot avea 2, 3 si 4 intrebari posibile
-- se poate bifa doar o caseta la intrebari
-- Cand se insereaza un text pentru nume, caracterele invalide sunt sterse in loc sa fie inlocuite cu _
+- Animatiile nu mai sunt liniare :D
+- Animatie pentru inceputul si finalul unui chestionar
 
 [Rezolvat]
-- Nu se poate loga pe Windows si Linux fara fisierele necesare pentru video
-- Nu se poate creea un user daca nu exista deja alt user
-- Nu se poate raspunde la mai mult de 10 chestionare 
+- Se afisau toate elementele daca progresul era intre 0 si 100
+- Nu se terminau intrebarile in chestionar daca ultima problema este gresita
+- Scrollbarul pentru fereastra de versiune noua nu mai este in afara ferestrei

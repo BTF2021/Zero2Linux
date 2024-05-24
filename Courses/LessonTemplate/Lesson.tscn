@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/Lesson.cs" id="1_4ktg6"]
 [ext_resource type="Theme" uid="uid://c3r51fw2bo66h" path="res://Sprites/CourseUI.theme" id="2_3hak8"]
 [ext_resource type="Texture2D" uid="uid://rsq42q4qde3" path="res://Sprites/BackHighlight.png" id="2_y1bgk"]
-[ext_resource type="Texture2D" uid="uid://cjf5iw2rvyax1" path="res://Sprites/debugBg.png" id="4_cg4kx"]
+[ext_resource type="Texture2D" uid="uid://b2obyjcw48efn" path="res://Courses/LessonTemplate/VidBg.png" id="3_jicr4"]
 [ext_resource type="Texture2D" uid="uid://bud38ywfs5qnt" path="res://Sprites/Play.png" id="5_edb0t"]
 [ext_resource type="Texture2D" uid="uid://bgdcdehp7orv6" path="res://Sprites/Circle.png" id="5_pxwpu"]
 [ext_resource type="Material" uid="uid://bl5ra5x2dyfgr" path="res://Sprites/Blur.material" id="5_wtb56"]
@@ -12,7 +12,6 @@
 
 [node name="Lesson" type="Node2D"]
 script = ExtResource("1_4ktg6")
-lessonid = 1
 
 [node name="Panel" type="Panel" parent="."]
 offset_left = 173.0
@@ -27,7 +26,6 @@ offset_top = -1.0
 offset_right = 1107.0
 offset_bottom = 719.0
 theme = ExtResource("2_3hak8")
-follow_focus = true
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
@@ -43,7 +41,7 @@ layout_mode = 2
 [node name="Title" type="Label" parent="Panel/ScrollContainer/MarginContainer/Body"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
-text = "Introducere"
+text = "Lectia 1: Introducere"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -52,7 +50,7 @@ layout_mode = 2
 
 [node name="VideoPreview" type="TextureRect" parent="Panel/ScrollContainer/MarginContainer/Body"]
 layout_mode = 2
-texture = ExtResource("4_cg4kx")
+texture = ExtResource("3_jicr4")
 expand_mode = 5
 stretch_mode = 4
 
@@ -77,21 +75,14 @@ texture_normal = ExtResource("5_edb0t")
 
 [node name="Atentie" type="Label" parent="Panel/ScrollContainer/MarginContainer/Body/VideoPreview"]
 visible = false
-layout_mode = 0
-offset_left = 155.0
-offset_top = 83.0
-offset_right = 701.0
-offset_bottom = 184.0
+offset_right = 871.0
+offset_bottom = 101.0
 theme_override_font_sizes/font_size = 35
 text = "Videoclipul nu poate fi redat
-FFmpeg static nu este instalat"
+FFmpeg static nu este prezent in folder"
 horizontal_alignment = 1
 
 [node name="HSeparator2" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Body"]
-layout_mode = 2
-
-[node name="Block" type="VBoxContainer" parent="Panel/ScrollContainer/MarginContainer/Body"]
-visible = false
 layout_mode = 2
 
 [node name="Content" type="VBoxContainer" parent="Panel/ScrollContainer/MarginContainer/Body"]
@@ -125,9 +116,8 @@ vertical_alignment = 1
 
 [node name="Quizitem" parent="Panel/ScrollContainer/MarginContainer/Body/Content" instance=ExtResource("7_mfwjb")]
 layout_mode = 2
-type = 1
-answ = 1
 answer1 = "Raspuns corect"
+explanation = "Aici este partea unde explic de ce este \"Raspuns corect\" raspunsul corect"
 
 [node name="Block2" type="VBoxContainer" parent="Panel/ScrollContainer/MarginContainer/Body/Content"]
 layout_mode = 2
@@ -190,13 +180,13 @@ drag_and_drop_selection_enabled = false
 
 [node name="Quizitem2" parent="Panel/ScrollContainer/MarginContainer/Body/Content" instance=ExtResource("7_mfwjb")]
 layout_mode = 2
-type = 1
 answ = 3
 question = "Care a fost raspunsul la prima intrebare?"
 answer1 = "Nr 3"
 answer2 = "Nr 2"
 answer3 = "Nr 1"
 answer4 = "Nr 4"
+explanation = "In intrebarea anterioara, raspunsul corect era \"Raspuns corect\", care era primul raspuns"
 
 [node name="Block3" type="VBoxContainer" parent="Panel/ScrollContainer/MarginContainer/Body/Content"]
 layout_mode = 2
@@ -230,6 +220,17 @@ offset_bottom = 200.0
 scale = Vector2(0.25, 0.25)
 texture_normal = ExtResource("1_0rts7")
 texture_pressed = ExtResource("2_y1bgk")
+
+[node name="Transition" type="Node2D" parent="."]
+visible = false
+
+[node name="Title" type="Label" parent="Transition"]
+offset_top = 296.0
+offset_right = 1280.0
+offset_bottom = 392.0
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="Panel/ScrollContainer/MarginContainer/Body/VideoPreview/textureRect/Watch" to="." method="_on_watch_pressed"]
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

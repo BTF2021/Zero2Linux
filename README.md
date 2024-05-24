@@ -5,7 +5,8 @@ Dezvoltat in Godot folosind C#
 ## FAQ
 > De ce nu merg videourile?
 
-  In 90% din cazuri, nu ai fisierele statice FFmpeg pentru redarea videourilor.
+  1. Redarea videourilor nu este disponibila pe Android
+  2. In 90% din cazuri, nu ai fisierele statice FFmpeg pentru redarea videourilor.
   In zipurile Full sunt incluse fisiere statice FFmpeg cu codecurile VP8, VP9 si Vorbis disponibile
 > In pagina de Release sunt 2 versiuni. Care este diferenta dintre Full si Lite?
 

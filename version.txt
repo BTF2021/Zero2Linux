@@ -1,12 +1,5 @@
-Beta 0.4.1;
-- Prima lectie (Dar fara video momentan :( )
-- Acum in modul test exista un timp limitat pentru rezolvarea intrebarilor
-
-[Imbunatatiri]
-- Animatiile nu mai sunt liniare :D
-- Animatie pentru inceputul si finalul unui chestionar
-
+Beta 0.4.2;
 [Rezolvat]
-- Se afisau toate elementele daca progresul era intre 0 si 100
-- Nu se terminau intrebarile in chestionar daca ultima problema este gresita
-- Scrollbarul pentru fereastra de versiune noua nu mai este in afara ferestrei
+- Driverul video pentru Godot a fost schimbat din Vulkan in OpenGL 3
+  (Calculatoarele ale caror drivere nu suportau Vulkan nu puteau sa ruleze si
+  cerea sa lanseze aplicatia cu driverul OpenGL 3)

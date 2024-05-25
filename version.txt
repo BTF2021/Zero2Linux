@@ -1,5 +1,5 @@
 Beta 0.4.2;
 [Rezolvat]
 - Driverul video pentru Godot a fost schimbat din Vulkan in OpenGL 3
-  (Calculatoarele ale caror drivere nu suportau Vulkan nu puteau sa ruleze si
-  cerea sa lanseze aplicatia cu driverul OpenGL 3)
+  (Calculatoarele ale caror drivere nu suportau Vulkan nu puteau sa ruleze aplicatia
+  si cerea sa lanseze aplicatia cu driverul OpenGL 3)

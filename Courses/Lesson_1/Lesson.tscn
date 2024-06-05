@@ -4,13 +4,13 @@
 [ext_resource type="Script" path="res://Scripts/Lesson.cs" id="1_4ktg6"]
 [ext_resource type="Theme" uid="uid://c3r51fw2bo66h" path="res://Sprites/CourseUI.theme" id="2_3hak8"]
 [ext_resource type="Texture2D" uid="uid://rsq42q4qde3" path="res://Sprites/BackHighlight.png" id="2_y1bgk"]
-[ext_resource type="Texture2D" uid="uid://rruu3471o0k7" path="res://Courses/Lesson_1/VidBg.png" id="3_5h6g7"]
+[ext_resource type="Texture2D" uid="uid://rruu3471o0k7" path="res://Courses/Lesson_3/VidBg.png" id="3_5h6g7"]
 [ext_resource type="Texture2D" uid="uid://bud38ywfs5qnt" path="res://Sprites/Play.png" id="5_edb0t"]
 [ext_resource type="Texture2D" uid="uid://bgdcdehp7orv6" path="res://Sprites/Circle.png" id="5_pxwpu"]
 [ext_resource type="Material" uid="uid://bl5ra5x2dyfgr" path="res://Sprites/Blur.material" id="5_wtb56"]
+[ext_resource type="Texture2D" uid="uid://ch1aetyhqjmhj" path="res://Courses/Lesson_1/Mint.png" id="7_enweq"]
 [ext_resource type="PackedScene" uid="uid://duiw5l0ody1l" path="res://Scenes/Quizitem.tscn" id="7_mfwjb"]
-[ext_resource type="Texture2D" uid="uid://ch1aetyhqjmhj" path="res://Courses/Lesson_1/Mint.png" id="7_qddyr"]
-[ext_resource type="Texture2D" uid="uid://dnugkvxgg62jg" path="res://Courses/Lesson_1/Linus.jpg" id="9_rtxw6"]
+[ext_resource type="Texture2D" uid="uid://dnugkvxgg62jg" path="res://Courses/Lesson_1/Linus.jpg" id="9_e20vh"]
 
 [node name="Lesson" type="Node2D"]
 script = ExtResource("1_4ktg6")
@@ -102,20 +102,23 @@ theme_override_font_sizes/italics_font_size = 25
 theme_override_font_sizes/bold_italics_font_size = 25
 theme_override_font_sizes/mono_font_size = 25
 bbcode_enabled = true
-text = "	Probabil ai auzit cel putin de Linux, fie ca esti in domeniul IT, fie pe Internet. Probabil ti-a fost recomandat Linux, deoarece este foarte stabil, nu colecteaza date personale sau pentru personalizarea desktopului.
+text = "	Probabil ai auzit cel putin de Linux, fie ca esti in domeniul IT, cel mai probabil legat de servere, fie pe Internet. Dar ce este acest \"Linux\" si de ce multi oameni il recomanda, desi alte sisteme de operare sunt (mult) mai populare?
 	De fapt, Linux nu este un sistem de operare propriu-zis. Este o combinatie intre kernel (Acesta este Linux) si aplicatiile software, majoritatea fiind parte de la GNU (Prescurtat din GNU's Not Linux) Project. De aceea este de preferat sa ii se spuna GNU/Linux.
-	[color=ffffff99][i]De-a lungul lectiilor, noi o sa ne referim la GNU/Linux prin Linux.[/i][/color]
+
+	[i]De-a lungul lectiilor, noi o sa ne referim la GNU/Linux prin Linux.[/i]
+
+	Linux este general recomandat, deoarece este foarte stabil, (mai stabil decat Windows si MacOs), mai sigur si desktopul se poate personaliza usor.
 	
-	[i]Ok. Atunci cum instalez Linux?[/i]
+	[color=ffffff89][i]Ok. Unde si cum instalez Linux?[/i][/color]
 	
-	Kernelul este de obicei inclus intr-o distributie (distro), impreuna cu alte programe si librari. Tot ce trebuie sa faci este sa instalezi o distributie. (O sa fie discutat in detalui in lectiile urmatoare)."
+	Linux, impreuna cu alte aplicatii, sunt incluse intr-o distributie (distro). Tot ce trebuie sa faci este sa instalezi o distributie. (O sa fie discutat in detalui in lectiile urmatoare)."
 fit_content = true
 
 [node name="Back2" type="TextureRect" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block"]
 custom_minimum_size = Vector2(600, 400)
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("7_qddyr")
+texture = ExtResource("7_enweq")
 expand_mode = 1
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block"]
@@ -168,14 +171,14 @@ theme_override_font_sizes/bold_italics_font_size = 25
 theme_override_font_sizes/mono_font_size = 25
 bbcode_enabled = true
 text = "	Linux fost creeat de Linus Torvalds pe 17 Septembrie 1991, initial pentru calculatoarele personale bazate pe arhitectura x86, dar de atunci a fost portat pe mai multe platforme, inclusiv sisteme incorporate (Rutere, dispozitive smart, console de jocuri video, televizoare, dispozitive de entertainment din automobile) [i]si telefoane[/i] (Android).
-	Acest lucru a fost posibil datorita limbajului de programare in care este scris (C), dar si de faptul ca Linux este open-source (codul este valabil publicului si se poate contribui la acesta), fiind sub termenii licentei [url=https://ro.wikipedia.org/wiki/Licen%C8%9Ba_Public%C4%83_General%C4%83_GNU]Licenta Publica Generala GNU (GPL)[/url]."
+	Acest lucru a fost posibil datorita limbajului de programare in care este scris (In mare parte in limbajul C, urmat de Assembly), dar si de faptul ca Linux este open-source (codul este valabil publicului si se poate contribui la acesta), fiind sub termenii licentei [url=https://ro.wikipedia.org/wiki/Licen%C8%9Ba_Public%C4%83_General%C4%83_GNU]Licenta Publica Generala GNU (GPL)[/url]."
 fit_content = true
 drag_and_drop_selection_enabled = false
 
 [node name="Back2" type="TextureRect" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block2"]
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("9_rtxw6")
+texture = ExtResource("9_e20vh")
 
 [node name="RichTextLabel4" type="RichTextLabel" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block2"]
 layout_mode = 2
@@ -200,7 +203,7 @@ theme_override_font_sizes/italics_font_size = 25
 theme_override_font_sizes/bold_italics_font_size = 25
 theme_override_font_sizes/mono_font_size = 25
 bbcode_enabled = true
-text = "	In Martie 2024, Linux ocupa in jur de 4% din cota de piata a calculatoarelor desktop (De aceea Linux nu este prea cunoscut), dar ocupa in jur de 97% din cota de piata a sistemelor de operare pentru servere.
+text = "	In Martie 2024, Linux ocupa in jur de 4% din cota de piata a calculatoarelor desktop (De aceea Linux nu este prea cunoscut), dar in jur de 97% din top un milion servere web folosesc Linux.
 	De aceea sunt importante cunostiintele de baza legate de utilizarea unui server Linux. Desi noi o sa lucram pe desktop, majoritatatea conceptelor (in special comenzile) se aplica si pentru servere."
 fit_content = true
 drag_and_drop_selection_enabled = false

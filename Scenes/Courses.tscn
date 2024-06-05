@@ -63,7 +63,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="Panel/ScrollContainer/VBoxContainer/End"]
 layout_mode = 2
 text = "Verifica setarile daca sunt afisate lectiile avansate si speciale
-Urmareste pagina de Github pentru noi lectii :)"
+Urmareste pagina de Github pentru posibile noi lectii :)"
 horizontal_alignment = 1
 
 [node name="MarginContainer2" type="MarginContainer" parent="Panel/ScrollContainer/VBoxContainer/End"]

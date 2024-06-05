@@ -17,7 +17,7 @@ public partial class Quizzes : Control
 			i++;
 		}
 		GD.Print(_data.currentStats.FinishedLes);
-		if(_data.currentStats.FinishedLes >= 1) 
+		if(_data.currentStats.FinishedLes >= 2) 
 		{	GetNode<Label>("Panel/Requirement").Hide();
 			GetNode<Panel>("Panel/Settings").Show();
 		}

@@ -75,6 +75,7 @@ texture_normal = ExtResource("5_edb0t")
 
 [node name="Atentie" type="Label" parent="Panel/ScrollContainer/MarginContainer/Body/VideoPreview"]
 visible = false
+layout_mode = 0
 offset_right = 871.0
 offset_bottom = 101.0
 theme_override_font_sizes/font_size = 35
@@ -93,11 +94,11 @@ layout_mode = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block"]
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 20
-theme_override_font_sizes/bold_font_size = 20
-theme_override_font_sizes/italics_font_size = 20
-theme_override_font_sizes/bold_italics_font_size = 20
-theme_override_font_sizes/mono_font_size = 20
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
 text = "Nu vreau pur si simplu sa copiez de pe wikipedia, asa ca o sa explic cum va fi o lectie
 
 Aici va fi o parte din lectie, urmata de o intrebare legata de sectiunea aceasta
@@ -127,11 +128,11 @@ layout_mode = 2
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block2"]
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 20
-theme_override_font_sizes/bold_font_size = 20
-theme_override_font_sizes/italics_font_size = 20
-theme_override_font_sizes/bold_italics_font_size = 20
-theme_override_font_sizes/mono_font_size = 20
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
 text = "Apoi urmeaza restul lectiei si asa mai departe pana la finalul lectiei
 
 Se pot introduce si imagini. De ex:"
@@ -145,13 +146,13 @@ texture = ExtResource("1_0rts7")
 
 [node name="RichTextLabel3" type="RichTextLabel" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block2"]
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 20
-theme_override_font_sizes/bold_font_size = 20
-theme_override_font_sizes/italics_font_size = 20
-theme_override_font_sizes/bold_italics_font_size = 20
-theme_override_font_sizes/mono_font_size = 20
-text = "                                                               O imagine:  ^
-                                                                                     |
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+text = "                                          O imagine:  ^
+                                                               |
 
 Marimea lectiilor nu sunt limitate de acest dreptunghi. Daca e mai mare de atat, o sa apara un scrollbar la dreapta."
 fit_content = true
@@ -169,11 +170,11 @@ layout_mode = 2
 
 [node name="RichTextLabel4" type="RichTextLabel" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block2"]
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 20
-theme_override_font_sizes/bold_font_size = 20
-theme_override_font_sizes/italics_font_size = 20
-theme_override_font_sizes/bold_italics_font_size = 20
-theme_override_font_sizes/mono_font_size = 20
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
 text = "In timpul lectiei, o sa mai fie si niste intrebari pentru a trece mai departe. Aceste intrebari vor fi si in chestionare."
 fit_content = true
 drag_and_drop_selection_enabled = false

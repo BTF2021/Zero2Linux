@@ -44,7 +44,7 @@ offset_left = -633.0
 offset_top = 330.0
 offset_right = -353.0
 offset_bottom = 353.0
-text = "Ver"
+text = "Zero2LInux Ver"
 vertical_alignment = 1
 
 [node name="Profiles" type="Control" parent="."]
@@ -93,9 +93,9 @@ texture = ExtResource("4_f0vrj")
 
 [node name="Name" type="Label" parent="Profiles/List/>,,<"]
 layout_mode = 0
-offset_left = -1.0
+offset_left = -5.0
 offset_top = 186.0
-offset_right = 168.0
+offset_right = 164.0
 offset_bottom = 221.0
 theme_override_font_sizes/font_size = 25
 text = "123456789abc"
@@ -103,10 +103,10 @@ horizontal_alignment = 1
 
 [node name="BigLetter" type="Label" parent="Profiles/List/>,,<"]
 layout_mode = 0
-offset_left = 4.0
-offset_top = 24.0
-offset_right = 156.0
-offset_bottom = 177.0
+offset_left = 3.0
+offset_top = 22.0
+offset_right = 158.0
+offset_bottom = 178.0
 theme_override_font_sizes/font_size = 70
 text = "T"
 horizontal_alignment = 1
@@ -192,9 +192,9 @@ vertical_alignment = 1
 
 [node name="Panel" type="Panel" parent="Create/Culoare"]
 layout_mode = 0
-offset_left = 294.0
+offset_left = 141.0
 offset_top = -3.0
-offset_right = 597.0
+offset_right = 444.0
 offset_bottom = 266.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_b6rum")
 
@@ -227,27 +227,27 @@ tooltip_text = "Logheaza-te ca "
 position = Vector2(80, 100)
 texture = ExtResource("4_f0vrj")
 
+[node name="Name" type="Label" parent="Create/Preview"]
+layout_mode = 0
+offset_left = -5.0
+offset_top = 186.0
+offset_right = 164.0
+offset_bottom = 221.0
+theme_override_font_sizes/font_size = 25
+text = "123456789abc"
+horizontal_alignment = 1
+
 [node name="BigLetter" type="Label" parent="Create/Preview"]
 layout_mode = 0
-offset_left = 4.0
-offset_top = 24.0
-offset_right = 156.0
-offset_bottom = 177.0
+offset_left = 3.0
+offset_top = 22.0
+offset_right = 158.0
+offset_bottom = 178.0
 theme_override_font_sizes/font_size = 70
 text = "T"
 horizontal_alignment = 1
 vertical_alignment = 1
 visible_characters = 1
-
-[node name="Name" type="Label" parent="Create/Preview"]
-layout_mode = 0
-offset_left = -1.0
-offset_top = 186.0
-offset_right = 168.0
-offset_bottom = 221.0
-theme_override_font_sizes/font_size = 25
-text = "Test"
-horizontal_alignment = 1
 
 [node name="Eroare" type="Label" parent="Create"]
 visible = false
@@ -291,9 +291,9 @@ offset_bottom = 720.0
 
 [node name="Hi" type="RichTextLabel" parent="NoUser"]
 layout_mode = 0
-offset_left = 352.0
+offset_left = 330.0
 offset_top = 2.0
-offset_right = 921.0
+offset_right = 939.0
 offset_bottom = 114.0
 size_flags_horizontal = 3
 theme_override_font_sizes/normal_font_size = 40
@@ -302,8 +302,8 @@ theme_override_font_sizes/italics_font_size = 40
 theme_override_font_sizes/bold_italics_font_size = 40
 theme_override_font_sizes/mono_font_size = 40
 bbcode_enabled = true
-text = "[rainbow freq=0.1 sat=0.7 val=0.8][wave amp=50.0 freq=2 connected=1]                       Salut
-Multumim ca ai ales Zero2OS[/wave][/rainbow]"
+text = "[rainbow freq=0.1 sat=0.7 val=0.8][wave amp=50.0 freq=2 connected=1]                          Salut
+Multumim ca ai ales Zero2Linux[/wave][/rainbow]"
 scroll_active = false
 shortcut_keys_enabled = false
 
@@ -314,7 +314,7 @@ offset_top = 239.0
 offset_right = 880.0
 offset_bottom = 387.0
 theme_override_font_sizes/font_size = 30
-text = "Pentru a finaliza instalarea,
+text = "Pentru a continua,
 Un nou utilizator trebuie creat.
 Apasa butonul pentru a continua"
 horizontal_alignment = 1

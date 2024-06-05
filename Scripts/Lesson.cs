@@ -37,6 +37,13 @@ public partial class Lesson : Node2D
 			GetNode<Sprite2D>("Panel/ScrollContainer/MarginContainer/Body/VideoPreview/textureRect").QueueFree();
 			GetNode<Label>("Panel/ScrollContainer/MarginContainer/Body/VideoPreview/Atentie").Show();
 		}
+		if(!ResourceLoader.Exists("res://Courses/Lesson_" + lessonid + "/Video.webm"))
+		{	GetNode<HSeparator>("Panel/ScrollContainer/MarginContainer/Body/HSeparator2").QueueFree();
+			GetNode<ColorRect>("Panel/ScrollContainer/MarginContainer/Body/VideoPreview/Spoiler").QueueFree();
+			GetNode<Sprite2D>("Panel/ScrollContainer/MarginContainer/Body/VideoPreview/textureRect").QueueFree();
+			GetNode<Label>("Panel/ScrollContainer/MarginContainer/Body/VideoPreview/Atentie").QueueFree();
+			GetNode<TextureRect>("Panel/ScrollContainer/MarginContainer/Body/VideoPreview").QueueFree();
+		}
 
 		//Calculeaza nr de intrebari si blocuri
 		percent = (int)_data.currentStats.LessonCompletion[lessonid];
@@ -152,7 +159,7 @@ public partial class Lesson : Node2D
 	//}
 
 	//Aceasta functie arata partile din lectie pana la o intrebare la care nu sa raspuns/ nu sa raspuns corect
-	private void showobjects(int index)
+	private async void showobjects(int index)
 	{	var foundquestion = false;
 		for (int i = index; i <= _node.GetChildCount()-1; i++)
 		{	if(foundquestion) _node.GetChild<CanvasItem>(i).Visible = false;
@@ -207,6 +214,7 @@ public partial class Lesson : Node2D
 	private void _on_watch_pressed()
 	{	var _video = (ResourceLoader.Load<PackedScene>("res://Scenes/VideoOverlay.tscn")).Instantiate();
 		_video.GetNode<VideoStreamPlayer>("Panel/VideoStreamPlayer").Stream.File = "res://Courses/Lesson_" + lessonid + "/Video.webm";
+		_video.GetNode<Sprite2D>("Bg").Texture = GD.Load<CompressedTexture2D>("res://Courses/Lesson_" + lessonid + "/VidBg.png");
 		AddChild(_video);
 	}
 	private void _on_text_link(Variant meta) => OS.ShellOpen((string)meta); //Pentru linkurile din text

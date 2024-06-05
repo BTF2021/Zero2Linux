@@ -6,6 +6,7 @@ public partial class Quizztime : Node2D
 	private DefaultData _data;
 	public PackedScene _item;
 	public Node2D _transition;
+	Godot.Collections.Array<Godot.Collections.Array> _list;
 	int total = 10;
 	int intrebari = 0;
 	int corecte = 0;
@@ -24,6 +25,8 @@ public partial class Quizztime : Node2D
 		_transition = GetNode<Node2D>("Transition");
 		GetAnswers += SendAnswers;
 		Next += NextQuestion;
+		_list = _data.GenerateQuestionSet();
+		//GD.Print(_list);
 		if(_data.questiontype == 1)
 		{	GetNode<Label>("Body/Title").Text = "Test";
 			GetNode<RichTextLabel>("Body/Correct").TooltipText = "Eroare: nr_intrebari_corecte nu poate fi afisat";
@@ -150,6 +153,14 @@ public partial class Quizztime : Node2D
 			var name = (String)GetChild(-1).Name;
 			if(name.Contains("Quizitem")) GetChild(-1).QueueFree();
 			var _panel =  _item.Instantiate<Quizitem>();
+			_panel.answnum = (int)_list[intrebari-1][0];
+			_panel.answ = (int)_list[intrebari-1][1];
+			_panel.question = (string)_list[intrebari-1][2];
+			_panel.answer1 = (string)_list[intrebari-1][3];
+			_panel.answer2 = (string)_list[intrebari-1][4];
+			_panel.answer3 = (string)_list[intrebari-1][5];
+			_panel.answer4 = (string)_list[intrebari-1][6];
+			_panel.explanation = (string)_list[intrebari-1][7];
 			var pos = Position;
 			pos.X = 296;
 			pos.Y = 202;
@@ -216,6 +227,13 @@ public partial class Quizztime : Node2D
 			await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
 			GetNode<RichTextLabel>("Body/Correct").Text = "Corecte: " + corecte;
 			GetNode<RichTextLabel>("Body/Wrong").Text = "Gresite: " + gresite;
+			if(corecte==10) _data.currentStats.flawlesstests++;
+			_data.currentStats.Testsnum++;
+			_data.WriteSave(_data.LoggedUser);
+		}
+		else
+		{	_data.currentStats.Questionaires++;
+			_data.WriteSave(_data.LoggedUser);
 		}
 		tween = GetTree().CreateTween();
 		GetNode<Label>("Feedback").Show();
@@ -228,7 +246,8 @@ public partial class Quizztime : Node2D
 				GetNode<Label>("Feedback").Text = "10 cu steluta!";
 				break;
 			case 3:
-				GetNode<Label>("Feedback").Text = "Felicitari! Cu siguranta te vei descurca si la test!";
+				if(_data.questiontype == 0)GetNode<Label>("Feedback").Text = "Felicitari! Cu siguranta te vei descurca si la test!";
+				else GetNode<Label>("Feedback").Text = "Felicitari! Continua asa!";
 				break;
 		}
 		else if(corecte >= 7) GetNode<Label>("Feedback").Text = "Te-ai descurcat foarte bine!";

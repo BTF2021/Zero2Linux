@@ -5,7 +5,7 @@ public partial class Incarcare : Node2D
 {
 	// Called when the node enters the scene tree for the first time.
 	public override async void _Ready()
-	{	var tip = (int)GD.RandRange(1, 11);
+	{	var tip = (int)GD.RandRange(1, 13);
 		switch(tip)
 		{	case 1:
 				GetNode<Label>("Tip").Text = "Fun fact: Nu se incarca nimic in acest moment";
@@ -35,7 +35,6 @@ public partial class Incarcare : Node2D
 						name = "Nu uita sa-ti actualizezi periodic programele instalate!";
 						break;
 					case "Android":
-						//Posibil build?
 						name = "Fun fact: Se poate rula Linux si pe dispozitive cu procesoare ARM";
 						break;
 				}
@@ -51,9 +50,19 @@ public partial class Incarcare : Node2D
 				GetNode<Label>("Tip").Text = "Vim, Nano, Emacs... nu conteaza atata timp cat poti edita un fisier text";
 				break;
 			case 11:
-				GetNode<Label>("Tip").Text = ":q + Enter pentru a iesi din Vim";
+				GetNode<Label>("Tip").Text = "Escape + :q + Enter pentru a iesi din Vim";
+				break;
+			case 12:
+				GetNode<Label>("Tip").Text = "Fun fact: Linux Mint este derivat dintr-o derivata a Debian";
+				break;
+			case 13:
+				GetNode<Label>("Tip").Text = "Viziteaza pagina de Github al acestui proiect pentru noi actualizari";
 				break;
 		}
+		/*
+		if(GD.RandRange(1, 100) == 1 && Time.GetDatetimeStringFromSystem().Find("09", 5) == 1 && Time.GetDatetimeStringFromSystem().Find("17", 8) == 1) GetNode<Label>("Tip").Text = "La multi ani Linux!";
+		else if(GD.RandRange(1, 100) == 1 && Time.GetDatetimeStringFromSystem().Find("12", 5) == 1 && Time.GetDatetimeStringFromSystem().Find("28", 8) == 1) GetNode<Label>("Tip").Text = "La multi ani Linus Torvalds!";
+		*/
 		GetNode<ProgressBar>("Bara").Value = 0;
 		Modulate = new Color(1, 1, 1, (float)0.5);
 		var tween = GetTree().CreateTween();

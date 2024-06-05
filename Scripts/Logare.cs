@@ -190,7 +190,7 @@ public partial class Logare : Node2D
 	}
 	private void logging(string name)
 	{	_data.LoggedUser = name;
-		GD.Print("Logare in: " + name);
+		GD.Print("Logat in: " + name);
 		GetTree().ChangeSceneToFile("res://Scenes/Main.tscn");
 	}
 

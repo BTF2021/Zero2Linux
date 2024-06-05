@@ -16,13 +16,12 @@ public class stats
 	{
 		{1, 0},
 		{2, 0},
-		{3, 0},
-		{4, 0},
-		{5, 0},
-		{6, 0}
+		{3, 0}
 	};
 	public int Questionaires = 0;     //Nr chestionare facute
-	public bool Adv = false;
+	public int Testsnum = 0;          //Nr teste facute
+	public int flawlesstests = 0;     //Nr teste fara greseli
+	public bool Adv = true;
 	public bool Spc = true;
 	public float VideoVolume = 0;
 	public bool QNumOnly = false;
@@ -36,11 +35,28 @@ public partial class DefaultData : Node
 	public Godot.Collections.Dictionary<int, Godot.Collections.Array> lessonList = new Godot.Collections.Dictionary<int, Godot.Collections.Array>() 
 	{	//structura vectorului este urmatoarea: numele lectiei, tipul lectiei(tag). Progresul a fost mutat in clasa stats
 		{1, new Godot.Collections.Array{"Lectia 1: Ce este Linux?", 0}},
-		{2, new Godot.Collections.Array{"Lectia 2: Ce sunt distrourile?", 0}},
-		{3, new Godot.Collections.Array{"Special: Linux pe masina virtuala", 2}},
-		{4, new Godot.Collections.Array{"Avansat: Desktop environments", 1}},
-		{5, new Godot.Collections.Array{"Avansat: GPU de la NVidia", 1}},
-		{6, new Godot.Collections.Array{"Lectia 3: Repos si Package Managers", 0}}
+		{2, new Godot.Collections.Array{"Lectia 2: Distributii Linux", 0}},
+		{3, new Godot.Collections.Array{"Linux pe masina virtuala", 2}}
+	};
+	public Godot.Collections.Dictionary<int, Godot.Collections.Dictionary<int, Godot.Collections.Array>> questionList = new Godot.Collections.Dictionary<int, Godot.Collections.Dictionary<int, Godot.Collections.Array>>() 
+	{	//structura vectorului este urmatoarea: nr lectie, iar inauntru nr intrebari, rasp corect, cele 4 intrebari, explicatie
+		{1, new Godot.Collections.Dictionary<int, Godot.Collections.Array>{
+			{1, new Godot.Collections.Array{3, 2, "Ce este Linux?", "Un program", "Un kernel", "O aplicatie pentru web", "", "Linux este kernelul. Majoritatea programelor sunt parte din GNU Project"}},
+			{2, new Godot.Collections.Array{4, 3, "In ce an a fost lansat Linux?", "1990", "1899", "1991", "1992", "Prima versiune de Linux a fost lansata pe 17 Septembrie 1991"}},
+			{3, new Godot.Collections.Array{2, 1, "Cea mai mare parte din codul Linux este in C si Assembly. Adevarat sau fals?", "Adevarat", "Fals", "", "", "Cea mai mare parte din codul Linux este in C si Assembly"}},
+			{4, new Godot.Collections.Array{2, 2, "Cea mai mare parte din codul Linux este in C++ si Python. Adevarat sau fals?", "Adevarat", "Fals", "", "", "Cea mai mare parte din codul Linux este in C si Assembly"}},
+			{5, new Godot.Collections.Array{4, 3, "Cine este creatorul si dezvoltatorul principal al kernelului Linux?", "Ken Thompson", "Ari Lemmke", "Linux Torvalds", "Douglas McIlroy", "Linux Torvalds este creatorul si dezvoltatorl principal al Linux."}},
+			{6, new Godot.Collections.Array{4, 4, "De la ce este prescurtat GPL", "Licenta Personala Generala", "Licenta Privata Generala", "Licenta Publica GNU", "Licenta Publica Generala", "Prescurtare GPL (in Romana) este Licenta Publica Generala"}}
+		}},
+		{2, new Godot.Collections.Dictionary<int, Godot.Collections.Array>{
+			{1, new Godot.Collections.Array{4, 3, "Ce este inclus (in general) intr-o distributie?", "Kernelul Linux si un browser", "Browser si aplicatii", "Kernelul Linux si aplicatii", "Doar Kernelul Linux", "De obicei, o distributie include kernelul Linux, dar si aplicatii, majoritatea aplicatiilor fiind parte din proiectul GNU"}},
+			{2, new Godot.Collections.Array{2, 1, "Se pot instala si actualiza aplicatii atat printr-o interfata grafica, cat si prin terminal", "Adevarat", "Fals", "", "", "Pentru a instala si actualiza aplicatii, utilizatorul are de obicei 2 moduri: grafic si prin terminal"}},
+			{3, new Godot.Collections.Array{2, 1, "Linux Mint este derivat din Debian. Adevarat sau fals?", "Adevarat", "Fals", "", "", "Linux Mint este o distributie derivata din Ubuntu, care la randul lui este derivat din Debian. Deci Linux Mint este derivat din Debian"}},
+			{4, new Godot.Collections.Array{4, 4, "Care este distributia bazata pe RHEL", "Debian", "Ubuntu", "Linux Mint", "Fedora", "Fedora este distributia din cele patru care este bazata pe RHEL"}},
+			{5, new Godot.Collections.Array{4, 4, "Care este distributia bazata pe Ubuntu", "Arch", "Fedora", "Debian", "Linux Mint", "Linux Mint este o distributie bazata pe Ubuntu"}},
+			{6, new Godot.Collections.Array{4, 1, "Care este distributia cea mai veche din cele patru", "Debian", "Fedora", "Linux Mint", "Ubuntu", "Debian este cea a doua cea mai veche distributie inca intretinuta"}}
+
+		}}
 	};
     //valori care nu ar trebui schimbate
 	public string LoggedUser = " ";
@@ -145,5 +161,27 @@ public partial class DefaultData : Node
 		DisplayServer.WindowSetVsyncMode(DisplayServer.VSyncMode.Enabled);
 		currentStats = new stats();
 		GetTree().ChangeSceneToFile("res://Scenes/Logare.tscn");
+	}
+	public Godot.Collections.Array<Godot.Collections.Array> GenerateQuestionSet()
+	{	GD.Randomize();
+		Godot.Collections.Array<Godot.Collections.Array> _list = new Godot.Collections.Array<Godot.Collections.Array>();
+		int i, lesson, number;
+		bool ok = false;
+		lesson = (int)MathF.Floor(GD.RandRange(1, 2));       //Luam indexul unei lectii la intamplare. Daca lectia nu este terminata, repeta pana cand ajungem la o lectie terminata
+		while((int)currentStats.LessonCompletion[lesson] != 100) lesson = (int)MathF.Floor(GD.RandRange(1, 2));      //Probabil se putea si mai bine
+		number = (int)Mathf.Floor(GD.RandRange(1, (int)questionList[lesson].Count));
+		_list.Add((Godot.Collections.Array)questionList[lesson][number]);
+		for(i=2;i<=10;i++)
+		{	while(!ok)
+			{	ok = true;
+				lesson = (int)MathF.Floor(GD.RandRange(1, 2));       //Luam indexul unei lectii la intamplare. Daca lectia nu este terminata, repeta pana cand ajungem la o lectie terminata
+				while((int)currentStats.LessonCompletion[lesson] != 100) lesson = (int)MathF.Floor(GD.RandRange(1, 2));      //Probabil se putea si mai bine
+				number = (int)Mathf.Floor(GD.RandRange(1, (int)questionList[lesson].Count));
+				if(_list.Contains((Godot.Collections.Array)questionList[lesson][number])) ok = false;
+			}
+			_list.Add((Godot.Collections.Array)questionList[lesson][number]);
+			ok = false;
+		}
+		return _list;
 	}
 }

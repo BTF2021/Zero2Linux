@@ -48,6 +48,7 @@ scroll_active = false
 shortcut_keys_enabled = false
 
 [node name="Subtitle" type="RichTextLabel" parent="UI"]
+self_modulate = Color(0.686739, 0.771303, 0.952505, 1)
 layout_mode = 0
 offset_left = 428.0
 offset_top = 151.0
@@ -90,7 +91,7 @@ text = "Lectii"
 layout_mode = 2
 size_flags_vertical = 3
 tooltip_text = "Testeaza-ti cunostiintele dobandite pe parcursul lectiilor.
-Necesita terminarea a cel putin o lectie."
+Necesita terminarea a cel putin doua lectii."
 theme_override_font_sizes/font_size = 20
 theme_override_styles/focus = ExtResource("2_0hv5f")
 text = "Chestionare"
@@ -98,7 +99,7 @@ text = "Chestionare"
 [node name="Progress" type="Button" parent="UI/Panel/Buttons"]
 layout_mode = 2
 size_flags_vertical = 3
-tooltip_text = "Regleaza-ti setarile legate de imagine, lectii, etc"
+tooltip_text = "Vezi intregul tau progres de pe acest profil"
 theme_override_font_sizes/font_size = 20
 theme_override_styles/focus = ExtResource("2_0hv5f")
 text = "Progres"

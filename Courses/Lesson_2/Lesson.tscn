@@ -1,0 +1,400 @@
+[gd_scene load_steps=14 format=3 uid="uid://dwdapqupu6w5c"]
+
+[ext_resource type="Texture2D" uid="uid://b1vo0cklpefq" path="res://Sprites/Back.png" id="1_0rts7"]
+[ext_resource type="Script" path="res://Scripts/Lesson.cs" id="1_4ktg6"]
+[ext_resource type="Theme" uid="uid://c3r51fw2bo66h" path="res://Sprites/CourseUI.theme" id="2_3hak8"]
+[ext_resource type="Texture2D" uid="uid://rsq42q4qde3" path="res://Sprites/BackHighlight.png" id="2_y1bgk"]
+[ext_resource type="Texture2D" uid="uid://rruu3471o0k7" path="res://Courses/Lesson_3/VidBg.png" id="3_5h6g7"]
+[ext_resource type="Texture2D" uid="uid://bud38ywfs5qnt" path="res://Sprites/Play.png" id="5_edb0t"]
+[ext_resource type="Texture2D" uid="uid://bgdcdehp7orv6" path="res://Sprites/Circle.png" id="5_pxwpu"]
+[ext_resource type="Material" uid="uid://bl5ra5x2dyfgr" path="res://Sprites/Blur.material" id="5_wtb56"]
+[ext_resource type="PackedScene" uid="uid://duiw5l0ody1l" path="res://Scenes/Quizitem.tscn" id="7_mfwjb"]
+[ext_resource type="Texture2D" uid="uid://dlktfpgshhpgq" path="res://Courses/Lesson_2/Mint.png" id="8_f4wi3"]
+[ext_resource type="Texture2D" uid="uid://b7c22xoqc766a" path="res://Courses/Lesson_2/Ubuntu.png" id="9_7yq6m"]
+[ext_resource type="Texture2D" uid="uid://dmh6qy2jepuom" path="res://Courses/Lesson_2/Debian.png" id="10_xkb28"]
+[ext_resource type="Texture2D" uid="uid://cb5phhtt5jptp" path="res://Courses/Lesson_2/Fedora.png" id="11_hv4je"]
+
+[node name="Lesson" type="Node2D"]
+script = ExtResource("1_4ktg6")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 173.0
+offset_right = 1078.0
+offset_bottom = 719.0
+size_flags_vertical = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
+layout_mode = 0
+offset_left = -173.0
+offset_top = -1.0
+offset_right = 1107.0
+offset_bottom = 719.0
+theme = ExtResource("2_3hak8")
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/ScrollContainer"]
+custom_minimum_size = Vector2(880, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_constants/margin_right = 9
+
+[node name="Body" type="VBoxContainer" parent="Panel/ScrollContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Panel/ScrollContainer/MarginContainer/Body"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Lectia 2: Distributii Linux"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Body"]
+layout_mode = 2
+
+[node name="VideoPreview" type="TextureRect" parent="Panel/ScrollContainer/MarginContainer/Body"]
+layout_mode = 2
+texture = ExtResource("3_5h6g7")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="Spoiler" type="ColorRect" parent="Panel/ScrollContainer/MarginContainer/Body/VideoPreview"]
+material = ExtResource("5_wtb56")
+layout_mode = 0
+offset_right = 871.0
+offset_bottom = 489.0
+
+[node name="textureRect" type="Sprite2D" parent="Panel/ScrollContainer/MarginContainer/Body/VideoPreview"]
+visible = false
+self_modulate = Color(0, 0, 0, 0.588235)
+position = Vector2(432, 263)
+scale = Vector2(4, 4)
+texture = ExtResource("5_pxwpu")
+
+[node name="Watch" type="TextureButton" parent="Panel/ScrollContainer/MarginContainer/Body/VideoPreview/textureRect"]
+offset_left = -16.2
+offset_top = -16.4
+offset_right = 15.8
+offset_bottom = 15.6
+texture_normal = ExtResource("5_edb0t")
+
+[node name="Atentie" type="Label" parent="Panel/ScrollContainer/MarginContainer/Body/VideoPreview"]
+visible = false
+layout_mode = 0
+offset_right = 871.0
+offset_bottom = 101.0
+theme_override_font_sizes/font_size = 35
+text = "Videoclipul nu poate fi redat
+FFmpeg static nu este prezent in folder"
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Body"]
+layout_mode = 2
+
+[node name="Content" type="VBoxContainer" parent="Panel/ScrollContainer/MarginContainer/Body"]
+layout_mode = 2
+
+[node name="Block" type="VBoxContainer" parent="Panel/ScrollContainer/MarginContainer/Body/Content"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+bbcode_enabled = true
+text = "	In prima lectie, am mentionat faptul ca kernelul este inclus in ceva numit distributie sau distro. In aceasta lectie vom discuta despre distributii, dar vom alege si prima distributie.
+	O distributie Linux este un sistem de operare ce contine kernelul Linux si o serie de aplicatii, majoritatea aplicatiilor fiind parte din proiectul GNU. De asemenea, majoritatea distributiilor includ si un package manager pentru instalarea si actualizarea programelor."
+fit_content = true
+
+[node name="Test2" type="Label" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "Cuvant inainte"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block"]
+layout_mode = 2
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+bbcode_enabled = true
+text = "	Desi aceasta lectie este dedicata recomandarilor pentru prima distributie, trebuie mentionat faptul ca [b][i]orice distributie este buna[/i][/b] daca inca mai primeste actualizari. In restul lectiilor vom continua cu o singura distributie, dar o sa fie si alte distributii similare.
+	Aplicatiile pot fi instalate printr-o aplicatie grafica (package manager), dar si prin terminal."
+fit_content = true
+
+[node name="HSeparator3" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block"]
+layout_mode = 2
+
+[node name="Quizitem" parent="Panel/ScrollContainer/MarginContainer/Body/Content" instance=ExtResource("7_mfwjb")]
+layout_mode = 2
+answ = 3
+question = "Ce este inclus (in general) intr-o distributie?"
+answer1 = "Kernelul Linux si un browser"
+answer2 = "Browser si aplicatii"
+answer3 = "Kernelul Linux si aplicatii"
+answer4 = "Doar Kernelul Linux"
+explanation = "De obicei, o distributie include kernelul Linux, dar si aplicatii, majoritatea aplicatiilor fiind parte din proiectul GNU"
+
+[node name="Block2" type="VBoxContainer" parent="Panel/ScrollContainer/MarginContainer/Body/Content"]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block2"]
+layout_mode = 2
+
+[node name="Test2" type="Label" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "Prima distributie: Linux Mint"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator3" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block2"]
+layout_mode = 2
+
+[node name="Back2" type="TextureRect" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block2"]
+custom_minimum_size = Vector2(650, 380)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("8_f4wi3")
+expand_mode = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block2"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+bbcode_enabled = true
+text = "[center][color=ffffff99][i]Desktopul principal Linux Mint (Cinnamon Edition)[/i][/color][/center]
+
+	O prima distributie des recomandata pentru noii utilizatori Linux este Linux Mint. Linux Mint vine preinstalat cu aplicatiile des folosite, cum ar fi un web browser, editor de texte, suita similara cu Office etc, dar si cu o aplicatie de instalat alte aplicatii si de actualizat cele deja instalate. De asemenea vine la pachet si cu codecuri pentru redarea video si audio (Daca ai bifat optiunea la instalare).
+	Cu toate acestea, Linux Mint este foarte stabil, iar Interfata sistemului este destul de similara cu Windows si se poate personaliza usor.
+	
+	[i]Daca nu se booteaza Linux Mint pe un calculator recent, foloseste varianta \"EDGE\"[/i]
+
+	Linux Mint este derivat dintr-o alta distributie, numita Ubuntu."
+fit_content = true
+drag_and_drop_selection_enabled = false
+
+[node name="Quizitem2" parent="Panel/ScrollContainer/MarginContainer/Body/Content" instance=ExtResource("7_mfwjb")]
+layout_mode = 2
+answnum = 2
+question = "Se pot instala si actualiza aplicatii atat printr-o interfata grafica, cat si prin terminal"
+answer1 = "Adevarat"
+answer2 = "Fals"
+answer3 = ""
+answer4 = ""
+explanation = "Pentru a instala si actualiza aplicatii, utilizatorul are de obicei 2 moduri: grafic si prin terminal"
+
+[node name="Block3" type="VBoxContainer" parent="Panel/ScrollContainer/MarginContainer/Body/Content"]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block3"]
+layout_mode = 2
+
+[node name="Test2" type="Label" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "A doua distributie: Ubuntu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator3" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block3"]
+layout_mode = 2
+
+[node name="Back2" type="TextureRect" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block3"]
+custom_minimum_size = Vector2(650, 380)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("9_7yq6m")
+expand_mode = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block3"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+bbcode_enabled = true
+text = "[center][color=ffffff99][i]Desktopul principal Ubuntu[/i][/color][/center]
+
+	Ubuntu este probabil cea mai cunoscuta distributie Linux. Desi este la fel de prietenoasa cu utilizatorul ca Linux Mint, Ubuntu are o interfata diferita fata de Windows, cea ce o sa faca (un pic) mai greu adaptarea la desktop.
+	Ubuntu este si el la randul lui derivat dintr-o alta distributie: Debian"
+fit_content = true
+drag_and_drop_selection_enabled = false
+
+[node name="Quizitem3" parent="Panel/ScrollContainer/MarginContainer/Body/Content" instance=ExtResource("7_mfwjb")]
+layout_mode = 2
+answnum = 2
+question = "Linux Mint este derivat din Debian. Adevarat sau fals?"
+answer1 = "Adevarat"
+answer2 = "Fals"
+answer3 = ""
+answer4 = ""
+explanation = "Linux Mint este o distributie derivata din Ubuntu, care la randul lui este derivat din Debian. Deci Linux Mint este derivat din Debian"
+
+[node name="Block4" type="VBoxContainer" parent="Panel/ScrollContainer/MarginContainer/Body/Content"]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block4"]
+layout_mode = 2
+
+[node name="Test2" type="Label" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block4"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "A treia distributie: Debian"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator3" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block4"]
+layout_mode = 2
+
+[node name="Back2" type="TextureRect" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block4"]
+custom_minimum_size = Vector2(650, 380)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("10_xkb28")
+expand_mode = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block4"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+bbcode_enabled = true
+text = "[center][color=ffffff99][i]Desktopul principal Debian[/i][/color][/center]
+
+	Probabil te intrebi de ce Linux Mint este o distributie derivata dintr-o alta derivata a acestei distributii (Desi este ceva normal in spatiu open source).
+	Actualizarile distributiei Debian au sanse foarte mici sa strice ceva, deoarece actiualizarile distributiei sunt odata la aproximativ 2 ani, dar o versiune primeste suport timp de 3 ani. De aceea Debian este foarte stabil.
+	Debian este a doua cea mai veche distributie Linux inca intretinuta.Daca detii un pc foarte recent, este recomandat sa folosesti alta distributie, dar daca ai un pc destul de vechi, Debian este foarte bun.
+
+	[color=ffffff89][i]Dar toate distributiile sunt bazate pe Debian!?[/i][/color]
+	Exista si alte distributii stabile care nu sunt bazate pe Debian. Un exemplu bun este urmatoarea distributie: Fedora.
+
+"
+fit_content = true
+drag_and_drop_selection_enabled = false
+
+[node name="HSeparator4" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block4"]
+layout_mode = 2
+
+[node name="Test3" type="Label" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block4"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "Ultima distributie: Fedora"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator5" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block4"]
+layout_mode = 2
+
+[node name="Back3" type="TextureRect" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block4"]
+custom_minimum_size = Vector2(650, 380)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("11_hv4je")
+expand_mode = 1
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block4"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+bbcode_enabled = true
+text = "[center][color=ffffff99][i]Desktopul principal Fedora[/i][/color][/center]
+
+	Comparativ cu celelalte distributii discutate, anterior, Fedora NU este bazat pe Debian, ci pe alta distributie, numita RHEL (Abreviat din [b]R[/b]ed [b]H[/b]at [b]E[/b]nterprise [b]L[/b]inux), o distributie creata specific pentru intreprinderi. Fedora incearca sa fie prima distributie care sa adopte noile tehnologii open-source (Daca ai un calculator foarte nou, considera Fedora)
+	Ca si celelalte trei distributii, Fedora este stabil, versiunile primind suport pentru 1-2 ani."
+fit_content = true
+drag_and_drop_selection_enabled = false
+
+[node name="HSeparator6" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block4"]
+layout_mode = 2
+
+[node name="Test4" type="Label" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block4"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "Verdictul Final"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator7" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block4"]
+layout_mode = 2
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="Panel/ScrollContainer/MarginContainer/Body/Content/Block4"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+bbcode_enabled = true
+text = "	Oricare dintre cele patru distributii este buna. Este alegerea ta ce distributie vrei sa folosesti.
+	In opinia mea recomand Linux Mint, deoarece este destul de similar cu Windows, dar si pentru interfata ei prietenoasa cu utilizatorii.
+
+	In urmatoarea lectie vom vorbi despre cum instalam aplicatii dar si cum le actualizam."
+fit_content = true
+drag_and_drop_selection_enabled = false
+
+[node name="Quizitem4" parent="Panel/ScrollContainer/MarginContainer/Body/Content" instance=ExtResource("7_mfwjb")]
+layout_mode = 2
+answ = 4
+question = "Care este distributia bazata pe RHEL"
+answer1 = "Debian"
+answer2 = "Ubuntu"
+answer3 = "Linux Mint"
+answer4 = "Fedora"
+explanation = "Fedora este distributia din cele patru care este bazata pe RHEL"
+
+[node name="HSeparator4" type="HSeparator" parent="Panel/ScrollContainer/MarginContainer/Body"]
+visible = false
+layout_mode = 2
+
+[node name="End" type="Label" parent="Panel/ScrollContainer/MarginContainer/Body"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Finalul lectiei"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Back" type="TextureButton" parent="."]
+offset_right = 200.0
+offset_bottom = 200.0
+scale = Vector2(0.25, 0.25)
+texture_normal = ExtResource("1_0rts7")
+texture_pressed = ExtResource("2_y1bgk")
+
+[node name="Transition" type="Node2D" parent="."]
+visible = false
+
+[node name="Title" type="Label" parent="Transition"]
+offset_top = 296.0
+offset_right = 1280.0
+offset_bottom = 392.0
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Panel/ScrollContainer/MarginContainer/Body/VideoPreview/textureRect/Watch" to="." method="_on_watch_pressed"]
+[connection signal="meta_clicked" from="Panel/ScrollContainer/MarginContainer/Body/Content/Block2/RichTextLabel2" to="." method="_on_text_link"]
+[connection signal="meta_clicked" from="Panel/ScrollContainer/MarginContainer/Body/Content/Block3/RichTextLabel2" to="." method="_on_text_link"]
+[connection signal="meta_clicked" from="Panel/ScrollContainer/MarginContainer/Body/Content/Block4/RichTextLabel2" to="." method="_on_text_link"]
+[connection signal="meta_clicked" from="Panel/ScrollContainer/MarginContainer/Body/Content/Block4/RichTextLabel3" to="." method="_on_text_link"]
+[connection signal="meta_clicked" from="Panel/ScrollContainer/MarginContainer/Body/Content/Block4/RichTextLabel4" to="." method="_on_text_link"]
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

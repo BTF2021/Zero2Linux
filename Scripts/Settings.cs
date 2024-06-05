@@ -16,9 +16,6 @@ public partial class Settings : Control
 		GetNode<LineEdit>("Panel/Settings/Altele/VBoxContainer/Name/NameEdit").Text = _data.currentStats.UsrName;
 		GetNode<ColorPickerButton>("Panel/Settings/Altele/VBoxContainer/FavColour/ColorButton").Color = _data.currentStats.FavColor;
 
-		if(_data.newversion == null)
-			if(!((String)ProjectSettings.GetSetting("application/config/version")).Contains(_data.newversion[0])) GetNode<Label>("Panel/Settings/Altele/VBoxContainer/Version").Text = GetNode<Label>("Panel/Settings/Altele/VBoxContainer/Version").Text;
-
 		if(!_data.isvideoavailable)
 		{	GetNode<Label>("Panel/Settings/Lectii/VBoxContainer/VideoVolume").Modulate = new Color((float)0.6, (float)0.6, (float)0.6, 1);
 			_slider.Editable = false;
@@ -35,7 +32,7 @@ public partial class Settings : Control
 		if(_data.currentStats.Adv) GetNode<CheckButton>("Panel/Settings/Lectii/VBoxContainer/Advanced/AdvancedButton").SetPressedNoSignal(true);
 		if(_data.currentStats.Spc) GetNode<CheckButton>("Panel/Settings/Lectii/VBoxContainer/Special/SpecialButton").SetPressedNoSignal(true);
 		if(_data.currentStats.QNumOnly) GetNode<CheckButton>("Panel/Settings/Lectii/VBoxContainer/ShowNumOnlyTest/SNTButton").SetPressedNoSignal(true);
-		GetNode<Label>("Panel/Settings/Altele/VBoxContainer/Version").Text = "Versiune: " + (String)ProjectSettings.GetSetting("application/config/version");
+		GetNode<Label>("Panel/Settings/Despre/VBoxContainer/Version").Text = "Versiune: " + (String)ProjectSettings.GetSetting("application/config/version");
 		if(_data.currentStats.ChkUpdates) GetNode<CheckButton>("Panel/Settings/Altele/VBoxContainer/GetUpdates/GetUpdatesButton").SetPressedNoSignal(true);
 
 		if(_data.currentStats.Anims)
@@ -112,7 +109,7 @@ public partial class Settings : Control
 		_data.currentStats.QNumOnly = !_data.currentStats.QNumOnly;
 		_data.WriteSave(_data.LoggedUser);
 	}
-	private void _on_github_pressed() => OS.ShellOpen("https://github.com/BTF2021/Zero2Linux/releases");
+	private void _on_github_pressed() => OS.ShellOpen("https://github.com/BTF2021/Zero2Linux");
 	private void _on_issue_pressed() => OS.ShellOpen("https://github.com/BTF2021/Zero2Linux/issues");
 	private void _on_updates_button_pressed()
 	{	_data.currentStats.ChkUpdates = !_data.currentStats.ChkUpdates;

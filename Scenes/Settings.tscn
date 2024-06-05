@@ -309,26 +309,37 @@ text = "Sterge progersul"
 
 [node name="DeleteSaveButton" type="Button" parent="Panel/Settings/Altele/VBoxContainer/DeleteSave"]
 layout_mode = 0
-offset_left = 498.913
-offset_top = -0.577492
-offset_right = 561.913
-offset_bottom = 30.4225
+offset_left = 495.237
+offset_top = -0.859187
+offset_right = 558.237
+offset_bottom = 30.1408
 tooltip_text = "Sterge profilul curent"
 theme_override_styles/normal = ExtResource("4_rkad0")
 text = "Sterge"
 
-[node name="MarginContainer3" type="MarginContainer" parent="Panel/Settings/Altele/VBoxContainer"]
-custom_minimum_size = Vector2(0, 40)
+[node name="Despre" type="Control" parent="Panel/Settings"]
+visible = false
 layout_mode = 2
 
-[node name="hSeparator3" type="HSeparator" parent="Panel/Settings/Altele/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Settings/Despre"]
+layout_mode = 0
+offset_left = 13.0
+offset_right = 730.0
+offset_bottom = 560.0
+theme_override_constants/separation = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/Settings/Despre/VBoxContainer"]
+custom_minimum_size = Vector2(0, 5)
 layout_mode = 2
 
-[node name="vBoxContainer" type="HBoxContainer" parent="Panel/Settings/Altele/VBoxContainer"]
+[node name="hSeparator" type="HSeparator" parent="Panel/Settings/Despre/VBoxContainer"]
+layout_mode = 2
+
+[node name="vBoxContainer" type="HBoxContainer" parent="Panel/Settings/Despre/VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Name2" type="RichTextLabel" parent="Panel/Settings/Altele/VBoxContainer/vBoxContainer"]
+[node name="Name2" type="RichTextLabel" parent="Panel/Settings/Despre/VBoxContainer/vBoxContainer"]
 custom_minimum_size = Vector2(161, 0)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 30
@@ -342,21 +353,21 @@ fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
 
-[node name="Version" type="Label" parent="Panel/Settings/Altele/VBoxContainer"]
+[node name="Version" type="Label" parent="Panel/Settings/Despre/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 19
 text = "Ver"
 horizontal_alignment = 1
 
-[node name="hSeparator4" type="HSeparator" parent="Panel/Settings/Altele/VBoxContainer"]
+[node name="hSeparator4" type="HSeparator" parent="Panel/Settings/Despre/VBoxContainer"]
 layout_mode = 2
 
-[node name="Github" type="Label" parent="Panel/Settings/Altele/VBoxContainer"]
+[node name="Github" type="Label" parent="Panel/Settings/Despre/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 19
-text = "Pagina proiectului"
+text = "  Pagina proiectului"
 
-[node name="GithubButton" type="Button" parent="Panel/Settings/Altele/VBoxContainer/Github"]
+[node name="GithubButton" type="Button" parent="Panel/Settings/Despre/VBoxContainer/Github"]
 layout_mode = 2
 offset_left = 498.913
 offset_top = -2.0
@@ -366,12 +377,12 @@ tooltip_text = "Acceseaza pagina de Github al proiectului"
 theme_override_styles/normal = ExtResource("4_rkad0")
 text = "Github"
 
-[node name="Issue" type="Label" parent="Panel/Settings/Altele/VBoxContainer"]
+[node name="Issue" type="Label" parent="Panel/Settings/Despre/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 19
-text = "Raporteaza un bug"
+text = "  Raporteaza un bug"
 
-[node name="IssueButton" type="Button" parent="Panel/Settings/Altele/VBoxContainer/Issue"]
+[node name="IssueButton" type="Button" parent="Panel/Settings/Despre/VBoxContainer/Issue"]
 layout_mode = 2
 offset_left = 498.913
 offset_top = -2.0
@@ -381,9 +392,30 @@ tooltip_text = "Acceseaza pagina de Github al proiectului"
 theme_override_styles/normal = ExtResource("4_rkad0")
 text = "Issues"
 
+[node name="hSeparator5" type="HSeparator" parent="Panel/Settings/Despre/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="Panel/Settings/Despre/VBoxContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="Name3" type="RichTextLabel" parent="Panel/Settings/Despre/VBoxContainer"]
+custom_minimum_size = Vector2(161, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+text = "	 Zero2Linux este un proiect personal, creeat pentru a-i invata pe cei mai putini familiarizati cu ecosistemul Linux sa foloseasca un desktop Linux.
+	 Zero2Linux este gratis pentru toata lumea, dar este foarte apreciat daca ai dea stea (star) la proiect pe Github sau sa contribui prin raportarea bugurilor."
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+
 [node name="Drag" type="Button" parent="Panel"]
 self_modulate = Color(1, 1, 1, 0)
-offset_left = -159.0
+offset_left = -85.0
 offset_top = -303.0
 offset_right = 364.0
 offset_bottom = -259.0
@@ -418,8 +450,8 @@ vertical_alignment = 1
 [connection signal="text_submitted" from="Panel/Settings/Altele/VBoxContainer/Name/NameEdit" to="." method="_on_name_submitted"]
 [connection signal="color_changed" from="Panel/Settings/Altele/VBoxContainer/FavColour/ColorButton" to="." method="_on_color_button"]
 [connection signal="pressed" from="Panel/Settings/Altele/VBoxContainer/DeleteSave/DeleteSaveButton" to="." method="_on_delete_pressed"]
-[connection signal="pressed" from="Panel/Settings/Altele/VBoxContainer/Github/GithubButton" to="." method="_on_github_pressed"]
-[connection signal="pressed" from="Panel/Settings/Altele/VBoxContainer/Issue/IssueButton" to="." method="_on_issue_pressed"]
+[connection signal="pressed" from="Panel/Settings/Despre/VBoxContainer/Github/GithubButton" to="." method="_on_github_pressed"]
+[connection signal="pressed" from="Panel/Settings/Despre/VBoxContainer/Issue/IssueButton" to="." method="_on_issue_pressed"]
 [connection signal="button_down" from="Panel/Drag" to="." method="_on_drag_down"]
 [connection signal="button_up" from="Panel/Drag" to="." method="_on_drag_up"]
 [connection signal="pressed" from="Panel/Back" to="." method="_on_back_pressed"]

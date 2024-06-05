@@ -26,9 +26,10 @@ theme_override_constants/margin_left = 20
 
 [node name="Name" type="Label" parent="PanelContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 27
 text = "Intrebare"
+horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="Raspuns1" type="CheckBox" parent="PanelContainer"]
 custom_minimum_size = Vector2(0, 40)
@@ -132,6 +133,7 @@ size_flags_vertical = 1
 theme_override_font_sizes/font_size = 20
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="MarginContainer2" type="MarginContainer" parent="Corect/hBoxContainer"]
 custom_minimum_size = Vector2(10, 0)

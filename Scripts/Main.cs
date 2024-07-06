@@ -5,10 +5,12 @@ public partial class Main : Node2D
 {
 	private DefaultData _data;
 	private HttpRequest request;
+	[Signal] public delegate void DownloadEventHandler(int mode);
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{	_data = (DefaultData)GetNode("/root/DefaultData");
 		_data.ReadSave(_data.LoggedUser);
+		Download += down;
 		#if GODOT_WINDOWS || GODOT_LINUXBSD
 			if(_data.isvideoavailable)
 			{	var bg = (ResourceLoader.Load<PackedScene>("res://Scenes/MainBg.tscn")).Instantiate();
@@ -17,6 +19,7 @@ public partial class Main : Node2D
 		#elif GODOT_ANDROID
 			GetNode<TextureButton>("UI/Bar/HBoxContainer/Power").QueueFree();
 		#endif
+		//Preluam de pe Github fisierul version.txt
 		if(!_data.verifiedver)
 		{	request = new HttpRequest();
 			AddChild(request);
@@ -50,7 +53,45 @@ public partial class Main : Node2D
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
-	{	GetNode<Label>("UI/Bar/HBoxContainer/Time").Text = Time.GetTimeStringFromSystem() + " " + Time.GetDateStringFromSystem();
+	{	if(HasNode("UI/Bar")) 
+		{
+			GetNode<Label>("UI/Bar/HBoxContainer/Time").Text = Time.GetTimeStringFromSystem();
+			GetNode<Label>("UI/Bar/HBoxContainer/Time").TooltipText = Time.GetDateStringFromSystem();
+		}
+	}
+
+	public override void _Notification(int what)
+	{	//Daca dai inapoi pe Android
+		if (what == NotificationWMGoBackRequest)
+        	GetTree().Quit();
+	}
+
+	//Semnal pentru NewVer.cs ca sa nu poata utilizatorul sa paraseasca scena Main
+	private void down(int mode)
+	{	if(mode ==1)
+		{	
+			#if GODOT_LINUXBSD || GODOT_WINDOWS
+				GetNode<TextureButton>("UI/Bar/HBoxContainer/Power").Disabled = true;
+				GetNode<TextureButton>("UI/Bar/HBoxContainer/Power").Hide();
+			#endif
+			GetNode<TextureButton>("UI/Bar/HBoxContainer/Logout").Disabled = true;
+			GetNode<TextureButton>("UI/Bar/HBoxContainer/Logout").Hide();
+			GetNode<Button>("UI/Panel/Buttons/Course").Disabled = true;
+			GetNode<Button>("UI/Panel/Buttons/Quizzes").Disabled = true;
+			GetNode<Button>("UI/Panel/Buttons/Settings").Disabled = true;
+		}
+		else
+		{	
+			#if GODOT_LINUXBSD || GODOT_WINDOWS
+				GetNode<TextureButton>("UI/Bar/HBoxContainer/Power").Disabled = false;
+				GetNode<TextureButton>("UI/Bar/HBoxContainer/Power").Show();
+			#endif
+			GetNode<TextureButton>("UI/Bar/HBoxContainer/Logout").Disabled = false;
+			GetNode<TextureButton>("UI/Bar/HBoxContainer/Logout").Show();
+			GetNode<Button>("UI/Panel/Buttons/Course").Disabled = false;
+			GetNode<Button>("UI/Panel/Buttons/Quizzes").Disabled = false;
+			GetNode<Button>("UI/Panel/Buttons/Settings").Disabled = false;
+		}
 	}
 
 	private void _on_quit_pressed() => GetTree().Quit(0);

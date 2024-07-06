@@ -34,10 +34,11 @@ offset_bottom = -258.0
 flat = true
 
 [node name="Back" type="TextureButton" parent="Panel"]
-offset_left = 327.0
-offset_top = -299.0
-offset_right = 367.0
-offset_bottom = -261.0
+offset_left = 321.334
+offset_top = -301.0
+offset_right = 361.334
+offset_bottom = -263.0
+scale = Vector2(1.1, 1.1)
 texture_normal = ExtResource("3_f2ids")
 
 [node name="Panel" type="Panel" parent="Panel"]
@@ -88,6 +89,7 @@ position = Vector2(80, 100)
 texture = ExtResource("5_an6bj")
 
 [node name="Name" type="Label" parent="Panel/Panel/ScrollContainer/VBoxContainer/Player/Account"]
+layout_mode = 0
 offset_left = -5.0
 offset_top = 186.0
 offset_right = 164.0
@@ -97,6 +99,7 @@ text = "123456789abc"
 horizontal_alignment = 1
 
 [node name="BigLetter" type="Label" parent="Panel/Panel/ScrollContainer/VBoxContainer/Player/Account"]
+layout_mode = 0
 offset_left = 3.0
 offset_top = 22.0
 offset_right = 158.0

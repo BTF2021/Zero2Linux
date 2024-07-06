@@ -1,2 +1,17 @@
-1.0.0;
-- Primul release oficial :)
+1.0.1;
+- In timpul unui test, exista posibilitatea de a sari peste o intrebare si sa fie rezolvata mai tarziu
+- Cand exista o noua actualizare, se poate descarca actualizarea direct din aplicatie
+
+[Imbunatatiri]
+- Butoanele de inchidere a ferestrelor sunt (un pic) mai mari
+- Textul de inceput al chestionarelor a fost mutat mai jos
+- Butonul de trimitere a raspunsului fost marit
+- Fereastra de confirmare a stergerii profilului a fost marit
+- Interfata pentru redarea videoclipurilor a fost marita
+- Imaginea reprezentativa pentru o lectie este aratata, indiferent daca se pot reda videoclipuri sau nu
+- In meniul principal, ziua, luna si anul au fost mutate in tooltip
+
+[Rezolvat]
+- In lectia a doua, Fedora era bazat pe RHEL (ar fi invers)
+- Nu se arata explicatia in modul antrenament daca ultima intrebare era raspunsa corect
+- Momentan nu avem o lectie avansata, asa ca setarea pentru lectiile avansate este ascunsa

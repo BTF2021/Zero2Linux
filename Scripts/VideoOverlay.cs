@@ -115,6 +115,7 @@ public partial class VideoOverlay : Node2D
 		}
 		_data.WriteSave(_data.LoggedUser);
 	}
+	//Functiile de mai jos sunt pentru a ascunde butoanele atunci cand cursorul nu este intr-o anumita zona a ecranului
 	private void _on_timer_timeout()
 	{	var pos = Position;
 		pos.X = 0;

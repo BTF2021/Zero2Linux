@@ -25,6 +25,7 @@ public class stats
 	public bool Spc = true;
 	public float VideoVolume = 0;
 	public bool QNumOnly = false;
+	public bool AdvQ = true;
 	public bool ChkUpdates = true;
 }
 public partial class DefaultData : Node
@@ -52,10 +53,9 @@ public partial class DefaultData : Node
 			{1, new Godot.Collections.Array{4, 3, "Ce este inclus (in general) intr-o distributie?", "Kernelul Linux si un browser", "Browser si aplicatii", "Kernelul Linux si aplicatii", "Doar Kernelul Linux", "De obicei, o distributie include kernelul Linux, dar si aplicatii, majoritatea aplicatiilor fiind parte din proiectul GNU"}},
 			{2, new Godot.Collections.Array{2, 1, "Se pot instala si actualiza aplicatii atat printr-o interfata grafica, cat si prin terminal", "Adevarat", "Fals", "", "", "Pentru a instala si actualiza aplicatii, utilizatorul are de obicei 2 moduri: grafic si prin terminal"}},
 			{3, new Godot.Collections.Array{2, 1, "Linux Mint este derivat din Debian. Adevarat sau fals?", "Adevarat", "Fals", "", "", "Linux Mint este o distributie derivata din Ubuntu, care la randul lui este derivat din Debian. Deci Linux Mint este derivat din Debian"}},
-			{4, new Godot.Collections.Array{4, 4, "Care este distributia bazata pe RHEL", "Debian", "Ubuntu", "Linux Mint", "Fedora", "Fedora este distributia din cele patru care este bazata pe RHEL"}},
+			{4, new Godot.Collections.Array{4, 4, "Care este distributia care NU este bazata pe Debian", "Debian", "Ubuntu", "Linux Mint", "Fedora", "Fedora este distributia din cele patru care NU este bazata pe Debian"}},
 			{5, new Godot.Collections.Array{4, 4, "Care este distributia bazata pe Ubuntu", "Arch", "Fedora", "Debian", "Linux Mint", "Linux Mint este o distributie bazata pe Ubuntu"}},
 			{6, new Godot.Collections.Array{4, 1, "Care este distributia cea mai veche din cele patru", "Debian", "Fedora", "Linux Mint", "Ubuntu", "Debian este cea a doua cea mai veche distributie inca intretinuta"}}
-
 		}}
 	};
     //valori care nu ar trebui schimbate
@@ -69,6 +69,7 @@ public partial class DefaultData : Node
 
     public override void _Ready()
 	{	
+		//Determinam daca putem reda videoclipuri. Daca nu (incercam sa) dezactivam optiunea
 		#if GODOT_LINUXBSD
 			#if TOOLS
 				if(DirAccess.DirExistsAbsolute("res://addons/ffmpeg/linux64"))isvideoavailable=true;
@@ -83,6 +84,7 @@ public partial class DefaultData : Node
 				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("libswresample.so.4"))
 				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("libswscale.so.7"))
 				)isvideoavailable=true;
+				else GDExtensionManager.UnloadExtension("res://addons/ffmpeg/ffmpeg.gdextension");
 			#endif
 		#elif GODOT_WINDOWS
 			#if TOOLS
@@ -98,14 +100,40 @@ public partial class DefaultData : Node
 				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("swresample-4.dll"))
 				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("swscale-7.dll"))
 				)isvideoavailable=true;
+				else GDExtensionManager.UnloadExtension("res://addons/ffmpeg/ffmpeg.gdextension");
 			#endif
 		#elif GODOT_ANDROID
+			GDExtensionManager.UnloadExtension("res://addons/ffmpeg/ffmpeg.gdextension");
 			isvideoavailable=false;
 		#endif
-		
-		GD.Print("Videouri disponibile: " + isvideoavailable);
-	}
 
+		GD.Print("Videouri disponibile: " + isvideoavailable);
+
+		#if GODOT_LINUXBSD || GODOT_WINDOWS
+			//Daca nu exista folder de cache, facem unul. Altfel, golim pe cel existent
+			if(!DirAccess.DirExistsAbsolute("user://cache")) DirAccess.MakeDirAbsolute("user://cache");
+			else CleanUpFolder("user://cache");
+		#endif
+	}
+	//Functie recursiva pentru GOLIREA unui anumit folder, din moment ce DirAccess nu poate sterge foldere cu fisiere in el
+	//AVETI GRIJA CU ACEASTA FUNCTIE, DEOARECE CONTINUTUL STERS NU POATE FI RECUPERAT!!!
+	private void CleanUpFolder(string path)
+	{	
+		#if GODOT_LINUXBSD || GODOT_WINDOWS
+			var files = DirAccess.Open(path);
+			files.IncludeNavigational = false;
+			System.Array filearray = files.GetFiles();
+			for (int i = 0; i < filearray.Length; i++) DirAccess.RemoveAbsolute(path + "/" + (string)(filearray.GetValue(i)));
+			filearray = files.GetDirectories();
+			for (int i = 0; i < filearray.Length; i++) 
+			{
+				CleanUpFolder(path + "/" + (string)(filearray.GetValue(i)));
+				DirAccess.RemoveAbsolute(path + "/" + (string)(filearray.GetValue(i)));
+			}
+		#else 
+			GD.Print("Aceasta functie nu este disponibila pe Android");
+		#endif
+	}
 	public bool SaveExists()
 	{	System.Array filearray = DirAccess.GetFilesAt("user://");
 		for (int i = 0; i < filearray.Length; i++)
@@ -153,33 +181,38 @@ public partial class DefaultData : Node
 		if(currentStats.VSync) DisplayServer.WindowSetVsyncMode(DisplayServer.VSyncMode.Enabled);
 		else DisplayServer.WindowSetVsyncMode(DisplayServer.VSyncMode.Disabled);
 	}
-	public void PurgeSave(string user)
+	//Functie pentru stergerea unui progres
+	public void DeleteSave(string user)
 	{
 		DirAccess.RemoveAbsolute("user://" + user + "_save.json");             //Trebuie sa fie functie statica
 		LoggedUser = " ";
+		//Restul este mai mult pentru delogare
 		DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
 		DisplayServer.WindowSetVsyncMode(DisplayServer.VSyncMode.Enabled);
 		currentStats = new stats();
 		GetTree().ChangeSceneToFile("res://Scenes/Logare.tscn");
 	}
 	public Godot.Collections.Array<Godot.Collections.Array> GenerateQuestionSet()
-	{	GD.Randomize();
+	{	GD.Randomize();     //Nu este necesar. Godot face asta de fiecare data cand deschizi aplicatia
 		Godot.Collections.Array<Godot.Collections.Array> _list = new Godot.Collections.Array<Godot.Collections.Array>();
 		int i, lesson, number;
 		bool ok = false;
-		lesson = (int)MathF.Floor(GD.RandRange(1, 2));       //Luam indexul unei lectii la intamplare. Daca lectia nu este terminata, repeta pana cand ajungem la o lectie terminata
-		while((int)currentStats.LessonCompletion[lesson] != 100) lesson = (int)MathF.Floor(GD.RandRange(1, 2));      //Probabil se putea si mai bine
-		number = (int)Mathf.Floor(GD.RandRange(1, (int)questionList[lesson].Count));
+		lesson = (int)Mathf.Round(GD.RandRange(1, (int)lessonList.Count));       //Luam indexul unei lectii la intamplare. Daca lectia nu este terminata, repeta pana cand ajungem la o lectie terminata
+		while((int)currentStats.LessonCompletion[lesson] != 100 || !questionList.ContainsKey(lesson) || ((int)lessonList[lesson][1] == 1 && !currentStats.AdvQ)) lesson = (int)Mathf.Round(GD.RandRange(1, (int)questionList.Count));      //Probabil se putea si mai bine
+		number = (int)Mathf.Round(GD.RandRange(1, (int)questionList[lesson].Count));
 		_list.Add((Godot.Collections.Array)questionList[lesson][number]);
+		GD.Print("Adaugat o intrebare. Este din lectia nr" + lesson + ", intrebarea " + number);   //Pentru prima intrebare nu este necesara verificarea daca se repeta, atata timp cat respecta conditiile de mai sus
 		for(i=2;i<=10;i++)
 		{	while(!ok)
-			{	ok = true;
-				lesson = (int)MathF.Floor(GD.RandRange(1, 2));       //Luam indexul unei lectii la intamplare. Daca lectia nu este terminata, repeta pana cand ajungem la o lectie terminata
-				while((int)currentStats.LessonCompletion[lesson] != 100) lesson = (int)MathF.Floor(GD.RandRange(1, 2));      //Probabil se putea si mai bine
-				number = (int)Mathf.Floor(GD.RandRange(1, (int)questionList[lesson].Count));
+			{	//Se repeta ce am facut mai sus
+				ok = true;
+				lesson = (int)Mathf.Round(GD.RandRange(1, (int)lessonList.Count));
+				while((int)currentStats.LessonCompletion[lesson] != 100 || !questionList.ContainsKey(lesson) || ((int)lessonList[lesson][1] == 1 && !currentStats.AdvQ)) lesson = (int)Mathf.Round(GD.RandRange(1, (int)questionList.Count));      //Probabil se putea si mai bine
+				number = (int)Mathf.Round(GD.RandRange(1, (int)questionList[lesson].Count));
 				if(_list.Contains((Godot.Collections.Array)questionList[lesson][number])) ok = false;
 			}
 			_list.Add((Godot.Collections.Array)questionList[lesson][number]);
+			GD.Print("Adaugat a-" + i + "-a intrebare. Este din lectia nr" + lesson + ", intrebarea " + number);
 			ok = false;
 		}
 		return _list;

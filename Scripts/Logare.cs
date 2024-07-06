@@ -6,8 +6,8 @@ public partial class Logare : Node2D
 {
 	private DefaultData _data;
 	private Button _profile;
-	private System.Array _names;
-	private bool profilespresent;
+	private System.Array _names;         //Vector pentru numele profilelor
+	private bool profilespresent;        //Daca exista profile
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{	_data = (DefaultData)GetNode("/root/DefaultData");
@@ -56,8 +56,14 @@ public partial class Logare : Node2D
 			GetNode<Sprite2D>("Create/Preview/Bg").SelfModulate = GetNode<ColorPicker>("Create/Culoare/Panel/CuloarePicker").Color;
 		}
 	}
+	public override void _Notification(int what)
+	{	//Daca dai inapoi pe Android
+		if (what == NotificationWMGoBackRequest && GetNode<Control>("Profiles").Visible == true)
+        	GetTree().Quit();
+	}
 	private void _on_nume_text_changed(string new_text)
-	{	if(new_text.IndexOf(" ") >= 0) new_text = new_text.Remove(new_text.IndexOf(" "));
+	{	//Aici este partea unde eliminam caracterele interzise din nume
+		if(new_text.IndexOf(" ") >= 0) new_text = new_text.Remove(new_text.IndexOf(" "));
 		if(new_text.IndexOf("/") >= 0) new_text = new_text.Remove(new_text.IndexOf("/"));
 		if(new_text.IndexOf(".") >= 0) new_text = new_text.Remove(new_text.IndexOf("."));
 		if(new_text.IndexOf(":") >= 0) new_text = new_text.Remove(new_text.IndexOf(":"));
@@ -80,11 +86,13 @@ public partial class Logare : Node2D
 		else
 		{	var ok = true;
 			var names = _data.GetSaves();
+			//Verificam daca deja exista nume
 			if(names != null)
 				for (int i = 0; i< names.Length; i++) if(GetNode<LineEdit>("Create/Nume/Nume").Text == (string)names.GetValue(i)) ok = false;
 			GD.Print(ok);
 			if(ok)
-			{	_data.currentStats.UsrName = GetNode<LineEdit>("Create/Nume/Nume").Text;
+			{	//Aici este partea unde cream un fisier folosind numele si culoarea deja date de utilizator
+				_data.currentStats.UsrName = GetNode<LineEdit>("Create/Nume/Nume").Text;
 				_data.currentStats.FavColor = GetNode<ColorPicker>("Create/Culoare/Panel/CuloarePicker").Color;
 				var file = FileAccess.Open("user://" + _data.currentStats.UsrName +"_save.json", FileAccess.ModeFlags.Write);
 				if (file == null) GD.Print("Nu se poate deschide fisierul. Eroare: " + FileAccess.GetOpenError());
@@ -193,7 +201,8 @@ public partial class Logare : Node2D
 		GD.Print("Logat in: " + name);
 		GetTree().ChangeSceneToFile("res://Scenes/Main.tscn");
 	}
-
+	
+	//Functie pentru adaugarea profilelor existente
 	private void AddProfiles(int index)
 	{	var button = (Button)_profile.Duplicate(8);
 		var file = FileAccess.Open("user://" + (string)_names.GetValue(index) + "_save.json", FileAccess.ModeFlags.Read);

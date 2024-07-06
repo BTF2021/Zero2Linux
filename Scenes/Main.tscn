@@ -147,8 +147,9 @@ size_flags_horizontal = 3
 
 [node name="Time" type="Label" parent="UI/Bar/HBoxContainer"]
 layout_mode = 2
+mouse_filter = 1
 theme_override_font_sizes/font_size = 20
-text = "hh-mm-ss yyyy-mm-dd"
+text = "hh-mm-ss"
 horizontal_alignment = 2
 
 [connection signal="pressed" from="UI/Panel/Buttons/Course" to="." method="_on_course_pressed"]

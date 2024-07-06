@@ -66,7 +66,7 @@ public partial class Progress : Control
 		#if GODOT_ANDROID
 			//Desi mousepos este preluat in _Proccess(), mousepos ramane aceeasi valoare dupa ce ecranul a fost atins
 			//Presupun ca ii ia un frame ca sa proceseze noua pozitie, ceea ce nu este de ajuns pentru aceasta functie
-			//Asa ca il actualizam acum mousepos
+			//Asa ca il actualizam acum
 			mousepos = GetViewport().GetMousePosition();
 		#endif
 		var winpos = GetNode<Sprite2D>("Panel").Position;

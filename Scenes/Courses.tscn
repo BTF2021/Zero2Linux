@@ -23,10 +23,11 @@ offset_bottom = -258.0
 flat = true
 
 [node name="Back" type="TextureButton" parent="Panel"]
-offset_left = 327.0
-offset_top = -299.0
-offset_right = 367.0
-offset_bottom = -261.0
+offset_left = 322.0
+offset_top = -301.0
+offset_right = 362.0
+offset_bottom = -263.0
+scale = Vector2(1.1, 1.1)
 texture_normal = ExtResource("3_ixxbh")
 
 [node name="Label" type="Label" parent="Panel"]

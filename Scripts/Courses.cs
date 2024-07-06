@@ -16,13 +16,15 @@ public partial class Courses : Control
 	{	_data = (DefaultData)GetNode("/root/DefaultData");
 		_VBoxContainer = (VBoxContainer)GetNode("Panel/ScrollContainer/VBoxContainer");
 		_courseitem = GD.Load<PackedScene>("res://Scenes/CourseItem.tscn");
+
+		//Aici preluam lista cu toate lectiile din DefaultData
 		int i=1;
 		while(_data.lessonList.ContainsKey(i))
 		{	AddItem(i);
 			i++;
 		}
 		GD.Print("Left");
-		GetNode<Node>("Panel/ScrollContainer/VBoxContainer").MoveChild(GetNode<Node>("Panel/ScrollContainer/VBoxContainer/End"), -1);
+		GetNode<Node>("Panel/ScrollContainer/VBoxContainer").MoveChild(GetNode<Node>("Panel/ScrollContainer/VBoxContainer/End"), -1); //Facem textul de la finalul lectiei ultimul din lista
 
 		if(_data.currentStats.Anims)
 		{
@@ -78,20 +80,22 @@ public partial class Courses : Control
 			GetParent().GetParent().AddChild((GD.Load<PackedScene>("res://Scenes/Incarcare.tscn")).Instantiate());
 			var timer = GetTree().CreateTimer(3);
 			GetParent<CanvasItem>().Hide();
-			timer.Timeout += () => _timeout(index);
+			timer.Timeout += () =>
+			{	_data.CurrentLesson = index;
+				GetTree().ChangeSceneToFile("res://Scenes/Lesson.tscn");
+			};
 		}
-		else _timeout(index);
-	}
-	private void _timeout(int index)
-	{	_data.CurrentLesson = index;
-		GetTree().ChangeSceneToFile("res://Courses/Lesson_" + index + "/Lesson.tscn");
+		else
+		{	_data.CurrentLesson = index;
+			GetTree().ChangeSceneToFile("res://Scenes/Lesson.tscn");
+		}
 	}
 	private void _on_drag_down()
 	{	GD.Print("Hi");
 		#if GODOT_ANDROID
 			//Desi mousepos este preluat in _Proccess(), mousepos ramane aceeasi valoare dupa ce ecranul a fost atins
 			//Presupun ca ii ia un frame ca sa proceseze noua pozitie, ceea ce nu este de ajuns pentru aceasta functie
-			//Asa ca il actualizam acum mousepos
+			//Asa ca il actualizam acum
 			mousepos = GetViewport().GetMousePosition();
 		#endif
 		var winpos = GetNode<Sprite2D>("Panel").Position;

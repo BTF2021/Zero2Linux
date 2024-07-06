@@ -11,12 +11,13 @@ public partial class Quizztime : Node2D
 	int intrebari = 0;
 	int corecte = 0;
 	int gresite = 0;
-	Godot.Collections.Array chars = new Godot.Collections.Array(){"/", "%", "&", "$", "@", "$", "#", "(", ")", "-", "0", "O"};
+	Godot.Collections.Array chars = new Godot.Collections.Array(){"/", "%", "&", "$", "@", "$", "#", "(", ")", "-", "0", "O"};   //Pentru efectul de glitch
 	string randomstr = "";
 	public Timer timer;
 	public Timer timp_ramas;
 	TimeSpan tp;
-	[Signal] public delegate void GetAnswersEventHandler(bool correct, int index);
+	[Signal] public delegate void GetAnswersEventHandler(bool correct, bool ignore, int index);
+	[Signal] public delegate void SkipEventHandler();
 	[Signal] public delegate void NextEventHandler();
 	// Called when the node enters the scene tree for the first time.
 	public async override void _Ready()
@@ -24,9 +25,10 @@ public partial class Quizztime : Node2D
 		_item = GD.Load<PackedScene>("res://Scenes/Quizitem.tscn");
 		_transition = GetNode<Node2D>("Transition");
 		GetAnswers += SendAnswers;
+		Skip += SkipQuestion;
 		Next += NextQuestion;
 		_list = _data.GenerateQuestionSet();
-		//GD.Print(_list);
+		GD.Print(_list);
 		if(_data.questiontype == 1)
 		{	GetNode<Label>("Body/Title").Text = "Test";
 			GetNode<RichTextLabel>("Body/Correct").TooltipText = "Eroare: nr_intrebari_corecte nu poate fi afisat";
@@ -61,10 +63,10 @@ public partial class Quizztime : Node2D
 			var tween = GetTree().CreateTween();
 			var pos = Position;
 			pos.X = 0;
-			pos.Y = 216 - 10;
+			pos.Y = 268 - 10;
 			GetNode<Label>("Transition/Title").Modulate = new Color(1, 1, 1, 0);
 			GetNode<Label>("Transition/Title").Position = pos;
-			pos.Y = 216;
+			pos.Y = 268;
 			tween.TweenProperty(GetNode<Label>("Transition/Title"), "modulate", new Color(1, 1, 1, 1), 0.25);
 			tween.Parallel().TweenProperty(GetNode<Label>("Transition/Title"), "position", pos, 0.25);
 			await ToSignal(tween, Tween.SignalName.Finished);
@@ -87,7 +89,7 @@ public partial class Quizztime : Node2D
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
-	{	GetNode<Label>("Body/Number").Text = "Intrebari: " + intrebari + "/" + total;
+	{	GetNode<Label>("Body/Number").Text = "Intrebare: " + intrebari + "/" + total;
 		if(_data.questiontype == 0)
 		{	GetNode<RichTextLabel>("Body/Correct").Text = "Corecte: " + corecte;
 			GetNode<RichTextLabel>("Body/Wrong").Text = "Gresite: " + gresite;
@@ -109,18 +111,25 @@ public partial class Quizztime : Node2D
 		_data.questiontype = 0;
 		GetTree().ChangeSceneToFile("res://Scenes/Main.tscn");
 	}
-	public void SendAnswers(bool correct, int index)
-	{
-		if(correct)
-		{	corecte++;
-			if(_data.questiontype == 0) GetNode<Button>("Continue").Show();
+	public void SendAnswers(bool correct, bool ignore, int index)
+	{	//Ignore este mai mult pentru functia de sarit peste
+		if(!ignore)
+		{
+			if(correct)
+			{	corecte++;
+				_list[intrebari-1]=null;
+				GD.Print("Am sters " + intrebari);
+				if(_data.questiontype == 0) GetNode<Button>("Continue").Show();
+			}
+			else if(!correct)
+			{	gresite++;
+				_list[intrebari-1]=null;
+				GD.Print("Am sters " + intrebari);
+				NextQuestion();
+				return;
+			}
 		}
-		else 
-		{	gresite++;
-			NextQuestion();
-			return;
-		}
-		if(intrebari<total)
+		if(intrebari<=total)
 		{
 			if(_data.questiontype == 1) NextQuestion();   //Nu arata explicatia. Treci mai departe
 		}
@@ -128,6 +137,7 @@ public partial class Quizztime : Node2D
 		{	var name = (String)GetChild(-1).Name;
 			if(name.Contains("Quizitem")) GetChild(-1).QueueFree();
 			_finished();
+			return;
 		}
 	}
 	public void _timeout()
@@ -142,6 +152,11 @@ public partial class Quizztime : Node2D
 	}
 	public void _timp_scurs()
 	{	GD.Print("TIMPUL S-A SCURS!");
+		int nr=0;
+		for(int i=1;i<=total;i++)
+		{	if(_list[i-1].Count != 0) nr++;
+		}
+		intrebari=total-nr;
 		var name = (String)GetChild(-1).Name;
 		if(name.Contains("Quizitem")) GetChild(-1).QueueFree();
 		GetNode<Label>("Body/RemainedTime").Hide();
@@ -149,7 +164,34 @@ public partial class Quizztime : Node2D
 	}
 	public async void NextQuestion()
 	{	if(intrebari<total)
-		{	intrebari++;
+		{	GD.Print(_list[intrebari]);
+			if(_list[intrebari].Count != 0) intrebari++;    //Daca exista urmatoarea intrebare, doar aduna-l cui 1
+			//Altfel, cauta urmatoarea urmatoarea intrebarea in vector
+			else 
+			{	for(int i=intrebari+1;i<=total;i++)
+				{	if(_list[i-1].Count != 0)
+					{	intrebari=i-1;
+						GD.Print("Sunt la " + (i-1));
+						NextQuestion();
+						return;
+					}
+				}
+				//Trecem si prin elementele anterioare
+				for(int i=1;i<=intrebari;i++)
+				{	if(_list[i-1].Count != 0)
+					{	intrebari=i-1;
+						GD.Print("Sunt la " + (i-1));
+						NextQuestion();
+						return;
+					}
+				}
+				intrebari=10;
+				var name1 = (String)GetChild(-1).Name;
+				if(name1.Contains("Quizitem")) GetChild(-1).QueueFree();
+				_finished();
+				return;
+			}
+			GD.Print(intrebari);
 			var name = (String)GetChild(-1).Name;
 			if(name.Contains("Quizitem")) GetChild(-1).QueueFree();
 			var _panel =  _item.Instantiate<Quizitem>();
@@ -166,6 +208,14 @@ public partial class Quizztime : Node2D
 			pos.Y = 202;
 			_panel.Position = pos;
 			_panel.type = _data.questiontype + 1;
+			if(_panel.type == 2) 
+			{
+				int nr=0;
+				for(int i=1;i<=total;i++)
+				{	if(_list[i-1].Count != 0) nr++;
+				}
+				if(nr >= 2) _panel.GetNode<CanvasItem>("PanelContainer/HBoxContainer/Skip").Show();
+			}
 			AddChild(_panel);
 			_panel.Name = "Quizitem";
 			if(_data.currentStats.Anims)
@@ -176,10 +226,25 @@ public partial class Quizztime : Node2D
 			}
 		}
 		else
-		{	var name = (String)GetChild(-1).Name;
+		{	//Cautam daca mai sunt intrebari neraspunses
+			if(_data.questiontype == 1)
+			{	for(int i=1;i<=total;i++)
+				{	if(_list[i-1].Count != 0)
+					{	intrebari=i-1;
+						GD.Print("Sunt la " + (i-1));
+						NextQuestion();
+						return;
+					}
+				}
+			}
+			var name = (String)GetChild(-1).Name;
 			if(name.Contains("Quizitem")) GetChild(-1).QueueFree();
 			_finished();
 		}
+	}
+	public async void SkipQuestion()
+	{	GD.Print("Salt peste " + intrebari);
+		SendAnswers(true, true, intrebari);
 	}
 	private void _finished()
 	{	if(_data.questiontype == 0) GetNode<Button>("Continue").Hide();
@@ -252,7 +317,7 @@ public partial class Quizztime : Node2D
 		}
 		else if(corecte >= 7) GetNode<Label>("Feedback").Text = "Te-ai descurcat foarte bine!";
 		else if(corecte >= 5) GetNode<Label>("Feedback").Text = "Te-ai descurcat destul de bine, dar stiu ca poti sa faci si mai bine!";
-		else if(corecte >= 3) GetNode<Label>("Feedback").Text = "Ai retinut unele notiuni, dar mai bine consulta lectiile inca o data.";
+		else if(corecte >= 3) GetNode<Label>("Feedback").Text = "Stiu ca poti si mai bine!";
 		else 
 		switch((int)GD.RandRange(1, 2))
 		{	case 1:

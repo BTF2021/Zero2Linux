@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bqd1321xxqoej" path="res://Sprites/CloseButton.png" id="5_7cisg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ijpad"]
-bg_color = Color(0, 0, 0, 0.611765)
+bg_color = Color(0, 0, 0, 0.411765)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_64lay"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -41,9 +41,9 @@ scale = Vector2(0.816107, 0.816092)
 texture = ExtResource("2_wmyog")
 
 [node name="Settings" type="TabContainer" parent="Panel"]
-offset_left = -371.0
-offset_top = -289.0
-offset_right = 371.0
+offset_left = -373.0
+offset_top = -286.0
+offset_right = 373.0
 offset_bottom = 303.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_ijpad")
 theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_64lay")
@@ -133,6 +133,7 @@ horizontal_alignment = 1
 layout_mode = 2
 
 [node name="Advanced" type="Label" parent="Panel/Settings/Lectii/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 19
 text = "Include lectiile avansate"
@@ -208,6 +209,20 @@ offset_top = 3.0
 offset_right = 544.0
 offset_bottom = 27.0
 tooltip_text = "Daca este activat, nu vor fi aratate numarul de raspunsuri corecte si gresite in modul test"
+
+[node name="IncludeAdvQ" type="Label" parent="Panel/Settings/Lectii/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 19
+text = "Include intrebari din lectii avansate"
+
+[node name="IAQButton" type="CheckButton" parent="Panel/Settings/Lectii/VBoxContainer/IncludeAdvQ"]
+layout_mode = 0
+offset_left = 500.0
+offset_top = 3.0
+offset_right = 544.0
+offset_bottom = 27.0
+tooltip_text = "Daca este activat, Intrebarile din lectiile avansate deja facute pot fi incluse in chestionare"
 
 [node name="Altele" type="Control" parent="Panel/Settings"]
 visible = false
@@ -332,9 +347,6 @@ theme_override_constants/separation = 8
 custom_minimum_size = Vector2(0, 5)
 layout_mode = 2
 
-[node name="hSeparator" type="HSeparator" parent="Panel/Settings/Despre/VBoxContainer"]
-layout_mode = 2
-
 [node name="vBoxContainer" type="HBoxContainer" parent="Panel/Settings/Despre/VBoxContainer"]
 layout_mode = 2
 alignment = 1
@@ -402,12 +414,13 @@ layout_mode = 2
 [node name="Name3" type="RichTextLabel" parent="Panel/Settings/Despre/VBoxContainer"]
 custom_minimum_size = Vector2(161, 0)
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 25
-theme_override_font_sizes/bold_font_size = 25
-theme_override_font_sizes/italics_font_size = 25
-theme_override_font_sizes/bold_italics_font_size = 25
-theme_override_font_sizes/mono_font_size = 25
-text = "	 Zero2Linux este un proiect personal, creeat pentru a-i invata pe cei mai putini familiarizati cu ecosistemul Linux sa foloseasca un desktop Linux.
+theme_override_font_sizes/normal_font_size = 19
+theme_override_font_sizes/bold_font_size = 19
+theme_override_font_sizes/italics_font_size = 19
+theme_override_font_sizes/bold_italics_font_size = 19
+theme_override_font_sizes/mono_font_size = 19
+text = "	 Zero2Linux este un proiect personal, creat pentru a-i invata pe cei mai putini familiarizati cu ecosistemul Linux sa foloseasca un desktop Linux.
+	Desi Linux este foarte popular pentru servere, majoritatea nu au auzit despre Linux/ cred ca Linux este doar pentru cei foarte avansati (sau cei care \"nu isi apreciaza timpul\"). Linux a avansat foarte mult, pana in punctul in care exista distributii care sunt facute special pentru utilizatori mai putini experimentati/ cei care nu vor sa configureze o distributie foarte mult. Zero2Linux incearca sa arate faptul ca Linux nu este (neaparat) foarte complicat si se pot face lucruri posibile si pe celelalte sisteme de operare, in multe cazuri chiar mai simplu.
 	 Zero2Linux este gratis pentru toata lumea, dar este foarte apreciat daca ai dea stea (star) la proiect pe Github sau sa contribui prin raportarea bugurilor."
 fit_content = true
 scroll_active = false
@@ -422,10 +435,11 @@ offset_bottom = -259.0
 flat = true
 
 [node name="Back" type="TextureButton" parent="Panel"]
-offset_left = 326.0
-offset_top = -300.0
-offset_right = 366.0
-offset_bottom = -262.0
+offset_left = 319.811
+offset_top = -301.437
+offset_right = 359.811
+offset_bottom = -263.437
+scale = Vector2(1.1, 1.1)
 texture_normal = ExtResource("5_7cisg")
 
 [node name="Label" type="Label" parent="Panel"]
@@ -445,6 +459,7 @@ vertical_alignment = 1
 [connection signal="pressed" from="Panel/Settings/Lectii/VBoxContainer/Special/SpecialButton" to="." method="_on_special_pressed"]
 [connection signal="value_changed" from="Panel/Settings/Lectii/VBoxContainer/VideoVolume/VideoVolumeSlide" to="." method="_on_video_volume_value_changed"]
 [connection signal="pressed" from="Panel/Settings/Lectii/VBoxContainer/ShowNumOnlyTest/SNTButton" to="." method="_on_snt_button_pressed"]
+[connection signal="pressed" from="Panel/Settings/Lectii/VBoxContainer/IncludeAdvQ/IAQButton" to="." method="_on_iaq_button_pressed"]
 [connection signal="pressed" from="Panel/Settings/Altele/VBoxContainer/GetUpdates/GetUpdatesButton" to="." method="_on_updates_button_pressed"]
 [connection signal="text_changed" from="Panel/Settings/Altele/VBoxContainer/Name/NameEdit" to="." method="_on_name_changed"]
 [connection signal="text_submitted" from="Panel/Settings/Altele/VBoxContainer/Name/NameEdit" to="." method="_on_name_submitted"]

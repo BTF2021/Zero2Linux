@@ -5,7 +5,7 @@ public partial class Incarcare : Node2D
 {
 	// Called when the node enters the scene tree for the first time.
 	public override async void _Ready()
-	{	var tip = (int)GD.RandRange(1, 13);
+	{	var tip = (int)GD.RandRange(1, 17);
 		switch(tip)
 		{	case 1:
 				GetNode<Label>("Tip").Text = "Fun fact: Nu se incarca nimic in acest moment";
@@ -58,11 +58,23 @@ public partial class Incarcare : Node2D
 			case 13:
 				GetNode<Label>("Tip").Text = "Viziteaza pagina de Github al acestui proiect pentru noi actualizari";
 				break;
+			case 14:
+				GetNode<Label>("Tip").Text = "fun fact: Linux Torvalds foloseste Fedora";
+				break;
+			case 15:
+				GetNode<Label>("Tip").Text = "Ai auzit de Justin Bieber Linux?";
+				break;
+			case 16:
+				GetNode<Label>("Tip").Text = "Ai auzit de Hannah Montana Linux?";
+				break;
+			case 17:
+				GetNode<Label>("Tip").Text = "Insereaza un text aici";
+				break;
 		}
-		/*
-		if(GD.RandRange(1, 100) == 1 && Time.GetDatetimeStringFromSystem().Find("09", 5) == 1 && Time.GetDatetimeStringFromSystem().Find("17", 8) == 1) GetNode<Label>("Tip").Text = "La multi ani Linux!";
-		else if(GD.RandRange(1, 100) == 1 && Time.GetDatetimeStringFromSystem().Find("12", 5) == 1 && Time.GetDatetimeStringFromSystem().Find("28", 8) == 1) GetNode<Label>("Tip").Text = "La multi ani Linus Torvalds!";
-		*/
+		//Easter Egg bazat pe data sistemului :)
+		if(Time.GetDatetimeStringFromSystem().Find("09", 4) == 5 && Time.GetDatetimeStringFromSystem().Find("17", 7) == 8) GetNode<Label>("Tip").Text = "La multi ani Linux!";
+		else if(Time.GetDatetimeStringFromSystem().Find("12", 4) == 5 && Time.GetDatetimeStringFromSystem().Find("28", 7) == 8) GetNode<Label>("Tip").Text = "La multi ani Linus Torvalds!";
+		
 		GetNode<ProgressBar>("Bara").Value = 0;
 		Modulate = new Color(1, 1, 1, (float)0.5);
 		var tween = GetTree().CreateTween();

@@ -17,21 +17,23 @@ public partial class Settings : Control
 		GetNode<ColorPickerButton>("Panel/Settings/Altele/VBoxContainer/FavColour/ColorButton").Color = _data.currentStats.FavColor;
 
 		if(!_data.isvideoavailable)
-		{	GetNode<Label>("Panel/Settings/Lectii/VBoxContainer/VideoVolume").Modulate = new Color((float)0.6, (float)0.6, (float)0.6, 1);
+		{	GetNode<Label>("Panel/Settings/Lectii/VBoxContainer/VideoVolume").QueueFree();
+			GetNode<Label>("Panel/Settings/Lectii/VBoxContainer/VideoVolume").Modulate = new Color((float)0.6, (float)0.6, (float)0.6, 1);
 			_slider.Editable = false;
 		}
 
 		#if GODOT_ANDROID
 			GetNode<Label>("Panel/Settings/Grafica/VBoxContainer/Fullscreen").QueueFree();
-			GetNode<Label>("Panel/Settings/Lectii/VBoxContainer/VideoVolume").QueueFree();
 		#endif
-
+		
+		//Pur si simplu verificam daca optiunile sunt true
 		if(_data.currentStats.FullScr) GetNode<CheckButton>("Panel/Settings/Grafica/VBoxContainer/Fullscreen/FullscreenButton").SetPressedNoSignal(true);
 		if(_data.currentStats.VSync) GetNode<CheckButton>("Panel/Settings/Grafica/VBoxContainer/VSync/VSyncButton").SetPressedNoSignal(true);
 		if(_data.currentStats.Anims) GetNode<CheckButton>("Panel/Settings/Grafica/VBoxContainer/Animations/AnimationsButton").SetPressedNoSignal(true);
 		if(_data.currentStats.Adv) GetNode<CheckButton>("Panel/Settings/Lectii/VBoxContainer/Advanced/AdvancedButton").SetPressedNoSignal(true);
 		if(_data.currentStats.Spc) GetNode<CheckButton>("Panel/Settings/Lectii/VBoxContainer/Special/SpecialButton").SetPressedNoSignal(true);
 		if(_data.currentStats.QNumOnly) GetNode<CheckButton>("Panel/Settings/Lectii/VBoxContainer/ShowNumOnlyTest/SNTButton").SetPressedNoSignal(true);
+		if(_data.currentStats.AdvQ) GetNode<CheckButton>("Panel/Settings/Lectii/VBoxContainer/IncludeAdvQ/IAQButton").SetPressedNoSignal(true);
 		GetNode<Label>("Panel/Settings/Despre/VBoxContainer/Version").Text = "Versiune: " + (String)ProjectSettings.GetSetting("application/config/version");
 		if(_data.currentStats.ChkUpdates) GetNode<CheckButton>("Panel/Settings/Altele/VBoxContainer/GetUpdates/GetUpdatesButton").SetPressedNoSignal(true);
 
@@ -51,12 +53,13 @@ public partial class Settings : Control
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
-	{	
-		#if GODOT_WINDOWS || GODOT_LINUXBSD
+	{	//Volum
+		if(_data.isvideoavailable)
+		{
 			if(_slider.Value == -11) GetNode<Label>("Panel/Settings/Lectii/VBoxContainer/VideoVolume/VideoVolumeText").Text = "Mut";
 			else if(_slider.Value == 10) GetNode<Label>("Panel/Settings/Lectii/VBoxContainer/VideoVolume/VideoVolumeText").Text = "Max";
 			else GetNode<Label>("Panel/Settings/Lectii/VBoxContainer/VideoVolume/VideoVolumeText").Text = (_slider.Value + 11).ToString();
-		#endif
+		}
 
 		mousepos = GetViewport().GetMousePosition();
 		var winpos = GetNode<Sprite2D>("Panel").Position;
@@ -107,6 +110,11 @@ public partial class Settings : Control
 	private void _on_snt_button_pressed()
 	{
 		_data.currentStats.QNumOnly = !_data.currentStats.QNumOnly;
+		_data.WriteSave(_data.LoggedUser);
+	}
+	private void _on_iaq_button_pressed()
+	{
+		_data.currentStats.AdvQ = !_data.currentStats.AdvQ;
 		_data.WriteSave(_data.LoggedUser);
 	}
 	private void _on_github_pressed() => OS.ShellOpen("https://github.com/BTF2021/Zero2Linux");
@@ -172,7 +180,7 @@ public partial class Settings : Control
 		#if GODOT_ANDROID
 			//Desi mousepos este preluat in _Proccess(), mousepos ramane aceeasi valoare dupa ce ecranul a fost atins
 			//Presupun ca ii ia un frame ca sa proceseze noua pozitie, ceea ce nu este de ajuns pentru aceasta functie
-			//Asa ca il actualizam acum mousepos
+			//Asa ca il actualizam acum
 			mousepos = GetViewport().GetMousePosition();
 		#endif
 		var winpos = GetNode<Sprite2D>("Panel").Position;

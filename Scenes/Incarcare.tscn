@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://qc1o5l6rijo6"]
+[gd_scene load_steps=9 format=3 uid="uid://qc1o5l6rijo6"]
 
 [ext_resource type="Script" path="res://Scripts/Incarcare.cs" id="1_16o33"]
 [ext_resource type="Texture2D" uid="uid://dmkypoj2doa4m" path="res://Sprites/LoadingBg.png" id="1_ucu8g"]
@@ -38,6 +38,10 @@ corner_radius_top_left = 6
 corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
+
+[sub_resource type="LabelSettings" id="LabelSettings_gfi22"]
+line_spacing = -15.0
+font_size = 25
 
 [node name="incarcare" type="Node2D"]
 top_level = true
@@ -85,12 +89,11 @@ scroll_active = false
 shortcut_keys_enabled = false
 
 [node name="Tip" type="Label" parent="."]
-offset_top = 552.0
+offset_top = 522.0
 offset_right = 1280.0
-offset_bottom = 587.0
-theme_override_font_sizes/font_size = 25
+offset_bottom = 557.0
 text = "Insereaza text aici"
+label_settings = SubResource("LabelSettings_gfi22")
 horizontal_alignment = 1
-vertical_alignment = 1
 
 [connection signal="value_changed" from="Bara" to="." method="_on_bara_changed"]

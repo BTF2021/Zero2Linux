@@ -74,7 +74,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="Send" type="Button" parent="PanelContainer/HBoxContainer"]
-custom_minimum_size = Vector2(120, 30)
+custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/normal = ExtResource("2_p2qk2")
@@ -83,12 +83,11 @@ text = "Trimite"
 
 [node name="Skip" type="Button" parent="PanelContainer/HBoxContainer"]
 visible = false
-custom_minimum_size = Vector2(120, 30)
+custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/normal = ExtResource("2_p2qk2")
 theme_override_styles/focus = ExtResource("2_1jsns")
-disabled = true
 text = "Sari peste"
 
 [node name="MarginContainer4" type="MarginContainer" parent="PanelContainer"]
@@ -164,3 +163,4 @@ layout_mode = 2
 theme_override_constants/margin_left = 20
 
 [connection signal="pressed" from="PanelContainer/HBoxContainer/Send" to="." method="_on_send_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/Skip" to="." method="_on_skip_pressed"]

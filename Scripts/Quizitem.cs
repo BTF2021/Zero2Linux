@@ -3,7 +3,7 @@ using System;
 
 public partial class Quizitem : PanelContainer
 {
-	public int type = 0;         //0: Lectie,        1: Normal,       2: Test
+	public int type = 0;         //0: Lectie,        1: Normal,       2: Test        O schimbam cand initializam scena corespunzatoare
 	[Export(PropertyHint.Range, "2,4,")] public int answnum = 4;      //Nr de raspunsuri posibile (intre 2 si 4)
 	[Export(PropertyHint.Range, "1,4,")] public int answ = 1;
 	public bool Complete = false;
@@ -25,6 +25,7 @@ public partial class Quizitem : PanelContainer
 		
 		if(answnum < 2 || answnum > 4) answnum = 4;
 		if(answ > answnum) answ = answnum;
+		//Cate raspunsuri posibile sunt
 		switch(answnum)
 		{	case 2:
 				GetNode<CheckBox>("PanelContainer/Raspuns3").Disabled = true;
@@ -51,7 +52,8 @@ public partial class Quizitem : PanelContainer
 	{
 	}
 	private void _on_raspuns_pressed(int index)
-	{	if(GetNode<CheckBox>("PanelContainer/Raspuns" + index).ButtonPressed == true);
+	{	//Asta este mai mult ca sa avem doar un singur raspuns bifat
+		if(GetNode<CheckBox>("PanelContainer/Raspuns" + index).ButtonPressed == true);
 		{	for (int i = 1; i <=4; i++) if(i!=index && GetNode<CheckBox>("PanelContainer/Raspuns" + i).ButtonPressed == true) GetNode<CheckBox>("PanelContainer/Raspuns" + i).SetPressedNoSignal(false);
 		}
 	}
@@ -65,20 +67,23 @@ public partial class Quizitem : PanelContainer
 		GetNode<Button>("PanelContainer/HBoxContainer/Skip").Disabled = true;
 	}
 	private void _on_send_pressed()
-	{	var a = new Godot.Collections.Array()
+	{	//Facem o lista cu toate casutele bifate
+		var a = new Godot.Collections.Array()
 		{	GetNode<CheckBox>("PanelContainer/Raspuns1").ButtonPressed, 
 			GetNode<CheckBox>("PanelContainer/Raspuns2").ButtonPressed,
 			GetNode<CheckBox>("PanelContainer/Raspuns3").ButtonPressed,
 			GetNode<CheckBox>("PanelContainer/Raspuns4").ButtonPressed
 		};
+		//determinam daca este raspuns corect
 		var ok = true;
 		for (int i = 1; i <=4; i++)
 		{	if(answ == i && (bool)a[i-1] != true) ok = false;
 			else if(answ != i && (bool)a[i-1] != false) ok = false; 
 		}
 		if(ok) ShowCorrect();
-		GetNode("/root").GetChild(1).EmitSignal("GetAnswers", ok, Index);
+		GetNode("/root").GetChild(1).EmitSignal("GetAnswers", ok, false, Index);
 	}
+	private void _on_skip_pressed() => GetNode("/root").GetChild(1).EmitSignal("Skip");
 	private void ShowCorrect()
 	{	if(type < 2)
 		{	GetNode<VBoxContainer>("PanelContainer").Hide(); 

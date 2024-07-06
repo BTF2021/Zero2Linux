@@ -12,39 +12,49 @@ public partial class Lesson : Node2D
 	private int questionansw;          //Nr de intrebari deja raspunse
 	private int blocksread;			   //Nr de blocuri deja vazute
 	private int percent;               //Procentul progresului
-	[Signal] public delegate void GetAnswersEventHandler(bool correct, int index);
+	[Signal] public delegate void GetAnswersEventHandler(bool correct, bool ignore, int index);
 
 	public async void _Treeentered() => _Ready();
 	// Called when the node enters the scene tree for the first time.
 	public override async void _Ready()
 	{
 		_data = (DefaultData)GetNode("/root/DefaultData");
-		_node = GetNode<VBoxContainer>("Panel/ScrollContainer/MarginContainer/Body/Content");
-		_questions = new Godot.Collections.Array<Quizitem>{};
 		lessonid = _data.CurrentLesson;
+		GetNode<Control>("Panel/ScrollContainer/MarginContainer/Body").AddChild((GD.Load<PackedScene>("res://Courses/Lesson_" + lessonid + "/Lesson.tscn")).Instantiate());
+		_questions = new Godot.Collections.Array<Quizitem>{};
+		_node = GetNode<VBoxContainer>("Panel/ScrollContainer/MarginContainer/Body/Content");
 		GetAnswers += SendAnswers;
-		#if GODOT_ANDROID
-			GetNode<HSeparator>("Panel/ScrollContainer/MarginContainer/Body/HSeparator2").QueueFree();
-			GetNode<ColorRect>("Panel/ScrollContainer/MarginContainer/Body/VideoPreview/Spoiler").QueueFree();
-			GetNode<Sprite2D>("Panel/ScrollContainer/MarginContainer/Body/VideoPreview/textureRect").QueueFree();
-			GetNode<Label>("Panel/ScrollContainer/MarginContainer/Body/VideoPreview/Atentie").QueueFree();
-			GetNode<TextureRect>("Panel/ScrollContainer/MarginContainer/Body/VideoPreview").QueueFree();
-		#endif
-		GetNode<TextureRect>("Panel/ScrollContainer/MarginContainer/Body/VideoPreview").Texture = GD.Load<CompressedTexture2D>("res://Courses/Lesson_" + lessonid + "/VidBg.png");
-		if(!_data.isvideoavailable)
-		{
-			GetNode<TextureRect>("Panel/ScrollContainer/MarginContainer/Body/VideoPreview").SelfModulate = new Color((float)0.6, (float)0.6, (float)0.6, 1);
-			GetNode<Sprite2D>("Panel/ScrollContainer/MarginContainer/Body/VideoPreview/textureRect").QueueFree();
-			GetNode<Label>("Panel/ScrollContainer/MarginContainer/Body/VideoPreview/Atentie").Show();
-		}
-		if(!ResourceLoader.Exists("res://Courses/Lesson_" + lessonid + "/Video.webm"))
+
+		//Daca nu putem reda videoclipurile, ramane doar imaginea cu blur
+		if(!ResourceLoader.Exists("res://Courses/Lesson_" + lessonid + "/VidBg.png"))
 		{	GetNode<HSeparator>("Panel/ScrollContainer/MarginContainer/Body/HSeparator2").QueueFree();
 			GetNode<ColorRect>("Panel/ScrollContainer/MarginContainer/Body/VideoPreview/Spoiler").QueueFree();
 			GetNode<Sprite2D>("Panel/ScrollContainer/MarginContainer/Body/VideoPreview/textureRect").QueueFree();
-			GetNode<Label>("Panel/ScrollContainer/MarginContainer/Body/VideoPreview/Atentie").QueueFree();
 			GetNode<TextureRect>("Panel/ScrollContainer/MarginContainer/Body/VideoPreview").QueueFree();
 		}
+		else if(!ResourceLoader.Exists("res://Courses/Lesson_" + lessonid + "/Video.webm") || !_data.isvideoavailable) GetNode<Sprite2D>("Panel/ScrollContainer/MarginContainer/Body/VideoPreview/textureRect").QueueFree();
+		GetNode<TextureRect>("Panel/ScrollContainer/MarginContainer/Body/VideoPreview").Texture = GD.Load<CompressedTexture2D>("res://Courses/Lesson_" + lessonid + "/VidBg.png");
 
+		//Titlu si rearanjarea elementelor
+		GetNode<Label>("Panel/ScrollContainer/MarginContainer/Body/Title").Text = "";
+		if((int)_data.lessonList[lessonid][1] == 1) 
+		{
+			GetNode<Label>("Panel/ScrollContainer/MarginContainer/Body/Title").Text = "Avansat: ";
+			GetNode<RichTextLabel>("Panel/ScrollContainer/MarginContainer/Body/Nota").Visible = true;
+			GetNode<RichTextLabel>("Panel/ScrollContainer/MarginContainer/Body/Nota").Text = "[center][color=ffffff99][i]Aceasta este o lectie optionala. Daca este activat din setari, intrebarile pot aparea si in chestionare si teste[/i][/color][/center]";
+			GetNode<CanvasItem>("Panel/ScrollContainer/MarginContainer/Body/HSeparator3").Visible = true;
+		}
+		else if((int)_data.lessonList[lessonid][1] == 2) 
+		{
+			GetNode<Label>("Panel/ScrollContainer/MarginContainer/Body/Title").Text = "Special: ";
+			GetNode<RichTextLabel>("Panel/ScrollContainer/MarginContainer/Body/Nota").Visible = true;
+			GetNode<RichTextLabel>("Panel/ScrollContainer/MarginContainer/Body/Nota").Text = "[center][color=ffffff99][i]Aceasta este o lectie optionala. Nu este numarata in lectii terminate si nu vor fi intrebari in chestionare si teste[/i][/color][/center]";
+			GetNode<CanvasItem>("Panel/ScrollContainer/MarginContainer/Body/HSeparator3").Visible = true;
+		}
+		GetNode<Label>("Panel/ScrollContainer/MarginContainer/Body/Title").Text = GetNode<Label>("Panel/ScrollContainer/MarginContainer/Body/Title").Text + (string)_data.lessonList[lessonid][0];
+		_node.GetParent().MoveChild(GetNode("Panel/ScrollContainer/MarginContainer/Body/HSeparator4"), -1);
+		_node.GetParent().MoveChild(GetNode("Panel/ScrollContainer/MarginContainer/Body/End"), -1);
+		
 		//Calculeaza nr de intrebari si blocuri
 		percent = (int)_data.currentStats.LessonCompletion[lessonid];
 		totalquestioncount = 0;
@@ -153,10 +163,11 @@ public partial class Lesson : Node2D
 		else	GetNode<Node2D>("Transition").Hide();
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	//public override void _Process(double delta)
-	//{
-	//}
+	/*Called every frame. 'delta' is the elapsed time since the previous frame.
+	public override void _Process(double delta)
+	{
+	}
+	*/
 
 	//Aceasta functie arata partile din lectie pana la o intrebare la care nu sa raspuns/ nu sa raspuns corect
 	private async void showobjects(int index)
@@ -177,7 +188,7 @@ public partial class Lesson : Node2D
 		}
 	}
 	//Functie pentru intrebari
-	public void SendAnswers(bool correct, int index)
+	public void SendAnswers(bool correct, bool ignore, int index)
 	{
 		if(correct)
 		{	//Daca nu a fost deja raspuns
@@ -186,6 +197,7 @@ public partial class Lesson : Node2D
 				showobjects(index+1);
 				_node.GetChild<Quizitem>(index).Complete = true;
 
+				//Calculam cat la suta din lectie a fost citita si-l salvam progresul
 				questionansw = 0;
 				for (int i = 0; i <= _questions.Count-1; i++)
 				{
@@ -195,6 +207,7 @@ public partial class Lesson : Node2D
 				_data.currentStats.LessonCompletion[lessonid] = (questionansw + blocksread) * 100 / (totalquestioncount + totallessonblocks);
 				_data.WriteSave(_data.LoggedUser);
 			}
+			//Altfel, facem intrebarea verde pentru un moment
 			else
 			{	var tween = GetTree().CreateTween();
 				_node.GetChild<CanvasItem>(index).Modulate = new Color((float)0.05, 1, (float)0.05, 1);  //Culoare verde

@@ -14,7 +14,7 @@ Dezvoltat in Godot folosind C#
 
 ## Android
 
-  Android 12 sau mai nou, pe arhitectura arm64_v8a (arm 64 biti)
+  Android 10 sau mai nou, pe arhitectura arm64_v8a (arm 64 biti)
 
 # FAQ
 > **In pagina de Release sunt 2 versiuni. Care este diferenta dintre Full si Lite?**

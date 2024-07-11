@@ -3,18 +3,18 @@ Invata Linux de la zero
 Dezvoltat in Godot folosind C#
 
 # Platforme
-## - Windows
+## Windows
 
   Windows 10 si 11, pe arhitectura x86_64 (64 biti)
-## - Linux
+## Linux
 
   Arhitectura x86_64 (64 biti)
 
   Serverul de display recomandat: X11
 
-## - Android
+## Android
 
-  Android 12 sau mai nou, pe arhitecturile x86_64 si arm64_v8a
+  Android 10 sau mai nou, pe arhitectura arm64_v8a (arm 64 biti)
 
 # FAQ
 > **In pagina de Release sunt 2 versiuni. Care este diferenta dintre Full si Lite?**

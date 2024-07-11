@@ -97,6 +97,7 @@ public partial class NewVer : Control
 		
 		//Mai intai construim linkul catre Github in functie de versiunea noua, platforma si daca este Full sau Lite
 		StringBuilder linktosite = new StringBuilder("https://github.com/BTF2021/Zero2Linux/releases/download/v" + (string)_data.newversion[0] + "/Z2L");
+		request.DownloadFile = OS.GetExecutablePath().GetBaseDir() + "/Zero2Linux v" + (string)_data.newversion[0] + ".zip";
 		switch(OS.GetName())
 		{	case "Windows":
 				linktosite.Append(".Win.");
@@ -106,6 +107,7 @@ public partial class NewVer : Control
 				break;
 			case "Android":
 				linktosite = new StringBuilder("https://github.com/BTF2021/Zero2Linux/releases/download/v" + (string)_data.newversion[0] + "/Zero2Linux.apk");
+				request.DownloadFile = "/storage/emulated/0/Download/Zero2Linux v" + (string)_data.newversion[0] + ".apk";
 				break;
 		}
 
@@ -134,25 +136,16 @@ public partial class NewVer : Control
 			#if GODOT_ANDROID
 				GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/Download/Bar/ProgressBar/Text").Text = "Executarea apk-ului...";
 				GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/Download/Log/LogText").Text = "Executarea apk-ului /storage/emulated/0/Download/Zero2Linux v" + (string)_data.newversion[0] + ".apk";
-				var file = FileAccess.Open("/storage/emulated/0/Download/Zero2Linux v" + (string)_data.newversion[0] + ".apk", FileAccess.ModeFlags.Write);
-				file.StoreBuffer(body);
-				file.Close();
 				//NOTA: aplicatia necesita permisiunea android.permission.REQUEST_INSTALL_PACKAGES in custom permissions
 				OS.ShellOpen("/storage/emulated/0/Download/Zero2Linux v" + (string)_data.newversion[0] + ".apk");
-			#else
+				
+				//Desktop
 				//Tbh, ar fi fost tare daca ar fi aplicat update-ul direct in loc sa puna arhiva intr-un folder.
 				//Am incercat sa fac acest lucru, dar ar fi dat crash daca incerci sa suprascrii orice fisier din folder (data_Zero2Linux_ ...) sau
 				//orice alt fisier inafara de executabil.
 				//Executabilul in sine nu schimba versiunea si tot o sa ramana la versiunea veche, deci nu este de ajutor.
 				//Mi-ar trebui o aplicatie extra pentru actualizari pentru desktop, dar nu are sens daca asta este tot ce face.
 				//In viitor s-ar putea sa dezvolt aceasta aplicatie extra, dar pana atunci, avem acest cod de mai jos.
-				GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/Download/Bar/ProgressBar/Text").Text = "Copiere in folderul cu aplicatia...";
-				var file = FileAccess.Open("user://cache/Zero2Linux v" + (string)_data.newversion[0] + ".zip", FileAccess.ModeFlags.Write);
-				file.StoreBuffer(body);
-				file.Close();
-				GD.Print(OS.GetExecutablePath().GetBaseDir());
-				GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/Download/Log/LogText").Text = "Copiere arhivei in folderul cu executabilul";
-				DirAccess.RenameAbsolute("user://cache/Zero2Linux v" + (string)_data.newversion[0] + ".zip", OS.GetExecutablePath().GetBaseDir() + "/Zero2Linux v" + (string)_data.newversion[0] + ".zip");
 			#endif
 			GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/Download/Bar/ProgressBar/Text").Text = "Gata :D";
 			GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/Title5").Text = "\nDescarcarea a fost finalizata cu succes.";

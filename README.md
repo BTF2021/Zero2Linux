@@ -1,4 +1,4 @@
-Invata Linux de la zero
+![Invata Linux de la zero](https://github.com/BTF2021/Zero2Linux/blob/unstable/githubassets/Banner.gif)
 
 Dezvoltat in Godot folosind C#
 

@@ -1,4 +1,5 @@
 ![Invata Linux de la zero](https://github.com/BTF2021/Zero2Linux/blob/unstable/githubassets/Banner.gif)
+Zero2Linux este un proiect personal, creat pentru a-i invata pe cei mai putini familiarizati cu ecosistemul Linux sa foloseasca un desktop Linux.
 
 Dezvoltat in Godot folosind C#
 
@@ -19,13 +20,13 @@ Dezvoltat in Godot folosind C#
 # FAQ
 > **In pagina de Release sunt 2 versiuni. Care este diferenta dintre Full si Lite?**
 
-  In Lite este doar executabilul si folderul pentru .NET. In Full sunt toate fisierele din Lite plus fisiere statice FFmpeg (cu codecurile VP8, VP9 si Vorbis disponibile)
+  In Lite este doar executabilul si folderul pentru .NET. In Full sunt toate fisierele din Lite plus fisiere statice FFmpeg (cu decodoarele VP8 si Vorbis disponibile)
   pentru redarea videoclipurilor cum ar fi fundalul in meniul principal si videourile propriu zise
 > **De ce nu se pot reda videourile**
 
   1. Redarea videourilor nu este disponibila pe Android
-  2. In 90% din cazuri, nu ai fisierele statice FFmpeg pentru redarea videourilor.
-  In zipurile Full sunt incluse fisiere statice FFmpeg cu codecurile VP8, VP9 si Vorbis disponibile
+  2. In cele mai multe cazuri, nu ai fisierele statice FFmpeg pentru redarea videourilor.
+  In zipurile Full sunt incluse fisiere statice FFmpeg cu decodoarele VP8 si Vorbis disponibile
 
 # Cum se compileaza
 - Descarca codul sursa

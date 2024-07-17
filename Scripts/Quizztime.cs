@@ -11,6 +11,7 @@ public partial class Quizztime : Node2D
 	int intrebari = 0;
 	int corecte = 0;
 	int gresite = 0;
+	int timp = 120; //Timpul de rezolvare
 	Godot.Collections.Array chars = new Godot.Collections.Array(){"/", "%", "&", "$", "@", "$", "#", "(", ")", "-", "0", "O"};   //Pentru efectul de glitch
 	string randomstr = "";
 	public Timer timer;
@@ -36,7 +37,7 @@ public partial class Quizztime : Node2D
 			GetNode<Label>("Body/RemainedTime").Show();
 			timp_ramas = GetNode<Timer>("Timp");
 			timp_ramas.Timeout += _timp_scurs;
-			timp_ramas.Start(61);
+			timp_ramas.Start(timp);
 			if(!_data.currentStats.QNumOnly) _timeout();
 		}
 		if(!_data.currentStats.QNumOnly && _data.currentStats.Anims)
@@ -59,7 +60,7 @@ public partial class Quizztime : Node2D
 			GetNode<TextureButton>("Back").Hide();
 			GetNode<Node2D>("Transition").Show();
 			GetNode<Label>("Transition/Title").Text = GetNode<Label>("Body/Title").Text;
-			if(_data.questiontype == 1) GetNode<Label>("Transition/Title").Text = GetNode<Label>("Transition/Title").Text + "\nTimp de rezolvare: 1:00";
+			if(_data.questiontype == 1) GetNode<Label>("Transition/Title").Text = GetNode<Label>("Transition/Title").Text + "\nTimp de rezolvare: " + TimeSpan.FromSeconds(timp_ramas.TimeLeft).ToString("mm\\:ss");
 			var tween = GetTree().CreateTween();
 			var pos = Position;
 			pos.X = 0;

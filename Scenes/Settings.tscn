@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://1phgnjaru1ou"]
+[gd_scene load_steps=11 format=3 uid="uid://1phgnjaru1ou"]
 
 [ext_resource type="Script" path="res://Scripts/Settings.cs" id="1_5tuin"]
 [ext_resource type="Texture2D" uid="uid://dherg8j0a21h2" path="res://Sprites/CoursePanel.png" id="2_wmyog"]
 [ext_resource type="StyleBox" uid="uid://di87pu5wmffgt" path="res://Sprites/UINoHover.stylebox" id="3_yiypy"]
 [ext_resource type="StyleBox" uid="uid://drod6m1sbtikq" path="res://Sprites/UISettingsButton.stylebox" id="4_rkad0"]
 [ext_resource type="Texture2D" uid="uid://bqd1321xxqoej" path="res://Sprites/CloseButton.png" id="5_7cisg"]
+[ext_resource type="Texture2D" uid="uid://c1cjk57xd8mq2" path="res://Sprites/CloseButtonHighlight.png" id="6_beobs"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ijpad"]
 bg_color = Color(0, 0, 0, 0.411765)
@@ -441,6 +442,7 @@ offset_right = 359.811
 offset_bottom = -263.437
 scale = Vector2(1.1, 1.1)
 texture_normal = ExtResource("5_7cisg")
+texture_pressed = ExtResource("6_beobs")
 
 [node name="Label" type="Label" parent="Panel"]
 offset_left = -72.0

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dsrtl4q4of7qd"]
 
 [ext_resource type="Script" path="res://Scripts/Quizztime.cs" id="1_uw27w"]
-[ext_resource type="Texture2D" uid="uid://b1vo0cklpefq" path="res://Sprites/Back.png" id="2_ix61e"]
+[ext_resource type="Texture2D" uid="uid://cuv7m0o2p7huh" path="res://Sprites/Back.png" id="2_ix61e"]
 [ext_resource type="Texture2D" uid="uid://rsq42q4qde3" path="res://Sprites/BackHighlight.png" id="3_ea8q5"]
 [ext_resource type="PackedScene" uid="uid://duiw5l0ody1l" path="res://Scenes/Quizitem.tscn" id="4_jaieg"]
 [ext_resource type="StyleBox" uid="uid://c8ip85nk5v8ds" path="res://Sprites/UIButtons.stylebox" id="4_t31no"]
@@ -12,9 +12,9 @@ script = ExtResource("1_uw27w")
 metadata/_edit_vertical_guides_ = [-177.0]
 
 [node name="Back" type="TextureButton" parent="."]
-offset_right = 200.0
-offset_bottom = 200.0
-scale = Vector2(0.25, 0.25)
+offset_right = 40.0
+offset_bottom = 38.0
+scale = Vector2(2, 2)
 texture_normal = ExtResource("2_ix61e")
 texture_pressed = ExtResource("3_ea8q5")
 

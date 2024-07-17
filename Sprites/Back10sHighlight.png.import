@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cuv7m0o2p7huh"
-path="res://.godot/imported/Back.png-bf612f83a6288ecb83cda6187e881290.ctex"
+uid="uid://ck5jia42xqrms"
+path="res://.godot/imported/Back10sHighlight.png-4f4ad2338e8e2d8764a31f98e92f7846.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Back.png"
-dest_files=["res://.godot/imported/Back.png-bf612f83a6288ecb83cda6187e881290.ctex"]
+source_file="res://Sprites/Back10sHighlight.png"
+dest_files=["res://.godot/imported/Back10sHighlight.png-4f4ad2338e8e2d8764a31f98e92f7846.ctex"]
 
 [params]
 

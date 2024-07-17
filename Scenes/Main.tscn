@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b4gdupblxidyf"]
+[gd_scene load_steps=9 format=3 uid="uid://b4gdupblxidyf"]
 
 [ext_resource type="Script" path="res://Scripts/Main.cs" id="1_c7d67"]
 [ext_resource type="StyleBox" uid="uid://di87pu5wmffgt" path="res://Sprites/UINoHover.stylebox" id="2_0hv5f"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://bid2ssfeh2pfy" path="res://Sprites/Bar.png" id="3_ocyen"]
 [ext_resource type="Texture2D" uid="uid://2k0tqngjaab8" path="res://Sprites/Power.png" id="4_q207a"]
 [ext_resource type="Texture2D" uid="uid://hbrqsdt4laac" path="res://Sprites/Logout.png" id="6_8su00"]
+[ext_resource type="Texture2D" uid="uid://drgkb2u3g5c1c" path="res://Sprites/PowerHighlight.png" id="6_kgrc2"]
+[ext_resource type="Texture2D" uid="uid://e5veq36hyvl8" path="res://Sprites/LogoutHighlight.png" id="8_mufyl"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_c7d67")
@@ -130,11 +132,13 @@ theme_override_constants/separation = 5
 layout_mode = 2
 tooltip_text = "Oprire calculator"
 texture_normal = ExtResource("4_q207a")
+texture_pressed = ExtResource("6_kgrc2")
 
 [node name="Logout" type="TextureButton" parent="UI/Bar/HBoxContainer"]
 layout_mode = 2
 tooltip_text = "Delogare"
 texture_normal = ExtResource("6_8su00")
+texture_pressed = ExtResource("8_mufyl")
 
 [node name="vSeparator" type="VSeparator" parent="UI/Bar/HBoxContainer"]
 visible = false

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dkrwuagt06eee"]
+[gd_scene load_steps=6 format=3 uid="uid://dkrwuagt06eee"]
 
 [ext_resource type="Script" path="res://Scripts/Quizzes.cs" id="1_2xhny"]
 [ext_resource type="Texture2D" uid="uid://dherg8j0a21h2" path="res://Sprites/CoursePanel.png" id="2_l88yu"]
 [ext_resource type="Texture2D" uid="uid://bqd1321xxqoej" path="res://Sprites/CloseButton.png" id="3_1ijik"]
+[ext_resource type="Texture2D" uid="uid://c1cjk57xd8mq2" path="res://Sprites/CloseButtonHighlight.png" id="4_tdx1f"]
 [ext_resource type="StyleBox" uid="uid://c8ip85nk5v8ds" path="res://Sprites/UIButtons.stylebox" id="5_6ssof"]
 
 [node name="Quizzes" type="Control"]
@@ -40,6 +41,7 @@ offset_right = 361.334
 offset_bottom = -262.0
 scale = Vector2(1.1, 1.1)
 texture_normal = ExtResource("3_1ijik")
+texture_pressed = ExtResource("4_tdx1f")
 
 [node name="Requirement" type="Label" parent="Panel"]
 visible = false

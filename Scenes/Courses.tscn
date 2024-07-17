@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bcd574anctpct"]
+[gd_scene load_steps=6 format=3 uid="uid://bcd574anctpct"]
 
 [ext_resource type="Script" path="res://Scripts/Courses.cs" id="1_bnupo"]
 [ext_resource type="Texture2D" uid="uid://bqd1321xxqoej" path="res://Sprites/CloseButton.png" id="3_ixxbh"]
 [ext_resource type="Texture2D" uid="uid://dherg8j0a21h2" path="res://Sprites/CoursePanel.png" id="3_thy4c"]
+[ext_resource type="Texture2D" uid="uid://c1cjk57xd8mq2" path="res://Sprites/CloseButtonHighlight.png" id="4_n2rmg"]
 [ext_resource type="Theme" uid="uid://c3r51fw2bo66h" path="res://Sprites/CourseUI.theme" id="4_wibqq"]
 
 [node name="Courses" type="Control"]
@@ -29,6 +30,7 @@ offset_right = 362.0
 offset_bottom = -263.0
 scale = Vector2(1.1, 1.1)
 texture_normal = ExtResource("3_ixxbh")
+texture_pressed = ExtResource("4_n2rmg")
 
 [node name="Label" type="Label" parent="Panel"]
 offset_left = -72.0

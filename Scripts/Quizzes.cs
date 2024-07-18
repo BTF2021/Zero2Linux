@@ -73,8 +73,7 @@ public partial class Quizzes : Control
 		else GetTree().ChangeSceneToFile("res://Scenes/Quizztime.tscn");
 	}
 	private void _on_test_entered() => GetNode<Label>("Panel/Settings/Description2").Text = "In modul test, se genereaza un chestionar aleatoriu." +
-	"\nAi un minut pentru rezolvare" +
-	"\nPentru a trece testul, se poate gresi de maxim 3 ori!" + 
+	"\nAi doua minute pentru rezolvare" +
 	"\nNumarul raspunsurilor corecte si gresite se vor arata la finalul testului" + 
 	"\nMult noroc";
 	

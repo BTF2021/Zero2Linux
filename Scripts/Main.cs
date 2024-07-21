@@ -11,12 +11,10 @@ public partial class Main : Node2D
 	{	_data = (DefaultData)GetNode("/root/DefaultData");
 		_data.ReadSave(_data.LoggedUser);
 		Download += down;
-		#if GODOT_WINDOWS || GODOT_LINUXBSD
-			if(_data.isvideoavailable)
-			{	var bg = (ResourceLoader.Load<PackedScene>("res://Scenes/MainBg.tscn")).Instantiate();
-				GetNode<Node2D>("UI/Bg").AddChild(bg);
-			}
-		#elif GODOT_ANDROID
+		if(!_data.currentStats.Anims)
+		{	GetNode("UI/Bg/Bg").QueueFree();
+		}
+		#if GODOT_ANDROID
 			GetNode<TextureButton>("UI/Bar/HBoxContainer/Power").QueueFree();
 		#endif
 		//Preluam de pe Github fisierul version.txt

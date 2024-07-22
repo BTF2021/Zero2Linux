@@ -60,10 +60,11 @@ vertical_alignment = 1
 
 [node name="Panel" type="Panel" parent="Panel"]
 self_modulate = Color(1, 1, 1, 0.34902)
+clip_contents = true
 offset_left = -372.0
 offset_top = -258.0
 offset_right = 373.0
-offset_bottom = 305.0
+offset_bottom = 144.0
 size_flags_horizontal = 6
 size_flags_vertical = 6
 
@@ -71,7 +72,7 @@ size_flags_vertical = 6
 layout_mode = 0
 offset_left = -1.0
 offset_right = 751.0
-offset_bottom = 563.0
+offset_bottom = 403.0
 scale = Vector2(0.990243, 0.997076)
 horizontal_scroll_mode = 0
 
@@ -129,12 +130,36 @@ autowrap_mode = 3
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Panel/ScrollContainer/VBoxContainer"]
+[node name="Download" type="Panel" parent="Panel"]
+offset_left = -372.0
+offset_top = 144.0
+offset_right = 373.0
+offset_bottom = 305.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Download"]
+clip_contents = true
+custom_minimum_size = Vector2(744, 0)
+layout_mode = 2
+offset_left = -1.0
+offset_right = 744.0
+offset_bottom = 161.0
+theme_override_constants/separation = 1
+
+[node name="hSeparator" type="HSeparator" parent="Panel/Download/VBoxContainer"]
+layout_mode = 2
+
+[node name="marginContainer2" type="MarginContainer" parent="Panel/Download/VBoxContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Download/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 3
 alignment = 1
 
-[node name="Go" type="Button" parent="Panel/Panel/ScrollContainer/VBoxContainer/HBoxContainer"]
+[node name="Go" type="Button" parent="Panel/Download/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(134, 0)
 layout_mode = 2
 mouse_filter = 1
@@ -142,7 +167,7 @@ theme_override_font_sizes/font_size = 25
 theme_override_styles/normal = ExtResource("3_5n7a8")
 text = "Github"
 
-[node name="Download" type="Button" parent="Panel/Panel/ScrollContainer/VBoxContainer/HBoxContainer"]
+[node name="Download" type="Button" parent="Panel/Download/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(134, 0)
 layout_mode = 2
 mouse_filter = 1
@@ -150,29 +175,29 @@ theme_override_font_sizes/font_size = 25
 theme_override_styles/normal = ExtResource("3_5n7a8")
 text = "Descarca"
 
-[node name="marginContainer3" type="MarginContainer" parent="Panel/Panel/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
+[node name="marginContainer3" type="MarginContainer" parent="Panel/Download/VBoxContainer"]
+custom_minimum_size = Vector2(0, 5)
 layout_mode = 2
 
-[node name="Download" type="VBoxContainer" parent="Panel/Panel/ScrollContainer/VBoxContainer"]
+[node name="Download" type="VBoxContainer" parent="Panel/Download/VBoxContainer"]
 visible = false
 layout_mode = 2
 
-[node name="Bar" type="HBoxContainer" parent="Panel/Panel/ScrollContainer/VBoxContainer/Download"]
+[node name="Bar" type="HBoxContainer" parent="Panel/Download/VBoxContainer/Download"]
 layout_mode = 2
 theme_override_constants/separation = 3
 
-[node name="marginContainer3" type="MarginContainer" parent="Panel/Panel/ScrollContainer/VBoxContainer/Download/Bar"]
-custom_minimum_size = Vector2(20, 0)
+[node name="marginContainer3" type="MarginContainer" parent="Panel/Download/VBoxContainer/Download/Bar"]
+custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
 
-[node name="ProgressBar" type="TextureProgressBar" parent="Panel/Panel/ScrollContainer/VBoxContainer/Download/Bar"]
+[node name="ProgressBar" type="TextureProgressBar" parent="Panel/Download/VBoxContainer/Download/Bar"]
 custom_minimum_size = Vector2(673, 40)
 layout_mode = 2
 texture_under = SubResource("GradientTexture2D_7ixn1")
 texture_progress = SubResource("GradientTexture2D_qfq45")
 
-[node name="Text" type="Label" parent="Panel/Panel/ScrollContainer/VBoxContainer/Download/Bar/ProgressBar"]
+[node name="Text" type="Label" parent="Panel/Download/VBoxContainer/Download/Bar/ProgressBar"]
 layout_mode = 0
 offset_right = 708.0
 offset_bottom = 40.0
@@ -181,45 +206,41 @@ text = "0mb / 0mb"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="marginContainer4" type="MarginContainer" parent="Panel/Panel/ScrollContainer/VBoxContainer/Download/Bar"]
+[node name="marginContainer4" type="MarginContainer" parent="Panel/Download/VBoxContainer/Download/Bar"]
 custom_minimum_size = Vector2(3, 0)
 layout_mode = 2
 
-[node name="Cancel" type="TextureButton" parent="Panel/Panel/ScrollContainer/VBoxContainer/Download/Bar"]
+[node name="Cancel" type="TextureButton" parent="Panel/Download/VBoxContainer/Download/Bar"]
 layout_mode = 2
 texture_normal = ExtResource("3_xnevs")
 
-[node name="Debug" type="HBoxContainer" parent="Panel/Panel/ScrollContainer/VBoxContainer/Download"]
+[node name="Debug" type="HBoxContainer" parent="Panel/Download/VBoxContainer/Download"]
 layout_mode = 2
 theme_override_constants/separation = 3
 alignment = 1
 
-[node name="DebugBox" type="CheckBox" parent="Panel/Panel/ScrollContainer/VBoxContainer/Download/Debug"]
+[node name="DebugBox" type="CheckBox" parent="Panel/Download/VBoxContainer/Download/Debug"]
 layout_mode = 2
 text = "Activeaza modul debug"
 
-[node name="Log" type="HBoxContainer" parent="Panel/Panel/ScrollContainer/VBoxContainer/Download"]
+[node name="Log" type="HBoxContainer" parent="Panel/Download/VBoxContainer/Download"]
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 3
 
-[node name="marginContainer4" type="MarginContainer" parent="Panel/Panel/ScrollContainer/VBoxContainer/Download/Log"]
+[node name="marginContainer4" type="MarginContainer" parent="Panel/Download/VBoxContainer/Download/Log"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
-[node name="LogText" type="Label" parent="Panel/Panel/ScrollContainer/VBoxContainer/Download/Log"]
+[node name="LogText" type="Label" parent="Panel/Download/VBoxContainer/Download/Log"]
 custom_minimum_size = Vector2(730, 0)
 layout_mode = 2
 autowrap_mode = 3
 
-[node name="marginContainer2" type="MarginContainer" parent="Panel/Panel/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-
 [connection signal="button_down" from="Panel/Drag" to="." method="_on_drag_down"]
 [connection signal="button_up" from="Panel/Drag" to="." method="_on_drag_up"]
 [connection signal="pressed" from="Panel/Skip" to="." method="_on_skip_pressed"]
-[connection signal="pressed" from="Panel/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Go" to="." method="_on_go_pressed"]
-[connection signal="pressed" from="Panel/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Download" to="." method="_on_download_pressed"]
-[connection signal="pressed" from="Panel/Panel/ScrollContainer/VBoxContainer/Download/Bar/Cancel" to="." method="_on_cancel_pressed"]
-[connection signal="pressed" from="Panel/Panel/ScrollContainer/VBoxContainer/Download/Debug/DebugBox" to="." method="_on_debug_pressed"]
+[connection signal="pressed" from="Panel/Download/VBoxContainer/HBoxContainer/Go" to="." method="_on_go_pressed"]
+[connection signal="pressed" from="Panel/Download/VBoxContainer/HBoxContainer/Download" to="." method="_on_download_pressed"]
+[connection signal="pressed" from="Panel/Download/VBoxContainer/Download/Bar/Cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="Panel/Download/VBoxContainer/Download/Debug/DebugBox" to="." method="_on_debug_pressed"]

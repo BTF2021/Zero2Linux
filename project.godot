@@ -20,6 +20,7 @@ config/icon="res://Icon.png"
 [autoload]
 
 DefaultData="*res://Scripts/DefaultData.cs"
+Transition="*res://Scenes/Transition.tscn"
 
 [display]
 

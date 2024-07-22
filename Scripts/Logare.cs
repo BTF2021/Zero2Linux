@@ -217,6 +217,8 @@ public partial class Logare : Node2D
 		pos1.Y = pos1.Y - 30;
 		tween.Parallel().TweenProperty(GetNode<Label>("Bg/Time"), "position", pos1, 0.5);
 		tween.Parallel().TweenProperty(GetNode<Label>("Bg/Time"), "modulate", new Color(1, 1, 1, 0), 0.5);
+		//Aceasta instructiune este motivul pentru care exista o alta scena in Autoload
+		//In timpul in care Godot a eliberat din memorie aceasta scena si incarca scena Main, o sa apara gri
 		tween.Finished += () => GetTree().ChangeSceneToFile("res://Scenes/Main.tscn");
 	}
 	

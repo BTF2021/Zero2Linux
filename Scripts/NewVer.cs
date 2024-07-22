@@ -64,7 +64,18 @@ public partial class NewVer : Control
 
 	private void _on_cancel_pressed()
 	{	request.CancelRequest();
-		GetNode("/root").GetChild(1).EmitSignal("Download", 0);
+		switch(OS.GetName())
+		{	case "Windows":
+				DirAccess.RemoveAbsolute(OS.GetExecutablePath().GetBaseDir() + "/Zero2Linux v" + (string)_data.newversion[0] + ".zip");
+				break;
+			case "Linux":
+				DirAccess.RemoveAbsolute(OS.GetExecutablePath().GetBaseDir() + "/Zero2Linux v" + (string)_data.newversion[0] + ".zip");
+				break;
+			case "Android":
+				DirAccess.RemoveAbsolute("/storage/emulated/0/Download/Zero2Linux v" + (string)_data.newversion[0] + ".apk");
+				break;
+		}
+		GetNode("/root").GetChild(-1).EmitSignal("Download", 0);
 		GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/Title4").Visible = true;
 		GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/Title5").Visible = false;
 		GetNode<CanvasItem>("Panel/Panel/ScrollContainer/VBoxContainer/Download").Visible = false;
@@ -93,7 +104,7 @@ public partial class NewVer : Control
 		GetNode<CanvasItem>("Panel/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Download").Hide();
 		GetNode<TextureButton>("Panel/Skip").Disabled = true;
 		GetNode<CanvasItem>("Panel/Skip").Visible = false;
-		GetNode("/root").GetChild(1).EmitSignal("Download", 1);
+		GetNode("/root").GetChild(-1).EmitSignal("Download", 1);
 		
 		//Mai intai construim linkul catre Github in functie de versiunea noua, platforma si daca este Full sau Lite
 		StringBuilder linktosite = new StringBuilder("https://github.com/BTF2021/Zero2Linux/releases/download/v" + (string)_data.newversion[0] + "/Z2L");
@@ -118,7 +129,6 @@ public partial class NewVer : Control
 		GD.Print(linktosite.ToString());
 
 		//Descarcam arhiva/apkul
-		if(!DirAccess.DirExistsAbsolute("user://cache")) DirAccess.MakeDirAbsolute("user://cache");
 		request.RequestRaw(linktosite.ToString(), new string[] {});
 		dwn = true;
 		GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/Download/Log/LogText").Text = "Descarcare de pe site-ul " + linktosite;

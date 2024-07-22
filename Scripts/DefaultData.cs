@@ -108,31 +108,6 @@ public partial class DefaultData : Node
 		#endif
 
 		GD.Print("Videouri disponibile: " + isvideoavailable);
-
-		#if GODOT_LINUXBSD || GODOT_WINDOWS
-			//Daca nu exista folder de cache, facem unul. Altfel, golim pe cel existent
-			if(!DirAccess.DirExistsAbsolute("user://cache")) DirAccess.MakeDirAbsolute("user://cache");
-			else CleanUpFolder("user://cache");
-		#endif
-	}
-	//Functie recursiva pentru GOLIREA unui anumit folder, din moment ce DirAccess nu poate sterge foldere cu fisiere in el
-	//AVETI GRIJA CU ACEASTA FUNCTIE, DEOARECE CONTINUTUL STERS NU POATE FI RECUPERAT!!!
-	private void CleanUpFolder(string path)
-	{	
-		#if GODOT_LINUXBSD || GODOT_WINDOWS
-			var files = DirAccess.Open(path);
-			files.IncludeNavigational = false;
-			System.Array filearray = files.GetFiles();
-			for (int i = 0; i < filearray.Length; i++) DirAccess.RemoveAbsolute(path + "/" + (string)(filearray.GetValue(i)));
-			filearray = files.GetDirectories();
-			for (int i = 0; i < filearray.Length; i++) 
-			{
-				CleanUpFolder(path + "/" + (string)(filearray.GetValue(i)));
-				DirAccess.RemoveAbsolute(path + "/" + (string)(filearray.GetValue(i)));
-			}
-		#else 
-			GD.Print("Aceasta functie nu este disponibila pe Android");
-		#endif
 	}
 	public bool SaveExists()
 	{	System.Array filearray = DirAccess.GetFilesAt("user://");

@@ -43,9 +43,10 @@ texture = ExtResource("2_wmyog")
 
 [node name="Settings" type="TabContainer" parent="Panel"]
 offset_left = -373.0
-offset_top = -286.0
+offset_top = -293.0
 offset_right = 373.0
 offset_bottom = 303.0
+theme_override_font_sizes/font_size = 18
 theme_override_styles/panel = SubResource("StyleBoxFlat_ijpad")
 theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_64lay")
 clip_tabs = false

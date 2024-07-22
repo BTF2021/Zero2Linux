@@ -199,7 +199,25 @@ public partial class Logare : Node2D
 	private void logging(string name)
 	{	_data.LoggedUser = name;
 		GD.Print("Logat in: " + name);
-		GetTree().ChangeSceneToFile("res://Scenes/Main.tscn");
+		
+		//Dezactiveaza toate butoanele
+		for(int i = 0; i< GetNode<HBoxContainer>("Profiles/List").GetChildCount(); i++) 
+			GetNode<HBoxContainer>("Profiles/List").GetChild<Button>(i).Disabled = true;
+		
+		var pos = Position;
+		pos.X = 0;
+		pos.Y = 254;
+		GetNode<Control>("Profiles").Position = pos;
+		pos.Y = 254 - 30;
+		GetNode<Control>("Profiles").Modulate = new Color(1, 1, 1, 1);
+		var tween = GetTree().CreateTween();
+		tween.TweenProperty(GetNode<Control>("Profiles"), "modulate", new Color(1, 1, 1, 0), 0.5);
+		tween.Parallel().TweenProperty(GetNode<Control>("Profiles"), "position", pos, 0.5);
+		var pos1 = GetNode<Label>("Bg/Time").Position;
+		pos1.Y = pos1.Y - 30;
+		tween.Parallel().TweenProperty(GetNode<Label>("Bg/Time"), "position", pos1, 0.5);
+		tween.Parallel().TweenProperty(GetNode<Label>("Bg/Time"), "modulate", new Color(1, 1, 1, 0), 0.5);
+		tween.Finished += () => GetTree().ChangeSceneToFile("res://Scenes/Main.tscn");
 	}
 	
 	//Functie pentru adaugarea profilelor existente

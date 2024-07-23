@@ -211,12 +211,12 @@ public partial class Logare : Node2D
 		pos.Y = 254 - 30;
 		GetNode<Control>("Profiles").Modulate = new Color(1, 1, 1, 1);
 		var tween = GetTree().CreateTween();
-		tween.TweenProperty(GetNode<Control>("Profiles"), "modulate", new Color(1, 1, 1, 0), 0.5);
-		tween.Parallel().TweenProperty(GetNode<Control>("Profiles"), "position", pos, 0.5);
+		tween.TweenProperty(GetNode<Control>("Profiles"), "modulate", new Color(1, 1, 1, 0), 0.3);
+		tween.Parallel().TweenProperty(GetNode<Control>("Profiles"), "position", pos, 0.3);
 		var pos1 = GetNode<Label>("Bg/Time").Position;
 		pos1.Y = pos1.Y - 30;
-		tween.Parallel().TweenProperty(GetNode<Label>("Bg/Time"), "position", pos1, 0.5);
-		tween.Parallel().TweenProperty(GetNode<Label>("Bg/Time"), "modulate", new Color(1, 1, 1, 0), 0.5);
+		tween.Parallel().TweenProperty(GetNode<Label>("Bg/Time"), "position", pos1, 0.3);
+		tween.Parallel().TweenProperty(GetNode<Label>("Bg/Time"), "modulate", new Color(1, 1, 1, 0), 0.3);
 		//Aceasta instructiune este motivul pentru care exista o alta scena in Autoload
 		//In timpul in care Godot a eliberat din memorie aceasta scena si incarca scena Main, o sa apara gri
 		tween.Finished += () => GetTree().ChangeSceneToFile("res://Scenes/Main.tscn");

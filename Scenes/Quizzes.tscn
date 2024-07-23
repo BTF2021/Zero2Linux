@@ -119,7 +119,7 @@ text = "Antrenament"
 [node name="Test" type="Button" parent="Panel/Settings/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-tooltip_text = "Alege un chestionar dintr-o lectie"
+tooltip_text = "Genereaza un test din intrebari deja parcurse"
 theme_override_styles/normal = ExtResource("5_6ssof")
 text = "Test"
 

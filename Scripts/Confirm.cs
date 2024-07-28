@@ -11,6 +11,23 @@ public partial class Confirm : Node2D
 	{	_data = (DefaultData)GetNode("/root/DefaultData");
 		timer = GetNode<Timer>("timer");
 		timeout = false;
+		if(_data.currentStats.Anims)
+		{	var scale = Scale;
+			var pos = Position;
+			scale.X = (float)0.75;
+			scale.Y = (float)0.75;
+			pos.X = 520;
+			pos.Y = 248;
+			GetNode<Panel>("Settings").Position = pos;
+			GetNode<Panel>("Settings").Scale = scale;
+			scale.X = (float)1.5;
+			scale.Y = (float)1.5;
+			pos.X = 389;
+			pos.Y = 182;
+			var tween = GetTree().CreateTween();
+			tween.TweenProperty(GetNode<Panel>("Settings"), "position", pos, 0.5).SetTrans(Tween.TransitionType.Expo).SetEase(Tween.EaseType.Out);
+			tween.Parallel().TweenProperty(GetNode<Panel>("Settings"), "scale", scale, 0.5).SetTrans(Tween.TransitionType.Expo).SetEase(Tween.EaseType.Out);
+		}
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

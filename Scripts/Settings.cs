@@ -178,7 +178,7 @@ public partial class Settings : Control
 		_data.currentStats.FavColor = color;
 		_data.WriteSave(_data.LoggedUser);
 	}
-	private void _on_delete_pressed() => AddChild((GD.Load<PackedScene>("res://Scenes/Confirma.tscn")).Instantiate());
+	private void _on_delete_pressed() => AddChild((GD.Load<PackedScene>("res://Scenes/Confirm.tscn")).Instantiate());
 
 	private void _on_drag_down()
 	{	GD.Print("Hi");

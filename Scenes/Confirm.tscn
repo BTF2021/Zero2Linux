@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dp66hckm2wrqb"]
 
-[ext_resource type="Script" path="res://Scripts/Confirma.cs" id="1_da6qr"]
+[ext_resource type="Script" path="res://Scripts/Confirm.cs" id="1_o4va3"]
 [ext_resource type="Shader" path="res://Scripts/Simple blur.gdshader" id="2_ijycy"]
 [ext_resource type="StyleBox" uid="uid://c8ip85nk5v8ds" path="res://Sprites/UIButtons.stylebox" id="3_ufrb6"]
 [ext_resource type="StyleBox" uid="uid://di87pu5wmffgt" path="res://Sprites/UINoHover.stylebox" id="4_q4w62"]
@@ -26,7 +26,7 @@ corner_radius_bottom_left = 6
 [node name="Confirma" type="Node2D"]
 top_level = true
 z_index = 99
-script = ExtResource("1_da6qr")
+script = ExtResource("1_o4va3")
 
 [node name="Blur" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_v230m")

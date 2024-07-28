@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Confirma : Node2D
+public partial class Confirm : Node2D
 {
 	private DefaultData _data;
 	public Timer timer;

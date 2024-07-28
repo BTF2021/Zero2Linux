@@ -10,6 +10,7 @@ public partial class Main : Node2D
 	public override void _Ready()
 	{	_data = (DefaultData)GetNode("/root/DefaultData");
 		_data.ReadSave(_data.LoggedUser);
+		GetNode<CanvasItem>("/root/Transition").Hide(); //A se vedea funtia logging din Logare.cs
 		Download += down;
 		if(!_data.currentStats.Anims)
 		{	GetNode("UI/Bg/Bg").QueueFree();

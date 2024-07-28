@@ -14,6 +14,7 @@ public partial class Logare : Node2D
 		_profile = GetNode<Button>("Profiles/List/>,,<");
 		_names = new string[7];
 		GetNode<Label>("Bg/Version").Text = "Zero2Linux Ver " + (String)ProjectSettings.GetSetting("application/config/version");
+		GetNode<CanvasItem>("/root/Transition").Show(); //A se vedea funtia logging
 		CheckUsers();
 		GetNode<Control>("Profiles").Visible = false;
 		GetNode<Control>("NoUser").Visible = false;
@@ -219,6 +220,7 @@ public partial class Logare : Node2D
 		tween.Parallel().TweenProperty(GetNode<Label>("Bg/Time"), "modulate", new Color(1, 1, 1, 0), 0.3);
 		//Aceasta instructiune este motivul pentru care exista o alta scena in Autoload
 		//In timpul in care Godot a eliberat din memorie aceasta scena si incarca scena Main, o sa apara gri
+		//De aceea aratam scena Transition in _Ready()
 		tween.Finished += () => GetTree().ChangeSceneToFile("res://Scenes/Main.tscn");
 	}
 	

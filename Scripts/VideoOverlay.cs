@@ -55,6 +55,14 @@ public partial class VideoOverlay : Node2D
 		else if(_volume.Value == 10)GetNode<Label>("ControlsTint/Controls/Volum/VolumeNum").Text = "Volum: Max";
 		else GetNode<Label>("ControlsTint/Controls/Volum/VolumeNum").Text = "Volum: " + (_volume.Value + 11).ToString();
 	}
+	public override void _UnhandledInput(InputEvent input)
+	{	if (input is InputEventKey eventKey)
+        	if (eventKey.Pressed)
+			{	if(eventKey.Keycode == Key.Space) _on_play_pressed();
+				if(eventKey.Keycode == Key.Right) _on_forward_pressed();
+				if(eventKey.Keycode == Key.Left) _on_backward_pressed();
+			}
+	}
 	private void _on_play_pressed()
 	{
 		//Daca nu a dat play, porneste. Altfel pauza

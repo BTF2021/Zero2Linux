@@ -81,7 +81,7 @@ public partial class Quizitem : PanelContainer
 			else if(answ != i && (bool)a[i-1] != false) ok = false; 
 		}
 		if(ok) ShowCorrect();
-		GetNode("/root").GetChild(1).EmitSignal("GetAnswers", ok, false, Index);
+		GetNode("/root").GetChild(-1).EmitSignal("GetAnswers", ok, false, Index);
 	}
 	private void _on_skip_pressed() => GetNode("/root").GetChild(1).EmitSignal("Skip");
 	private void ShowCorrect()

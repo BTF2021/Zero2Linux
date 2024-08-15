@@ -112,6 +112,7 @@ public partial class Quizztime : Node2D
 		_data.questiontype = 0;
 		GetTree().ChangeSceneToFile("res://Scenes/Main.tscn");
 	}
+	private void _on_retry_pressed() => GetTree().ReloadCurrentScene();
 	public void SendAnswers(bool correct, bool ignore, int index)
 	{	//Ignore este mai mult pentru functia de sarit peste
 		if(!ignore)
@@ -255,9 +256,11 @@ public partial class Quizztime : Node2D
 	private async void QuestionFinished()
 	{	GetNode<Timer>("Timp").Stop();
 		GetNode<Timer>("ShakeTimer").Stop();
+		GetNode<TextureButton>("Back").Disabled = true;
 		var tween = GetTree().CreateTween();
 		tween.TweenProperty(GetNode<Label>("Body/Title"), "modulate", new Color(1, 1, 1, 0), 0.25);
 		tween.Parallel().TweenProperty(GetNode<Label>("Body/RemainedTime"), "modulate", new Color(1, 1, 1, 0), 0.25);
+		tween.Parallel().TweenProperty(GetNode<TextureButton>("Back"), "modulate", new Color(1, 1, 1, 0), 0.25);
 		await ToSignal(tween, Tween.SignalName.Finished);
 		tween.Stop();
 		tween = GetTree().CreateTween();
@@ -328,6 +331,10 @@ public partial class Quizztime : Node2D
 				GetNode<Label>("Feedback").Text = "Citeste cu atentie intrebarile.";
 				break;
 		}
+		GetNode<Button>("Exit").Visible = true;
+		GetNode<Button>("Retry").Visible = true;
 		tween.TweenProperty(GetNode<Label>("Feedback"), "self_modulate", new Color(1, 1, 1, 1), 0.25).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+		tween.TweenProperty(GetNode<Button>("Exit"), "self_modulate", new Color(1, 1, 1, 1), 0.2).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+		tween.TweenProperty(GetNode<Button>("Retry"), "self_modulate", new Color(1, 1, 1, 1), 0.2).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
 	}
 }

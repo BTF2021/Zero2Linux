@@ -101,6 +101,34 @@ theme_override_styles/focus = ExtResource("5_g1hxa")
 theme_override_styles/normal = ExtResource("4_t31no")
 text = "Continua"
 
+[node name="Exit" type="Button" parent="."]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(120, 30)
+offset_left = 400.0
+offset_top = 496.0
+offset_right = 603.0
+offset_bottom = 560.0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = ExtResource("5_g1hxa")
+theme_override_styles/normal = ExtResource("4_t31no")
+text = "Iesire"
+
+[node name="Retry" type="Button" parent="."]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(120, 30)
+offset_left = 616.0
+offset_top = 496.0
+offset_right = 962.0
+offset_bottom = 560.0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = ExtResource("5_g1hxa")
+theme_override_styles/normal = ExtResource("4_t31no")
+text = "Incearca alt chestionar"
+
 [node name="Reference" type="Control" parent="."]
 visible = false
 layout_mode = 3
@@ -132,3 +160,5 @@ vertical_alignment = 1
 
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="Exit" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Retry" to="." method="_on_retry_pressed"]

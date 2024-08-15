@@ -60,13 +60,13 @@ public partial class Lesson : Node2D
 		totalquestioncount = 0;
 		totallessonblocks = 0;
 		for (int i = 0; i <= _node.GetChildCount()-1; i++)
-		{	if(_node.GetChild(i).Name.ToString().Match("Quizitem"))
+		{	if(_node.GetChild(i).Name.ToString().Contains("Quizitem"))
 			{	_node.GetChild<Quizitem>(i).Index = i;
 				_node.GetChild<Quizitem>(i).Complete = false;
 				_questions.Add((Quizitem)_node.GetChild<Quizitem>(i));
 				totalquestioncount++;
 			}
-			else if(_node.GetChild(i).Name.ToString().Match("Block")) totallessonblocks++;
+			else if(_node.GetChild(i).Name.ToString().Contains("Block")) totallessonblocks++;
 		}
 
 		//Aici aratam lectia in fuctie de progresul salvat (daca este sub 100%)
@@ -75,7 +75,7 @@ public partial class Lesson : Node2D
 		{
 			//Luam tot ce este in Content si adaugam nr de intrebari si blocuri si calculam progresul
 			//Pana cand acesta este egal cu progresul salvat (Daca nu a fost modificat save.json folosind surse externe)
-			//GD.Print(questionansw + "/" + totalquestioncount + " " + blocksread + "/" + totallessonblocks + " " + calc);
+			GD.Print("Intainte de calcule: " + questionansw + "/" + totalquestioncount + " " + blocksread + "/" + totallessonblocks + " " + (questionansw + blocksread) * 100 / (totalquestioncount + totallessonblocks));
 			for (int i = 0; i <= _node.GetChildCount()-1; i++)
 			{	var calc = (questionansw + blocksread) * 100 / (totalquestioncount + totallessonblocks);
 				//Daca am ajuns la progresul din save.json
@@ -84,13 +84,13 @@ public partial class Lesson : Node2D
 					showobjects(i);
 					break;
 				}
-				GD.Print(questionansw + "/" + totalquestioncount + " " + blocksread + "/" + totallessonblocks + " " + calc);
+				GD.Print(questionansw + "/" + totalquestioncount + " " + blocksread + "/" + totallessonblocks + " " + (questionansw + blocksread) * 100 / (totalquestioncount + totallessonblocks));
 				//Altfel continuam
-				if(_node.GetChild(i).Name.ToString().Match("Quizitem")) 
+				if(_node.GetChild(i).Name.ToString().Contains("Quizitem")) 
 				{	_node.GetChild<Quizitem>(i).Complete = true;
 					questionansw++;
 				}
-				else if(_node.GetChild(i).Name.ToString().Match("Block")) blocksread++;
+				else if(_node.GetChild(i).Name.ToString().Contains("Block")) blocksread++;
 			}
 		}
 		//100%
@@ -98,7 +98,7 @@ public partial class Lesson : Node2D
 		else if (_data.currentStats.LessonCompletion[lessonid] == 100)
 		{
 			for (int i = 0; i <= _node.GetChildCount()-1; i++)
-				if(_node.GetChild(i).Name.ToString().Match("Quizitem")) 
+				if(_node.GetChild(i).Name.ToString().Contains("Quizitem")) 
 					_node.GetChild<Quizitem>(i).Complete = true;     //Daca intrebarile nu sunt setate la true, se poate suprascrie progresul prin raspunderea corecta a acestora si se strica totul
 			_node.GetParent().GetChild<CanvasItem>(_node.GetParent().GetChildCount()-2).Visible = true;
 			_node.GetParent().GetChild<CanvasItem>(_node.GetParent().GetChildCount()-1).Visible = true;
@@ -176,10 +176,10 @@ public partial class Lesson : Node2D
 		{	if(foundquestion) _node.GetChild<CanvasItem>(i).Visible = false;
 			else 
 			{
-				if(_node.GetChild(i).Name.ToString().Match("Block")) blocksread++;
+				if(_node.GetChild(i).Name.ToString().Contains("Block")) blocksread++;
 				_node.GetChild<CanvasItem>(i).Visible = true;
 			}
-			if(_node.GetChild(i).Name.ToString().Match("Quizitem")) foundquestion = true;
+			if(_node.GetChild(i).Name.ToString().Contains("Quizitem")) foundquestion = true;
 		}
 		if (!foundquestion)
 		{

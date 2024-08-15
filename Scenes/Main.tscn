@@ -41,11 +41,11 @@ offset_left = 508.0
 offset_top = 96.0
 offset_right = 782.0
 offset_bottom = 165.0
+theme_override_font_sizes/bold_italics_font_size = 50
+theme_override_font_sizes/italics_font_size = 50
+theme_override_font_sizes/mono_font_size = 50
 theme_override_font_sizes/normal_font_size = 50
 theme_override_font_sizes/bold_font_size = 50
-theme_override_font_sizes/italics_font_size = 50
-theme_override_font_sizes/bold_italics_font_size = 50
-theme_override_font_sizes/mono_font_size = 50
 bbcode_enabled = true
 text = "[rainbow freq=0.2 sat=0.8 val=0.8][wave amp=65.0 freq=2.0 connected=1]Zero2Linux[/wave][/rainbow]"
 fit_content = true
@@ -57,13 +57,13 @@ self_modulate = Color(0.686739, 0.771303, 0.952505, 1)
 layout_mode = 0
 offset_left = 428.0
 offset_top = 151.0
-offset_right = 861.0
+offset_right = 868.0
 offset_bottom = 220.0
+theme_override_font_sizes/bold_italics_font_size = 40
+theme_override_font_sizes/italics_font_size = 40
+theme_override_font_sizes/mono_font_size = 40
 theme_override_font_sizes/normal_font_size = 40
 theme_override_font_sizes/bold_font_size = 40
-theme_override_font_sizes/italics_font_size = 40
-theme_override_font_sizes/bold_italics_font_size = 40
-theme_override_font_sizes/mono_font_size = 40
 bbcode_enabled = true
 text = "[wave amp=25.0 freq=2.0 connected=1]Invata Linux de la zero[/wave]"
 fit_content = true
@@ -89,8 +89,8 @@ layout_mode = 2
 size_flags_vertical = 3
 tooltip_text = "Incepe o lectie"
 theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = ExtResource("4_ja7mp")
 theme_override_styles/focus = ExtResource("2_0hv5f")
+theme_override_styles/normal = ExtResource("4_ja7mp")
 text = "Lectii"
 
 [node name="Quizzes" type="Button" parent="UI/Panel/Buttons"]
@@ -99,8 +99,8 @@ size_flags_vertical = 3
 tooltip_text = "Testeaza-ti cunostiintele dobandite pe parcursul lectiilor.
 Necesita terminarea a cel putin doua lectii."
 theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = ExtResource("4_ja7mp")
 theme_override_styles/focus = ExtResource("2_0hv5f")
+theme_override_styles/normal = ExtResource("4_ja7mp")
 text = "Chestionare"
 
 [node name="Progress" type="Button" parent="UI/Panel/Buttons"]
@@ -108,8 +108,8 @@ layout_mode = 2
 size_flags_vertical = 3
 tooltip_text = "Vezi intregul tau progres de pe acest profil"
 theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = ExtResource("4_ja7mp")
 theme_override_styles/focus = ExtResource("2_0hv5f")
+theme_override_styles/normal = ExtResource("4_ja7mp")
 text = "Progres"
 
 [node name="Settings" type="Button" parent="UI/Panel/Buttons"]
@@ -117,8 +117,8 @@ layout_mode = 2
 size_flags_vertical = 3
 tooltip_text = "Regleaza-ti setarile legate de imagine, lectii, etc"
 theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = ExtResource("4_ja7mp")
 theme_override_styles/focus = ExtResource("2_0hv5f")
+theme_override_styles/normal = ExtResource("4_ja7mp")
 text = "Setari"
 
 [node name="Bar" type="Sprite2D" parent="UI"]

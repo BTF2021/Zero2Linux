@@ -7,11 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://bqd1321xxqoej" path="res://Sprites/CloseButton.png" id="5_7cisg"]
 [ext_resource type="Texture2D" uid="uid://c1cjk57xd8mq2" path="res://Sprites/CloseButtonHighlight.png" id="6_beobs"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ijpad"]
-bg_color = Color(0, 0, 0, 0.411765)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_64lay"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ijpad"]
+bg_color = Color(0, 0, 0, 0.411765)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_idgcd"]
 bg_color = Color(0.262932, 0.262932, 0.262932, 1)
@@ -47,12 +47,14 @@ offset_top = -293.0
 offset_right = 373.0
 offset_bottom = 303.0
 theme_override_font_sizes/font_size = 18
-theme_override_styles/panel = SubResource("StyleBoxFlat_ijpad")
 theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_64lay")
+theme_override_styles/panel = SubResource("StyleBoxFlat_ijpad")
+current_tab = 0
 clip_tabs = false
 
 [node name="Grafica" type="Control" parent="Panel/Settings"]
 layout_mode = 2
+metadata/_tab_index = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/Settings/Grafica"]
 layout_mode = 0
@@ -119,6 +121,7 @@ tooltip_text = "Daca este activat, unele elemente de UI vor fi animate"
 [node name="Lectii" type="Control" parent="Panel/Settings"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/Settings/Lectii"]
 layout_mode = 0
@@ -189,10 +192,10 @@ rounded = true
 
 [node name="VideoVolumeText" type="Label" parent="Panel/Settings/Lectii/VBoxContainer/VideoVolume"]
 layout_mode = 0
-offset_left = 688.388
-offset_top = 3.08451
-offset_right = 723.388
-offset_bottom = 31.0845
+offset_left = 685.0
+offset_top = 3.0
+offset_right = 733.0
+offset_bottom = 31.0
 theme_override_font_sizes/font_size = 20
 text = "11"
 
@@ -241,6 +244,7 @@ tooltip_text = "Daca este activat, Intrebarile din lectiile avansate deja facute
 [node name="Altele" type="Control" parent="Panel/Settings"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/Settings/Altele"]
 layout_mode = 0
@@ -296,10 +300,10 @@ text = "Numele utilizatorului"
 
 [node name="NameEdit" type="LineEdit" parent="Panel/Settings/Altele/VBoxContainer/Name"]
 layout_mode = 0
-offset_left = 496.0
-offset_top = 3.0
-offset_right = 605.0
-offset_bottom = 26.0
+offset_left = 492.336
+offset_top = 0.352113
+offset_right = 601.336
+offset_bottom = 30.3521
 scale = Vector2(1.25, 1.25)
 tooltip_text = "Introdu aici numele.
 Numarul maxim de caractere este de 12
@@ -307,8 +311,8 @@ si nu poate contine spatiu si urmatoarele
 caractere:
  / . :  , @ ' % \""
 theme_override_font_sizes/font_size = 15
-theme_override_styles/normal = SubResource("StyleBoxFlat_idgcd")
 theme_override_styles/focus = ExtResource("3_yiypy")
+theme_override_styles/normal = SubResource("StyleBoxFlat_idgcd")
 placeholder_text = "John_123345"
 alignment = 1
 max_length = 12
@@ -324,10 +328,10 @@ text = "Culoare"
 
 [node name="ColorButton" type="ColorPickerButton" parent="Panel/Settings/Altele/VBoxContainer/FavColour"]
 layout_mode = 0
-offset_left = 496.012
-offset_top = -3.76057
-offset_right = 559.012
-offset_bottom = 27.2394
+offset_left = 494.786
+offset_top = 0.239437
+offset_right = 557.786
+offset_bottom = 28.4394
 scale = Vector2(1.25, 1.25)
 theme_override_styles/normal = SubResource("StyleBoxFlat_fflmj")
 toggle_mode = false
@@ -341,10 +345,10 @@ text = "Sterge progersul"
 
 [node name="DeleteSaveButton" type="Button" parent="Panel/Settings/Altele/VBoxContainer/DeleteSave"]
 layout_mode = 0
-offset_left = 495.237
-offset_top = -0.859187
-offset_right = 558.237
-offset_bottom = 30.1408
+offset_left = 492.336
+offset_top = -2.32394
+offset_right = 555.336
+offset_bottom = 28.676
 scale = Vector2(1.25, 1.25)
 tooltip_text = "Sterge profilul curent"
 theme_override_styles/normal = ExtResource("4_rkad0")
@@ -353,6 +357,7 @@ text = "Sterge"
 [node name="Despre" type="Control" parent="Panel/Settings"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/Settings/Despre"]
 layout_mode = 0
@@ -370,13 +375,13 @@ layout_mode = 2
 alignment = 1
 
 [node name="Name2" type="RichTextLabel" parent="Panel/Settings/Despre/VBoxContainer/vBoxContainer"]
-custom_minimum_size = Vector2(161, 0)
+custom_minimum_size = Vector2(162, 0)
 layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 30
+theme_override_font_sizes/italics_font_size = 30
+theme_override_font_sizes/mono_font_size = 30
 theme_override_font_sizes/normal_font_size = 30
 theme_override_font_sizes/bold_font_size = 30
-theme_override_font_sizes/italics_font_size = 30
-theme_override_font_sizes/bold_italics_font_size = 30
-theme_override_font_sizes/mono_font_size = 30
 bbcode_enabled = true
 text = "[wave amp=50.0 freq=2.0 connected=1]Zero2Linux[/wave]"
 fit_content = true
@@ -434,11 +439,11 @@ layout_mode = 2
 [node name="Name3" type="RichTextLabel" parent="Panel/Settings/Despre/VBoxContainer"]
 custom_minimum_size = Vector2(161, 0)
 layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 19
+theme_override_font_sizes/italics_font_size = 19
+theme_override_font_sizes/mono_font_size = 19
 theme_override_font_sizes/normal_font_size = 19
 theme_override_font_sizes/bold_font_size = 19
-theme_override_font_sizes/italics_font_size = 19
-theme_override_font_sizes/bold_italics_font_size = 19
-theme_override_font_sizes/mono_font_size = 19
 text = "	 Zero2Linux este un proiect personal, creat pentru a-i invata pe cei mai putini familiarizati cu ecosistemul Linux sa foloseasca un desktop Linux.
 	Desi Linux este foarte popular pentru servere, majoritatea nu au auzit despre Linux/ cred ca Linux este doar pentru cei foarte avansati (sau cei care \"nu isi apreciaza timpul\"). Linux a avansat foarte mult, pana in punctul in care exista distributii care sunt facute special pentru utilizatori mai putini experimentati/ cei care nu vor sa configureze o distributie foarte mult. Zero2Linux incearca sa arate faptul ca Linux nu este (neaparat) foarte complicat si se pot face lucruri posibile si pe celelalte sisteme de operare, in multe cazuri chiar mai simplu.
 	 Zero2Linux este gratis pentru toata lumea, dar este foarte apreciat daca ai dea stea (star) la proiect pe Github sau sa contribui prin raportarea bugurilor."

@@ -14,7 +14,7 @@ config/name="Zero2Linux"
 config/version="1.0.1"
 run/main_scene="res://Scenes/Logare.tscn"
 config/quit_on_go_back=false
-config/features=PackedStringArray("4.2", "C#", "Mobile")
+config/features=PackedStringArray("4.3", "C#", "Mobile")
 config/icon="res://Icon.png"
 
 [autoload]

@@ -28,9 +28,16 @@ Dezvoltat in Godot folosind C#
   2. In cele mai multe cazuri, nu ai fisierele statice FFmpeg pentru redarea videourilor.
   In zipurile Full sunt incluse fisiere statice FFmpeg cu decodoarele VP8 si Vorbis disponibile
 
-# Cum se compileaza
+# Cum se deschide proiectul
 - Descarca codul sursa
-- Descarca Godot 4.2.2 **Mono** (Godot Engine - .NET) ([Link catre site](https://godotengine.org/download))
+- Descarca Godot 4.3 **Mono** (Godot Engine - .NET) ([Link catre site](https://godotengine.org/download))
 - Descarca SDKul .NET (daca esti pe Linux, trebuie instalat si Mono SDK)
 - Deschide proiectul in Godot
-- Project > Export...
+
+**In cazul in care vrei sa generezi executabil**
+- In cazul in care nu ai Export Templates, Apasa pe Editor > Manage Export Templates... si dupa aceea pe Download & Install
+- Apasa pe Project > Export...
+- Adauga un Preset pentru platforma dorita (se poate configura acel preset)
+- Export Project...
+
+Pentru Android necesita mult prea multi pasi pentru acest README, asa ca o sa las link catre documentatia oficiala Godot [aici](https://docs.godotengine.org/en/stable/tutorials/export/exporting_for_android.html)

@@ -83,7 +83,7 @@ public partial class Quizitem : PanelContainer
 		if(ok) ShowCorrect();
 		GetNode("/root").GetChild(-1).EmitSignal("GetAnswers", ok, false, Index);
 	}
-	private void _on_skip_pressed() => GetNode("/root").GetChild(1).EmitSignal("Skip");
+	private void _on_skip_pressed() => GetNode("/root").GetChild(-1).EmitSignal("Skip");
 	private void ShowCorrect()
 	{	if(type < 2)
 		{	GetNode<VBoxContainer>("PanelContainer").Hide(); 

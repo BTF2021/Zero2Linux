@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b5r4kq07nfvp1"]
+[gd_scene load_steps=14 format=3 uid="uid://b5r4kq07nfvp1"]
 
 [ext_resource type="Script" path="res://Scripts/VideoOverlay.cs" id="1_8kp3d"]
 [ext_resource type="Texture2D" uid="uid://cuv7m0o2p7huh" path="res://Sprites/Back.png" id="2_5ji7h"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://covos5p0vtxt" path="res://Sprites/Fullscr.png" id="5_4p4g7"]
 [ext_resource type="Texture2D" uid="uid://dm63bhlfvpsr7" path="res://Sprites/PlayHighlight.png" id="5_tisoe"]
 [ext_resource type="Texture2D" uid="uid://ce7r8ib5refvj" path="res://Sprites/Frwrd10sHighlight.png" id="7_pggls"]
+[ext_resource type="StyleBox" uid="uid://dhjub7y84wcpf" path="res://Sprites/Slider.stylebox" id="8_ew0bt"]
 [ext_resource type="Texture2D" uid="uid://0cx1a0sumavq" path="res://Sprites/FullscrHighlight.png" id="9_tshvh"]
 
 [sub_resource type="FFmpegVideoStream" id="FFmpegVideoStream_pu380"]
@@ -93,6 +94,7 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 mouse_filter = 1
+theme_override_styles/slider = ExtResource("8_ew0bt")
 min_value = -11.0
 max_value = 10.0
 
@@ -104,6 +106,7 @@ mouse_filter = 2
 custom_minimum_size = Vector2(606, 36)
 layout_mode = 2
 mouse_filter = 1
+theme_override_styles/slider = ExtResource("8_ew0bt")
 
 [node name="VSeparator3" type="VSeparator" parent="ControlsTint/Controls"]
 layout_mode = 2

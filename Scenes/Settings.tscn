@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://1phgnjaru1ou"]
+[gd_scene load_steps=12 format=3 uid="uid://1phgnjaru1ou"]
 
 [ext_resource type="Script" path="res://Scripts/Settings.cs" id="1_5tuin"]
 [ext_resource type="Texture2D" uid="uid://dherg8j0a21h2" path="res://Sprites/CoursePanel.png" id="2_wmyog"]
+[ext_resource type="StyleBox" uid="uid://dhjub7y84wcpf" path="res://Sprites/Slider.stylebox" id="3_7a02l"]
 [ext_resource type="StyleBox" uid="uid://di87pu5wmffgt" path="res://Sprites/UINoHover.stylebox" id="3_yiypy"]
 [ext_resource type="StyleBox" uid="uid://drod6m1sbtikq" path="res://Sprites/UISettingsButton.stylebox" id="4_rkad0"]
 [ext_resource type="Texture2D" uid="uid://bqd1321xxqoej" path="res://Sprites/CloseButton.png" id="5_7cisg"]
@@ -35,6 +36,7 @@ expand_margin_bottom = 3.0
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_5tuin")
+metadata/_edit_vertical_guides_ = [341.0]
 
 [node name="Panel" type="Sprite2D" parent="."]
 position = Vector2(645, 339)
@@ -186,6 +188,7 @@ offset_right = 630.0
 offset_bottom = 27.0
 scale = Vector2(1.25, 1.25)
 tooltip_text = "Regleaza volumul videoclipurilor"
+theme_override_styles/slider = ExtResource("3_7a02l")
 min_value = -11.0
 max_value = 10.0
 rounded = true

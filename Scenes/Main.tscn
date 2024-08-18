@@ -110,7 +110,7 @@ tooltip_text = "Vezi intregul tau progres de pe acest profil"
 theme_override_font_sizes/font_size = 20
 theme_override_styles/focus = ExtResource("2_0hv5f")
 theme_override_styles/normal = ExtResource("4_ja7mp")
-text = "Progres"
+text = "Statistici"
 
 [node name="Settings" type="Button" parent="UI/Panel/Buttons"]
 layout_mode = 2

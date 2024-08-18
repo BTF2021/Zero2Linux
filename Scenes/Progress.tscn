@@ -1,10 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://ydpakdxasj4l"]
+[gd_scene load_steps=9 format=3 uid="uid://ydpakdxasj4l"]
 
 [ext_resource type="Script" path="res://Scripts/Progress.cs" id="1_mqchc"]
 [ext_resource type="Texture2D" uid="uid://dherg8j0a21h2" path="res://Sprites/CoursePanel.png" id="2_obwnj"]
 [ext_resource type="Texture2D" uid="uid://bqd1321xxqoej" path="res://Sprites/CloseButton.png" id="3_f2ids"]
 [ext_resource type="Texture2D" uid="uid://c1cjk57xd8mq2" path="res://Sprites/CloseButtonHighlight.png" id="4_eswb5"]
 [ext_resource type="Texture2D" uid="uid://ddhgftxfvqe6s" path="res://Sprites/Profile.png" id="5_an6bj"]
+[ext_resource type="Texture2D" uid="uid://c1evic8xalmre" path="res://Sprites/More.png" id="6_qcky1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dc4hc"]
+bg_color = Color(0.0823529, 0.0823529, 0.0823529, 0.866667)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8syrq"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="Quizzes" type="Control"]
 layout_mode = 3
@@ -22,7 +33,7 @@ offset_top = -291.0
 offset_right = 73.6207
 offset_bottom = -268.0
 theme_override_font_sizes/font_size = 16
-text = "Progres"
+text = "Statistici"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -61,7 +72,6 @@ size_flags_vertical = 6
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/Panel"]
 layout_mode = 0
-offset_left = 2.0
 offset_right = 742.0
 offset_bottom = 559.0
 horizontal_scroll_mode = 0
@@ -69,11 +79,10 @@ horizontal_scroll_mode = 0
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/Panel/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 1
+theme_override_constants/separation = 3
 alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/Panel/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 
 [node name="Player" type="HBoxContainer" parent="Panel/Panel/ScrollContainer/VBoxContainer"]
@@ -116,17 +125,73 @@ visible_characters = 1
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Panel/ScrollContainer/VBoxContainer"]
+[node name="hSeparator" type="HSeparator" parent="Panel/Panel/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/Panel/ScrollContainer/VBoxContainer/HBoxContainer"]
+[node name="MarginContainer3" type="MarginContainer" parent="Panel/Panel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="Item" type="VBoxContainer" parent="Panel/Panel/ScrollContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+alignment = 1
+
+[node name="Panel" type="Panel" parent="Panel/Panel/ScrollContainer/VBoxContainer/Item"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dc4hc")
+
+[node name="Contents" type="HBoxContainer" parent="Panel/Panel/ScrollContainer/VBoxContainer/Item/Panel"]
+layout_mode = 2
+offset_right = 742.0
+offset_bottom = 41.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/Panel/ScrollContainer/VBoxContainer/Item/Panel/Contents"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
-[node name="Stats" type="Label" parent="Panel/Panel/ScrollContainer/VBoxContainer/HBoxContainer"]
+[node name="Stat" type="Label" parent="Panel/Panel/ScrollContainer/VBoxContainer/Item/Panel/Contents"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Test"
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "Test: 120053"
+
+[node name="MarginContainer2" type="MarginContainer" parent="Panel/Panel/ScrollContainer/VBoxContainer/Item/Panel/Contents"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Arrow" type="TextureRect" parent="Panel/Panel/ScrollContainer/VBoxContainer/Item/Panel/Contents"]
+visible = false
+layout_mode = 2
+texture = ExtResource("6_qcky1")
+stretch_mode = 2
+
+[node name="MarginContainer3" type="MarginContainer" parent="Panel/Panel/ScrollContainer/VBoxContainer/Item/Panel/Contents"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Panel/Panel/ScrollContainer/VBoxContainer/Item/Panel"]
+visible = false
+layout_mode = 0
+offset_right = 742.0
+offset_bottom = 45.0
+theme_override_styles/focus = SubResource("StyleBoxFlat_8syrq")
+disabled = true
+flat = true
+
+[node name="SubContainer" type="HBoxContainer" parent="Panel/Panel/ScrollContainer/VBoxContainer/Item"]
+visible = false
+layout_mode = 2
+
+[node name="marginContainer" type="MarginContainer" parent="Panel/Panel/ScrollContainer/VBoxContainer/Item/SubContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="Child" type="VBoxContainer" parent="Panel/Panel/ScrollContainer/VBoxContainer/Item/SubContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [connection signal="button_down" from="Panel/Drag" to="." method="_on_drag_down"]
 [connection signal="button_up" from="Panel/Drag" to="." method="_on_drag_up"]

@@ -5,7 +5,7 @@ public partial class Incarcare : Node2D
 {
 	// Called when the node enters the scene tree for the first time.
 	public override async void _Ready()
-	{	var tip = (int)GD.RandRange(1, 17);
+	{	var tip = (int)GD.RandRange(1, 18);
 		switch(tip)
 		{	case 1:
 				GetNode<Label>("Tip").Text = "Fun fact: Nu se incarca nimic in acest moment";
@@ -50,7 +50,7 @@ public partial class Incarcare : Node2D
 				GetNode<Label>("Tip").Text = "Vim, Nano, Emacs... nu conteaza atata timp cat poti edita un fisier text";
 				break;
 			case 11:
-				GetNode<Label>("Tip").Text = "Escape + :q + Enter pentru a iesi din Vim";
+				GetNode<Label>("Tip").Text = ":q + Enter pentru a iesi din Vim";
 				break;
 			case 12:
 				GetNode<Label>("Tip").Text = "Fun fact: Linux Mint este derivat dintr-o derivata a Debian";
@@ -59,7 +59,7 @@ public partial class Incarcare : Node2D
 				GetNode<Label>("Tip").Text = "Viziteaza pagina de Github al acestui proiect pentru noi actualizari";
 				break;
 			case 14:
-				GetNode<Label>("Tip").Text = "fun fact: Linux Torvalds foloseste Fedora";
+				GetNode<Label>("Tip").Text = "Fun fact: Linux Torvalds foloseste Fedora";
 				break;
 			case 15:
 				GetNode<Label>("Tip").Text = "Ai auzit de Justin Bieber Linux?";
@@ -69,6 +69,9 @@ public partial class Incarcare : Node2D
 				break;
 			case 17:
 				GetNode<Label>("Tip").Text = "Insereaza un text aici";
+				break;
+			case 18:
+				GetNode<Label>("Tip").Text = "Fun Fact: Freax era numele oficial pentru Linux";
 				break;
 		}
 		//Easter Egg bazat pe data sistemului :)

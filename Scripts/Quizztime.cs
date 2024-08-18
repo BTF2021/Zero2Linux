@@ -296,6 +296,8 @@ public partial class Quizztime : Node2D
 			await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
 			GetNode<RichTextLabel>("Body/Correct").Text = "Corecte: " + corecte;
 			GetNode<RichTextLabel>("Body/Wrong").Text = "Gresite: " + gresite;
+			if(corecte>=5)	_data.currentStats.goodtests++;
+			if(corecte>=7)	_data.currentStats.greattest++;
 			if(corecte==10) _data.currentStats.flawlesstests++;
 			_data.currentStats.Testsnum++;
 			_data.WriteSave(_data.LoggedUser);

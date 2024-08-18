@@ -5,6 +5,7 @@ public partial class Progress : Control
 {
 	private DefaultData _data;
 	private VBoxContainer _item;
+	private int spc, unfinished;
 	private Vector2 mousepos;
 	private bool inputgrab;
 	private Vector2 dif;
@@ -21,24 +22,35 @@ public partial class Progress : Control
 		int i = 1;
 		while(_data.lessonList.ContainsKey(i))
 		{	if((int)_data.currentStats.LessonCompletion[i] == 100 && (int)_data.lessonList[i][1] != 2) _data.currentStats.FinishedLes++;
+			else if((int)_data.currentStats.LessonCompletion[i] == 100 && (int)_data.lessonList[i][1] == 2) spc++;
+			else if((int)_data.currentStats.LessonCompletion[i] < 100 && (int)_data.currentStats.LessonCompletion[i] > 0) unfinished++;
 			i++;
 		}
 
-		//Adaugam elementele din lista
-		AddItem("Lectii finalizate: " + _data.currentStats.FinishedLes, null);
-		if(_data.currentStats.FinishedLes > 0)
-		{
-			AddItem("Lista lectiilor finalizate", null);
+		//Adaugam elemente in lista
+		if(unfinished > 0)
+		{	AddItem("Lectii incepute: " + unfinished, null);
 			i=1;
+			while(_data.lessonList.ContainsKey(i))
+			{	if((int)_data.currentStats.LessonCompletion[i] < 100 && (int)_data.currentStats.LessonCompletion[i] > 0) AddItem((string)_data.lessonList[i][0], GetNode<VBoxContainer>("Panel/Panel/ScrollContainer/VBoxContainer").GetChild<VBoxContainer>(-1));
+				i++;
+			}
+		}
+		else AddItem("Nu ai nicio lectie inceputa", null);
+		AddItem("Lectii finalizate: " + (_data.currentStats.FinishedLes + spc), null);
+		if(_data.currentStats.FinishedLes > 0)
+		{	i=1;
 			while(_data.lessonList.ContainsKey(i))
 			{	if((int)_data.currentStats.LessonCompletion[i] == 100) AddItem((string)_data.lessonList[i][0], GetNode<VBoxContainer>("Panel/Panel/ScrollContainer/VBoxContainer").GetChild<VBoxContainer>(-1));
 				i++;
 			}
 		}
-		else AddItem("Nu ai nicio lectie terminata...", null);
+		else AddItem("Nu ai nicio lectie terminata", null);
 		AddItem("Chestionare facute: " + _data.currentStats.Questionaires, null);
 		AddItem("Teste facute: " + _data.currentStats.Testsnum, null);
-		AddItem("Fara greseli: " + _data.currentStats.flawlesstests, GetNode<VBoxContainer>("Panel/Panel/ScrollContainer/VBoxContainer").GetChild<VBoxContainer>(-1));
+		AddItem("Peste nota 5: " + _data.currentStats.goodtests, GetNode<VBoxContainer>("Panel/Panel/ScrollContainer/VBoxContainer").GetChild<VBoxContainer>(-1));
+		AddItem("Peste nota 7: " + _data.currentStats.greattest, GetNode<VBoxContainer>("Panel/Panel/ScrollContainer/VBoxContainer").GetChild<VBoxContainer>(-1));
+		AddItem("Nota 10: " + _data.currentStats.flawlesstests, GetNode<VBoxContainer>("Panel/Panel/ScrollContainer/VBoxContainer").GetChild<VBoxContainer>(-1));
 
 		if(_data.currentStats.Anims)
 		{

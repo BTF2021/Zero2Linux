@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 //clasa pentru a salva setari si progres. De ce am facut asta? Ca sa se salveze frumos in format JSON
 public class stats
 {
-	public int version = 4;
+	public int version = 5;
 	public string UsrName = " ";
 	public Color FavColor = new Color(1, 1, 1, 1);
 	public bool FullScr = false;
@@ -20,6 +20,8 @@ public class stats
 	};
 	public int Questionaires = 0;     //Nr chestionare facute
 	public int Testsnum = 0;          //Nr teste facute
+	public int goodtests = 0;         //Nr teste peste 5
+	public int greattest = 0;         //Nr teste peste 7
 	public int flawlesstests = 0;     //Nr teste fara greseli
 	public bool Adv = true;
 	public bool Spc = true;
@@ -32,6 +34,7 @@ public partial class DefaultData : Node
 {
 	//De aici vor fi accesate si salvate setarile si progresul
 	public stats currentStats = new stats();
+	private stats defaultStats = new stats();         //Duplicat pentru currentStats (Mai mult pentru versiune)
 
 	public Godot.Collections.Dictionary<int, Godot.Collections.Array> lessonList = new Godot.Collections.Dictionary<int, Godot.Collections.Array>() 
 	{	//structura vectorului este urmatoarea: numele lectiei, tipul lectiei(tag). Progresul a fost mutat in clasa stats
@@ -151,6 +154,7 @@ public partial class DefaultData : Node
 		stats content = JsonConvert.DeserializeObject<stats>(file.GetAsText());
 		file.Close();
 		currentStats = content;
+		if(currentStats.version < defaultStats.version) UpgradeSaveFile(user);
 		if(currentStats.FullScr) DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
 		else DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
 		if(currentStats.VSync) DisplayServer.WindowSetVsyncMode(DisplayServer.VSyncMode.Enabled);
@@ -166,6 +170,16 @@ public partial class DefaultData : Node
 		DisplayServer.WindowSetVsyncMode(DisplayServer.VSyncMode.Enabled);
 		currentStats = new stats();
 		GetTree().ChangeSceneToFile("res://Scenes/Logare.tscn");
+	}
+	//Functie pentru actualizarea progresului in functie de versiunea fisierului
+	public void UpgradeSaveFile(string user)
+	{	if(currentStats.version < 5)
+		{	currentStats.goodtests = currentStats.flawlesstests;
+			currentStats.greattest = currentStats.flawlesstests;
+			currentStats.version = 5;
+			WriteSave(user);
+		}
+		//if(currentStats.version < )
 	}
 	public Godot.Collections.Array<Godot.Collections.Array> GenerateQuestionSet()
 	{	GD.Randomize();     //Nu este necesar. Godot face asta de fiecare data cand deschizi aplicatia

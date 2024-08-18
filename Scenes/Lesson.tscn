@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cseipsy3u81k3"]
+[gd_scene load_steps=8 format=3 uid="uid://cseipsy3u81k3"]
 
 [ext_resource type="Texture2D" uid="uid://cuv7m0o2p7huh" path="res://Sprites/Back.png" id="1_0rts7"]
 [ext_resource type="Script" path="res://Scripts/Lesson.cs" id="1_4ktg6"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://dmkypoj2doa4m" path="res://Sprites/LoadingBg.png" id="3_f7gdh"]
 [ext_resource type="Texture2D" uid="uid://bud38ywfs5qnt" path="res://Sprites/Play.png" id="5_edb0t"]
 [ext_resource type="Texture2D" uid="uid://bgdcdehp7orv6" path="res://Sprites/Circle.png" id="5_pxwpu"]
-[ext_resource type="Material" uid="uid://bl5ra5x2dyfgr" path="res://Sprites/Blur.material" id="5_wtb56"]
 
 [node name="Lesson" type="Node2D"]
 script = ExtResource("1_4ktg6")
@@ -69,10 +68,10 @@ expand_mode = 5
 stretch_mode = 4
 
 [node name="Spoiler" type="ColorRect" parent="Panel/ScrollContainer/MarginContainer/Body/VideoPreview"]
-material = ExtResource("5_wtb56")
 layout_mode = 0
 offset_right = 871.0
 offset_bottom = 489.0
+color = Color(0, 0, 0, 0.254902)
 
 [node name="textureRect" type="Sprite2D" parent="Panel/ScrollContainer/MarginContainer/Body/VideoPreview"]
 self_modulate = Color(0, 0, 0, 0.901961)

@@ -186,7 +186,7 @@ visible = false
 layout_mode = 2
 
 [node name="marginContainer" type="MarginContainer" parent="Panel/Panel/ScrollContainer/VBoxContainer/Item/SubContainer"]
-custom_minimum_size = Vector2(20, 0)
+custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 
 [node name="Child" type="VBoxContainer" parent="Panel/Panel/ScrollContainer/VBoxContainer/Item/SubContainer"]

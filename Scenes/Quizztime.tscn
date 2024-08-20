@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dsrtl4q4of7qd"]
+[gd_scene load_steps=10 format=3 uid="uid://dsrtl4q4of7qd"]
 
 [ext_resource type="Script" path="res://Scripts/Quizztime.cs" id="1_uw27w"]
 [ext_resource type="Texture2D" uid="uid://cuv7m0o2p7huh" path="res://Sprites/Back.png" id="2_ix61e"]
@@ -6,6 +6,54 @@
 [ext_resource type="PackedScene" uid="uid://duiw5l0ody1l" path="res://Scenes/Quizitem.tscn" id="4_jaieg"]
 [ext_resource type="StyleBox" uid="uid://c8ip85nk5v8ds" path="res://Sprites/UIButtons.stylebox" id="4_t31no"]
 [ext_resource type="StyleBox" uid="uid://di87pu5wmffgt" path="res://Sprites/UINoHover.stylebox" id="5_g1hxa"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_siul7"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+direction = Vector3(0.5, -1, 0)
+spread = 30.0
+flatness = 0.1
+initial_velocity_min = 700.0
+initial_velocity_max = 1000.0
+angular_velocity_min = -360.0
+angular_velocity_max = 360.0
+gravity = Vector3(0, 400, 0)
+scale_min = 10.0
+scale_max = 15.0
+hue_variation_min = -2.23517e-08
+hue_variation_max = 1.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_whcqm"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 30.0
+flatness = 0.1
+initial_velocity_min = 700.0
+initial_velocity_max = 1000.0
+angular_velocity_min = -360.0
+angular_velocity_max = 360.0
+gravity = Vector3(0, 500, 0)
+scale_min = 10.0
+scale_max = 15.0
+hue_variation_min = -2.23517e-08
+hue_variation_max = 1.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xqw4v"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+direction = Vector3(-0.5, -1, 0)
+spread = 30.0
+flatness = 0.1
+initial_velocity_min = 700.0
+initial_velocity_max = 1000.0
+angular_velocity_min = -360.0
+angular_velocity_max = 360.0
+gravity = Vector3(0, 400, 0)
+scale_min = 10.0
+scale_max = 15.0
+hue_variation_min = -2.23517e-08
+hue_variation_max = 1.0
 
 [node name="Quizztime" type="Node2D"]
 script = ExtResource("1_uw27w")
@@ -157,6 +205,42 @@ offset_bottom = 364.0
 theme_override_font_sizes/font_size = 70
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Confetti" type="Node2D" parent="."]
+top_level = true
+
+[node name="Left" type="GPUParticles2D" parent="Confetti"]
+position = Vector2(0, 720)
+emitting = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_siul7")
+lifetime = 8.0
+one_shot = true
+explosiveness = 1.0
+randomness = 0.1
+visibility_rect = Rect2(0, -720, 1280, 720)
+
+[node name="Center" type="GPUParticles2D" parent="Confetti"]
+position = Vector2(640, 720)
+emitting = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_whcqm")
+lifetime = 8.0
+one_shot = true
+explosiveness = 1.0
+randomness = 0.1
+visibility_rect = Rect2(-640, -720, 1280, 720)
+
+[node name="Right" type="GPUParticles2D" parent="Confetti"]
+position = Vector2(1280, 720)
+emitting = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_xqw4v")
+lifetime = 8.0
+one_shot = true
+explosiveness = 1.0
+randomness = 0.1
+visibility_rect = Rect2(-1280, -720, 1280, 720)
 
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="Continue" to="." method="_on_continue_pressed"]

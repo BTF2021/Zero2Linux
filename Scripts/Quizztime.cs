@@ -298,7 +298,16 @@ public partial class Quizztime : Node2D
 			GetNode<RichTextLabel>("Body/Wrong").Text = "Gresite: " + gresite;
 			if(corecte>=5)	_data.currentStats.goodtests++;
 			if(corecte>=7)	_data.currentStats.greattest++;
-			if(corecte==10) _data.currentStats.flawlesstests++;
+			if(corecte==10) 
+			{
+				_data.currentStats.flawlesstests++;
+				//Confeti
+				if(_data.currentStats.Anims)
+				{	GetNode<GpuParticles2D>("Confetti/Left").Emitting = true;
+					GetNode<GpuParticles2D>("Confetti/Center").Emitting = true;
+					GetNode<GpuParticles2D>("Confetti/Right").Emitting = true;
+				}
+			}
 			_data.currentStats.Testsnum++;
 			_data.WriteSave(_data.LoggedUser);
 		}

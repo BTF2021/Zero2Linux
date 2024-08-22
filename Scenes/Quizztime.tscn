@@ -10,9 +10,8 @@
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_siul7"]
 lifetime_randomness = 0.3
 particle_flag_disable_z = true
-direction = Vector3(0.5, -1, 0)
-spread = 30.0
-flatness = 0.1
+direction = Vector3(0.25, -1, 0)
+spread = 15.0
 initial_velocity_min = 700.0
 initial_velocity_max = 1000.0
 angular_velocity_min = -360.0
@@ -27,8 +26,7 @@ hue_variation_max = 1.0
 lifetime_randomness = 0.3
 particle_flag_disable_z = true
 direction = Vector3(0, -1, 0)
-spread = 30.0
-flatness = 0.1
+spread = 15.0
 initial_velocity_min = 700.0
 initial_velocity_max = 1000.0
 angular_velocity_min = -360.0
@@ -42,9 +40,8 @@ hue_variation_max = 1.0
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xqw4v"]
 lifetime_randomness = 0.3
 particle_flag_disable_z = true
-direction = Vector3(-0.5, -1, 0)
-spread = 30.0
-flatness = 0.1
+direction = Vector3(-0.25, -1, 0)
+spread = 15.0
 initial_velocity_min = 700.0
 initial_velocity_max = 1000.0
 angular_velocity_min = -360.0
@@ -210,9 +207,9 @@ vertical_alignment = 1
 top_level = true
 
 [node name="Left" type="GPUParticles2D" parent="Confetti"]
-position = Vector2(0, 720)
+position = Vector2(0, 744)
 emitting = false
-amount = 100
+amount = 50
 process_material = SubResource("ParticleProcessMaterial_siul7")
 lifetime = 8.0
 one_shot = true
@@ -221,9 +218,9 @@ randomness = 0.1
 visibility_rect = Rect2(0, -720, 1280, 720)
 
 [node name="Center" type="GPUParticles2D" parent="Confetti"]
-position = Vector2(640, 720)
+position = Vector2(640, 744)
 emitting = false
-amount = 100
+amount = 50
 process_material = SubResource("ParticleProcessMaterial_whcqm")
 lifetime = 8.0
 one_shot = true
@@ -232,9 +229,9 @@ randomness = 0.1
 visibility_rect = Rect2(-640, -720, 1280, 720)
 
 [node name="Right" type="GPUParticles2D" parent="Confetti"]
-position = Vector2(1280, 720)
+position = Vector2(1280, 744)
 emitting = false
-amount = 100
+amount = 50
 process_material = SubResource("ParticleProcessMaterial_xqw4v")
 lifetime = 8.0
 one_shot = true

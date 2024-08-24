@@ -57,9 +57,8 @@ offset_bottom = 720.0
 
 [node name="Title" type="RichTextLabel" parent="Profiles"]
 layout_mode = 0
-offset_left = 574.0
 offset_top = -168.0
-offset_right = 707.0
+offset_right = 1280.0
 offset_bottom = -109.0
 size_flags_horizontal = 3
 theme_override_font_sizes/bold_italics_font_size = 40
@@ -68,7 +67,7 @@ theme_override_font_sizes/mono_font_size = 40
 theme_override_font_sizes/normal_font_size = 40
 theme_override_font_sizes/bold_font_size = 40
 bbcode_enabled = true
-text = "[wave amp=50.0 freq=1.9 connected=1]Logare[/wave]"
+text = "[center][wave amp=50.0 freq=1.9 connected=1]Logare[/wave][/center]"
 scroll_active = false
 shortcut_keys_enabled = false
 
@@ -132,9 +131,8 @@ offset_bottom = 720.0
 
 [node name="Title" type="RichTextLabel" parent="Create"]
 layout_mode = 0
-offset_left = 439.0
 offset_top = -2.0
-offset_right = 845.0
+offset_right = 1280.0
 offset_bottom = 57.0
 size_flags_horizontal = 3
 theme_override_font_sizes/bold_italics_font_size = 40
@@ -143,7 +141,7 @@ theme_override_font_sizes/mono_font_size = 40
 theme_override_font_sizes/normal_font_size = 40
 theme_override_font_sizes/bold_font_size = 40
 bbcode_enabled = true
-text = "[wave amp=50.0 freq=1.9 connected=1]Creeaza un nou user[/wave]"
+text = "[center][wave amp=50.0 freq=1.9 connected=1]Creeaza un nou user[/wave][/center]"
 scroll_active = false
 shortcut_keys_enabled = false
 
@@ -291,9 +289,8 @@ offset_bottom = 720.0
 
 [node name="Hi" type="RichTextLabel" parent="NoUser"]
 layout_mode = 0
-offset_left = 330.0
 offset_top = 2.0
-offset_right = 939.0
+offset_right = 1280.0
 offset_bottom = 114.0
 size_flags_horizontal = 3
 theme_override_font_sizes/bold_italics_font_size = 40
@@ -302,8 +299,8 @@ theme_override_font_sizes/mono_font_size = 40
 theme_override_font_sizes/normal_font_size = 40
 theme_override_font_sizes/bold_font_size = 40
 bbcode_enabled = true
-text = "[rainbow freq=0.1 sat=0.7 val=0.8][wave amp=50.0 freq=2 connected=1]                          Salut
-Multumim ca ai ales Zero2Linux[/wave][/rainbow]"
+text = "[rainbow freq=0.1 sat=0.7 val=0.8][wave amp=50.0 freq=2 connected=1][center]Salut[/center]
+[center]Multumim ca ai ales Zero2Linux[/center][/wave][/rainbow]"
 scroll_active = false
 shortcut_keys_enabled = false
 

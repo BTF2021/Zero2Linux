@@ -75,20 +75,8 @@ public partial class Courses : Control
 	}
 	private void _on_back_pressed() => QueueFree();
 	private void PanelPressed(int index)
-	{	if(_data.currentStats.Anims)
-		{
-			GetParent().GetParent().AddChild((GD.Load<PackedScene>("res://Scenes/Incarcare.tscn")).Instantiate());
-			var timer = GetTree().CreateTimer(3);
-			GetParent<CanvasItem>().Hide();
-			timer.Timeout += () =>
-			{	_data.CurrentLesson = index;
-				GetTree().ChangeSceneToFile("res://Scenes/Lesson.tscn");
-			};
-		}
-		else
-		{	_data.CurrentLesson = index;
-			GetTree().ChangeSceneToFile("res://Scenes/Lesson.tscn");
-		}
+	{	_data.CurrentLesson = index;
+		_data.LoadScene("res://Scenes/Lesson.tscn");
 	}
 	private void _on_drag_down()
 	{	GD.Print("Hi");

@@ -52,25 +52,13 @@ public partial class Quizzes : Control
 	private void _on_back_pressed() => QueueFree();
 	private async void _on_training_pressed()
 	{	_data.questiontype = 0;
-		if(_data.currentStats.Anims)
-		{	GetParent().GetParent().AddChild((GD.Load<PackedScene>("res://Scenes/Incarcare.tscn")).Instantiate());
-			var timer = GetTree().CreateTimer(3.5);
-			GetParent<CanvasItem>().Hide();
-			timer.Timeout += () => GetTree().ChangeSceneToFile("res://Scenes/Quizztime.tscn");
-		}
-		else GetTree().ChangeSceneToFile("res://Scenes/Quizztime.tscn");
+		_data.LoadScene("res://Scenes/Quizztime.tscn");
 	}
 	private void _on_training_mouse_entered() => GetNode<Label>("Panel/Settings/Description2").Text = "In modul antrenament, se genereaza un chestionar aleatoriu." + 
 	"\nNu conteaza daca ai raspuns corect sau gresit.";
 	private void _on_test_pressed()
 	{	_data.questiontype = 1;
-		if(_data.currentStats.Anims)
-		{	GetParent().GetParent().AddChild((GD.Load<PackedScene>("res://Scenes/Incarcare.tscn")).Instantiate());
-			var timer = GetTree().CreateTimer(3);
-			GetParent<CanvasItem>().Hide();
-			timer.Timeout += () => GetTree().ChangeSceneToFile("res://Scenes/Quizztime.tscn");
-		}
-		else GetTree().ChangeSceneToFile("res://Scenes/Quizztime.tscn");
+		_data.LoadScene("res://Scenes/Quizztime.tscn");
 	}
 	private void _on_test_entered() => GetNode<Label>("Panel/Settings/Description2").Text = "In modul test, se genereaza un chestionar aleatoriu." +
 	"\nAi doua minute pentru rezolvare" +

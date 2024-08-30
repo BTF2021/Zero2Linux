@@ -1,6 +1,5 @@
 using Godot;
 using System;
-using System.Threading;
 
 public partial class Incarcare : Node2D
 {
@@ -14,7 +13,7 @@ public partial class Incarcare : Node2D
 		target = _data.loadtarget;
 		done = false;
 		GD.Print(target);
-		var tip = (int)GD.RandRange(1, 19);
+		var tip = (int)GD.RandRange(1, 21);
 		switch(tip)
 		{	case 1:
 				GetNode<RichTextLabel>("Tip").Text = GetNode<RichTextLabel>("Tip").Text + "Se incarca...";
@@ -83,8 +82,13 @@ public partial class Incarcare : Node2D
 				GetNode<RichTextLabel>("Tip").Text = GetNode<RichTextLabel>("Tip").Text + "Fun Fact: Freax era numele oficial pentru Linux";
 				break;
 			case 19:
-				//Un sarpe
-				GetNode<RichTextLabel>("Tip").Text = GetNode<RichTextLabel>("Tip").Text + "[wave amp=45.0 freq=7.0 connected=1]<ooooooooooooooooooooooooooooooooooooooooooooooooooooe [/wave]";
+				GetNode<RichTextLabel>("Tip").Text = GetNode<RichTextLabel>("Tip").Text + "[wave amp=45.0 freq=7.0 connected=1]<ooooooooooooooooooooooooooooooooooooooooooooooooooooe[/wave]";    //Ar trebui sa arate a sarpe
+				break;
+			case 20:
+				GetNode<RichTextLabel>("Tip").Text = GetNode<RichTextLabel>("Tip").Text + "Fun fact: Probabil ai mai multe dispozitive Linux decat crezi";
+				break;
+			case 21:
+				GetNode<RichTextLabel>("Tip").Text = GetNode<RichTextLabel>("Tip").Text + "[i]Read the friendly manual[/i]";
 				break;
 		}
 		//Easter Egg bazat pe data sistemului :)
@@ -130,7 +134,7 @@ public partial class Incarcare : Node2D
 	{	
 		if(value == 100)
 		{	var tween = GetTree().CreateTween();
-			tween.TweenProperty(GetNode<ProgressBar>("Bara"), "value", 120, 2);
+			tween.TweenProperty(GetNode<ProgressBar>("Bara"), "value", 120, 1.5);
 			await ToSignal(tween, Tween.SignalName.Finished);
 			tween.Stop();
 			tween = GetTree().CreateTween();
@@ -138,15 +142,10 @@ public partial class Incarcare : Node2D
 			await ToSignal(tween, Tween.SignalName.Finished);
 			tween.Stop(); 
 			_data.loadtarget = "";
-			//Cel mai mare hack vreodata, doar ca sa nu mai fiu bombardat de erori in consola
-			//SceneTree.ChangeSceneToPacked() ii ia mult ca sa adauge scena dorita, cea ce inseamna ca o sa fie multe erori de genul:
-			//	void Incarcare+<ChangeScene>d__6.MoveNext(): System.NullReferenceException: Object reference not set to an instance of an object.
-			//Asa ca o sa adaugam scena dorita ca fiu al Root (nodul principal, ce contine scena curenta si nodurile din Autoload),
-			//schimbam SceneTree.CurrentScene cu ce vrem noi (Caci nu inteleg de ce nu trece singur dupa ce sterg nodul SceneTree.CurrentScene)
-			//si la final stergem acest nod
-			GetTree().Root.AddChild(((PackedScene)(ResourceLoader.LoadThreadedGet(target))).Instantiate());
-			GetTree().CurrentScene = GetTree().Root.GetChild(-1);
-			QueueFree();
+			//Dupa multe incercari am reusit sa nu mai am erori de genul "Object reference not set to an instance of an object" in aceasta functie
+			//Era nevoie doar de un if
+			var packed = (PackedScene)(ResourceLoader.LoadThreadedGet(target));
+			if(packed != null) GetTree().ChangeSceneToPacked(packed);
 		}
 	}
 }

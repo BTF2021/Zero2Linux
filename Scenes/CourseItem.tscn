@@ -32,7 +32,7 @@ script = ExtResource("1_jtknl")
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
-custom_minimum_size = Vector2(5, 0)
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
 [node name="Adv" type="TextureRect" parent="PanelContainer"]

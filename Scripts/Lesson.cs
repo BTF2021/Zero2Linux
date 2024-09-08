@@ -54,6 +54,17 @@ public partial class Lesson : Node2D
 		GetNode<Label>("Panel/ScrollContainer/MarginContainer/Body/Title").Text = GetNode<Label>("Panel/ScrollContainer/MarginContainer/Body/Title").Text + (string)_data.lessonList[lessonid][0];
 		_node.GetParent().MoveChild(GetNode("Panel/ScrollContainer/MarginContainer/Body/HSeparator4"), -1);
 		_node.GetParent().MoveChild(GetNode("Panel/ScrollContainer/MarginContainer/Body/End"), -1);
+
+		//Conecteaza toate RichTextLabelurile cu functia de deschidere a linkurilor
+		for (int i = 0; i <= GetNode("Panel/ScrollContainer/MarginContainer/Body/Content").GetChildCount()-1; i++)
+		{	if(GetNode("Panel/ScrollContainer/MarginContainer/Body/Content").GetChild(i).Name.ToString().Contains("Block"))
+			{	var name = GetNode("Panel/ScrollContainer/MarginContainer/Body/Content").GetChild(i).Name.ToString();
+				for (int j = 0; j <= GetNode("Panel/ScrollContainer/MarginContainer/Body/Content/" + name).GetChildCount()-1; j++)
+				{	if(GetNode("Panel/ScrollContainer/MarginContainer/Body/Content/" + name).GetChild(j).Name.ToString().Contains("RichTextLabel"))	
+						GetNode("Panel/ScrollContainer/MarginContainer/Body/Content/" + name).GetChild<RichTextLabel>(j).MetaClicked += _on_text_link;
+				}
+			}
+		}
 		
 		//Calculeaza nr de intrebari si blocuri
 		percent = (int)_data.currentStats.LessonCompletion[lessonid];

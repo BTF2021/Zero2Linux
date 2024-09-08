@@ -9,12 +9,12 @@ offset_right = 676.0
 offset_bottom = 153.0
 mouse_filter = 1
 script = ExtResource("1_hrfcq")
-question = "Care dintre acestea este raspunsul corect?"
+question = "Intrebare"
 answer1 = "Raspuns 1"
-answer2 = "Nu face nimic special"
-answer3 = "Raspuns gresit"
-answer4 = "Un raspuns scris pentru a fi foarte foarte foarte foarte foarte lung"
-explanation = "Aceasta este o explicatie"
+answer2 = "Raspuns 2"
+answer3 = "Raspuns 3"
+answer4 = "Raspuns 4"
+explanation = "Explicatie"
 
 [node name="PanelContainer" type="VBoxContainer" parent="."]
 layout_mode = 2

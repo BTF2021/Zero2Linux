@@ -26,6 +26,7 @@ public partial class VideoOverlay : Node2D
 		{	GetNode<TextureButton>("ControlsTint/Controls/Fullscr").TextureNormal = GD.Load<CompressedTexture2D>("res://Sprites/Winscr.png");
 			GetNode<TextureButton>("ControlsTint/Controls/Fullscr").TexturePressed = GD.Load<CompressedTexture2D>("res://Sprites/WinscrHighlight.png");
 		}
+		GetNode<TextureButton>("ControlsTint/Controls/Play").GrabFocus();  //Cand apesi pe spacebar, mai apare acest Node in spate.
 		vt = TimeSpan.FromSeconds(videotime);
 		paused = true;
 		dragging = false;
@@ -57,8 +58,8 @@ public partial class VideoOverlay : Node2D
 	}
 	public override void _UnhandledInput(InputEvent input)
 	{	if (input is InputEventKey eventKey)
-        	if (eventKey.Pressed)
-			{	if(eventKey.Keycode == Key.Space) _on_play_pressed();
+        	if (eventKey.Pressed && !eventKey.Echo)
+			{	//if(eventKey.Keycode == Key.Space) _on_play_pressed();
 				if(eventKey.Keycode == Key.Right) _on_forward_pressed();
 				if(eventKey.Keycode == Key.Left) _on_backward_pressed();
 			}
@@ -153,12 +154,10 @@ public partial class VideoOverlay : Node2D
 		tween.Parallel().TweenProperty(GetNode<ColorRect>("BackTint"), "self_modulate", new Color(1, 1, 1, 0), 0.25);
 	}
 	private async void _on_mouse_exited()
-	{	GD.Print("Bye");
-		if(!paused && !dragging) _timer.Start(1.5);
+	{	if(!paused && !dragging) _timer.Start(1.5);
 	}
 	private void _on_mouse_entered()
-	{	GD.Print("Hi");
-		_timer.Stop();
+	{	_timer.Stop();
 		var pos = Position;
 		pos.X = 0;
 		pos.Y = 8;

@@ -24,13 +24,13 @@ centered = false
 [node name="Tint" type="ColorRect" parent="."]
 offset_right = 1280.0
 offset_bottom = 720.0
-mouse_filter = 2
 color = Color(0.0313726, 0.0313726, 0.0313726, 0.686275)
 
 [node name="Panel" type="AspectRatioContainer" parent="."]
 offset_right = 1280.0
 offset_bottom = 720.0
 mouse_filter = 2
+ratio = 1.7778
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Panel"]
 layout_mode = 2
@@ -59,6 +59,7 @@ layout_mode = 2
 [node name="Backward" type="TextureButton" parent="ControlsTint/Controls"]
 layout_mode = 2
 tooltip_text = "Inapoi cu 10 secunde"
+focus_mode = 0
 mouse_filter = 1
 texture_normal = ExtResource("2_m5ft7")
 texture_pressed = ExtResource("3_dv4bi")
@@ -73,6 +74,7 @@ texture_pressed = ExtResource("5_tisoe")
 [node name="Forward" type="TextureButton" parent="ControlsTint/Controls"]
 layout_mode = 2
 tooltip_text = "Inainte cu 10 secunde"
+focus_mode = 0
 mouse_filter = 1
 texture_normal = ExtResource("4_0c7my")
 texture_pressed = ExtResource("7_pggls")
@@ -93,6 +95,7 @@ horizontal_alignment = 1
 [node name="Volume" type="HSlider" parent="ControlsTint/Controls/Volum"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
+focus_mode = 0
 mouse_filter = 1
 theme_override_styles/slider = ExtResource("8_ew0bt")
 min_value = -11.0
@@ -105,6 +108,7 @@ mouse_filter = 2
 [node name="Seekbar" type="HSlider" parent="ControlsTint/Controls"]
 custom_minimum_size = Vector2(606, 36)
 layout_mode = 2
+focus_mode = 0
 mouse_filter = 1
 theme_override_styles/slider = ExtResource("8_ew0bt")
 
@@ -121,6 +125,7 @@ vertical_alignment = 1
 
 [node name="Fullscr" type="TextureButton" parent="ControlsTint/Controls"]
 layout_mode = 2
+focus_mode = 0
 mouse_filter = 1
 texture_normal = ExtResource("5_4p4g7")
 texture_pressed = ExtResource("9_tshvh")
@@ -136,6 +141,7 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 38.0
 scale = Vector2(1.2, 1.2)
+focus_mode = 0
 texture_normal = ExtResource("2_5ji7h")
 texture_pressed = ExtResource("3_5uc3p")
 

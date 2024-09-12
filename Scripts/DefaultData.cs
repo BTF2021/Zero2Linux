@@ -67,7 +67,6 @@ public partial class DefaultData : Node
 	public bool isvideoavailable = false;
 	public int CurrentLesson = 0;
 	public int questiontype = 0;
-	public string loadtarget;
 	//Vector pentru retinerea informatiilor privind versiunea noua de pe Github
 	public Godot.Collections.Array<String> newversion = new Godot.Collections.Array<String>{};
 
@@ -184,8 +183,11 @@ public partial class DefaultData : Node
 	}
 	public void LoadScene(string target)
 	{	//Incarcam Incarcare.tscn, dam valoare scena pe care vrem sa o incarcam, impachetam la loc si o incarcam ca scena principala
-		loadtarget = target;
-		GetTree().ChangeSceneToFile("res://Scenes/Incarcare.tscn");
+		var scene = (Incarcare)GD.Load<PackedScene>("res://Scenes/Incarcare.tscn").Instantiate();
+		scene.target = target;
+		PackedScene pack = new PackedScene();
+		pack.Pack(scene);
+		GetTree().ChangeSceneToPacked(pack);
 	}
 	public Godot.Collections.Array<Godot.Collections.Array> GenerateQuestionSet()
 	{	GD.Randomize();     //Nu este necesar. Godot face asta de fiecare data cand deschizi aplicatia

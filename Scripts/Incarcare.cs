@@ -4,13 +4,12 @@ using System;
 public partial class Incarcare : Node2D
 {
 	private DefaultData _data;
-	public string target;
+	[Export]public string target;
 	private bool done;						//Pentru avertizarile legate de Tweenuri
 	public Godot.Collections.Array progress;
 	public override async void _Ready()
 	{	_data = (DefaultData)GetNode("/root/DefaultData");
 		GetNode<RichTextLabel>("Tip").Text = "[center]";
-		target = _data.loadtarget;
 		done = false;
 		GD.Print(target);
 		var tip = (int)GD.RandRange(1, 21);
@@ -141,7 +140,6 @@ public partial class Incarcare : Node2D
 			tween.TweenProperty(GetNode<Node2D>("."), "modulate", new Color(1, 1, 1, 0), 0.5);
 			await ToSignal(tween, Tween.SignalName.Finished);
 			tween.Stop(); 
-			_data.loadtarget = "";
 			//Dupa multe incercari am reusit sa nu mai am erori de genul "Object reference not set to an instance of an object" in aceasta functie
 			//Era nevoie doar de un if
 			var packed = (PackedScene)(ResourceLoader.LoadThreadedGet(target));

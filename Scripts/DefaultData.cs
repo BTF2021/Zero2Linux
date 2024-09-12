@@ -28,7 +28,7 @@ public class stats
 	public float VideoVolume = 0;
 	public bool QNumOnly = false;
 	public bool AdvQ = true;
-	public bool ChkUpdates = true;
+	public bool ChkUpdates = false;
 }
 public partial class DefaultData : Node
 {

@@ -48,7 +48,6 @@ text = "Zero2LInux Ver"
 vertical_alignment = 1
 
 [node name="Profiles" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_top = 254.0
@@ -71,41 +70,58 @@ text = "[center][wave amp=50.0 freq=1.9 connected=1]Logare[/wave][/center]"
 scroll_active = false
 shortcut_keys_enabled = false
 
-[node name="List" type="HBoxContainer" parent="Profiles"]
+[node name="Square" type="ScrollContainer" parent="Profiles"]
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 0
-offset_right = 1280.0
-offset_bottom = 181.0
+offset_left = 112.0
+offset_top = -83.0
+offset_right = 1180.0
+offset_bottom = 296.0
+scroll_vertical_custom_step = 400.0
+horizontal_scroll_mode = 0
+
+[node name="Vlist" type="VBoxContainer" parent="Profiles/Square"]
+custom_minimum_size = Vector2(1060, 0)
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_constants/separation = -1
+
+[node name="List" type="HBoxContainer" parent="Profiles/Square/Vlist"]
+custom_minimum_size = Vector2(0, 190)
+layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name=">,,<" type="Button" parent="Profiles/List"]
+[node name=">,,<" type="Button" parent="Profiles/Square/Vlist/List"]
 visible = false
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 tooltip_text = "Logheaza-te ca "
+mouse_filter = 1
 theme_override_styles/focus = ExtResource("3_rxovc")
 flat = true
 
-[node name="Bg" type="Sprite2D" parent="Profiles/List/>,,<"]
-position = Vector2(80, 100)
+[node name="Bg" type="Sprite2D" parent="Profiles/Square/Vlist/List/>,,<"]
+position = Vector2(80, 80)
 texture = ExtResource("4_f0vrj")
 
-[node name="Name" type="Label" parent="Profiles/List/>,,<"]
+[node name="Name" type="Label" parent="Profiles/Square/Vlist/List/>,,<"]
 layout_mode = 0
 offset_left = -5.0
-offset_top = 186.0
-offset_right = 164.0
-offset_bottom = 221.0
+offset_top = 158.0
+offset_right = 166.0
+offset_bottom = 193.0
 theme_override_font_sizes/font_size = 25
 text = "123456789abc"
 horizontal_alignment = 1
 
-[node name="BigLetter" type="Label" parent="Profiles/List/>,,<"]
+[node name="BigLetter" type="Label" parent="Profiles/Square/Vlist/List/>,,<"]
 layout_mode = 0
 offset_left = 3.0
-offset_top = 22.0
+offset_top = 17.0
 offset_right = 158.0
-offset_bottom = 178.0
+offset_bottom = 145.0
 theme_override_font_sizes/font_size = 70
 text = "T"
 horizontal_alignment = 1

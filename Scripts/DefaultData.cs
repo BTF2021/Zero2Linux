@@ -43,7 +43,7 @@ public partial class DefaultData : Node
 		{3, new Godot.Collections.Array{"Linux pe masina virtuala", 2}}
 	};
 	public Godot.Collections.Dictionary<int, Godot.Collections.Dictionary<int, Godot.Collections.Array>> questionList = new Godot.Collections.Dictionary<int, Godot.Collections.Dictionary<int, Godot.Collections.Array>>() 
-	{	//structura vectorului este urmatoarea: nr lectie, iar inauntru nr intrebari, rasp corect, cele 4 intrebari, explicatie
+	{	//structura vectorului este urmatoarea: nr lectie, iar inauntru nr intrebari, rasp corect, cele 4 raspunsuri posibile, explicatie
 		{1, new Godot.Collections.Dictionary<int, Godot.Collections.Array>{
 			{1, new Godot.Collections.Array{3, 2, "Ce este Linux?", "Un program", "Un kernel", "O aplicatie pentru web", "", "Linux este kernelul. Majoritatea programelor sunt parte din GNU Project"}},
 			{2, new Godot.Collections.Array{4, 3, "In ce an a fost lansat Linux?", "1990", "1899", "1991", "1992", "Prima versiune de Linux a fost lansata pe 17 Septembrie 1991"}},
@@ -54,7 +54,7 @@ public partial class DefaultData : Node
 		}},
 		{2, new Godot.Collections.Dictionary<int, Godot.Collections.Array>{
 			{1, new Godot.Collections.Array{4, 3, "Ce este inclus (in general) intr-o distributie?", "Kernelul Linux si un browser", "Browser si aplicatii", "Kernelul Linux si aplicatii", "Doar Kernelul Linux", "De obicei, o distributie include kernelul Linux, dar si aplicatii, majoritatea aplicatiilor fiind parte din proiectul GNU"}},
-			{2, new Godot.Collections.Array{2, 1, "Se pot instala si actualiza aplicatii atat printr-o interfata grafica, cat si prin terminal", "Adevarat", "Fals", "", "", "Pentru a instala si actualiza aplicatii, utilizatorul are de obicei 2 moduri: grafic si prin terminal"}},
+			{2, new Godot.Collections.Array{2, 2, "Fedora este bazata pe Debian", "Adevarat", "Fals", "", "", "Fedora NU este bazata pe Debian"}},
 			{3, new Godot.Collections.Array{2, 1, "Linux Mint este derivat din Debian. Adevarat sau fals?", "Adevarat", "Fals", "", "", "Linux Mint este o distributie derivata din Ubuntu, care la randul lui este derivat din Debian. Deci Linux Mint este derivat din Debian"}},
 			{4, new Godot.Collections.Array{4, 4, "Care este distributia care NU este bazata pe Debian", "Debian", "Ubuntu", "Linux Mint", "Fedora", "Fedora este distributia din cele patru care NU este bazata pe Debian"}},
 			{5, new Godot.Collections.Array{4, 4, "Care este distributia bazata pe Ubuntu", "Arch", "Fedora", "Debian", "Linux Mint", "Linux Mint este o distributie bazata pe Ubuntu"}},
@@ -127,8 +127,8 @@ public partial class DefaultData : Node
 	public System.Array GetSaves()
 	{	System.Array filearray = DirAccess.GetFilesAt("user://");
 		var length = filearray.Length;
-		if(length > 7) length = 7;
-		System.Array savenames = new string[7];
+		if(length > 100) length = 100;
+		System.Array savenames = new string[length];
 		if(!SaveExists()) return null;
 		for (int i = 0; i < length; i++)
 			if(((string)(filearray.GetValue(i))).EndsWith("_save.json"))     					 //Ceva stupid. filearray.GetValue(i) trebuie sa fie string ca sa poate folosi Contains()

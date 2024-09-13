@@ -241,5 +241,11 @@ public partial class Lesson : Node2D
 		_video.GetNode<Sprite2D>("Bg").Texture = GD.Load<CompressedTexture2D>("res://Courses/Lesson_" + lessonid + "/VidBg.png");
 		AddChild(_video);
 	}
-	private void _on_text_link(Variant meta) => OS.ShellOpen((string)meta); //Pentru linkurile din text
+	//Pentru linkurile din text
+	private void _on_text_link(Variant meta)
+	{	var scene = (Confirm)GD.Load<PackedScene>("res://Scenes/Confirm.tscn").Instantiate();
+		scene.reason = 2;
+		scene.link = (string)meta;
+		AddChild(scene);
+	}
 }

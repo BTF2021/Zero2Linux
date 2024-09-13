@@ -109,8 +109,19 @@ public partial class Quizztime : Node2D
 
 	private void _on_back_pressed()
 	{	GD.Print("Pressed");
-		_data.questiontype = 0;
-		GetTree().ChangeSceneToFile("res://Scenes/Main.tscn");
+		int n = 0;
+		for(int i = 0; i < total; i++) if(_list[i].Count != 0) n++;
+		GD.Print(n);
+		if(n < 10)
+		{	var scene = (Confirm)GD.Load<PackedScene>("res://Scenes/Confirm.tscn").Instantiate();
+			scene.reason = 1;
+			AddChild(scene);
+			GetTree().Paused = true;
+		}
+		else
+		{	_data.questiontype = 0;
+			GetTree().ChangeSceneToFile("res://Scenes/Main.tscn");
+		}
 	}
 	private void _on_retry_pressed() => GetTree().ReloadCurrentScene();
 	public void SendAnswers(bool correct, bool ignore, int index)

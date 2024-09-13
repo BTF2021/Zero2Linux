@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bkx0p2po0iq6n"]
+[gd_scene load_steps=9 format=3 uid="uid://bkx0p2po0iq6n"]
 
 [ext_resource type="Texture2D" uid="uid://c311u78gq8dn" path="res://Sprites/Bg.png" id="1_acc6r"]
 [ext_resource type="Script" path="res://Scripts/Logare.cs" id="1_avx0j"]
+[ext_resource type="Theme" uid="uid://c3r51fw2bo66h" path="res://Sprites/CourseUI.theme" id="3_llrmv"]
 [ext_resource type="StyleBox" uid="uid://di87pu5wmffgt" path="res://Sprites/UINoHover.stylebox" id="3_rxovc"]
 [ext_resource type="Texture2D" uid="uid://ddhgftxfvqe6s" path="res://Sprites/Profile.png" id="4_f0vrj"]
 [ext_resource type="StyleBox" uid="uid://c8ip85nk5v8ds" path="res://Sprites/UIButtons.stylebox" id="5_c51ni"]
@@ -77,6 +78,7 @@ offset_left = 112.0
 offset_top = -83.0
 offset_right = 1180.0
 offset_bottom = 296.0
+theme = ExtResource("3_llrmv")
 scroll_vertical_custom_step = 400.0
 horizontal_scroll_mode = 0
 

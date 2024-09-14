@@ -74,9 +74,9 @@ shortcut_keys_enabled = false
 [node name="Square" type="ScrollContainer" parent="Profiles"]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 0
-offset_left = 112.0
+offset_left = 102.0
 offset_top = -83.0
-offset_right = 1180.0
+offset_right = 1192.0
 offset_bottom = 296.0
 theme = ExtResource("3_llrmv")
 scroll_vertical_custom_step = 400.0

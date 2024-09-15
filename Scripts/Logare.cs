@@ -191,6 +191,8 @@ public partial class Logare : Node2D
 		if(!_data.SaveExists()) profilespresent = false;
 		else
 		{	profilespresent = true;
+			if(ListLenght >= 13)GetNode<Panel>("Profiles/Panel").Visible = true;
+			else GetNode<Panel>("Profiles/Panel").Visible = false;
 			System.Array.Copy(_data.GetSaves(), 0, _names, 0, ListLenght);
 			if(ListLenght == 100) 
 			{	if(_names.GetValue(99) != null)

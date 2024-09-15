@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bkx0p2po0iq6n"]
+[gd_scene load_steps=10 format=3 uid="uid://bkx0p2po0iq6n"]
 
 [ext_resource type="Texture2D" uid="uid://c311u78gq8dn" path="res://Sprites/Bg.png" id="1_acc6r"]
 [ext_resource type="Script" path="res://Scripts/Logare.cs" id="1_avx0j"]
+[ext_resource type="StyleBox" uid="uid://drod6m1sbtikq" path="res://Sprites/UISettingsButton.stylebox" id="3_03oal"]
 [ext_resource type="Theme" uid="uid://c3r51fw2bo66h" path="res://Sprites/CourseUI.theme" id="3_llrmv"]
 [ext_resource type="StyleBox" uid="uid://di87pu5wmffgt" path="res://Sprites/UINoHover.stylebox" id="3_rxovc"]
 [ext_resource type="Texture2D" uid="uid://ddhgftxfvqe6s" path="res://Sprites/Profile.png" id="4_f0vrj"]
@@ -70,6 +71,16 @@ bbcode_enabled = true
 text = "[center][wave amp=50.0 freq=1.9 connected=1]Logare[/wave][/center]"
 scroll_active = false
 shortcut_keys_enabled = false
+
+[node name="Panel" type="Panel" parent="Profiles"]
+visible = false
+self_modulate = Color(0.707967, 0.707967, 0.707967, 0.631373)
+layout_mode = 0
+offset_left = 97.0
+offset_top = -83.0
+offset_right = 1192.0
+offset_bottom = 296.0
+theme_override_styles/panel = ExtResource("3_03oal")
 
 [node name="Square" type="ScrollContainer" parent="Profiles"]
 custom_minimum_size = Vector2(0, 200)

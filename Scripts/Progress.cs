@@ -37,9 +37,9 @@ public partial class Progress : Control
 			}
 		}
 		else AddItem("Nu ai nicio lectie inceputa", null);
-		AddItem("Lectii finalizate: " + (_data.currentStats.FinishedLes + spc), null);
 		if(_data.currentStats.FinishedLes > 0)
-		{	i=1;
+		{	AddItem("Lectii finalizate: " + (_data.currentStats.FinishedLes + spc), null);
+			i=1;
 			while(_data.lessonList.ContainsKey(i))
 			{	if((int)_data.currentStats.LessonCompletion[i] == 100) AddItem((string)_data.lessonList[i][0], GetNode<VBoxContainer>("Panel/Panel/ScrollContainer/VBoxContainer").GetChild<VBoxContainer>(-1));
 				i++;

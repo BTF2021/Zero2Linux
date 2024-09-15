@@ -104,7 +104,13 @@ public partial class Main : Node2D
 		DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
 		DisplayServer.WindowSetVsyncMode(DisplayServer.VSyncMode.Enabled);
 		GetTree().ChangeSceneToFile("res://Scenes/Logare.tscn");
-	}	
+	}
+	private void _on_notification_pressed()
+	{	var newver = (GD.Load<PackedScene>("res://Scenes/NewVer.tscn")).Instantiate();
+		newver.GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/Title2").Text = newver.GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/Title2").Text + (String)ProjectSettings.GetSetting("application/config/version") + "\nVersiunea actuala este: " + _data.newversion[0] + "\n ";
+		newver.GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/HBoxContainer2/Title3").Text = _data.newversion[1];
+		GetNode<Control>("UI").AddChild(newver);
+	}
 	private void _on_course_pressed() => GetNode<Control>("UI").AddChild((GD.Load<PackedScene>("res://Scenes/Courses.tscn")).Instantiate());
 
 	private void _on_settings_pressed() => GetNode<Control>("UI").AddChild((GD.Load<PackedScene>("res://Scenes/Settings.tscn")).Instantiate());
@@ -121,11 +127,8 @@ public partial class Main : Node2D
 			if(!((String)ProjectSettings.GetSetting("application/config/version")).Contains(_data.newversion[0]) && _data.currentStats.ChkUpdates) //Daca versiunea programului corespunde cu versiunea din version.txt
 			{
 				GD.Print("Versiune veche");
-				var newver = (GD.Load<PackedScene>("res://Scenes/NewVer.tscn")).Instantiate();
-				newver.GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/Title2").Text = newver.GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/Title2").Text + (String)ProjectSettings.GetSetting("application/config/version") + "\nVersiunea actuala este: " + _data.newversion[0] + "\n ";
-				newver.GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/HBoxContainer2/Title3").Text = _data.newversion[1];
-				GetNode<Control>("UI").AddChild(newver);
-				GD.Print("Gata");
+				GetNode<TextureButton>("UI/Bar/HBoxContainer/Notification").Disabled = false;
+				GetNode<TextureButton>("UI/Bar/HBoxContainer/Notification").Visible = true;
 			}
 			else GD.Print("Mergem in continuare");
 		}

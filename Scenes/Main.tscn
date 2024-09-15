@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b4gdupblxidyf"]
+[gd_scene load_steps=13 format=3 uid="uid://b4gdupblxidyf"]
 
 [ext_resource type="Script" path="res://Scripts/Main.cs" id="1_c7d67"]
 [ext_resource type="StyleBox" uid="uid://di87pu5wmffgt" path="res://Sprites/UINoHover.stylebox" id="2_0hv5f"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://hbrqsdt4laac" path="res://Sprites/Logout.png" id="6_8su00"]
 [ext_resource type="Texture2D" uid="uid://drgkb2u3g5c1c" path="res://Sprites/PowerHighlight.png" id="6_kgrc2"]
 [ext_resource type="Texture2D" uid="uid://e5veq36hyvl8" path="res://Sprites/LogoutHighlight.png" id="8_mufyl"]
+[ext_resource type="Texture2D" uid="uid://ephkf4sqir17" path="res://Sprites/Notification.png" id="11_bert4"]
+[ext_resource type="Texture2D" uid="uid://bwxgn7nokfxs7" path="res://Sprites/NotificationHighlight.png" id="12_ie7en"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_c7d67")
@@ -154,6 +156,14 @@ self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="Notification" type="TextureButton" parent="UI/Bar/HBoxContainer"]
+visible = false
+layout_mode = 2
+tooltip_text = "Exista o versiune noua"
+disabled = true
+texture_normal = ExtResource("11_bert4")
+texture_pressed = ExtResource("12_ie7en")
+
 [node name="Time" type="Label" parent="UI/Bar/HBoxContainer"]
 layout_mode = 2
 mouse_filter = 1
@@ -167,3 +177,4 @@ horizontal_alignment = 2
 [connection signal="pressed" from="UI/Panel/Buttons/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="UI/Bar/HBoxContainer/Power" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="UI/Bar/HBoxContainer/Logout" to="." method="_on_logout_pressed"]
+[connection signal="pressed" from="UI/Bar/HBoxContainer/Notification" to="." method="_on_notification_pressed"]

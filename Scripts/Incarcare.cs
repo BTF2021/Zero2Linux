@@ -91,8 +91,8 @@ public partial class Incarcare : Node2D
 				break;
 		}
 		//Easter Egg bazat pe data sistemului :)
-		if(Time.GetDatetimeStringFromSystem().Find("09", 4) == 5 && Time.GetDatetimeStringFromSystem().Find("17", 7) == 8) GetNode<RichTextLabel>("Tip").Text = GetNode<RichTextLabel>("Tip").Text + "La multi ani Linux!";
-		else if(Time.GetDatetimeStringFromSystem().Find("12", 4) == 5 && Time.GetDatetimeStringFromSystem().Find("28", 7) == 8) GetNode<RichTextLabel>("Tip").Text = GetNode<RichTextLabel>("Tip").Text + "La multi ani Linus Torvalds!";
+		if(Time.GetDatetimeStringFromSystem().Find("09", 4) == 5 && Time.GetDatetimeStringFromSystem().Find("17", 7) == 8) GetNode<RichTextLabel>("Tip").Text = "[center]La multi ani Linux!";
+		else if(Time.GetDatetimeStringFromSystem().Find("12", 4) == 5 && Time.GetDatetimeStringFromSystem().Find("28", 7) == 8) GetNode<RichTextLabel>("Tip").Text = "[center]La multi ani Linus Torvalds!";
 		GetNode<RichTextLabel>("Tip").Text = GetNode<RichTextLabel>("Tip").Text + "[/center]";
 
 		GetNode<ProgressBar>("Bara").Value = 0;

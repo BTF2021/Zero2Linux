@@ -50,6 +50,7 @@ text = "Zero2LInux Ver"
 vertical_alignment = 1
 
 [node name="Profiles" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_top = 254.0
@@ -143,12 +144,12 @@ visible_characters = 1
 
 [node name="Create" type="Button" parent="Profiles"]
 layout_mode = 0
-offset_left = 482.0
-offset_top = 318.0
-offset_right = 789.0
-offset_bottom = 361.0
+offset_left = 488.0
+offset_top = 314.0
+offset_right = 800.0
+offset_bottom = 357.0
 theme_override_font_sizes/font_size = 25
-text = "Creaza un nou utilizator"
+text = "Creeaza un nou utilizator"
 
 [node name="Create" type="Control" parent="."]
 visible = false

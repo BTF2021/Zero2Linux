@@ -112,7 +112,7 @@ public partial class Quizztime : Node2D
 		int n = 0;
 		for(int i = 0; i < total; i++) if(_list[i].Count != 0) n++;
 		GD.Print(n);
-		if(n < 10)
+		if(n < 10 && n != 0)
 		{	var scene = (Confirm)GD.Load<PackedScene>("res://Scenes/Confirm.tscn").Instantiate();
 			scene.reason = 1;
 			AddChild(scene);

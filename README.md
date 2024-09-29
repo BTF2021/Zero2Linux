@@ -20,8 +20,8 @@ Dezvoltat in Godot folosind C#
 # FAQ
 > **In pagina de Release sunt 2 versiuni. Care este diferenta dintre Full si Lite?**
 
-  In Lite este doar executabilul si folderul pentru .NET. In Full sunt toate fisierele din Lite plus fisiere statice FFmpeg (cu decodoarele VP8 si Vorbis disponibile)
-  pentru redarea videoclipurilor cum ar fi fundalul in meniul principal si videourile propriu zise
+  In Lite este doar executabilul si folderul pentru .NET. In Full sunt toate fisierele din Lite plus fisiere statice FFmpeg (cu decodoarele VP8 si Vorbis)
+  pentru redarea videoclipurilor
 > **De ce nu se pot reda videourile**
 
   1. Redarea videourilor nu este disponibila pe Android

@@ -22,6 +22,7 @@ public partial class Settings : Control
 		if(!_data.isvideoavailable)
 		{	GetNode<Label>("Panel/Settings/Lectii/VBoxContainer/VideoVolume").QueueFree();
 			GetNode<Label>("Panel/Settings/Lectii/VBoxContainer/VideoVolume").Modulate = new Color((float)0.6, (float)0.6, (float)0.6, 1);
+			GetNode<RichTextLabel>("Panel/Settings/Despre/VBoxContainer/Notice").Visible = false;
 			_slider.Editable = false;
 		}
 
@@ -183,6 +184,7 @@ public partial class Settings : Control
 		scene.reason = 0;
 		AddChild(scene);
 	}
+	private void _on_notice_meta_clicked(Variant meta) => OS.ShellOpen((string)meta);
 
 	private void _on_drag_down()
 	{	GD.Print("Hi");

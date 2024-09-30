@@ -366,12 +366,8 @@ metadata/_tab_index = 3
 layout_mode = 0
 offset_left = 13.0
 offset_right = 730.0
-offset_bottom = 560.0
+offset_bottom = 562.0
 theme_override_constants/separation = 8
-
-[node name="MarginContainer" type="MarginContainer" parent="Panel/Settings/Despre/VBoxContainer"]
-custom_minimum_size = Vector2(0, 5)
-layout_mode = 2
 
 [node name="vBoxContainer" type="HBoxContainer" parent="Panel/Settings/Despre/VBoxContainer"]
 layout_mode = 2
@@ -408,9 +404,9 @@ text = "  Pagina proiectului"
 [node name="GithubButton" type="Button" parent="Panel/Settings/Despre/VBoxContainer/Github"]
 layout_mode = 2
 offset_left = 498.462
-offset_top = -0.239435
+offset_top = -1.61971
 offset_right = 561.462
-offset_bottom = 30.7606
+offset_bottom = 29.3803
 scale = Vector2(1.25, 1.25)
 tooltip_text = "Acceseaza pagina de Github al proiectului"
 theme_override_styles/normal = ExtResource("4_rkad0")
@@ -424,19 +420,15 @@ text = "  Raporteaza un bug"
 [node name="IssueButton" type="Button" parent="Panel/Settings/Despre/VBoxContainer/Issue"]
 layout_mode = 2
 offset_left = 498.462
-offset_top = -0.352124
+offset_top = -1.73238
 offset_right = 561.462
-offset_bottom = 30.6479
+offset_bottom = 29.2676
 scale = Vector2(1.25, 1.25)
 tooltip_text = "Acceseaza pagina de Github al proiectului"
 theme_override_styles/normal = ExtResource("4_rkad0")
 text = "Issues"
 
 [node name="hSeparator5" type="HSeparator" parent="Panel/Settings/Despre/VBoxContainer"]
-layout_mode = 2
-
-[node name="MarginContainer2" type="MarginContainer" parent="Panel/Settings/Despre/VBoxContainer"]
-custom_minimum_size = Vector2(0, 5)
 layout_mode = 2
 
 [node name="Name3" type="RichTextLabel" parent="Panel/Settings/Despre/VBoxContainer"]
@@ -448,8 +440,26 @@ theme_override_font_sizes/mono_font_size = 19
 theme_override_font_sizes/normal_font_size = 19
 theme_override_font_sizes/bold_font_size = 19
 text = "	 Zero2Linux este un proiect personal, creat pentru a-i invata pe cei mai putini familiarizati cu ecosistemul Linux sa foloseasca un desktop Linux.
-	Desi Linux este foarte popular pentru servere, majoritatea nu au auzit despre Linux/ cred ca Linux este doar pentru cei foarte avansati (sau cei care \"nu isi apreciaza timpul\"). Linux a avansat foarte mult, pana in punctul in care exista distributii care sunt facute special pentru utilizatori mai putini experimentati/ cei care nu vor sa configureze o distributie foarte mult. Zero2Linux incearca sa arate faptul ca Linux nu este (neaparat) foarte complicat si se pot face lucruri posibile si pe celelalte sisteme de operare, in multe cazuri chiar mai simplu.
+	Desi Linux este foarte popular pentru servere, majoritatea nu au auzit despre Linux/ cred ca Linux este doar pentru cei foarte avansati (sau cei care \"nu isi apreciaza timpul\"). Zero2Linux incearca sa arate faptul ca Linux nu este (neaparat) foarte complicat si se pot face lucruri posibile si pe celelalte sisteme de operare, in multe cazuri chiar mai simplu.
 	 Zero2Linux este gratis pentru toata lumea, dar este foarte apreciat daca ai dea stea (star) la proiect pe Github sau sa contribui prin raportarea bugurilor."
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="marginContainer" type="MarginContainer" parent="Panel/Settings/Despre/VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+
+[node name="Notice" type="RichTextLabel" parent="Panel/Settings/Despre/VBoxContainer"]
+custom_minimum_size = Vector2(161, 0)
+layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 19
+theme_override_font_sizes/italics_font_size = 19
+theme_override_font_sizes/mono_font_size = 19
+theme_override_font_sizes/normal_font_size = 19
+theme_override_font_sizes/bold_font_size = 19
+bbcode_enabled = true
+text = "	 Acest proiect foloseste librarii din proiectul [url=https://ffmpeg.org/]FFmpeg[/url] sub licenta LGPLv2.1"
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
@@ -496,6 +506,7 @@ vertical_alignment = 1
 [connection signal="pressed" from="Panel/Settings/Altele/VBoxContainer/DeleteSave/DeleteSaveButton" to="." method="_on_delete_pressed"]
 [connection signal="pressed" from="Panel/Settings/Despre/VBoxContainer/Github/GithubButton" to="." method="_on_github_pressed"]
 [connection signal="pressed" from="Panel/Settings/Despre/VBoxContainer/Issue/IssueButton" to="." method="_on_issue_pressed"]
+[connection signal="meta_clicked" from="Panel/Settings/Despre/VBoxContainer/Notice" to="." method="_on_notice_meta_clicked"]
 [connection signal="button_down" from="Panel/Drag" to="." method="_on_drag_down"]
 [connection signal="button_up" from="Panel/Drag" to="." method="_on_drag_up"]
 [connection signal="pressed" from="Panel/Back" to="." method="_on_back_pressed"]

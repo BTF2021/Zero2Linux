@@ -181,8 +181,7 @@ public partial class Logare : Node2D
 		CheckUsers();
 	}
 	private void CheckUsers()
-	{	ListLenght = _data.GetSaves().Length;
-		for(int i = 0; i< GetNode<VBoxContainer>("Profiles/Square/Vlist").GetChildCount(); i++) 
+	{	for(int i = 0; i< GetNode<VBoxContainer>("Profiles/Square/Vlist").GetChildCount(); i++) 
 		{	for(int j = 0; j< GetNode<VBoxContainer>("Profiles/Square/Vlist").GetChild(i).GetChildCount(); j++)
 			{	if(GetNode<VBoxContainer>("Profiles/Square/Vlist").GetChild(i).GetChild<Node>(j).Name != (StringName)">,,<")
 					GetNode<VBoxContainer>("Profiles/Square/Vlist").GetChild(i).GetChild<Node>(j).QueueFree();
@@ -190,7 +189,8 @@ public partial class Logare : Node2D
 		}
 		if(!_data.SaveExists()) profilespresent = false;
 		else
-		{	profilespresent = true;
+		{	ListLenght = _data.GetSaves().Length;
+			profilespresent = true;
 			if(ListLenght >= 13)GetNode<Panel>("Profiles/Panel").Visible = true;
 			else GetNode<Panel>("Profiles/Panel").Visible = false;
 			System.Array.Copy(_data.GetSaves(), 0, _names, 0, ListLenght);

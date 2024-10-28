@@ -1,9 +1,9 @@
 ![Invata Linux de la zero](https://github.com/BTF2021/Zero2Linux/blob/unstable/githubassets/Banner.gif)
 Zero2Linux este un proiect personal, creat pentru a-i invata pe cei mai putini familiarizati cu ecosistemul Linux sa foloseasca un desktop Linux.
 
-Dezvoltat in Godot folosind C#
+Dezvoltat in Godot folosind C#.
 
-**Nota** Videoclipurile din lectii sunt redate folosind librariile din proiectul [FFmpeg](https://ffmpeg.org/) sub licenta LGPLv2.1
+**Nota** Videoclipurile din lectii sunt redate folosind librariile din proiectul [FFmpeg](https://ffmpeg.org/) sub licenta LGPLv2.1.
 
 # Platforme
 ## Windows
@@ -22,13 +22,13 @@ Dezvoltat in Godot folosind C#
 # FAQ
 > **In pagina de Release sunt 2 versiuni. Care este diferenta dintre Full si Lite?**
 
-  In Lite este doar executabilul si folderul pentru .NET. In Full sunt toate fisierele din Lite plus librarii statice [FFmpeg](https://ffmpeg.org/) (cu decodoarele VP8 si Vorbis)
-  pentru redarea videoclipurilor
+  In Lite este doar executabilul si folderul pentru .NET. In Full sunt toate fisierele din Lite plus librarii statice FFmpeg pentru redarea videoclipurilor.
 > **De ce nu se pot reda videourile**
 
   1. Redarea videourilor nu este disponibila pe Android
   2. In cele mai multe cazuri, nu ai librariile statice [FFmpeg](https://ffmpeg.org/) pentru redarea videourilor.
-  In zipurile Full sunt incluse librarii statice FFmpeg cu decodoarele VP8 si Vorbis disponibile
+
+### Mai multe informatii in [wiki](https://github.com/BTF2021/Zero2Linux/wiki/Redarea-videoclipurilor-pentru-lectii)
 
 # Cum se deschide proiectul
 - Descarca codul sursa

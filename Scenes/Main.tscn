@@ -1,11 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://b4gdupblxidyf"]
+[gd_scene load_steps=13 format=3 uid="uid://b4gdupblxidyf"]
 
 [ext_resource type="Script" path="res://Scripts/Main.cs" id="1_c7d67"]
 [ext_resource type="StyleBox" uid="uid://di87pu5wmffgt" path="res://Sprites/UINoHover.stylebox" id="2_0hv5f"]
 [ext_resource type="Texture2D" uid="uid://c311u78gq8dn" path="res://Sprites/Bg.png" id="2_lj8l1"]
 [ext_resource type="Texture2D" uid="uid://bid2ssfeh2pfy" path="res://Sprites/Bar.png" id="3_ocyen"]
+[ext_resource type="VideoStream" path="res://Sprites/bgvid.ogv" id="3_v0gny"]
+[ext_resource type="StyleBox" uid="uid://c8ip85nk5v8ds" path="res://Sprites/UIButtons.stylebox" id="4_ja7mp"]
 [ext_resource type="Texture2D" uid="uid://2k0tqngjaab8" path="res://Sprites/Power.png" id="4_q207a"]
 [ext_resource type="Texture2D" uid="uid://hbrqsdt4laac" path="res://Sprites/Logout.png" id="6_8su00"]
+[ext_resource type="Texture2D" uid="uid://drgkb2u3g5c1c" path="res://Sprites/PowerHighlight.png" id="6_kgrc2"]
+[ext_resource type="Texture2D" uid="uid://e5veq36hyvl8" path="res://Sprites/LogoutHighlight.png" id="8_mufyl"]
+[ext_resource type="Texture2D" uid="uid://ephkf4sqir17" path="res://Sprites/Notification.png" id="11_bert4"]
+[ext_resource type="Texture2D" uid="uid://bwxgn7nokfxs7" path="res://Sprites/NotificationHighlight.png" id="12_ie7en"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_c7d67")
@@ -22,27 +28,27 @@ position = Vector2(640, 360)
 [node name="Sprite2D" type="Sprite2D" parent="UI/Bg"]
 texture = ExtResource("2_lj8l1")
 
-[node name="Tint" type="ColorRect" parent="UI/Bg"]
-visible = false
+[node name="Bg" type="VideoStreamPlayer" parent="UI/Bg"]
 offset_left = -640.0
 offset_top = -360.0
 offset_right = 640.0
-offset_bottom = 360.0
-color = Color(0.0313726, 0.0313726, 0.0313726, 0.345098)
+offset_bottom = 359.0
+stream = ExtResource("3_v0gny")
+autoplay = true
+loop = true
 
 [node name="Name" type="RichTextLabel" parent="UI"]
 layout_mode = 0
-offset_left = 508.0
 offset_top = 96.0
-offset_right = 782.0
+offset_right = 1280.0
 offset_bottom = 165.0
+theme_override_font_sizes/bold_italics_font_size = 50
+theme_override_font_sizes/italics_font_size = 50
+theme_override_font_sizes/mono_font_size = 50
 theme_override_font_sizes/normal_font_size = 50
 theme_override_font_sizes/bold_font_size = 50
-theme_override_font_sizes/italics_font_size = 50
-theme_override_font_sizes/bold_italics_font_size = 50
-theme_override_font_sizes/mono_font_size = 50
 bbcode_enabled = true
-text = "[rainbow freq=0.2 sat=0.8 val=0.8][wave amp=65.0 freq=2.0 connected=1]Zero2Linux[/wave][/rainbow]"
+text = "[center][rainbow freq=0.2 sat=0.8 val=0.8][wave amp=65.0 freq=2.0 connected=1]Zero2Linux[/wave][/rainbow][/center]"
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
@@ -50,17 +56,16 @@ shortcut_keys_enabled = false
 [node name="Subtitle" type="RichTextLabel" parent="UI"]
 self_modulate = Color(0.686739, 0.771303, 0.952505, 1)
 layout_mode = 0
-offset_left = 428.0
 offset_top = 151.0
-offset_right = 861.0
+offset_right = 1280.0
 offset_bottom = 220.0
+theme_override_font_sizes/bold_italics_font_size = 40
+theme_override_font_sizes/italics_font_size = 40
+theme_override_font_sizes/mono_font_size = 40
 theme_override_font_sizes/normal_font_size = 40
 theme_override_font_sizes/bold_font_size = 40
-theme_override_font_sizes/italics_font_size = 40
-theme_override_font_sizes/bold_italics_font_size = 40
-theme_override_font_sizes/mono_font_size = 40
 bbcode_enabled = true
-text = "[wave amp=25.0 freq=2.0 connected=1]Invata Linux de la zero[/wave]"
+text = "[center][wave amp=25.0 freq=2.0 connected=1]Invata Linux de la zero[/wave][/center]"
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
@@ -85,6 +90,7 @@ size_flags_vertical = 3
 tooltip_text = "Incepe o lectie"
 theme_override_font_sizes/font_size = 20
 theme_override_styles/focus = ExtResource("2_0hv5f")
+theme_override_styles/normal = ExtResource("4_ja7mp")
 text = "Lectii"
 
 [node name="Quizzes" type="Button" parent="UI/Panel/Buttons"]
@@ -94,6 +100,7 @@ tooltip_text = "Testeaza-ti cunostiintele dobandite pe parcursul lectiilor.
 Necesita terminarea a cel putin doua lectii."
 theme_override_font_sizes/font_size = 20
 theme_override_styles/focus = ExtResource("2_0hv5f")
+theme_override_styles/normal = ExtResource("4_ja7mp")
 text = "Chestionare"
 
 [node name="Progress" type="Button" parent="UI/Panel/Buttons"]
@@ -102,7 +109,8 @@ size_flags_vertical = 3
 tooltip_text = "Vezi intregul tau progres de pe acest profil"
 theme_override_font_sizes/font_size = 20
 theme_override_styles/focus = ExtResource("2_0hv5f")
-text = "Progres"
+theme_override_styles/normal = ExtResource("4_ja7mp")
+text = "Statistici"
 
 [node name="Settings" type="Button" parent="UI/Panel/Buttons"]
 layout_mode = 2
@@ -110,6 +118,7 @@ size_flags_vertical = 3
 tooltip_text = "Regleaza-ti setarile legate de imagine, lectii, etc"
 theme_override_font_sizes/font_size = 20
 theme_override_styles/focus = ExtResource("2_0hv5f")
+theme_override_styles/normal = ExtResource("4_ja7mp")
 text = "Setari"
 
 [node name="Bar" type="Sprite2D" parent="UI"]
@@ -130,11 +139,13 @@ theme_override_constants/separation = 5
 layout_mode = 2
 tooltip_text = "Oprire calculator"
 texture_normal = ExtResource("4_q207a")
+texture_pressed = ExtResource("6_kgrc2")
 
 [node name="Logout" type="TextureButton" parent="UI/Bar/HBoxContainer"]
 layout_mode = 2
 tooltip_text = "Delogare"
 texture_normal = ExtResource("6_8su00")
+texture_pressed = ExtResource("8_mufyl")
 
 [node name="vSeparator" type="VSeparator" parent="UI/Bar/HBoxContainer"]
 visible = false
@@ -144,6 +155,14 @@ layout_mode = 2
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="Notification" type="TextureButton" parent="UI/Bar/HBoxContainer"]
+visible = false
+layout_mode = 2
+tooltip_text = "Exista o versiune noua"
+disabled = true
+texture_normal = ExtResource("11_bert4")
+texture_pressed = ExtResource("12_ie7en")
 
 [node name="Time" type="Label" parent="UI/Bar/HBoxContainer"]
 layout_mode = 2
@@ -158,3 +177,4 @@ horizontal_alignment = 2
 [connection signal="pressed" from="UI/Panel/Buttons/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="UI/Bar/HBoxContainer/Power" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="UI/Bar/HBoxContainer/Logout" to="." method="_on_logout_pressed"]
+[connection signal="pressed" from="UI/Bar/HBoxContainer/Notification" to="." method="_on_notification_pressed"]

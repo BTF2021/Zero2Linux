@@ -11,6 +11,7 @@ public partial class Quizztime : Node2D
 	int intrebari = 0;
 	int corecte = 0;
 	int gresite = 0;
+	int timp = 120; //Timpul de rezolvare
 	Godot.Collections.Array chars = new Godot.Collections.Array(){"/", "%", "&", "$", "@", "$", "#", "(", ")", "-", "0", "O"};   //Pentru efectul de glitch
 	string randomstr = "";
 	public Timer timer;
@@ -36,7 +37,7 @@ public partial class Quizztime : Node2D
 			GetNode<Label>("Body/RemainedTime").Show();
 			timp_ramas = GetNode<Timer>("Timp");
 			timp_ramas.Timeout += _timp_scurs;
-			timp_ramas.Start(61);
+			timp_ramas.Start(timp);
 			if(!_data.currentStats.QNumOnly) _timeout();
 		}
 		if(!_data.currentStats.QNumOnly && _data.currentStats.Anims)
@@ -59,7 +60,7 @@ public partial class Quizztime : Node2D
 			GetNode<TextureButton>("Back").Hide();
 			GetNode<Node2D>("Transition").Show();
 			GetNode<Label>("Transition/Title").Text = GetNode<Label>("Body/Title").Text;
-			if(_data.questiontype == 1) GetNode<Label>("Transition/Title").Text = GetNode<Label>("Transition/Title").Text + "\nTimp de rezolvare: 1:00";
+			if(_data.questiontype == 1) GetNode<Label>("Transition/Title").Text = GetNode<Label>("Transition/Title").Text + "\nTimp de rezolvare: " + TimeSpan.FromSeconds(timp_ramas.TimeLeft).ToString("mm\\:ss");
 			var tween = GetTree().CreateTween();
 			var pos = Position;
 			pos.X = 0;
@@ -108,9 +109,21 @@ public partial class Quizztime : Node2D
 
 	private void _on_back_pressed()
 	{	GD.Print("Pressed");
-		_data.questiontype = 0;
-		GetTree().ChangeSceneToFile("res://Scenes/Main.tscn");
+		int n = 0;
+		for(int i = 0; i < total; i++) if(_list[i].Count != 0) n++;
+		GD.Print(n);
+		if(n < 10 && n != 0)
+		{	var scene = (Confirm)GD.Load<PackedScene>("res://Scenes/Confirm.tscn").Instantiate();
+			scene.reason = 1;
+			AddChild(scene);
+			GetTree().Paused = true;
+		}
+		else
+		{	_data.questiontype = 0;
+			GetTree().ChangeSceneToFile("res://Scenes/Main.tscn");
+		}
 	}
+	private void _on_retry_pressed() => GetTree().ReloadCurrentScene();
 	public void SendAnswers(bool correct, bool ignore, int index)
 	{	//Ignore este mai mult pentru functia de sarit peste
 		if(!ignore)
@@ -254,9 +267,11 @@ public partial class Quizztime : Node2D
 	private async void QuestionFinished()
 	{	GetNode<Timer>("Timp").Stop();
 		GetNode<Timer>("ShakeTimer").Stop();
+		GetNode<TextureButton>("Back").Disabled = true;
 		var tween = GetTree().CreateTween();
 		tween.TweenProperty(GetNode<Label>("Body/Title"), "modulate", new Color(1, 1, 1, 0), 0.25);
 		tween.Parallel().TweenProperty(GetNode<Label>("Body/RemainedTime"), "modulate", new Color(1, 1, 1, 0), 0.25);
+		tween.Parallel().TweenProperty(GetNode<TextureButton>("Back"), "modulate", new Color(1, 1, 1, 0), 0.25);
 		await ToSignal(tween, Tween.SignalName.Finished);
 		tween.Stop();
 		tween = GetTree().CreateTween();
@@ -292,7 +307,18 @@ public partial class Quizztime : Node2D
 			await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
 			GetNode<RichTextLabel>("Body/Correct").Text = "Corecte: " + corecte;
 			GetNode<RichTextLabel>("Body/Wrong").Text = "Gresite: " + gresite;
-			if(corecte==10) _data.currentStats.flawlesstests++;
+			if(corecte>=5)	_data.currentStats.goodtests++;
+			if(corecte>=7)	_data.currentStats.greattest++;
+			if(corecte==10) 
+			{
+				_data.currentStats.flawlesstests++;
+				//Confeti
+				if(_data.currentStats.Anims)
+				{	GetNode<GpuParticles2D>("Confetti/Left").Emitting = true;
+					GetNode<GpuParticles2D>("Confetti/Center").Emitting = true;
+					GetNode<GpuParticles2D>("Confetti/Right").Emitting = true;
+				}
+			}
 			_data.currentStats.Testsnum++;
 			_data.WriteSave(_data.LoggedUser);
 		}
@@ -327,6 +353,10 @@ public partial class Quizztime : Node2D
 				GetNode<Label>("Feedback").Text = "Citeste cu atentie intrebarile.";
 				break;
 		}
+		GetNode<Button>("Exit").Visible = true;
+		GetNode<Button>("Retry").Visible = true;
 		tween.TweenProperty(GetNode<Label>("Feedback"), "self_modulate", new Color(1, 1, 1, 1), 0.25).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+		tween.TweenProperty(GetNode<Button>("Exit"), "self_modulate", new Color(1, 1, 1, 1), 0.2).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+		tween.TweenProperty(GetNode<Button>("Retry"), "self_modulate", new Color(1, 1, 1, 1), 0.2).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
 	}
 }

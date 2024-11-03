@@ -7,13 +7,16 @@ public partial class Logare : Node2D
 	private DefaultData _data;
 	private Button _profile;
 	private System.Array _names;         //Vector pentru numele profilelor
+	private int ListLenght;
+	private int Index;
 	private bool profilespresent;        //Daca exista profile
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{	_data = (DefaultData)GetNode("/root/DefaultData");
-		_profile = GetNode<Button>("Profiles/List/>,,<");
-		_names = new string[7];
+		_profile = GetNode<Button>("Profiles/Square/Vlist/List/>,,<");
+		_names = new string[101];
 		GetNode<Label>("Bg/Version").Text = "Zero2Linux Ver " + (String)ProjectSettings.GetSetting("application/config/version");
+		GetNode<CanvasItem>("/root/Transition").Show(); //A se vedea funtia logging
 		CheckUsers();
 		GetNode<Control>("Profiles").Visible = false;
 		GetNode<Control>("NoUser").Visible = false;
@@ -72,8 +75,9 @@ public partial class Logare : Node2D
 		if(new_text.IndexOf("'") >= 0) new_text = new_text.Remove(new_text.IndexOf("'"));
 		if(new_text.IndexOf("%") >= 0) new_text = new_text.Remove(new_text.IndexOf("%"));
 		if(new_text.IndexOf('"') >= 0) new_text = new_text.Remove(new_text.IndexOf('"'));
+		var caret = GetNode<LineEdit>("Create/Nume/Nume").CaretColumn;	//Salveaza pozitia inainte de a salva textul
 		GetNode<LineEdit>("Create/Nume/Nume").Text = new_text;
-		GetNode<LineEdit>("Create/Nume/Nume").CaretColumn = new_text.Length;
+		GetNode<LineEdit>("Create/Nume/Nume").CaretColumn = caret;
 	}
 	private void _on_create_pressed()
 	{
@@ -104,6 +108,7 @@ public partial class Logare : Node2D
 				GetNode<Button>("Create/Back").Disabled = true;
 				GetNode<Control>("Create").Visible = false;
 				GetNode<Control>("Profiles").Visible = true;
+				
 				CheckUsers();
 
 				var pos = Position;
@@ -115,8 +120,6 @@ public partial class Logare : Node2D
 				var tween = GetTree().CreateTween();
 				tween.TweenProperty(GetNode<Control>("Profiles"), "modulate", new Color(1, 1, 1, 1), 0.25);
 				tween.Parallel().TweenProperty(GetNode<Control>("Profiles"), "position", pos, 0.25);
-
-				if(FileAccess.FileExists("user://defaults.json")) DirAccess.RemoveAbsolute("user://defaults.json");
 			}
 			else
 			{	GD.Print("Nu se poate creea utilizator: Deja exista un utilizator cu acel nume");
@@ -178,18 +181,25 @@ public partial class Logare : Node2D
 		CheckUsers();
 	}
 	private void CheckUsers()
-	{	for(int i = 0; i < GetNode<HBoxContainer>("Profiles/List").GetChildCount(); i++)
-		{	if(GetNode<HBoxContainer>("Profiles/List").GetChild<Node>(i).Name != (StringName)">,,<")
-				GetNode<HBoxContainer>("Profiles/List").GetChild<Node>(i).QueueFree();
+	{	for(int i = 0; i< GetNode<VBoxContainer>("Profiles/Square/Vlist").GetChildCount(); i++) 
+		{	for(int j = 0; j< GetNode<VBoxContainer>("Profiles/Square/Vlist").GetChild(i).GetChildCount(); j++)
+			{	if(GetNode<VBoxContainer>("Profiles/Square/Vlist").GetChild(i).GetChild<Node>(j).Name != (StringName)">,,<")
+					GetNode<VBoxContainer>("Profiles/Square/Vlist").GetChild(i).GetChild<Node>(j).QueueFree();
+			}
 		}
 		if(!_data.SaveExists()) profilespresent = false;
 		else
-		{	profilespresent = true;
-			System.Array.Copy(_data.GetSaves(), _names, 7);
-			if(_names.GetValue(6) != null) 
-			{
-				GetNode<Button>("Profiles/Create").Disabled = true;
-				GetNode<Button>("Profiles/Create").TooltipText = "Nu se pot creea noi utilizatori.\nVa rugam sa stergeti un utilizator pentru a creea altul";
+		{	ListLenght = _data.GetSaves().Length;
+			profilespresent = true;
+			if(ListLenght >= 13)GetNode<Panel>("Profiles/Panel").Visible = true;
+			else GetNode<Panel>("Profiles/Panel").Visible = false;
+			System.Array.Copy(_data.GetSaves(), 0, _names, 0, ListLenght);
+			if(ListLenght == 100) 
+			{	if(_names.GetValue(99) != null)
+				{	GetNode<Button>("Profiles/Create").Disabled = true;
+					GetNode<Button>("Profiles/Create").TooltipText = "Nu se pot creea noi utilizatori.\nVa rugam sa stergeti un utilizator pentru a creea altul";
+				}
+				else GetNode<Button>("Profiles/Create").TooltipText = "Creeaza un utilizator nou";
 			}
 			else GetNode<Button>("Profiles/Create").TooltipText = "Creeaza un utilizator nou";
 			for(int i = 0; i< _names.Length; i++) 
@@ -199,12 +209,35 @@ public partial class Logare : Node2D
 	private void logging(string name)
 	{	_data.LoggedUser = name;
 		GD.Print("Logat in: " + name);
-		GetTree().ChangeSceneToFile("res://Scenes/Main.tscn");
+		
+		//Dezactiveaza toate butoanele
+		for(int i = 0; i< GetNode<VBoxContainer>("Profiles/Square/Vlist").GetChildCount(); i++) 
+			for(int j = 0; j< GetNode<VBoxContainer>("Profiles/Square/Vlist").GetChild(i).GetChildCount(); j++)
+				GetNode<VBoxContainer>("Profiles/Square/Vlist").GetChild(i).GetChild<Button>(j).Disabled = true;
+		
+		var pos = Position;
+		pos.X = 0;
+		pos.Y = 254;
+		GetNode<Control>("Profiles").Position = pos;
+		pos.Y = 254 - 30;
+		GetNode<Control>("Profiles").Modulate = new Color(1, 1, 1, 1);
+		var tween = GetTree().CreateTween();
+		tween.TweenProperty(GetNode<Control>("Profiles"), "modulate", new Color(1, 1, 1, 0), 0.3);
+		tween.Parallel().TweenProperty(GetNode<Control>("Profiles"), "position", pos, 0.3);
+		var pos1 = GetNode<Label>("Bg/Time").Position;
+		pos1.Y = pos1.Y - 30;
+		tween.Parallel().TweenProperty(GetNode<Label>("Bg/Time"), "position", pos1, 0.3);
+		tween.Parallel().TweenProperty(GetNode<Label>("Bg/Time"), "modulate", new Color(1, 1, 1, 0), 0.3);
+		//Aceasta instructiune este motivul pentru care exista o alta scena in Autoload
+		//In timpul in care Godot a eliberat din memorie aceasta scena si incarca scena Main, o sa apara gri
+		//De aceea aratam scena Transition in _Ready()
+		tween.Finished += () => GetTree().ChangeSceneToFile("res://Scenes/Main.tscn");
 	}
 	
 	//Functie pentru adaugarea profilelor existente
 	private void AddProfiles(int index)
-	{	var button = (Button)_profile.Duplicate(8);
+	{	Index = index;
+		var button = (Button)_profile.Duplicate(8);
 		var file = FileAccess.Open("user://" + (string)_names.GetValue(index) + "_save.json", FileAccess.ModeFlags.Read);
 		if (file == null) GD.Print("Nu se poate deschide fisierul. Eroare: " + FileAccess.GetOpenError());
 		stats content = JsonConvert.DeserializeObject<stats>(file.GetAsText());
@@ -215,7 +248,16 @@ public partial class Logare : Node2D
 		button.GetNode<Label>("BigLetter").Text = content.UsrName;
 		button.GetNode<Sprite2D>("Bg").SelfModulate = content.FavColor;
 		button.Show();
-		GetNode<HBoxContainer>("Profiles/List").AddChild(button);
+		if(index % 6 == 0 && index > 0 && GetNode<VBoxContainer>("Profiles/Square/Vlist").GetChildCount() != (index / 6) + 1)
+		{
+			Node list = GetNode<HBoxContainer>("Profiles/Square/Vlist/List").Duplicate(8);
+			int count = list.GetChildCount();
+			for(int i = 0; i < count; i++) 
+				list.GetChild(i).QueueFree();
+			GetNode<VBoxContainer>("Profiles/Square/Vlist").AddChild(list);
+		}
+		GetNode<VBoxContainer>("Profiles/Square/Vlist").GetChild((index / 6)).AddChild(button);
+		GD.Print("Adaugat " + content.UsrName + " cu indexul " + index + " in " + GetNode<VBoxContainer>("Profiles/Square/Vlist").GetChild((index / 6)).Name);
 		button.Pressed += () => logging(content.UsrName);
 	}
 }

@@ -1,0 +1,193 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6frsfwmvfpux"]
+
+[ext_resource type="Texture2D" uid="uid://bj40odn0r6c5x" path="res://Courses/Lesson_6/List.png" id="1_6phh2"]
+[ext_resource type="PackedScene" uid="uid://duiw5l0ody1l" path="res://Scenes/Quizitem.tscn" id="2_27d8o"]
+
+[node name="Content" type="VBoxContainer"]
+
+[node name="Block" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Block"]
+layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "	In lectia anterioara am discutat despre packet managere si cum sa instalezi programe. Daca ai instalat un program prin package manager, sunt sanse sa fi vazut un alt buton pe langa cel de instalare:"
+fit_content = true
+
+[node name="Image" type="TextureRect" parent="Block"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("1_6phh2")
+expand_mode = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Block"]
+layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "	In majoritatea distributiilor, ai optiunea de a instala un program ca Flatpak sau ca pachet specific distributiei (in cazul acesta, RPM). In aceasta lectie vom discuta despre aceste formate."
+fit_content = true
+
+[node name="HSeparator" type="HSeparator" parent="Block"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Block"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "Pachete pentru sistem: Deb, Rpm si alte"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="Block"]
+layout_mode = 2
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Block"]
+layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "	Pachetele Deb si Rpm sunt pachete specifice distributiilor bazate pe Debian, respectiv Fedora. Aceste pachete sunt in repo-uri distributiei sau repo-uri adaugate de tine.
+	Aceste pachete sunt separate, cea ce inseamna ca un pachet contine ori un program, ori o librarie folosita de alte programe. De asemenea, cu trecerea timpului, acestea o sa ocupe mai putin spatiu, deoarece programele declara ce alte pachete are nevoie ca sa functioneze.
+	Deb si Rpm se instaleaza ca superuser (administrator), cea ce le permit sa faca ce-si doresc. De asemenea, in cazul dezvoltatorilor, programul trebuie creat pentru orice arhitectura, pentru 32-biti si 64-biti, pentru fiecare versiune a unei distributii, pentru fiecare distributie.
+
+	Deb si Rpm nu sunt singurele pachete pentru o anumita distributie. Exista si alte formate de pachet care au aceeasi caracteristica. De exemplu: pacman pentru Arch Linux."
+fit_content = true
+drag_and_drop_selection_enabled = false
+
+[node name="HSeparator3" type="HSeparator" parent="Block"]
+layout_mode = 2
+
+[node name="Title2" type="Label" parent="Block"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "Flatpak"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator4" type="HSeparator" parent="Block"]
+layout_mode = 2
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="Block"]
+layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "	Din aceasta cauza a fost creat Flatpak. Programele sunt impachetate impreuna cu alte librarii necesare (dar daca are nevoie de multe pachete necesare si altor programe, librariile o sa fie instalate separat).
+	Flatpak este mai sigur decat Deb si Rpm, deoarece nu necesita superuser, iar programul este intr-un sandbox, cu permisiuni.
+	Pentru dezvoltatori, pachetele Flatpak ruleaza pe orice sistem cu Flatpak instalat, mai putin Ubuntu si variantele acestuia (Pe Ubuntu si derivatele acestuia, Flatpak trebuie instalat de catre utilizator. Linux Mint are Flatpak deja instalat). De asemenea, nu trebuie sa astepti distributiile sa impacheteze noile versiuni ale unui program.
+	Flatpak este doar pentru programele cu interfata grafica, deci nu poate inlocui complet pachetel Deb si Rpm. De asemenea, Flatpak ocupa mai mult spatiu si exista posibilitatea ca programul sa nu respecte preferintele desktopului."
+fit_content = true
+drag_and_drop_selection_enabled = false
+
+[node name="Quizitem" parent="." instance=ExtResource("2_27d8o")]
+layout_mode = 2
+answnum = 2
+answ = 2
+question = "Ubuntu include Flatpak"
+answer1 = "Adevarat"
+answer2 = "Fals"
+explanation = "Ubuntu nu include Flatpak, dar poate fi instalat de utilizator."
+
+[node name="Block2" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="Block2"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Block2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "Snap"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="Block2"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Block2"]
+layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "	Pentru Ubuntu, exista un \"inlocuitor\" al Flatpak: Snap. Diferenta este ca Snap suporta si utilitatile prin linia de comanda, dar componenta de server nu este open-source (codul sursa nu este disponibil), in timp ce Flatpak si Flathub (site-ul de unde instalezi pachete Flatpak) sunt open-source. In plus, pachetele Snap se pornesc foarte greu atunci cand sunt rulate pentru prima data pe sistem."
+fit_content = true
+
+[node name="HSeparator3" type="HSeparator" parent="Block2"]
+layout_mode = 2
+
+[node name="Title2" type="Label" parent="Block2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "AppImage"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator4" type="HSeparator" parent="Block2"]
+layout_mode = 2
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Block2"]
+layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "	Pachetele AppImage sunt pachete ce includ programul plus toate librariile intr-un singur fisier. Acestea sunt foarte portabile, din moment ce totul este inclus in fisier, dar nu se integreaza foarte bine cu sistemul si ocupa cel mai mult spatiu comparativ cu celelalte tipuri de pachete."
+fit_content = true
+drag_and_drop_selection_enabled = false
+
+[node name="Quizitem2" parent="." instance=ExtResource("2_27d8o")]
+layout_mode = 2
+answ = 3
+question = "Ce format de pachet ocupa cel mai putin spatiu?"
+answer1 = "Flatpak"
+answer2 = "Snap"
+answer3 = "Deb si Rpm"
+answer4 = "AppImage"
+explanation = "Pachetele Deb si Rpm includ ori programul, ori o librarie pentru alte programe. Acestea ocupa mai putin spatiu decat alte formate."
+
+[node name="Block3" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="Block3"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Block3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "Ce format sa folosesc?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="Block3"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Block3"]
+layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "	Nu exista nu format mai bun decat altul. Utilizatorul este cel care alege ce format vrea sa foloseasca. In majoritatea cazurilor, Flatpak este o alegere buna, dar se pot combina formate de pachete diferite."
+fit_content = true

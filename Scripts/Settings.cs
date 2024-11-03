@@ -5,6 +5,7 @@ public partial class Settings : Control
 {
 	private DefaultData _data;
 	private HSlider _slider;
+	private bool video;
 	private Vector2 mousepos;
 	private bool inputgrab;
 	private Vector2 dif;
@@ -16,9 +17,12 @@ public partial class Settings : Control
 		GetNode<LineEdit>("Panel/Settings/Altele/VBoxContainer/Name/NameEdit").Text = _data.currentStats.UsrName;
 		GetNode<ColorPickerButton>("Panel/Settings/Altele/VBoxContainer/FavColour/ColorButton").Color = _data.currentStats.FavColor;
 
+		video = _data.isvideoavailable;           //Pentru _Process
+
 		if(!_data.isvideoavailable)
 		{	GetNode<Label>("Panel/Settings/Lectii/VBoxContainer/VideoVolume").QueueFree();
 			GetNode<Label>("Panel/Settings/Lectii/VBoxContainer/VideoVolume").Modulate = new Color((float)0.6, (float)0.6, (float)0.6, 1);
+			GetNode<RichTextLabel>("Panel/Settings/Despre/VBoxContainer/Notice").Visible = false;
 			_slider.Editable = false;
 		}
 
@@ -54,7 +58,9 @@ public partial class Settings : Control
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{	//Volum
-		if(_data.isvideoavailable)
+		//Din motive necunoscute, daca folosesti _data.isvideoavailable in loc de video, editorul o sa dea o eroare LA FIECARE FRAME.
+		//Programul functioneaza si cu _data.isvideoavailable, dar prefer sa nu mai dea erori de fiecare data cand deschid Settings
+		if(video)
 		{
 			if(_slider.Value == -11) GetNode<Label>("Panel/Settings/Lectii/VBoxContainer/VideoVolume/VideoVolumeText").Text = "Mut";
 			else if(_slider.Value == 10) GetNode<Label>("Panel/Settings/Lectii/VBoxContainer/VideoVolume/VideoVolumeText").Text = "Max";
@@ -173,7 +179,12 @@ public partial class Settings : Control
 		_data.currentStats.FavColor = color;
 		_data.WriteSave(_data.LoggedUser);
 	}
-	private void _on_delete_pressed() => AddChild((GD.Load<PackedScene>("res://Scenes/Confirma.tscn")).Instantiate());
+	private void _on_delete_pressed()
+	{	var scene = (Confirm)GD.Load<PackedScene>("res://Scenes/Confirm.tscn").Instantiate();
+		scene.reason = 0;
+		AddChild(scene);
+	}
+	private void _on_notice_meta_clicked(Variant meta) => OS.ShellOpen((string)meta);
 
 	private void _on_drag_down()
 	{	GD.Print("Hi");

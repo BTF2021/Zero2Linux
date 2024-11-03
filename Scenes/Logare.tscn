@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bkx0p2po0iq6n"]
+[gd_scene load_steps=10 format=3 uid="uid://bkx0p2po0iq6n"]
 
 [ext_resource type="Texture2D" uid="uid://c311u78gq8dn" path="res://Sprites/Bg.png" id="1_acc6r"]
 [ext_resource type="Script" path="res://Scripts/Logare.cs" id="1_avx0j"]
+[ext_resource type="StyleBox" uid="uid://drod6m1sbtikq" path="res://Sprites/UISettingsButton.stylebox" id="3_03oal"]
+[ext_resource type="Theme" uid="uid://c3r51fw2bo66h" path="res://Sprites/CourseUI.theme" id="3_llrmv"]
 [ext_resource type="StyleBox" uid="uid://di87pu5wmffgt" path="res://Sprites/UINoHover.stylebox" id="3_rxovc"]
 [ext_resource type="Texture2D" uid="uid://ddhgftxfvqe6s" path="res://Sprites/Profile.png" id="4_f0vrj"]
 [ext_resource type="StyleBox" uid="uid://c8ip85nk5v8ds" path="res://Sprites/UIButtons.stylebox" id="5_c51ni"]
@@ -57,56 +59,83 @@ offset_bottom = 720.0
 
 [node name="Title" type="RichTextLabel" parent="Profiles"]
 layout_mode = 0
-offset_left = 574.0
 offset_top = -168.0
-offset_right = 707.0
+offset_right = 1280.0
 offset_bottom = -109.0
 size_flags_horizontal = 3
+theme_override_font_sizes/bold_italics_font_size = 40
+theme_override_font_sizes/italics_font_size = 40
+theme_override_font_sizes/mono_font_size = 40
 theme_override_font_sizes/normal_font_size = 40
 theme_override_font_sizes/bold_font_size = 40
-theme_override_font_sizes/italics_font_size = 40
-theme_override_font_sizes/bold_italics_font_size = 40
-theme_override_font_sizes/mono_font_size = 40
 bbcode_enabled = true
-text = "[wave amp=50.0 freq=1.9 connected=1]Logare[/wave]"
+text = "[center][wave amp=50.0 freq=1.9 connected=1]Logare[/wave][/center]"
 scroll_active = false
 shortcut_keys_enabled = false
 
-[node name="List" type="HBoxContainer" parent="Profiles"]
+[node name="Panel" type="Panel" parent="Profiles"]
+visible = false
+self_modulate = Color(0.707967, 0.707967, 0.707967, 0.631373)
 layout_mode = 0
-offset_right = 1280.0
-offset_bottom = 181.0
+offset_left = 97.0
+offset_top = -83.0
+offset_right = 1192.0
+offset_bottom = 296.0
+theme_override_styles/panel = ExtResource("3_03oal")
+
+[node name="Square" type="ScrollContainer" parent="Profiles"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 0
+offset_left = 102.0
+offset_top = -83.0
+offset_right = 1192.0
+offset_bottom = 296.0
+theme = ExtResource("3_llrmv")
+scroll_vertical_custom_step = 400.0
+horizontal_scroll_mode = 0
+
+[node name="Vlist" type="VBoxContainer" parent="Profiles/Square"]
+custom_minimum_size = Vector2(1060, 0)
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_constants/separation = -1
+
+[node name="List" type="HBoxContainer" parent="Profiles/Square/Vlist"]
+custom_minimum_size = Vector2(0, 190)
+layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name=">,,<" type="Button" parent="Profiles/List"]
+[node name=">,,<" type="Button" parent="Profiles/Square/Vlist/List"]
 visible = false
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 tooltip_text = "Logheaza-te ca "
+mouse_filter = 1
 theme_override_styles/focus = ExtResource("3_rxovc")
 flat = true
 
-[node name="Bg" type="Sprite2D" parent="Profiles/List/>,,<"]
-position = Vector2(80, 100)
+[node name="Bg" type="Sprite2D" parent="Profiles/Square/Vlist/List/>,,<"]
+position = Vector2(80, 80)
 texture = ExtResource("4_f0vrj")
 
-[node name="Name" type="Label" parent="Profiles/List/>,,<"]
+[node name="Name" type="Label" parent="Profiles/Square/Vlist/List/>,,<"]
 layout_mode = 0
 offset_left = -5.0
-offset_top = 186.0
-offset_right = 164.0
-offset_bottom = 221.0
+offset_top = 158.0
+offset_right = 166.0
+offset_bottom = 193.0
 theme_override_font_sizes/font_size = 25
 text = "123456789abc"
 horizontal_alignment = 1
 
-[node name="BigLetter" type="Label" parent="Profiles/List/>,,<"]
+[node name="BigLetter" type="Label" parent="Profiles/Square/Vlist/List/>,,<"]
 layout_mode = 0
 offset_left = 3.0
-offset_top = 22.0
+offset_top = 17.0
 offset_right = 158.0
-offset_bottom = 178.0
+offset_bottom = 145.0
 theme_override_font_sizes/font_size = 70
 text = "T"
 horizontal_alignment = 1
@@ -115,12 +144,12 @@ visible_characters = 1
 
 [node name="Create" type="Button" parent="Profiles"]
 layout_mode = 0
-offset_left = 482.0
-offset_top = 318.0
-offset_right = 789.0
-offset_bottom = 361.0
+offset_left = 488.0
+offset_top = 314.0
+offset_right = 800.0
+offset_bottom = 357.0
 theme_override_font_sizes/font_size = 25
-text = "Creaza un nou utilizator"
+text = "Creeaza un nou utilizator"
 
 [node name="Create" type="Control" parent="."]
 visible = false
@@ -132,18 +161,17 @@ offset_bottom = 720.0
 
 [node name="Title" type="RichTextLabel" parent="Create"]
 layout_mode = 0
-offset_left = 439.0
 offset_top = -2.0
-offset_right = 845.0
+offset_right = 1280.0
 offset_bottom = 57.0
 size_flags_horizontal = 3
+theme_override_font_sizes/bold_italics_font_size = 40
+theme_override_font_sizes/italics_font_size = 40
+theme_override_font_sizes/mono_font_size = 40
 theme_override_font_sizes/normal_font_size = 40
 theme_override_font_sizes/bold_font_size = 40
-theme_override_font_sizes/italics_font_size = 40
-theme_override_font_sizes/bold_italics_font_size = 40
-theme_override_font_sizes/mono_font_size = 40
 bbcode_enabled = true
-text = "[wave amp=50.0 freq=1.9 connected=1]Creeaza un nou user[/wave]"
+text = "[center][wave amp=50.0 freq=1.9 connected=1]Creeaza un nou user[/wave][/center]"
 scroll_active = false
 shortcut_keys_enabled = false
 
@@ -169,8 +197,8 @@ si nu poate contine spatiu si urmatoarele
 caractere:
  / . :  , @ ' % \""
 theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxFlat_y087x")
 theme_override_styles/focus = ExtResource("3_rxovc")
+theme_override_styles/normal = SubResource("StyleBoxFlat_y087x")
 placeholder_text = "John_1233453"
 alignment = 1
 max_length = 12
@@ -291,19 +319,18 @@ offset_bottom = 720.0
 
 [node name="Hi" type="RichTextLabel" parent="NoUser"]
 layout_mode = 0
-offset_left = 330.0
 offset_top = 2.0
-offset_right = 939.0
+offset_right = 1280.0
 offset_bottom = 114.0
 size_flags_horizontal = 3
+theme_override_font_sizes/bold_italics_font_size = 40
+theme_override_font_sizes/italics_font_size = 40
+theme_override_font_sizes/mono_font_size = 40
 theme_override_font_sizes/normal_font_size = 40
 theme_override_font_sizes/bold_font_size = 40
-theme_override_font_sizes/italics_font_size = 40
-theme_override_font_sizes/bold_italics_font_size = 40
-theme_override_font_sizes/mono_font_size = 40
 bbcode_enabled = true
-text = "[rainbow freq=0.1 sat=0.7 val=0.8][wave amp=50.0 freq=2 connected=1]                          Salut
-Multumim ca ai ales Zero2Linux[/wave][/rainbow]"
+text = "[rainbow freq=0.1 sat=0.7 val=0.8][wave amp=50.0 freq=2 connected=1][center]Salut[/center]
+[center]Multumim ca ai ales Zero2Linux[/center][/wave][/rainbow]"
 scroll_active = false
 shortcut_keys_enabled = false
 

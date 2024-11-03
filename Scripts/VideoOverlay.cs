@@ -22,7 +22,11 @@ public partial class VideoOverlay : Node2D
 		videotime = _stream.GetStreamLength();
 		_slider.MaxValue = videotime;
 		_volume.Value = _data.currentStats.VideoVolume;
-		if(DisplayServer.WindowGetMode() == DisplayServer.WindowMode.Fullscreen) GetNode<TextureButton>("ControlsTint/Controls/Fullscr").TextureNormal = GD.Load<CompressedTexture2D>("res://Sprites/Winscr.png");
+		if(DisplayServer.WindowGetMode() == DisplayServer.WindowMode.Fullscreen) 
+		{	GetNode<TextureButton>("ControlsTint/Controls/Fullscr").TextureNormal = GD.Load<CompressedTexture2D>("res://Sprites/Winscr.png");
+			GetNode<TextureButton>("ControlsTint/Controls/Fullscr").TexturePressed = GD.Load<CompressedTexture2D>("res://Sprites/WinscrHighlight.png");
+		}
+		GetNode<TextureButton>("ControlsTint/Controls/Play").GrabFocus();  //Cand apesi pe spacebar, mai apare acest Node in spate.
 		vt = TimeSpan.FromSeconds(videotime);
 		paused = true;
 		dragging = false;
@@ -38,7 +42,11 @@ public partial class VideoOverlay : Node2D
 		if(_stream.IsPlaying())
 			if(!_stream.Paused) _slider.Value = videocurrenttime;
 			else _stream.StreamPosition = _slider.Value;
-		else GetNode<TextureButton>("ControlsTint/Controls/Play").TextureNormal = GD.Load<CompressedTexture2D>("res://Sprites/Play.png");
+		else 
+		{
+			GetNode<TextureButton>("ControlsTint/Controls/Play").TextureNormal = GD.Load<CompressedTexture2D>("res://Sprites/Play.png");
+			GetNode<TextureButton>("ControlsTint/Controls/Play").TexturePressed = GD.Load<CompressedTexture2D>("res://Sprites/PlayHighlight.png");
+		}
 		//Text
 		if(_stream.GetStreamLength() >= 3600) GetNode<Label>("ControlsTint/Controls/Time").Text = vct.ToString("hh\\:mm\\:ss") + "/" + vt.ToString("hh\\:mm\\:ss");
 		else GetNode<Label>("ControlsTint/Controls/Time").Text = vct.ToString("mm\\:ss") + "/" + vt.ToString("mm\\:ss");
@@ -48,6 +56,14 @@ public partial class VideoOverlay : Node2D
 		else if(_volume.Value == 10)GetNode<Label>("ControlsTint/Controls/Volum/VolumeNum").Text = "Volum: Max";
 		else GetNode<Label>("ControlsTint/Controls/Volum/VolumeNum").Text = "Volum: " + (_volume.Value + 11).ToString();
 	}
+	public override void _UnhandledInput(InputEvent input)
+	{	if (input is InputEventKey eventKey)
+        	if (eventKey.Pressed && !eventKey.Echo)
+			{	//if(eventKey.Keycode == Key.Space) _on_play_pressed();
+				if(eventKey.Keycode == Key.Right) _on_forward_pressed();
+				if(eventKey.Keycode == Key.Left) _on_backward_pressed();
+			}
+	}
 	private void _on_play_pressed()
 	{
 		//Daca nu a dat play, porneste. Altfel pauza
@@ -55,12 +71,19 @@ public partial class VideoOverlay : Node2D
 		{	_stream.Stop();
 			_stream.Play();
 			GetNode<TextureButton>("ControlsTint/Controls/Play").TextureNormal = GD.Load<CompressedTexture2D>("res://Sprites/Pause.png");
+			GetNode<TextureButton>("ControlsTint/Controls/Play").TexturePressed = GD.Load<CompressedTexture2D>("res://Sprites/PauseHighlight.png");
 			_on_mouse_exited();
 		}
 		else _stream.Paused = !_stream.Paused;
 		paused = _stream.Paused;
-		if(!_stream.Paused) GetNode<TextureButton>("ControlsTint/Controls/Play").TextureNormal = GD.Load<CompressedTexture2D>("res://Sprites/Pause.png");
-		else GetNode<TextureButton>("ControlsTint/Controls/Play").TextureNormal = GD.Load<CompressedTexture2D>("res://Sprites/Play.png");
+		if(!_stream.Paused) 
+		{	GetNode<TextureButton>("ControlsTint/Controls/Play").TextureNormal = GD.Load<CompressedTexture2D>("res://Sprites/Pause.png");
+			GetNode<TextureButton>("ControlsTint/Controls/Play").TexturePressed = GD.Load<CompressedTexture2D>("res://Sprites/PauseHighlight.png");
+		}
+		else 
+		{	GetNode<TextureButton>("ControlsTint/Controls/Play").TextureNormal = GD.Load<CompressedTexture2D>("res://Sprites/Play.png");
+			GetNode<TextureButton>("ControlsTint/Controls/Play").TexturePressed = GD.Load<CompressedTexture2D>("res://Sprites/PlayHighlight.png");
+		}
 	}
 	//Scade StreamPosition cu 10s
 	private void _on_backward_pressed()
@@ -107,11 +130,13 @@ public partial class VideoOverlay : Node2D
 		{	DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
 			_data.currentStats.FullScr = true;
 			GetNode<TextureButton>("ControlsTint/Controls/Fullscr").TextureNormal = GD.Load<CompressedTexture2D>("res://Sprites/Winscr.png");
+			GetNode<TextureButton>("ControlsTint/Controls/Fullscr").TexturePressed = GD.Load<CompressedTexture2D>("res://Sprites/WinscrHighlight.png");
 		}
 		else
 		{	DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
 			_data.currentStats.FullScr = false;
 			GetNode<TextureButton>("ControlsTint/Controls/Fullscr").TextureNormal = GD.Load<CompressedTexture2D>("res://Sprites/Fullscr.png");
+			GetNode<TextureButton>("ControlsTint/Controls/Fullscr").TexturePressed = GD.Load<CompressedTexture2D>("res://Sprites/FullscrHighlight.png");
 		}
 		_data.WriteSave(_data.LoggedUser);
 	}
@@ -122,25 +147,23 @@ public partial class VideoOverlay : Node2D
 		pos.Y = 50;
 		var tween = GetTree().CreateTween();
 		tween.Parallel().TweenProperty(GetNode<HBoxContainer>("ControlsTint/Controls"), "position", pos, 0.25);
-		pos.X = -50;
+		pos.X = -90;
 		pos.Y = 0;
 		tween.Parallel().TweenProperty(GetNode<TextureButton>("BackTint/Back"), "position", pos, 0.25);
 		tween.Parallel().TweenProperty(GetNode<ColorRect>("ControlsTint"), "self_modulate", new Color(1, 1, 1, 0), 0.25);
 		tween.Parallel().TweenProperty(GetNode<ColorRect>("BackTint"), "self_modulate", new Color(1, 1, 1, 0), 0.25);
 	}
 	private async void _on_mouse_exited()
-	{	GD.Print("Bye");
-		if(!paused && !dragging) _timer.Start(1.5);
+	{	if(!paused && !dragging) _timer.Start(1.5);
 	}
 	private void _on_mouse_entered()
-	{	GD.Print("Hi");
-		_timer.Stop();
+	{	_timer.Stop();
 		var pos = Position;
 		pos.X = 0;
 		pos.Y = 8;
 		var tween = GetTree().CreateTween();
 		tween.Parallel().TweenProperty(GetNode<HBoxContainer>("ControlsTint/Controls"), "position", pos, 0.25);
-		pos.X = -5;
+		pos.X = 0;
 		pos.Y = 0;
 		tween.Parallel().TweenProperty(GetNode<TextureButton>("BackTint/Back"), "position", pos, 0.25);
 		tween.Parallel().TweenProperty(GetNode<ColorRect>("ControlsTint"), "self_modulate", new Color(1, 1, 1, 1), 0.25);

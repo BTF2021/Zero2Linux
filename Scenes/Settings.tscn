@@ -1,16 +1,18 @@
-[gd_scene load_steps=10 format=3 uid="uid://1phgnjaru1ou"]
+[gd_scene load_steps=12 format=3 uid="uid://1phgnjaru1ou"]
 
 [ext_resource type="Script" path="res://Scripts/Settings.cs" id="1_5tuin"]
 [ext_resource type="Texture2D" uid="uid://dherg8j0a21h2" path="res://Sprites/CoursePanel.png" id="2_wmyog"]
+[ext_resource type="StyleBox" uid="uid://dhjub7y84wcpf" path="res://Sprites/Slider.stylebox" id="3_7a02l"]
 [ext_resource type="StyleBox" uid="uid://di87pu5wmffgt" path="res://Sprites/UINoHover.stylebox" id="3_yiypy"]
 [ext_resource type="StyleBox" uid="uid://drod6m1sbtikq" path="res://Sprites/UISettingsButton.stylebox" id="4_rkad0"]
 [ext_resource type="Texture2D" uid="uid://bqd1321xxqoej" path="res://Sprites/CloseButton.png" id="5_7cisg"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ijpad"]
-bg_color = Color(0, 0, 0, 0.411765)
+[ext_resource type="Texture2D" uid="uid://c1cjk57xd8mq2" path="res://Sprites/CloseButtonHighlight.png" id="6_beobs"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_64lay"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ijpad"]
+bg_color = Color(0, 0, 0, 0.411765)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_idgcd"]
 bg_color = Color(0.262932, 0.262932, 0.262932, 1)
@@ -34,6 +36,7 @@ expand_margin_bottom = 3.0
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_5tuin")
+metadata/_edit_vertical_guides_ = [341.0]
 
 [node name="Panel" type="Sprite2D" parent="."]
 position = Vector2(645, 339)
@@ -42,15 +45,18 @@ texture = ExtResource("2_wmyog")
 
 [node name="Settings" type="TabContainer" parent="Panel"]
 offset_left = -373.0
-offset_top = -286.0
+offset_top = -293.0
 offset_right = 373.0
 offset_bottom = 303.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_ijpad")
+theme_override_font_sizes/font_size = 18
 theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_64lay")
+theme_override_styles/panel = SubResource("StyleBoxFlat_ijpad")
+current_tab = 0
 clip_tabs = false
 
 [node name="Grafica" type="Control" parent="Panel/Settings"]
 layout_mode = 2
+metadata/_tab_index = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/Settings/Grafica"]
 layout_mode = 0
@@ -65,13 +71,16 @@ layout_mode = 2
 
 [node name="Text" type="Label" parent="Panel/Settings/Grafica/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 25
 text = "Setari legate de grafica"
 horizontal_alignment = 1
 
+[node name="hSeparator" type="HSeparator" parent="Panel/Settings/Grafica/VBoxContainer"]
+layout_mode = 2
+
 [node name="Fullscreen" type="Label" parent="Panel/Settings/Grafica/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 19
+theme_override_font_sizes/font_size = 25
 text = "Fullscreen"
 
 [node name="FullscreenButton" type="CheckButton" parent="Panel/Settings/Grafica/VBoxContainer/Fullscreen"]
@@ -80,11 +89,12 @@ offset_left = 498.913
 offset_top = 3.0
 offset_right = 542.913
 offset_bottom = 27.0
+scale = Vector2(1.25, 1.25)
 tooltip_text = "Daca este activat, aceasta fereastra va fi in fullscreen"
 
 [node name="VSync" type="Label" parent="Panel/Settings/Grafica/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 19
+theme_override_font_sizes/font_size = 25
 text = "VSync"
 
 [node name="VSyncButton" type="CheckButton" parent="Panel/Settings/Grafica/VBoxContainer/VSync"]
@@ -93,11 +103,12 @@ offset_left = 500.0
 offset_top = 3.0
 offset_right = 544.0
 offset_bottom = 27.0
+scale = Vector2(1.25, 1.25)
 tooltip_text = "Daca este activat, numarul de cadre pe secuda (framerate) va fi la maximul frecventei monitorului (in cele mai multe cazuri 60 FPS)"
 
 [node name="Animations" type="Label" parent="Panel/Settings/Grafica/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 19
+theme_override_font_sizes/font_size = 25
 text = "Animatii"
 
 [node name="AnimationsButton" type="CheckButton" parent="Panel/Settings/Grafica/VBoxContainer/Animations"]
@@ -106,11 +117,13 @@ offset_left = 500.0
 offset_top = 3.0
 offset_right = 544.0
 offset_bottom = 27.0
+scale = Vector2(1.25, 1.25)
 tooltip_text = "Daca este activat, unele elemente de UI vor fi animate"
 
 [node name="Lectii" type="Control" parent="Panel/Settings"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/Settings/Lectii"]
 layout_mode = 0
@@ -125,7 +138,7 @@ layout_mode = 2
 
 [node name="Text" type="Label" parent="Panel/Settings/Lectii/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 25
 text = "Lectii"
 horizontal_alignment = 1
 
@@ -133,9 +146,8 @@ horizontal_alignment = 1
 layout_mode = 2
 
 [node name="Advanced" type="Label" parent="Panel/Settings/Lectii/VBoxContainer"]
-visible = false
 layout_mode = 2
-theme_override_font_sizes/font_size = 19
+theme_override_font_sizes/font_size = 25
 text = "Include lectiile avansate"
 
 [node name="AdvancedButton" type="CheckButton" parent="Panel/Settings/Lectii/VBoxContainer/Advanced"]
@@ -144,11 +156,12 @@ offset_left = 500.0
 offset_top = 3.0
 offset_right = 544.0
 offset_bottom = 27.0
+scale = Vector2(1.25, 1.25)
 tooltip_text = "Daca este activat, in lista de lectii vor aparea si lectiile marcate ca fiind avansate"
 
 [node name="Special" type="Label" parent="Panel/Settings/Lectii/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 19
+theme_override_font_sizes/font_size = 25
 text = "Include lectiile speciale"
 
 [node name="SpecialButton" type="CheckButton" parent="Panel/Settings/Lectii/VBoxContainer/Special"]
@@ -157,31 +170,35 @@ offset_left = 500.0
 offset_top = 3.0
 offset_right = 544.0
 offset_bottom = 27.0
+scale = Vector2(1.25, 1.25)
 tooltip_text = "Daca este activat, in lista de lectii vor aparea si lectiile marcate ca fiind avansate"
 
 [node name="VideoVolume" type="Label" parent="Panel/Settings/Lectii/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 19
+theme_override_font_sizes/font_size = 25
 text = "Volum video"
 
 [node name="VideoVolumeSlide" type="HSlider" parent="Panel/Settings/Lectii/VBoxContainer/VideoVolume"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 0
-offset_left = 400.0
+offset_left = 430.0
 offset_top = 3.0
-offset_right = 600.001
+offset_right = 630.0
 offset_bottom = 27.0
+scale = Vector2(1.25, 1.25)
 tooltip_text = "Regleaza volumul videoclipurilor"
+theme_override_styles/slider = ExtResource("3_7a02l")
 min_value = -11.0
 max_value = 10.0
 rounded = true
 
 [node name="VideoVolumeText" type="Label" parent="Panel/Settings/Lectii/VBoxContainer/VideoVolume"]
 layout_mode = 0
-offset_left = 600.0
+offset_left = 685.0
 offset_top = 3.0
-offset_right = 635.0
-offset_bottom = 26.0
+offset_right = 733.0
+offset_bottom = 31.0
+theme_override_font_sizes/font_size = 20
 text = "11"
 
 [node name="MarginContainer2" type="MarginContainer" parent="Panel/Settings/Lectii/VBoxContainer"]
@@ -190,7 +207,7 @@ layout_mode = 2
 
 [node name="Text2" type="Label" parent="Panel/Settings/Lectii/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 25
 text = "Chestionare"
 horizontal_alignment = 1
 
@@ -199,7 +216,7 @@ layout_mode = 2
 
 [node name="ShowNumOnlyTest" type="Label" parent="Panel/Settings/Lectii/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 19
+theme_override_font_sizes/font_size = 25
 text = "Arata doar nr de intrebari in modul test"
 
 [node name="SNTButton" type="CheckButton" parent="Panel/Settings/Lectii/VBoxContainer/ShowNumOnlyTest"]
@@ -208,12 +225,12 @@ offset_left = 500.0
 offset_top = 3.0
 offset_right = 544.0
 offset_bottom = 27.0
+scale = Vector2(1.25, 1.25)
 tooltip_text = "Daca este activat, nu vor fi aratate numarul de raspunsuri corecte si gresite in modul test"
 
 [node name="IncludeAdvQ" type="Label" parent="Panel/Settings/Lectii/VBoxContainer"]
-visible = false
 layout_mode = 2
-theme_override_font_sizes/font_size = 19
+theme_override_font_sizes/font_size = 25
 text = "Include intrebari din lectii avansate"
 
 [node name="IAQButton" type="CheckButton" parent="Panel/Settings/Lectii/VBoxContainer/IncludeAdvQ"]
@@ -222,11 +239,13 @@ offset_left = 500.0
 offset_top = 3.0
 offset_right = 544.0
 offset_bottom = 27.0
+scale = Vector2(1.25, 1.25)
 tooltip_text = "Daca este activat, Intrebarile din lectiile avansate deja facute pot fi incluse in chestionare"
 
 [node name="Altele" type="Control" parent="Panel/Settings"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/Settings/Altele"]
 layout_mode = 0
@@ -241,7 +260,7 @@ layout_mode = 2
 
 [node name="Text" type="Label" parent="Panel/Settings/Altele/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 25
 text = "Alte setari"
 horizontal_alignment = 1
 
@@ -250,7 +269,7 @@ layout_mode = 2
 
 [node name="GetUpdates" type="Label" parent="Panel/Settings/Altele/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 19
+theme_override_font_sizes/font_size = 25
 text = "Primeste actualizari"
 
 [node name="GetUpdatesButton" type="CheckButton" parent="Panel/Settings/Altele/VBoxContainer/GetUpdates"]
@@ -259,6 +278,7 @@ offset_left = 499.0
 offset_top = -3.0
 offset_right = 543.0
 offset_bottom = 28.0
+scale = Vector2(1.25, 1.25)
 tooltip_text = "Daca este activat, dupa logare programul va verifica daca exista actualizari disponibile"
 
 [node name="MarginContainer2" type="MarginContainer" parent="Panel/Settings/Altele/VBoxContainer"]
@@ -267,7 +287,7 @@ layout_mode = 2
 
 [node name="Text2" type="Label" parent="Panel/Settings/Altele/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 25
 text = "Utilizator"
 horizontal_alignment = 1
 
@@ -276,23 +296,24 @@ layout_mode = 2
 
 [node name="Name" type="Label" parent="Panel/Settings/Altele/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 19
+theme_override_font_sizes/font_size = 25
 text = "Numele utilizatorului"
 
 [node name="NameEdit" type="LineEdit" parent="Panel/Settings/Altele/VBoxContainer/Name"]
 layout_mode = 0
-offset_left = 496.0
-offset_top = 3.0
-offset_right = 605.0
-offset_bottom = 26.0
+offset_left = 492.336
+offset_top = 0.352113
+offset_right = 601.336
+offset_bottom = 30.3521
+scale = Vector2(1.25, 1.25)
 tooltip_text = "Introdu aici numele.
 Numarul maxim de caractere este de 12
 si nu poate contine spatiu si urmatoarele
 caractere:
  / . :  , @ ' % \""
 theme_override_font_sizes/font_size = 15
-theme_override_styles/normal = SubResource("StyleBoxFlat_idgcd")
 theme_override_styles/focus = ExtResource("3_yiypy")
+theme_override_styles/normal = SubResource("StyleBoxFlat_idgcd")
 placeholder_text = "John_123345"
 alignment = 1
 max_length = 12
@@ -303,15 +324,16 @@ caret_blink = true
 
 [node name="FavColour" type="Label" parent="Panel/Settings/Altele/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 19
+theme_override_font_sizes/font_size = 25
 text = "Culoare"
 
 [node name="ColorButton" type="ColorPickerButton" parent="Panel/Settings/Altele/VBoxContainer/FavColour"]
 layout_mode = 0
-offset_left = 498.913
-offset_top = -3.0
-offset_right = 561.913
-offset_bottom = 28.0
+offset_left = 494.786
+offset_top = 0.239437
+offset_right = 557.786
+offset_bottom = 28.4394
+scale = Vector2(1.25, 1.25)
 theme_override_styles/normal = SubResource("StyleBoxFlat_fflmj")
 toggle_mode = false
 color = Color(1, 1, 1, 1)
@@ -319,15 +341,16 @@ edit_alpha = false
 
 [node name="DeleteSave" type="Label" parent="Panel/Settings/Altele/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 19
+theme_override_font_sizes/font_size = 25
 text = "Sterge progersul"
 
 [node name="DeleteSaveButton" type="Button" parent="Panel/Settings/Altele/VBoxContainer/DeleteSave"]
 layout_mode = 0
-offset_left = 495.237
-offset_top = -0.859187
-offset_right = 558.237
-offset_bottom = 30.1408
+offset_left = 492.336
+offset_top = -2.32394
+offset_right = 555.336
+offset_bottom = 28.676
+scale = Vector2(1.25, 1.25)
 tooltip_text = "Sterge profilul curent"
 theme_override_styles/normal = ExtResource("4_rkad0")
 text = "Sterge"
@@ -335,30 +358,27 @@ text = "Sterge"
 [node name="Despre" type="Control" parent="Panel/Settings"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/Settings/Despre"]
 layout_mode = 0
 offset_left = 13.0
 offset_right = 730.0
-offset_bottom = 560.0
+offset_bottom = 562.0
 theme_override_constants/separation = 8
-
-[node name="MarginContainer" type="MarginContainer" parent="Panel/Settings/Despre/VBoxContainer"]
-custom_minimum_size = Vector2(0, 5)
-layout_mode = 2
 
 [node name="vBoxContainer" type="HBoxContainer" parent="Panel/Settings/Despre/VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
 [node name="Name2" type="RichTextLabel" parent="Panel/Settings/Despre/VBoxContainer/vBoxContainer"]
-custom_minimum_size = Vector2(161, 0)
+custom_minimum_size = Vector2(162, 0)
 layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 30
+theme_override_font_sizes/italics_font_size = 30
+theme_override_font_sizes/mono_font_size = 30
 theme_override_font_sizes/normal_font_size = 30
 theme_override_font_sizes/bold_font_size = 30
-theme_override_font_sizes/italics_font_size = 30
-theme_override_font_sizes/bold_italics_font_size = 30
-theme_override_font_sizes/mono_font_size = 30
 bbcode_enabled = true
 text = "[wave amp=50.0 freq=2.0 connected=1]Zero2Linux[/wave]"
 fit_content = true
@@ -367,7 +387,7 @@ shortcut_keys_enabled = false
 
 [node name="Version" type="Label" parent="Panel/Settings/Despre/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 19
+theme_override_font_sizes/font_size = 25
 text = "Ver"
 horizontal_alignment = 1
 
@@ -376,30 +396,32 @@ layout_mode = 2
 
 [node name="Github" type="Label" parent="Panel/Settings/Despre/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 19
+theme_override_font_sizes/font_size = 25
 text = "  Pagina proiectului"
 
 [node name="GithubButton" type="Button" parent="Panel/Settings/Despre/VBoxContainer/Github"]
 layout_mode = 2
-offset_left = 498.913
-offset_top = -2.0
-offset_right = 561.913
-offset_bottom = 29.0
+offset_left = 498.462
+offset_top = -1.61971
+offset_right = 561.462
+offset_bottom = 29.3803
+scale = Vector2(1.25, 1.25)
 tooltip_text = "Acceseaza pagina de Github al proiectului"
 theme_override_styles/normal = ExtResource("4_rkad0")
 text = "Github"
 
 [node name="Issue" type="Label" parent="Panel/Settings/Despre/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 19
+theme_override_font_sizes/font_size = 25
 text = "  Raporteaza un bug"
 
 [node name="IssueButton" type="Button" parent="Panel/Settings/Despre/VBoxContainer/Issue"]
 layout_mode = 2
-offset_left = 498.913
-offset_top = -2.0
-offset_right = 561.913
-offset_bottom = 29.0
+offset_left = 498.462
+offset_top = -1.73238
+offset_right = 561.462
+offset_bottom = 29.2676
+scale = Vector2(1.25, 1.25)
 tooltip_text = "Acceseaza pagina de Github al proiectului"
 theme_override_styles/normal = ExtResource("4_rkad0")
 text = "Issues"
@@ -407,21 +429,35 @@ text = "Issues"
 [node name="hSeparator5" type="HSeparator" parent="Panel/Settings/Despre/VBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="Panel/Settings/Despre/VBoxContainer"]
-custom_minimum_size = Vector2(0, 5)
-layout_mode = 2
-
 [node name="Name3" type="RichTextLabel" parent="Panel/Settings/Despre/VBoxContainer"]
 custom_minimum_size = Vector2(161, 0)
 layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 19
+theme_override_font_sizes/italics_font_size = 19
+theme_override_font_sizes/mono_font_size = 19
 theme_override_font_sizes/normal_font_size = 19
 theme_override_font_sizes/bold_font_size = 19
-theme_override_font_sizes/italics_font_size = 19
-theme_override_font_sizes/bold_italics_font_size = 19
-theme_override_font_sizes/mono_font_size = 19
 text = "	 Zero2Linux este un proiect personal, creat pentru a-i invata pe cei mai putini familiarizati cu ecosistemul Linux sa foloseasca un desktop Linux.
-	Desi Linux este foarte popular pentru servere, majoritatea nu au auzit despre Linux/ cred ca Linux este doar pentru cei foarte avansati (sau cei care \"nu isi apreciaza timpul\"). Linux a avansat foarte mult, pana in punctul in care exista distributii care sunt facute special pentru utilizatori mai putini experimentati/ cei care nu vor sa configureze o distributie foarte mult. Zero2Linux incearca sa arate faptul ca Linux nu este (neaparat) foarte complicat si se pot face lucruri posibile si pe celelalte sisteme de operare, in multe cazuri chiar mai simplu.
+	Desi Linux este foarte popular pentru servere, majoritatea nu au auzit despre Linux/ cred ca Linux este doar pentru cei foarte avansati (sau cei care \"nu isi apreciaza timpul\"). Zero2Linux incearca sa arate faptul ca Linux nu este (neaparat) foarte complicat si se pot face lucruri posibile si pe celelalte sisteme de operare, in multe cazuri chiar mai simplu.
 	 Zero2Linux este gratis pentru toata lumea, dar este foarte apreciat daca ai dea stea (star) la proiect pe Github sau sa contribui prin raportarea bugurilor."
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="marginContainer" type="MarginContainer" parent="Panel/Settings/Despre/VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+
+[node name="Notice" type="RichTextLabel" parent="Panel/Settings/Despre/VBoxContainer"]
+custom_minimum_size = Vector2(161, 0)
+layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 19
+theme_override_font_sizes/italics_font_size = 19
+theme_override_font_sizes/mono_font_size = 19
+theme_override_font_sizes/normal_font_size = 19
+theme_override_font_sizes/bold_font_size = 19
+bbcode_enabled = true
+text = "	 Acest proiect foloseste librarii din proiectul [url=https://ffmpeg.org/]FFmpeg[/url] sub licenta LGPLv2.1"
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
@@ -441,6 +477,7 @@ offset_right = 359.811
 offset_bottom = -263.437
 scale = Vector2(1.1, 1.1)
 texture_normal = ExtResource("5_7cisg")
+texture_pressed = ExtResource("6_beobs")
 
 [node name="Label" type="Label" parent="Panel"]
 offset_left = -72.0
@@ -467,6 +504,7 @@ vertical_alignment = 1
 [connection signal="pressed" from="Panel/Settings/Altele/VBoxContainer/DeleteSave/DeleteSaveButton" to="." method="_on_delete_pressed"]
 [connection signal="pressed" from="Panel/Settings/Despre/VBoxContainer/Github/GithubButton" to="." method="_on_github_pressed"]
 [connection signal="pressed" from="Panel/Settings/Despre/VBoxContainer/Issue/IssueButton" to="." method="_on_issue_pressed"]
+[connection signal="meta_clicked" from="Panel/Settings/Despre/VBoxContainer/Notice" to="." method="_on_notice_meta_clicked"]
 [connection signal="button_down" from="Panel/Drag" to="." method="_on_drag_down"]
 [connection signal="button_up" from="Panel/Drag" to="." method="_on_drag_up"]
 [connection signal="pressed" from="Panel/Back" to="." method="_on_back_pressed"]

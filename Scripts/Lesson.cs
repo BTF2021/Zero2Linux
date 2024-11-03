@@ -54,19 +54,30 @@ public partial class Lesson : Node2D
 		GetNode<Label>("Panel/ScrollContainer/MarginContainer/Body/Title").Text = GetNode<Label>("Panel/ScrollContainer/MarginContainer/Body/Title").Text + (string)_data.lessonList[lessonid][0];
 		_node.GetParent().MoveChild(GetNode("Panel/ScrollContainer/MarginContainer/Body/HSeparator4"), -1);
 		_node.GetParent().MoveChild(GetNode("Panel/ScrollContainer/MarginContainer/Body/End"), -1);
+
+		//Conecteaza toate RichTextLabelurile cu functia de deschidere a linkurilor
+		for (int i = 0; i <= GetNode("Panel/ScrollContainer/MarginContainer/Body/Content").GetChildCount()-1; i++)
+		{	if(GetNode("Panel/ScrollContainer/MarginContainer/Body/Content").GetChild(i).Name.ToString().Contains("Block"))
+			{	var name = GetNode("Panel/ScrollContainer/MarginContainer/Body/Content").GetChild(i).Name.ToString();
+				for (int j = 0; j <= GetNode("Panel/ScrollContainer/MarginContainer/Body/Content/" + name).GetChildCount()-1; j++)
+				{	if(GetNode("Panel/ScrollContainer/MarginContainer/Body/Content/" + name).GetChild(j).Name.ToString().Contains("RichTextLabel"))	
+						GetNode("Panel/ScrollContainer/MarginContainer/Body/Content/" + name).GetChild<RichTextLabel>(j).MetaClicked += _on_text_link;
+				}
+			}
+		}
 		
 		//Calculeaza nr de intrebari si blocuri
 		percent = (int)_data.currentStats.LessonCompletion[lessonid];
 		totalquestioncount = 0;
 		totallessonblocks = 0;
 		for (int i = 0; i <= _node.GetChildCount()-1; i++)
-		{	if(_node.GetChild(i).Name.ToString().Match("Quizitem"))
+		{	if(_node.GetChild(i).Name.ToString().Contains("Quizitem"))
 			{	_node.GetChild<Quizitem>(i).Index = i;
 				_node.GetChild<Quizitem>(i).Complete = false;
 				_questions.Add((Quizitem)_node.GetChild<Quizitem>(i));
 				totalquestioncount++;
 			}
-			else if(_node.GetChild(i).Name.ToString().Match("Block")) totallessonblocks++;
+			else if(_node.GetChild(i).Name.ToString().Contains("Block")) totallessonblocks++;
 		}
 
 		//Aici aratam lectia in fuctie de progresul salvat (daca este sub 100%)
@@ -75,7 +86,7 @@ public partial class Lesson : Node2D
 		{
 			//Luam tot ce este in Content si adaugam nr de intrebari si blocuri si calculam progresul
 			//Pana cand acesta este egal cu progresul salvat (Daca nu a fost modificat save.json folosind surse externe)
-			//GD.Print(questionansw + "/" + totalquestioncount + " " + blocksread + "/" + totallessonblocks + " " + calc);
+			GD.Print("Intainte de calcule: " + questionansw + "/" + totalquestioncount + " " + blocksread + "/" + totallessonblocks + " " + (questionansw + blocksread) * 100 / (totalquestioncount + totallessonblocks));
 			for (int i = 0; i <= _node.GetChildCount()-1; i++)
 			{	var calc = (questionansw + blocksread) * 100 / (totalquestioncount + totallessonblocks);
 				//Daca am ajuns la progresul din save.json
@@ -84,13 +95,13 @@ public partial class Lesson : Node2D
 					showobjects(i);
 					break;
 				}
-				GD.Print(questionansw + "/" + totalquestioncount + " " + blocksread + "/" + totallessonblocks + " " + calc);
+				GD.Print(questionansw + "/" + totalquestioncount + " " + blocksread + "/" + totallessonblocks + " " + (questionansw + blocksread) * 100 / (totalquestioncount + totallessonblocks));
 				//Altfel continuam
-				if(_node.GetChild(i).Name.ToString().Match("Quizitem")) 
+				if(_node.GetChild(i).Name.ToString().Contains("Quizitem")) 
 				{	_node.GetChild<Quizitem>(i).Complete = true;
 					questionansw++;
 				}
-				else if(_node.GetChild(i).Name.ToString().Match("Block")) blocksread++;
+				else if(_node.GetChild(i).Name.ToString().Contains("Block")) blocksread++;
 			}
 		}
 		//100%
@@ -98,7 +109,7 @@ public partial class Lesson : Node2D
 		else if (_data.currentStats.LessonCompletion[lessonid] == 100)
 		{
 			for (int i = 0; i <= _node.GetChildCount()-1; i++)
-				if(_node.GetChild(i).Name.ToString().Match("Quizitem")) 
+				if(_node.GetChild(i).Name.ToString().Contains("Quizitem")) 
 					_node.GetChild<Quizitem>(i).Complete = true;     //Daca intrebarile nu sunt setate la true, se poate suprascrie progresul prin raspunderea corecta a acestora si se strica totul
 			_node.GetParent().GetChild<CanvasItem>(_node.GetParent().GetChildCount()-2).Visible = true;
 			_node.GetParent().GetChild<CanvasItem>(_node.GetParent().GetChildCount()-1).Visible = true;
@@ -176,10 +187,10 @@ public partial class Lesson : Node2D
 		{	if(foundquestion) _node.GetChild<CanvasItem>(i).Visible = false;
 			else 
 			{
-				if(_node.GetChild(i).Name.ToString().Match("Block")) blocksread++;
+				if(_node.GetChild(i).Name.ToString().Contains("Block")) blocksread++;
 				_node.GetChild<CanvasItem>(i).Visible = true;
 			}
-			if(_node.GetChild(i).Name.ToString().Match("Quizitem")) foundquestion = true;
+			if(_node.GetChild(i).Name.ToString().Contains("Quizitem")) foundquestion = true;
 		}
 		if (!foundquestion)
 		{
@@ -230,5 +241,11 @@ public partial class Lesson : Node2D
 		_video.GetNode<Sprite2D>("Bg").Texture = GD.Load<CompressedTexture2D>("res://Courses/Lesson_" + lessonid + "/VidBg.png");
 		AddChild(_video);
 	}
-	private void _on_text_link(Variant meta) => OS.ShellOpen((string)meta); //Pentru linkurile din text
+	//Pentru linkurile din text
+	private void _on_text_link(Variant meta)
+	{	var scene = (Confirm)GD.Load<PackedScene>("res://Scenes/Confirm.tscn").Instantiate();
+		scene.reason = 2;
+		scene.link = (string)meta;
+		AddChild(scene);
+	}
 }

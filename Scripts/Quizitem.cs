@@ -49,7 +49,9 @@ public partial class Quizitem : PanelContainer
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
-	{
+	{	var pressed = false;
+		for (int i = 1; i <=4; i++) if(GetNode<CheckBox>("PanelContainer/Raspuns" + i).ButtonPressed == true) pressed = true;
+		GetNode<Button>("PanelContainer/HBoxContainer/Send").Disabled = !pressed;
 	}
 	private void _on_raspuns_pressed(int index)
 	{	//Asta este mai mult ca sa avem doar un singur raspuns bifat
@@ -59,11 +61,11 @@ public partial class Quizitem : PanelContainer
 	}
 	public void _disable()
 	{
-		GetNode<CheckBox>("PanelContainer/Raspuns1").Disabled = true; 
+		GetNode<CheckBox>("PanelContainer/Raspuns1").Disabled = true;
 		GetNode<CheckBox>("PanelContainer/Raspuns2").Disabled = true;
 		GetNode<CheckBox>("PanelContainer/Raspuns3").Disabled = true;
 		GetNode<CheckBox>("PanelContainer/Raspuns4").Disabled = true;
-		GetNode<Button>("PanelContainer/HBoxContainer/Send").Disabled = true; 
+		GetNode<Button>("PanelContainer/HBoxContainer/Send").Disabled = true;
 		GetNode<Button>("PanelContainer/HBoxContainer/Skip").Disabled = true;
 	}
 	private void _on_send_pressed()
@@ -81,9 +83,9 @@ public partial class Quizitem : PanelContainer
 			else if(answ != i && (bool)a[i-1] != false) ok = false; 
 		}
 		if(ok) ShowCorrect();
-		GetNode("/root").GetChild(1).EmitSignal("GetAnswers", ok, false, Index);
+		GetNode("/root").GetChild(-1).EmitSignal("GetAnswers", ok, false, Index);
 	}
-	private void _on_skip_pressed() => GetNode("/root").GetChild(1).EmitSignal("Skip");
+	private void _on_skip_pressed() => GetNode("/root").GetChild(-1).EmitSignal("Skip");
 	private void ShowCorrect()
 	{	if(type < 2)
 		{	GetNode<VBoxContainer>("PanelContainer").Hide(); 

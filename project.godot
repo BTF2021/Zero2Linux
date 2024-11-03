@@ -11,15 +11,18 @@ config_version=5
 [application]
 
 config/name="Zero2Linux"
-config/version="1.0.1"
+config/version="1.1"
 run/main_scene="res://Scenes/Logare.tscn"
 config/quit_on_go_back=false
-config/features=PackedStringArray("4.2", "C#", "Mobile")
-config/icon="res://icon.svg"
+config/features=PackedStringArray("4.3", "C#", "Mobile")
+boot_splash/show_image=false
+boot_splash/fullsize=false
+config/icon="res://Icon.png"
 
 [autoload]
 
 DefaultData="*res://Scripts/DefaultData.cs"
+Transition="*res://Scenes/Transition.tscn"
 
 [display]
 

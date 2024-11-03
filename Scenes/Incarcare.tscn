@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://qc1o5l6rijo6"]
+[gd_scene load_steps=8 format=3 uid="uid://qc1o5l6rijo6"]
 
 [ext_resource type="Script" path="res://Scripts/Incarcare.cs" id="1_16o33"]
 [ext_resource type="Texture2D" uid="uid://dmkypoj2doa4m" path="res://Sprites/LoadingBg.png" id="1_ucu8g"]
@@ -39,11 +39,7 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
-[sub_resource type="LabelSettings" id="LabelSettings_gfi22"]
-line_spacing = -15.0
-font_size = 25
-
-[node name="incarcare" type="Node2D"]
+[node name="Incarcare" type="Node2D"]
 top_level = true
 z_index = 100
 script = ExtResource("1_16o33")
@@ -69,6 +65,7 @@ offset_right = 824.0
 offset_bottom = 498.0
 theme_override_styles/background = SubResource("StyleBoxFlat_v8yql")
 theme_override_styles/fill = SubResource("StyleBoxFlat_to4hx")
+max_value = 120.0
 value = 50.0
 show_percentage = false
 
@@ -77,23 +74,31 @@ offset_left = 544.0
 offset_top = 88.0
 offset_right = 736.0
 offset_bottom = 143.0
+theme_override_font_sizes/bold_italics_font_size = 40
+theme_override_font_sizes/italics_font_size = 40
+theme_override_font_sizes/mono_font_size = 40
 theme_override_font_sizes/normal_font_size = 40
 theme_override_font_sizes/bold_font_size = 40
-theme_override_font_sizes/italics_font_size = 40
-theme_override_font_sizes/bold_italics_font_size = 40
-theme_override_font_sizes/mono_font_size = 40
 bbcode_enabled = true
 text = "[rainbow freq=0.2 sat=0.8 val=0.8][wave amp=50.0 freq=2.0 connected=1]Incarcare[/wave][/rainbow]"
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
 
-[node name="Tip" type="Label" parent="."]
+[node name="Tip" type="RichTextLabel" parent="."]
 offset_top = 522.0
 offset_right = 1280.0
 offset_bottom = 557.0
-text = "Insereaza text aici"
-label_settings = SubResource("LabelSettings_gfi22")
-horizontal_alignment = 1
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "[center]Insereaza text aici[/center]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
 
-[connection signal="value_changed" from="Bara" to="." method="_on_bara_changed"]
+[connection signal="value_changed" from="Bara" to="." method="ChangeScene"]

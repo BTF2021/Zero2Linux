@@ -1,20 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://duiw5l0ody1l"]
+[gd_scene load_steps=6 format=3 uid="uid://duiw5l0ody1l"]
 
 [ext_resource type="Script" path="res://Scripts/Quizitem.cs" id="1_hrfcq"]
 [ext_resource type="StyleBox" uid="uid://di87pu5wmffgt" path="res://Sprites/UINoHover.stylebox" id="2_1jsns"]
+[ext_resource type="Theme" uid="uid://c3r51fw2bo66h" path="res://Sprites/CourseUI.theme" id="2_8s1j7"]
 [ext_resource type="StyleBox" uid="uid://c8ip85nk5v8ds" path="res://Sprites/UIButtons.stylebox" id="2_p2qk2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2dumw"]
+bg_color = Color(0.212305, 0.212305, 0.212305, 1)
 
 [node name="Quizitem" type="PanelContainer"]
 offset_right = 676.0
 offset_bottom = 153.0
 mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_2dumw")
 script = ExtResource("1_hrfcq")
-question = "Care dintre acestea este raspunsul corect?"
+question = "Intrebare"
 answer1 = "Raspuns 1"
-answer2 = "Nu face nimic special"
-answer3 = "Raspuns gresit"
-answer4 = "Un raspuns scris pentru a fi foarte foarte foarte foarte foarte lung"
-explanation = "Aceasta este o explicatie"
+answer2 = "Raspuns 2"
+answer3 = "Raspuns 3"
+answer4 = "Raspuns 4"
+explanation = "Explicatie"
 
 [node name="PanelContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -35,6 +40,7 @@ autowrap_mode = 3
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 0
+theme = ExtResource("2_8s1j7")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/focus = ExtResource("2_1jsns")
 text = "Raspuns 1"
@@ -43,6 +49,7 @@ text = "Raspuns 1"
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 0
+theme = ExtResource("2_8s1j7")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/focus = ExtResource("2_1jsns")
 text = "Raspuns 2"
@@ -51,6 +58,7 @@ text = "Raspuns 2"
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 0
+theme = ExtResource("2_8s1j7")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/focus = ExtResource("2_1jsns")
 text = "Raspuns 3"
@@ -59,6 +67,7 @@ text = "Raspuns 3"
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 0
+theme = ExtResource("2_8s1j7")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/focus = ExtResource("2_1jsns")
 text = "Raspuns 4"
@@ -77,8 +86,8 @@ size_flags_horizontal = 4
 custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_styles/normal = ExtResource("2_p2qk2")
 theme_override_styles/focus = ExtResource("2_1jsns")
+theme_override_styles/normal = ExtResource("2_p2qk2")
 text = "Trimite"
 
 [node name="Skip" type="Button" parent="PanelContainer/HBoxContainer"]
@@ -86,8 +95,8 @@ visible = false
 custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_styles/normal = ExtResource("2_p2qk2")
 theme_override_styles/focus = ExtResource("2_1jsns")
+theme_override_styles/normal = ExtResource("2_p2qk2")
 text = "Sari peste"
 
 [node name="MarginContainer4" type="MarginContainer" parent="PanelContainer"]
@@ -110,7 +119,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="Corect" type="RichTextLabel" parent="Corect/Title"]
-custom_minimum_size = Vector2(78, 0)
+custom_minimum_size = Vector2(79, 0)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 25
 bbcode_enabled = true
@@ -153,8 +162,8 @@ visible = false
 custom_minimum_size = Vector2(120, 30)
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_styles/normal = ExtResource("2_p2qk2")
 theme_override_styles/focus = ExtResource("2_1jsns")
+theme_override_styles/normal = ExtResource("2_p2qk2")
 text = "Continua"
 
 [node name="MarginContainer3" type="MarginContainer" parent="Corect"]

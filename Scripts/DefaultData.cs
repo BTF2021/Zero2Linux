@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 //clasa pentru a salva setari si progres. De ce am facut asta? Ca sa se salveze frumos in format JSON
 public class stats
 {
-	public int version = 4;
+	public int version = 5;
 	public string UsrName = " ";
 	public Color FavColor = new Color(1, 1, 1, 1);
 	public bool FullScr = false;
@@ -16,31 +16,40 @@ public class stats
 	{
 		{1, 0},
 		{2, 0},
-		{3, 0}
+		{3, 0},
+		{4, 0},
+		{5, 0},
+		{6, 0}
 	};
 	public int Questionaires = 0;     //Nr chestionare facute
 	public int Testsnum = 0;          //Nr teste facute
+	public int goodtests = 0;         //Nr teste peste 5
+	public int greattest = 0;         //Nr teste peste 7
 	public int flawlesstests = 0;     //Nr teste fara greseli
 	public bool Adv = true;
 	public bool Spc = true;
 	public float VideoVolume = 0;
 	public bool QNumOnly = false;
 	public bool AdvQ = true;
-	public bool ChkUpdates = true;
+	public bool ChkUpdates = false;
 }
 public partial class DefaultData : Node
 {
 	//De aici vor fi accesate si salvate setarile si progresul
 	public stats currentStats = new stats();
+	private stats defaultStats = new stats();         //Duplicat pentru currentStats (Mai mult pentru versiune)
 
 	public Godot.Collections.Dictionary<int, Godot.Collections.Array> lessonList = new Godot.Collections.Dictionary<int, Godot.Collections.Array>() 
 	{	//structura vectorului este urmatoarea: numele lectiei, tipul lectiei(tag). Progresul a fost mutat in clasa stats
 		{1, new Godot.Collections.Array{"Lectia 1: Ce este Linux?", 0}},
 		{2, new Godot.Collections.Array{"Lectia 2: Distributii Linux", 0}},
-		{3, new Godot.Collections.Array{"Linux pe masina virtuala", 2}}
+		{3, new Godot.Collections.Array{"Linux pe masina virtuala", 2}},
+		{4, new Godot.Collections.Array{"Alte distributii Linux", 1}},
+		{5, new Godot.Collections.Array{"Repos si Package managers", 0}},
+		{6, new Godot.Collections.Array{"Format pachete", 1}}
 	};
 	public Godot.Collections.Dictionary<int, Godot.Collections.Dictionary<int, Godot.Collections.Array>> questionList = new Godot.Collections.Dictionary<int, Godot.Collections.Dictionary<int, Godot.Collections.Array>>() 
-	{	//structura vectorului este urmatoarea: nr lectie, iar inauntru nr intrebari, rasp corect, cele 4 intrebari, explicatie
+	{	//structura vectorului este urmatoarea: nr lectie, iar inauntru nr intrebari, rasp corect, cele 4 raspunsuri posibile, explicatie
 		{1, new Godot.Collections.Dictionary<int, Godot.Collections.Array>{
 			{1, new Godot.Collections.Array{3, 2, "Ce este Linux?", "Un program", "Un kernel", "O aplicatie pentru web", "", "Linux este kernelul. Majoritatea programelor sunt parte din GNU Project"}},
 			{2, new Godot.Collections.Array{4, 3, "In ce an a fost lansat Linux?", "1990", "1899", "1991", "1992", "Prima versiune de Linux a fost lansata pe 17 Septembrie 1991"}},
@@ -51,11 +60,32 @@ public partial class DefaultData : Node
 		}},
 		{2, new Godot.Collections.Dictionary<int, Godot.Collections.Array>{
 			{1, new Godot.Collections.Array{4, 3, "Ce este inclus (in general) intr-o distributie?", "Kernelul Linux si un browser", "Browser si aplicatii", "Kernelul Linux si aplicatii", "Doar Kernelul Linux", "De obicei, o distributie include kernelul Linux, dar si aplicatii, majoritatea aplicatiilor fiind parte din proiectul GNU"}},
-			{2, new Godot.Collections.Array{2, 1, "Se pot instala si actualiza aplicatii atat printr-o interfata grafica, cat si prin terminal", "Adevarat", "Fals", "", "", "Pentru a instala si actualiza aplicatii, utilizatorul are de obicei 2 moduri: grafic si prin terminal"}},
+			{2, new Godot.Collections.Array{2, 2, "Fedora este bazata pe Debian", "Adevarat", "Fals", "", "", "Fedora NU este bazata pe Debian"}},
 			{3, new Godot.Collections.Array{2, 1, "Linux Mint este derivat din Debian. Adevarat sau fals?", "Adevarat", "Fals", "", "", "Linux Mint este o distributie derivata din Ubuntu, care la randul lui este derivat din Debian. Deci Linux Mint este derivat din Debian"}},
 			{4, new Godot.Collections.Array{4, 4, "Care este distributia care NU este bazata pe Debian", "Debian", "Ubuntu", "Linux Mint", "Fedora", "Fedora este distributia din cele patru care NU este bazata pe Debian"}},
 			{5, new Godot.Collections.Array{4, 4, "Care este distributia bazata pe Ubuntu", "Arch", "Fedora", "Debian", "Linux Mint", "Linux Mint este o distributie bazata pe Ubuntu"}},
 			{6, new Godot.Collections.Array{4, 1, "Care este distributia cea mai veche din cele patru", "Debian", "Fedora", "Linux Mint", "Ubuntu", "Debian este cea a doua cea mai veche distributie inca intretinuta"}}
+		}},
+		{4, new Godot.Collections.Dictionary<int, Godot.Collections.Array>{
+			{1, new Godot.Collections.Array{4, 1, "Care este distributia care a fost dezvoltata de Red Hat?", "Fedora", "Nobara", "Debian", "AlmaLinux", "Celelalte distributii sunt BAZATE pe distributii Red Hat"}},
+			{2, new Godot.Collections.Array{3, 2, "AUR este un repo pentru utilizatorii distributiei...", "Gentoo", "Arch", "LFS", "", "AUR este o prescurtare pentru 'Arch User Repository'"}},
+			{3, new Godot.Collections.Array{2, 1, "Distributiile AntiX, Lubuntu si Peppermint sunt bazate pe Debian", "Adevarat", "Fals", "", "", "AntiX si Peppermint sunt bazate pe Debian. Lubuntu este bazat pe Ubuntu"}},
+			{4, new Godot.Collections.Array{2, 2, "LFS este o distributie", "Adevarat", "Fals", "", "", "LFS este o documentatie despre cum sa-ti configurezi Linux de la zero"}},
+			{5, new Godot.Collections.Array{4, 2, "Care dintre aceste distributii este una comerciala?", "Fedora", "RHEL", "CentOS", "Debian", "RHEL este prescurtare la 'Red Hat Enterprise Linux'"}}
+		}},
+		{5, new Godot.Collections.Dictionary<int, Godot.Collections.Array>{
+			{1, new Godot.Collections.Array{3, 3, "Ce NU poate sa faca un package manager?", "Sa instaleze programe", "Sa programele deja curente", "Sa configureze programe", "", "Package managerul poate DOAR sa instaleze si sa actualizeze programe"}},
+			{2, new Godot.Collections.Array{2, 1, "Comenzile apt si dnf se folosesc de repo-uri ca sa descarce programele", "Adevarat", "Fals", "", "", "Package managerele (chiar si comenzile apt si dnf) descarca programele folosindu-se de repository-uri"}},
+			{3, new Godot.Collections.Array{2, 1, "Cum se numeste comanda pentru instalat programe pentru Debian", "Apt", "Dnf", "", "", "Comanda pentru Debian este apt"}},
+			{4, new Godot.Collections.Array{2, 2, "Cum se numeste comanda pentru instalat programe pentru Fedora", "Apt", "Dnf", "", "", "Comanda pentru Fedora este dnf"}},
+			{5, new Godot.Collections.Array{2, 1, "Se pot instala si actualiza aplicatii atat printr-o interfata grafica, cat si prin terminal", "Adevarat", "Fals", "", "", "Pentru a instala si actualiza aplicatii, utilizatorul are de obicei 2 moduri: grafic si prin terminal"}}
+		}},
+		{6, new Godot.Collections.Dictionary<int, Godot.Collections.Array>{
+			{1, new Godot.Collections.Array{2, 2, "Ubuntu include Flatpak", "Adevarat", "Fals", "", "", "Ubuntu nu include Flatpak, dar poate fi instalat de utilizator."}},
+			{2, new Godot.Collections.Array{4, 3, "Ce format ocupa cel mai putin spatiu?", "Flatpak", "Snap", "Deb si Rpm", "AppImage", "Pachetele Deb si Rpm includ ori programul, ori o librarie pentru alte programe. Acestea ocupa mai putin spatiu decat alte formate."}},
+			{3, new Godot.Collections.Array{4, 2, "Care format poate fi folosit pe majoritatea distributiilor", "Deb si Rpm", "Flatpak", "AppImage", "Snap", "Ubuntu nu include Flatpak, dar poate fi instalat de utilizator."}},
+			{4, new Godot.Collections.Array{4, 4, "Care format poate fi folosit pe Ubuntu (PE LANGA DEB)", "Rpm", "Flatpak", "AppImage", "Snap", "In loc de Flatpak, Ubuntu foloseste Snap."}},
+			{5, new Godot.Collections.Array{4, 3, "Care este formatul cel mai portabil", "Deb si Rpm", "Flatpak", "AppImage", "Snap", "AppImage contine programul + toate librariile necesare intr-un singur fisier."}}
 		}}
 	};
     //valori care nu ar trebui schimbate
@@ -108,31 +138,6 @@ public partial class DefaultData : Node
 		#endif
 
 		GD.Print("Videouri disponibile: " + isvideoavailable);
-
-		#if GODOT_LINUXBSD || GODOT_WINDOWS
-			//Daca nu exista folder de cache, facem unul. Altfel, golim pe cel existent
-			if(!DirAccess.DirExistsAbsolute("user://cache")) DirAccess.MakeDirAbsolute("user://cache");
-			else CleanUpFolder("user://cache");
-		#endif
-	}
-	//Functie recursiva pentru GOLIREA unui anumit folder, din moment ce DirAccess nu poate sterge foldere cu fisiere in el
-	//AVETI GRIJA CU ACEASTA FUNCTIE, DEOARECE CONTINUTUL STERS NU POATE FI RECUPERAT!!!
-	private void CleanUpFolder(string path)
-	{	
-		#if GODOT_LINUXBSD || GODOT_WINDOWS
-			var files = DirAccess.Open(path);
-			files.IncludeNavigational = false;
-			System.Array filearray = files.GetFiles();
-			for (int i = 0; i < filearray.Length; i++) DirAccess.RemoveAbsolute(path + "/" + (string)(filearray.GetValue(i)));
-			filearray = files.GetDirectories();
-			for (int i = 0; i < filearray.Length; i++) 
-			{
-				CleanUpFolder(path + "/" + (string)(filearray.GetValue(i)));
-				DirAccess.RemoveAbsolute(path + "/" + (string)(filearray.GetValue(i)));
-			}
-		#else 
-			GD.Print("Aceasta functie nu este disponibila pe Android");
-		#endif
 	}
 	public bool SaveExists()
 	{	System.Array filearray = DirAccess.GetFilesAt("user://");
@@ -142,14 +147,14 @@ public partial class DefaultData : Node
 				return true;
 			}
 		}
-		GD.Print("Exista fisier: false. Creaza un nou save.json");
+		GD.Print("Exista fisier: false. Creeaza un nou save.json");
 		return false;
 	}
 	public System.Array GetSaves()
 	{	System.Array filearray = DirAccess.GetFilesAt("user://");
 		var length = filearray.Length;
-		if(length > 7) length = 7;
-		System.Array savenames = new string[7];
+		if(length > 100) length = 100;
+		System.Array savenames = new string[length];
 		if(!SaveExists()) return null;
 		for (int i = 0; i < length; i++)
 			if(((string)(filearray.GetValue(i))).EndsWith("_save.json"))     					 //Ceva stupid. filearray.GetValue(i) trebuie sa fie string ca sa poate folosi Contains()
@@ -176,6 +181,7 @@ public partial class DefaultData : Node
 		stats content = JsonConvert.DeserializeObject<stats>(file.GetAsText());
 		file.Close();
 		currentStats = content;
+		if(currentStats.version < defaultStats.version) UpgradeSaveFile(user);
 		if(currentStats.FullScr) DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
 		else DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
 		if(currentStats.VSync) DisplayServer.WindowSetVsyncMode(DisplayServer.VSyncMode.Enabled);
@@ -191,6 +197,24 @@ public partial class DefaultData : Node
 		DisplayServer.WindowSetVsyncMode(DisplayServer.VSyncMode.Enabled);
 		currentStats = new stats();
 		GetTree().ChangeSceneToFile("res://Scenes/Logare.tscn");
+	}
+	//Functie pentru actualizarea progresului in functie de versiunea fisierului
+	public void UpgradeSaveFile(string user)
+	{	if(currentStats.version < 5)
+		{	currentStats.goodtests = currentStats.flawlesstests;
+			currentStats.greattest = currentStats.flawlesstests;
+			currentStats.version = 5;
+			WriteSave(user);
+		}
+		//if(currentStats.version < )
+	}
+	public void LoadScene(string target)
+	{	//Incarcam Incarcare.tscn, dam valoare scena pe care vrem sa o incarcam, impachetam la loc si o incarcam ca scena principala
+		var scene = (Incarcare)GD.Load<PackedScene>("res://Scenes/Incarcare.tscn").Instantiate();
+		scene.target = target;
+		PackedScene pack = new PackedScene();
+		pack.Pack(scene);
+		GetTree().ChangeSceneToPacked(pack);
 	}
 	public Godot.Collections.Array<Godot.Collections.Array> GenerateQuestionSet()
 	{	GD.Randomize();     //Nu este necesar. Godot face asta de fiecare data cand deschizi aplicatia

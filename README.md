@@ -1,4 +1,4 @@
-![Invata Linux de la zero](https://github.com/BTF2021/Zero2Linux/blob/unstable/githubassets/Banner.gif)
+![Invata Linux de la zero](https://github.com/BTF2021/Zero2Linux/blob/main/githubassets/Banner.gif)
 Zero2Linux este un proiect personal, creat pentru a-i invata pe cei mai putini familiarizati cu ecosistemul Linux sa foloseasca un desktop Linux.
 
 Dezvoltat in Godot folosind C#.

@@ -1,0 +1,168 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6frsfwmvfpux"]
+
+[ext_resource type="Texture2D" uid="uid://destipeceercx" path="res://Courses/Lesson_5/Manager.png" id="1_mteve"]
+[ext_resource type="PackedScene" uid="uid://duiw5l0ody1l" path="res://Scenes/Quizitem.tscn" id="2_27d8o"]
+[ext_resource type="Texture2D" uid="uid://bu44qherkjckr" path="res://Courses/Lesson_5/Repo.png" id="3_gikkx"]
+
+[node name="Content" type="VBoxContainer"]
+
+[node name="Block" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Block"]
+layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "	Urmatorul lucru pe care-l face orice utilizator a unui calculator este sa-si instaleze programele necesare. Pe Windows, in cele mai multe cazuri, utilizatorul cauta pe internet aplicatia, descarca installerul si-l executa. [b]Pentru fiecare program[/b]. Acest proces dureaza foarte mult (pe langa configurarea aplicatiilor), si exista riscul ca [url=https://arstechnica.com/information-technology/2023/02/until-further-notice-think-twice-before-using-google-to-download-software/]aplicatia sa fie malicioasa[/url].
+	Pe Linux, acest procesnu mai este necesar si se poate face chiar si cu [u]o singura comanda[/u]."
+fit_content = true
+
+[node name="HSeparator" type="HSeparator" parent="Block"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Block"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "Package manager"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="Block"]
+layout_mode = 2
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Block"]
+layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "	Distributia instalata are un program special pentru instalarea si actualizarea programelor."
+fit_content = true
+
+[node name="Image" type="TextureRect" parent="Block"]
+custom_minimum_size = Vector2(600, 500)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("1_mteve")
+expand_mode = 1
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Block"]
+layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "[center][color=ffffff99][i]Package Managerul pentru Linux Mint[/i][/color][/center]
+
+	Un Package Manager este un program prin care se pot instala si actualiza aplicatii. In loc sa intri pe site-ul programului sa descarci programul respectiv, poti sa o faci pe un package manager.
+
+	Package managerul nu contine toate programele, dar se pot adauga \"surse\", numite repositories (sau pe scurt repos)."
+fit_content = true
+
+[node name="Quizitem" parent="." instance=ExtResource("2_27d8o")]
+layout_mode = 2
+answnum = 3
+answ = 3
+question = "Ce NU poate sa faca un package manager?"
+answer1 = "Sa instaleze programe"
+answer2 = "Sa programele deja curente"
+answer3 = "Sa configureze programe"
+explanation = "Package managerul poate DOAR sa instaleze si sa actualizeze programe"
+
+[node name="Block2" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="Block2"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Block2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "Repositories (repos)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="Block2"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Block2"]
+layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "	Repo-urile sunt servere ce contin programele facute special pentru distributia ta. Acestea sunt folosite de package managere si se pot adauga si alte repo-uri."
+fit_content = true
+drag_and_drop_selection_enabled = false
+
+[node name="Image" type="TextureRect" parent="Block2"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("3_gikkx")
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Block2"]
+layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "[center][color=ffffff99][i]Lista de repo-uri (Fedora)[/i][/color][/center]
+
+	Package managerul nu este singura metoda de a instala si actualiza programele. Partea cea mai buna: aceasta metoda necesita o singura comanda."
+fit_content = true
+drag_and_drop_selection_enabled = false
+
+[node name="Block3" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="Block3"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Block3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "Terminal (apt si dnf)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="Block3"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Block3"]
+layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "	Cel mai rapid si eficient mod de a instala un program este prin intermediul terminalului. Daca stii numele programului, trebuie doar sa introduci in terminal urmatoarele comenzi:
+
+	[ul] [u]apt[/u] install <nume program>  pentru Debian si distributiile bazate pe aceasta (Ubuntu, Linux Mint, etc)
+ [u]dnf[/u] install <nume program>  pentru Fedora si distributiile bazate pe aceasta[/ul]
+
+	Aceste comenzi necesita drepturi de administrator (in cele mai multe cazuri, scrie \"sudo\" inainte de comanda)
+	[color=ffffff99][i]NOTA: daca distributia ta nu se gaseste aici, consulta documentatia distributiei tale [/i][/color]
+	Terminalul poate fi o unealta foarte versatila daca doresti sa dedici timp sa inveti cum sa o folosesti. O sa vorbim despre terminal intr-o lectie dedicata."
+fit_content = true
+drag_and_drop_selection_enabled = false
+
+[node name="Quizitem2" parent="." instance=ExtResource("2_27d8o")]
+layout_mode = 2
+answnum = 2
+question = "Comenzile apt si dnf se folosesc de repo-uri ca sa descarce programele"
+answer1 = "Adevarat"
+answer2 = "Fals"
+explanation = "Package managerele (chiar si comenzile apt si dnf) descarca programele folosindu-se de repository-uri"

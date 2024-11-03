@@ -16,7 +16,10 @@ public class stats
 	{
 		{1, 0},
 		{2, 0},
-		{3, 0}
+		{3, 0},
+		{4, 0},
+		{5, 0},
+		{6, 0}
 	};
 	public int Questionaires = 0;     //Nr chestionare facute
 	public int Testsnum = 0;          //Nr teste facute
@@ -40,7 +43,10 @@ public partial class DefaultData : Node
 	{	//structura vectorului este urmatoarea: numele lectiei, tipul lectiei(tag). Progresul a fost mutat in clasa stats
 		{1, new Godot.Collections.Array{"Lectia 1: Ce este Linux?", 0}},
 		{2, new Godot.Collections.Array{"Lectia 2: Distributii Linux", 0}},
-		{3, new Godot.Collections.Array{"Linux pe masina virtuala", 2}}
+		{3, new Godot.Collections.Array{"Linux pe masina virtuala", 2}},
+		{4, new Godot.Collections.Array{"Alte distributii Linux", 1}},
+		{5, new Godot.Collections.Array{"Repos si Package managers", 0}},
+		{6, new Godot.Collections.Array{"Format pachete", 1}}
 	};
 	public Godot.Collections.Dictionary<int, Godot.Collections.Dictionary<int, Godot.Collections.Array>> questionList = new Godot.Collections.Dictionary<int, Godot.Collections.Dictionary<int, Godot.Collections.Array>>() 
 	{	//structura vectorului este urmatoarea: nr lectie, iar inauntru nr intrebari, rasp corect, cele 4 raspunsuri posibile, explicatie
@@ -59,6 +65,27 @@ public partial class DefaultData : Node
 			{4, new Godot.Collections.Array{4, 4, "Care este distributia care NU este bazata pe Debian", "Debian", "Ubuntu", "Linux Mint", "Fedora", "Fedora este distributia din cele patru care NU este bazata pe Debian"}},
 			{5, new Godot.Collections.Array{4, 4, "Care este distributia bazata pe Ubuntu", "Arch", "Fedora", "Debian", "Linux Mint", "Linux Mint este o distributie bazata pe Ubuntu"}},
 			{6, new Godot.Collections.Array{4, 1, "Care este distributia cea mai veche din cele patru", "Debian", "Fedora", "Linux Mint", "Ubuntu", "Debian este cea a doua cea mai veche distributie inca intretinuta"}}
+		}},
+		{4, new Godot.Collections.Dictionary<int, Godot.Collections.Array>{
+			{1, new Godot.Collections.Array{4, 1, "Care este distributia care a fost dezvoltata de Red Hat?", "Fedora", "Nobara", "Debian", "AlmaLinux", "Celelalte distributii sunt BAZATE pe distributii Red Hat"}},
+			{2, new Godot.Collections.Array{3, 2, "AUR este un repo pentru utilizatorii distributiei...", "Gentoo", "Arch", "LFS", "", "AUR este o prescurtare pentru 'Arch User Repository'"}},
+			{3, new Godot.Collections.Array{2, 1, "Distributiile AntiX, Lubuntu si Peppermint sunt bazate pe Debian", "Adevarat", "Fals", "", "", "AntiX si Peppermint sunt bazate pe Debian. Lubuntu este bazat pe Ubuntu"}},
+			{4, new Godot.Collections.Array{2, 2, "LFS este o distributie", "Adevarat", "Fals", "", "", "LFS este o documentatie despre cum sa-ti configurezi Linux de la zero"}},
+			{5, new Godot.Collections.Array{4, 2, "Care dintre aceste distributii este una comerciala?", "Fedora", "RHEL", "CentOS", "Debian", "RHEL este prescurtare la 'Red Hat Enterprise Linux'"}}
+		}},
+		{5, new Godot.Collections.Dictionary<int, Godot.Collections.Array>{
+			{1, new Godot.Collections.Array{3, 3, "Ce NU poate sa faca un package manager?", "Sa instaleze programe", "Sa programele deja curente", "Sa configureze programe", "", "Package managerul poate DOAR sa instaleze si sa actualizeze programe"}},
+			{2, new Godot.Collections.Array{2, 1, "Comenzile apt si dnf se folosesc de repo-uri ca sa descarce programele", "Adevarat", "Fals", "", "", "Package managerele (chiar si comenzile apt si dnf) descarca programele folosindu-se de repository-uri"}},
+			{3, new Godot.Collections.Array{2, 1, "Cum se numeste comanda pentru instalat programe pentru Debian", "Apt", "Dnf", "", "", "Comanda pentru Debian este apt"}},
+			{4, new Godot.Collections.Array{2, 2, "Cum se numeste comanda pentru instalat programe pentru Fedora", "Apt", "Dnf", "", "", "Comanda pentru Fedora este dnf"}},
+			{5, new Godot.Collections.Array{2, 1, "Se pot instala si actualiza aplicatii atat printr-o interfata grafica, cat si prin terminal", "Adevarat", "Fals", "", "", "Pentru a instala si actualiza aplicatii, utilizatorul are de obicei 2 moduri: grafic si prin terminal"}}
+		}},
+		{6, new Godot.Collections.Dictionary<int, Godot.Collections.Array>{
+			{1, new Godot.Collections.Array{2, 2, "Ubuntu include Flatpak", "Adevarat", "Fals", "", "", "Ubuntu nu include Flatpak, dar poate fi instalat de utilizator."}},
+			{2, new Godot.Collections.Array{4, 3, "Ce format ocupa cel mai putin spatiu?", "Flatpak", "Snap", "Deb si Rpm", "AppImage", "Pachetele Deb si Rpm includ ori programul, ori o librarie pentru alte programe. Acestea ocupa mai putin spatiu decat alte formate."}},
+			{3, new Godot.Collections.Array{4, 2, "Care format poate fi folosit pe majoritatea distributiilor", "Deb si Rpm", "Flatpak", "AppImage", "Snap", "Ubuntu nu include Flatpak, dar poate fi instalat de utilizator."}},
+			{4, new Godot.Collections.Array{4, 4, "Care format poate fi folosit pe Ubuntu (PE LANGA DEB)", "Rpm", "Flatpak", "AppImage", "Snap", "In loc de Flatpak, Ubuntu foloseste Snap."}},
+			{5, new Godot.Collections.Array{4, 3, "Care este formatul cel mai portabil", "Deb si Rpm", "Flatpak", "AppImage", "Snap", "AppImage contine programul + toate librariile necesare intr-un singur fisier."}}
 		}}
 	};
     //valori care nu ar trebui schimbate
@@ -120,7 +147,7 @@ public partial class DefaultData : Node
 				return true;
 			}
 		}
-		GD.Print("Exista fisier: false. Creaza un nou save.json");
+		GD.Print("Exista fisier: false. Creeaza un nou save.json");
 		return false;
 	}
 	public System.Array GetSaves()

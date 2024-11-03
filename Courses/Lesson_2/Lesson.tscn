@@ -19,30 +19,10 @@ theme_override_font_sizes/italics_font_size = 25
 theme_override_font_sizes/bold_italics_font_size = 25
 theme_override_font_sizes/mono_font_size = 25
 bbcode_enabled = true
-text = "	In prima lectie, am mentionat faptul ca kernelul este inclus in ceva numit distributie sau distro. In aceasta lectie vom discuta despre distributii, dar vom alege si prima distributie.
-	O distributie Linux este un sistem de operare ce contine kernelul Linux si o serie de aplicatii, majoritatea aplicatiilor fiind parte din proiectul GNU. De asemenea, majoritatea distributiilor includ si un package manager pentru instalarea si actualizarea programelor."
-fit_content = true
+text = "	Una dintre problemele pe care un nou utilizator este de a alege o distributie Linux. Datorita naturii open-source a kernelului, sunt [b]o multime[/b] de distributii. In aceasta lectie vom prezenta patru distributii considerate \"prietenoase\" cu noii utilizatori.
 
-[node name="Test2" type="Label" parent="Block"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 45
-text = "Cuvant inainte"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HSeparator2" type="HSeparator" parent="Block"]
-layout_mode = 2
-
-[node name="RichTextLabel2" type="RichTextLabel" parent="Block"]
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 25
-theme_override_font_sizes/bold_font_size = 25
-theme_override_font_sizes/italics_font_size = 25
-theme_override_font_sizes/bold_italics_font_size = 25
-theme_override_font_sizes/mono_font_size = 25
-bbcode_enabled = true
-text = "	Desi aceasta lectie este dedicata recomandarilor pentru prima distributie, trebuie mentionat faptul ca [b][i]orice distributie este buna[/i][/b] daca inca mai primeste actualizari. In restul lectiilor vom continua cu o singura distributie, dar o sa fie si alte distributii similare.
-	Aplicatiile pot fi instalate printr-o aplicatie grafica (package manager), dar si prin terminal."
+	O distributie Linux este un sistem de operare ce contine kernelul Linux si o serie de aplicatii, majoritatea aplicatiilor fiind parte din proiectul GNU. De asemenea, majoritatea distributiilor includ si un package manager pentru instalarea si actualizarea programelor. Aplicatiile pot fi instalate printr-o aplicatie grafica (package manager), dar si prin terminal.
+	Desi aceasta lectie este dedicata prezentarii a patru distributii specifice, trebuie mentionat faptul ca [b][i]orice distributie[/i][/b] este buna daca inca mai primeste actualizari."
 fit_content = true
 
 [node name="HSeparator3" type="HSeparator" parent="Block"]
@@ -91,10 +71,11 @@ theme_override_font_sizes/mono_font_size = 25
 bbcode_enabled = true
 text = "[center][color=ffffff99][i]Desktopul principal Linux Mint (Cinnamon Edition)[/i][/color][/center]
 
-	O prima distributie des recomandata pentru noii utilizatori Linux este Linux Mint. Linux Mint vine preinstalat cu aplicatiile des folosite, cum ar fi un web browser, editor de texte, suita similara cu Office etc, dar si cu o aplicatie de instalat alte aplicatii si de actualizat cele deja instalate. De asemenea vine la pachet si cu codecuri pentru redarea video si audio (Daca ai bifat optiunea la instalare).
+	O prima distributie des recomandata pentru noii utilizatori Linux este Linux Mint. Linux Mint vine preinstalat cu aplicatiile des folosite. De asemenea vine la pachet si cu codecuri pentru redarea video si audio (Daca ai bifat optiunea la instalare).
+	Linux Mint are trei editii: Cinnamon (cea mai populara editie), Xfce si Mate
 	Cu toate acestea, Linux Mint este foarte stabil, iar Interfata sistemului este destul de similara cu Windows si se poate personaliza usor.
 	
-	[i]Daca nu se booteaza Linux Mint pe un calculator recent, foloseste varianta \"EDGE\"[/i]
+	[i]Daca nu se booteaza Linux Mint pe un calculator recent, foloseste varianta \"EDGE\" ISO[/i]
 
 	Linux Mint este derivat dintr-o alta distributie, numita Ubuntu."
 fit_content = true
@@ -143,7 +124,7 @@ theme_override_font_sizes/mono_font_size = 25
 bbcode_enabled = true
 text = "[center][color=ffffff99][i]Desktopul principal Ubuntu[/i][/color][/center]
 
-	Ubuntu este probabil cea mai cunoscuta distributie Linux. Desi este la fel de prietenoasa cu utilizatorul ca Linux Mint, Ubuntu are o interfata diferita fata de Windows, cea ce o sa faca (un pic) mai greu adaptarea la desktop.
+	Ubuntu este probabil cea mai cunoscuta distributie Linux. Desi este la fel de prietenoasa cu utilizatorul ca Linux Mint, La fel ca Linux Mint, Ubuntu vine la pachet cu aplicatii preinstalate. Ubuntu are o interfata diferita de Linux Mint, dar se poate personaliza pe placul utilizatorilor.
 	Ubuntu este si el la randul lui derivat dintr-o alta distributie: Debian"
 fit_content = true
 drag_and_drop_selection_enabled = false
@@ -192,8 +173,7 @@ bbcode_enabled = true
 text = "[center][color=ffffff99][i]Desktopul principal Debian[/i][/color][/center]
 
 	Probabil te intrebi de ce Linux Mint este o distributie derivata dintr-o alta derivata a acestei distributii (Desi este ceva normal in spatiu open source).
-	Actualizarile distributiei Debian au sanse foarte mici sa strice ceva, deoarece actiualizarile distributiei sunt odata la aproximativ 2 ani, dar o versiune primeste suport timp de 3 ani. De aceea Debian este foarte stabil.
-	Debian este a doua cea mai veche distributie Linux inca intretinuta.Daca detii un pc foarte recent, este recomandat sa folosesti alta distributie, dar daca ai un pc destul de vechi, Debian este foarte bun.
+	Debian este a doua cea mai veche distributie Linux inca intretinuta.Daca detii un calculator foarte recent, este recomandat sa folosesti alta distributie, dar daca ai un calculator destul de vechi, Debian este foarte bun. Actualizarile distributiei Debian au sanse foarte mici sa strice ceva, deoarece actualizarile distributiei sunt odata la aproximativ 2 ani, dar o versiune primeste suport timp de 3 ani. Acest lucru se aplica si pentru Ubuntu si, la randul lui, Linux Mint.
 
 	[color=ffffff89][i]Dar toate distributiile sunt bazate pe Debian!?[/i][/color]
 	Exista si alte distributii stabile care nu sunt bazate pe Debian. Un exemplu bun este urmatoarea distributie: Fedora.
@@ -232,7 +212,7 @@ theme_override_font_sizes/mono_font_size = 25
 bbcode_enabled = true
 text = "[center][color=ffffff99][i]Desktopul principal Fedora[/i][/color][/center]
 
-	Comparativ cu celelalte distributii discutate, anterior, Fedora NU este bazat pe Debian, din contra. Fedora incearca sa fie prima distributie care sa adopte noile tehnologii open-source (Daca ai un calculator foarte nou, considera Fedora)
+	Comparativ cu celelalte distributii discutate anterior, Fedora NU este bazat pe Debian. Fedora incearca sa fie prima distributie care sa adopte noile tehnologii open-source.Daca vrei sa beneficiezi de noi tehnologii, dar si beneficiile unui sistem stabil, considera Fedora.
 	Ca si celelalte trei distributii, Fedora este stabil, versiunile primind suport pentru 1-2 ani."
 fit_content = true
 drag_and_drop_selection_enabled = false

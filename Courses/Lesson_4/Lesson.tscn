@@ -1,0 +1,164 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwd4yn45iw2ks"]
+
+[ext_resource type="Texture2D" uid="uid://dwasjkx7ygl02" path="res://Courses/Lesson_4/Arch.png" id="3_yjq2u"]
+[ext_resource type="Texture2D" uid="uid://w4wxyskjkgyl" path="res://Courses/Lesson_4/RHEL.png" id="7_0lnim"]
+[ext_resource type="PackedScene" uid="uid://duiw5l0ody1l" path="res://Scenes/Quizitem.tscn" id="11_5kwpd"]
+
+[node name="Content" type="VBoxContainer"]
+
+[node name="Block" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Block"]
+layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "	[color=ffffff89]In aceasta lectie vom discuta despre alte distributii, multe dintre acestea nefiind din lectia a doua. Recomand sa treci mai intai prin lectia a doua si sa fi ales deja distributia in care vei lucra.[/color]
+	
+	In lectia a doua am vorbit doar despre patru distributii considerate de comunitate \"prietenoase\" cu utilizatorii noi. In realitate insa, exista [b]MULT[/b] mai multe distributii Linux , unele cu o comunitate mai mica, altele cu comunitati mari, unele cu un grad de complexitate mic, altele foarte complexe.
+	In aceasta lectie vom discuta cateva din acestea, dar exista un site pentru o lista de distributii ([url=https://distrowatch.com/]Distrowatch.com[/url]).
+"
+fit_content = true
+
+[node name="Block2" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="Block2"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Block2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "Fedora si distributii comerciale"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="Block2"]
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="Block2"]
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("7_0lnim")
+expand_mode = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Block2"]
+layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "[center][color=ffffff99][i]Desktopul principal RHEL (Nimic diferit fata de Fedora)[/i][/color][/center]
+
+	In lectia a doua am mentionat faptul ca Debian nu este singura distributie folosita ca baza pentru alte distributii si ca Fedora este o distributie care nu este bazata pe Debian.
+	Fedora este o baza destul de buna pentru dezvoltatori de a-si crea distributii. Unele exemple ar fi [url=https://distrowatch.com/nobara]Nobara[/url], [url=https://distrowatch.com/centos]CentOS[/url] si multe altele, dar surprinzator exista si o distributie comerciala: RHEL.
+	RHEL (Red Hat Enterprise Linux) este o distributie comerciala dezvoltata de Red Hat pentru intreprinderi. RHEL [url=https://www.theregister.com/2023/06/23/red_hat_centos_move/][b]era[/b][/url] open-source (desi are componente non-free), deci s-au dezvoltat distributii bazate pa aceasta (fara acele componente), cum ar fi [url=https://distrowatch.com/table.php?distribution=alma]AlmaLinux[/url] si [url=https://distrowatch.com/rocky]Rocky Linux[/url].
+
+	Cel mai probabil, aceste distributii sunt folosite pentru servere, fie servere masive... fie un calculator vechi de 10 ani."
+fit_content = true
+drag_and_drop_selection_enabled = false
+
+[node name="Quizitem" parent="." instance=ExtResource("11_5kwpd")]
+layout_mode = 2
+question = "Care este distributia care a fost dezvoltata de Red Hat?"
+answer1 = "Fedora"
+answer2 = "Debian"
+answer3 = "CentOS"
+answer4 = "AlmaLinux"
+explanation = "Celelalte distributii sunt BAZATE pe distributii Red Hat"
+
+[node name="Block3" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Block3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "Distributii usoare (lightweight)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Block3"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Block3"]
+layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "	Comparativ cu alte sisteme de operare, majoritatea distributiilor Linux foloseste putine resurse si ocupa mai putin spatiu de stocare. Cu toate acestea exista si distributii (in general bazate pe Debian), dar optimizate pentru calculatoare mai slabe. De obicei, aceste distributii vin la pachet cu un desktop care nu utilizeaza multe resurse si elimina cateva programe extra. 
+	Exemple de distributii lightweight sunt [url=https://distrowatch.com/table.php?distribution=antix]AntiX[/url], [url=]Lubuntu[/url] (Ubuntu, dar cu un alt Desktop) si [url=https://distrowatch.com/table.php?distribution=peppermint]Peppermint[/url].
+
+	Din moment ce aceste distributii elimina programe extra, de ce sa nu lasam utilizatorul sa decida?"
+fit_content = true
+
+[node name="HSeparator2" type="HSeparator" parent="Block3"]
+layout_mode = 2
+
+[node name="Title2" type="Label" parent="Block3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "Arch, Gentoo si LFS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator3" type="HSeparator" parent="Block3"]
+layout_mode = 2
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Block3"]
+layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "	Daca celelalte distributii discutate anterior \"pur si simplu functioneaza\", aceste trei distributii (dar si altele de acest gen) le permit utilizatorilor sa-si configureze sistemul, de la programele instalate, pana la kernel.
+	Motivul pentru care aceste distributii sunt dificile pentru majoritatea utilizatorilor este faptul ca, in loc sa instalezi distributia folosind o interfata grafica si sistemul sa faca partea dificila, utilizatorul trebuie sa-si instaleze distributia, folosind doar terminalul pentru [b]TOT[/b] (chiar si setarea orei)."
+fit_content = true
+
+[node name="Image2" type="TextureRect" parent="Block3"]
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("3_yjq2u")
+expand_mode = 1
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Block3"]
+layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "[center][color=ffffff99][i]Cum se instaleaza Arch Linux[/i][/color][/center]
+
+	Avantajul este ca utilizatorul are mai mult control asupra sistemului, iar sistemul se poate acomoda mai usor nevoilor utilizatorului: Vrei sistem care ocupa cat mai putin spatiu posibil? Vrei un sistem care poate fi folosit pe un smartphone? Ambele sunt posibile pe astfel de distributii.
+	[url=https://distrowatch.com/table.php?distribution=ARCH]Arch Linux[/url], [url=https://distrowatch.com/table.php?distribution=gentoo]Gentoo[/url] si [url=https://distrowatch.com/table.php?distribution=lfs]LFS[/url] (Linux From Scratch) sunt trei distributii populare, cunoscute pentru gradul lor de dificultate.
+	[ul] Arch Linux este o distributie lightweight si flexibila, care incearca sa fie simpla. Instalatia este minima, configurata de utilizator. Exista un repo (A se vedea lectia legata de repos si package managers) in care utilizatorii pot contribui cu pachete, numit [url=https://aur.archlinux.org/]AUR[/url] (Arch User Repository) 
+ Gentoo este similar cu Arch, dar ofera mai multa flexibilitate si poate fi optimizat pentru orice. Aplicatiile sunt compilate (aplicatia este generata din codul sursa), cea ce ofera o performanta mai buna
+ LFS nu este o distributie, ci o documentatie despre cum sa-ti obtii codul sursa pentru o baza minimala, sa compilezi manual si sa configurezi [b]de la zero[/b][/ul]
+
+	Exista si alte distributii care au un grad de dificultate mai mare, dar pentru un utilizator obisnuit, avantajele nu sunt foarte mari. Daca poti dedica timp si vrei sa inveti cum sa configurezi un astfel de sistem, considera una dintre aceste distributii."
+fit_content = true
+
+[node name="Quizitem2" parent="." instance=ExtResource("11_5kwpd")]
+layout_mode = 2
+answnum = 3
+answ = 2
+question = "AUR este un repo pentru utilizatorii distributiei..."
+answer1 = "Gentoo"
+answer2 = "Arch"
+answer3 = "LFS"
+answer4 = ""
+explanation = "AUR este o prescurtare pentru 'Arch User Repository'"

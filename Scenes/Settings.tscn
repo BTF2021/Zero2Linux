@@ -146,7 +146,6 @@ horizontal_alignment = 1
 layout_mode = 2
 
 [node name="Advanced" type="Label" parent="Panel/Settings/Lectii/VBoxContainer"]
-visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Include lectiile avansate"
@@ -230,7 +229,6 @@ scale = Vector2(1.25, 1.25)
 tooltip_text = "Daca este activat, nu vor fi aratate numarul de raspunsuri corecte si gresite in modul test"
 
 [node name="IncludeAdvQ" type="Label" parent="Panel/Settings/Lectii/VBoxContainer"]
-visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Include intrebari din lectii avansate"

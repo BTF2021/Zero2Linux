@@ -1,10 +1,10 @@
 [gd_scene load_steps=13 format=3 uid="uid://b4gdupblxidyf"]
 
-[ext_resource type="Script" path="res://Scripts/Main.cs" id="1_c7d67"]
+[ext_resource type="Script" uid="uid://dgx4lrx3pggyr" path="res://Scripts/Main.cs" id="1_c7d67"]
 [ext_resource type="StyleBox" uid="uid://di87pu5wmffgt" path="res://Sprites/UINoHover.stylebox" id="2_0hv5f"]
 [ext_resource type="Texture2D" uid="uid://c311u78gq8dn" path="res://Sprites/Bg.png" id="2_lj8l1"]
 [ext_resource type="Texture2D" uid="uid://bid2ssfeh2pfy" path="res://Sprites/Bar.png" id="3_ocyen"]
-[ext_resource type="VideoStream" path="res://Sprites/bgvid.ogv" id="3_v0gny"]
+[ext_resource type="VideoStream" uid="uid://bojvvr7rcdaw8" path="res://Sprites/bgvid.ogv" id="3_v0gny"]
 [ext_resource type="StyleBox" uid="uid://c8ip85nk5v8ds" path="res://Sprites/UIButtons.stylebox" id="4_ja7mp"]
 [ext_resource type="Texture2D" uid="uid://2k0tqngjaab8" path="res://Sprites/Power.png" id="4_q207a"]
 [ext_resource type="Texture2D" uid="uid://hbrqsdt4laac" path="res://Sprites/Logout.png" id="6_8su00"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dp66hckm2wrqb"]
 
-[ext_resource type="Script" path="res://Scripts/Confirm.cs" id="1_o4va3"]
+[ext_resource type="Script" uid="uid://wlp14h7s40pr" path="res://Scripts/Confirm.cs" id="1_o4va3"]
 [ext_resource type="Material" uid="uid://bl5ra5x2dyfgr" path="res://Sprites/Blur.material" id="2_dltu8"]
 [ext_resource type="StyleBox" uid="uid://jov22gqerob3" path="res://Sprites/UIConfirmPanel.stylebox" id="3_63gs6"]
 [ext_resource type="StyleBox" uid="uid://c8ip85nk5v8ds" path="res://Sprites/UIButtons.stylebox" id="3_ufrb6"]

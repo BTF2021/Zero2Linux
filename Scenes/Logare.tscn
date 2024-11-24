@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://bkx0p2po0iq6n"]
 
 [ext_resource type="Texture2D" uid="uid://c311u78gq8dn" path="res://Sprites/Bg.png" id="1_acc6r"]
-[ext_resource type="Script" path="res://Scripts/Logare.cs" id="1_avx0j"]
+[ext_resource type="Script" uid="uid://he3o72220x3i" path="res://Scripts/Logare.cs" id="1_avx0j"]
 [ext_resource type="StyleBox" uid="uid://drod6m1sbtikq" path="res://Sprites/UISettingsButton.stylebox" id="3_03oal"]
 [ext_resource type="Theme" uid="uid://c3r51fw2bo66h" path="res://Sprites/CourseUI.theme" id="3_llrmv"]
 [ext_resource type="StyleBox" uid="uid://di87pu5wmffgt" path="res://Sprites/UINoHover.stylebox" id="3_rxovc"]

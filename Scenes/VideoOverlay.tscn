@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://b5r4kq07nfvp1"]
 
-[ext_resource type="Script" path="res://Scripts/VideoOverlay.cs" id="1_8kp3d"]
+[ext_resource type="Script" uid="uid://chnjwc7yjanfc" path="res://Scripts/VideoOverlay.cs" id="1_8kp3d"]
 [ext_resource type="Texture2D" uid="uid://cuv7m0o2p7huh" path="res://Sprites/Back.png" id="2_5ji7h"]
 [ext_resource type="Texture2D" uid="uid://p1v6x8plca83" path="res://Sprites/Back10s.png" id="2_m5ft7"]
 [ext_resource type="Texture2D" uid="uid://bud38ywfs5qnt" path="res://Sprites/Play.png" id="2_mb415"]
@@ -13,7 +13,7 @@
 [ext_resource type="StyleBox" uid="uid://dhjub7y84wcpf" path="res://Sprites/Slider.stylebox" id="8_ew0bt"]
 [ext_resource type="Texture2D" uid="uid://0cx1a0sumavq" path="res://Sprites/FullscrHighlight.png" id="9_tshvh"]
 
-[sub_resource type="FFmpegVideoStream" id="FFmpegVideoStream_pu380"]
+[sub_resource type="FFmpegVideoStream" id="FFmpegVideoStream_l8t6t"]
 
 [node name="VideoOverlay" type="Node2D"]
 script = ExtResource("1_8kp3d")
@@ -36,7 +36,8 @@ ratio = 1.7778
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-stream = SubResource("FFmpegVideoStream_pu380")
+stream = SubResource("FFmpegVideoStream_l8t6t")
+buffering_msec = 1000
 
 [node name="ControlsTint" type="ColorRect" parent="."]
 offset_top = 660.0

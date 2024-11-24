@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://duiw5l0ody1l"]
 
-[ext_resource type="Script" path="res://Scripts/Quizitem.cs" id="1_hrfcq"]
+[ext_resource type="Script" uid="uid://dnu1oiel21j2m" path="res://Scripts/Quizitem.cs" id="1_hrfcq"]
 [ext_resource type="StyleBox" uid="uid://di87pu5wmffgt" path="res://Sprites/UINoHover.stylebox" id="2_1jsns"]
 [ext_resource type="Theme" uid="uid://c3r51fw2bo66h" path="res://Sprites/CourseUI.theme" id="2_8s1j7"]
 [ext_resource type="StyleBox" uid="uid://c8ip85nk5v8ds" path="res://Sprites/UIButtons.stylebox" id="2_p2qk2"]

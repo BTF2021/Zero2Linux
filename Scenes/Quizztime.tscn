@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://dsrtl4q4of7qd"]
 
-[ext_resource type="Script" path="res://Scripts/Quizztime.cs" id="1_uw27w"]
+[ext_resource type="Script" uid="uid://cayqnr6o66y7v" path="res://Scripts/Quizztime.cs" id="1_uw27w"]
 [ext_resource type="Texture2D" uid="uid://cuv7m0o2p7huh" path="res://Sprites/Back.png" id="2_ix61e"]
 [ext_resource type="Texture2D" uid="uid://rsq42q4qde3" path="res://Sprites/BackHighlight.png" id="3_ea8q5"]
 [ext_resource type="PackedScene" uid="uid://duiw5l0ody1l" path="res://Scenes/Quizitem.tscn" id="4_jaieg"]

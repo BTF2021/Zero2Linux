@@ -13,9 +13,9 @@ public partial class Progress : Control
 	public override void _Ready()
 	{	_data = (DefaultData)GetNode("/root/DefaultData");
 		_item = GetNode<VBoxContainer>("Panel/Panel/ScrollContainer/VBoxContainer/Item");
-		GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/Player/Account/Name").Text = _data.currentStats.UsrName;
-		GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/Player/Account/BigLetter").Text = _data.currentStats.UsrName;
-		GetNode<Sprite2D>("Panel/Panel/ScrollContainer/VBoxContainer/Player/Account/Bg").SelfModulate = _data.currentStats.FavColor;
+		GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/Account/Name").Text = _data.currentStats.UsrName;
+		GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/Account/BigLetter").Text = _data.currentStats.UsrName;
+		GetNode<Sprite2D>("Panel/Panel/ScrollContainer/VBoxContainer/Account/Bg").SelfModulate = _data.currentStats.FavColor;
 
 		//Calculam cate lectii sunt deja terminate
 		_data.currentStats.FinishedLes = 0;

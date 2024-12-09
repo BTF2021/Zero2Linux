@@ -84,22 +84,14 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 3
 alignment = 1
 
-[node name="Player" type="HBoxContainer" parent="Panel/Panel/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 216)
-layout_mode = 2
-alignment = 1
+[node name="Account" type="Node2D" parent="Panel/Panel/ScrollContainer/VBoxContainer"]
+position = Vector2(295, 0)
 
-[node name="Account" type="Control" parent="Panel/Panel/ScrollContainer/VBoxContainer/Player"]
-custom_minimum_size = Vector2(160, 0)
-layout_mode = 2
-tooltip_text = "Logheaza-te ca "
-
-[node name="Bg" type="Sprite2D" parent="Panel/Panel/ScrollContainer/VBoxContainer/Player/Account"]
+[node name="Bg" type="Sprite2D" parent="Panel/Panel/ScrollContainer/VBoxContainer/Account"]
 position = Vector2(80, 100)
 texture = ExtResource("5_an6bj")
 
-[node name="Name" type="Label" parent="Panel/Panel/ScrollContainer/VBoxContainer/Player/Account"]
-layout_mode = 0
+[node name="Name" type="Label" parent="Panel/Panel/ScrollContainer/VBoxContainer/Account"]
 offset_left = -5.0
 offset_top = 186.0
 offset_right = 164.0
@@ -108,8 +100,7 @@ theme_override_font_sizes/font_size = 25
 text = "123456789abc"
 horizontal_alignment = 1
 
-[node name="BigLetter" type="Label" parent="Panel/Panel/ScrollContainer/VBoxContainer/Player/Account"]
-layout_mode = 0
+[node name="BigLetter" type="Label" parent="Panel/Panel/ScrollContainer/VBoxContainer/Account"]
 offset_left = 3.0
 offset_top = 22.0
 offset_right = 158.0
@@ -122,6 +113,10 @@ visible_characters = 1
 
 [node name="MarginContainer2" type="MarginContainer" parent="Panel/Panel/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="MarginContainer4" type="MarginContainer" parent="Panel/Panel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 204)
 layout_mode = 2
 
 [node name="hSeparator" type="HSeparator" parent="Panel/Panel/ScrollContainer/VBoxContainer"]

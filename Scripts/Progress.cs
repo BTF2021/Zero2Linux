@@ -71,8 +71,9 @@ public partial class Progress : Control
 	{	mousepos = GetViewport().GetMousePosition();
 		var winpos = GetNode<Sprite2D>("Panel").Position;
 		var newpos = Position;
-		newpos.X = Mathf.Lerp(winpos.X, mousepos.X + dif.X, 1);
-		newpos.Y = Mathf.Lerp(winpos.Y, mousepos.Y + dif.Y, 1);
+		//Pozitia este raportata la centrul ferestrei
+		newpos.X = Mathf.Clamp(Mathf.Lerp(winpos.X, mousepos.X + dif.X, 1), 0, 1280);
+		newpos.Y = Mathf.Clamp(Mathf.Lerp(winpos.Y, mousepos.Y + dif.Y, 1), 279, 920);
 		if(inputgrab) GetNode<Sprite2D>("Panel").Position = newpos;
 	}
 	private void _on_back_pressed() => QueueFree();

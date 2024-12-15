@@ -199,6 +199,7 @@ public partial class Settings : Control
 		dif.Y = winpos.Y - mousepos.Y;
 		GD.Print(dif);
 		inputgrab = true;
+		GetParent().MoveChild(this, -1);
 	}
 	private void _on_drag_up()
 	{	GD.Print("Bye");

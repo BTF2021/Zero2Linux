@@ -109,14 +109,14 @@ public partial class Main : Node2D
 	{	var newver = (GD.Load<PackedScene>("res://Scenes/NewVer.tscn")).Instantiate();
 		newver.GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/Title2").Text = newver.GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/Title2").Text + (String)ProjectSettings.GetSetting("application/config/version") + "\nVersiunea actuala este: " + _data.newversion[0] + "\n ";
 		newver.GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/HBoxContainer2/Title3").Text = _data.newversion[1];
-		GetNode<Control>("UI").AddChild(newver);
+		AddChild(newver);
 	}
-	private void _on_course_pressed() => GetNode<Control>("UI").AddChild((GD.Load<PackedScene>("res://Scenes/Courses.tscn")).Instantiate());
+	private void _on_course_pressed() => AddChild((GD.Load<PackedScene>("res://Scenes/Courses.tscn")).Instantiate());
 
-	private void _on_settings_pressed() => GetNode<Control>("UI").AddChild((GD.Load<PackedScene>("res://Scenes/Settings.tscn")).Instantiate());
+	private void _on_settings_pressed() => AddChild((GD.Load<PackedScene>("res://Scenes/Settings.tscn")).Instantiate());
 
-	private void _on_quizzes_pressed() => GetNode<Control>("UI").AddChild((GD.Load<PackedScene>("res://Scenes/Quizzes.tscn")).Instantiate());
-	private void _on_progress_pressed() => GetNode<Control>("UI").AddChild((GD.Load<PackedScene>("res://Scenes/Progress.tscn")).Instantiate());
+	private void _on_quizzes_pressed() => AddChild((GD.Load<PackedScene>("res://Scenes/Quizzes.tscn")).Instantiate());
+	private void _on_progress_pressed() => AddChild((GD.Load<PackedScene>("res://Scenes/Progress.tscn")).Instantiate());
 
 	private void OnRequestCompleted(long result, long responseCode, string[] headers, byte[] body)
 	{	if(result == 0)

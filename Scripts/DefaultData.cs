@@ -216,8 +216,9 @@ public partial class DefaultData : Node
 		pack.Pack(scene);
 		GetTree().ChangeSceneToPacked(pack);
 	}
-	public Godot.Collections.Array<Godot.Collections.Array> GenerateQuestionSet()
-	{	GD.Randomize();     //Nu este necesar. Godot face asta de fiecare data cand deschizi aplicatia
+	public Godot.Collections.Array<Godot.Collections.Array> GenerateQuestionSet(int num)
+	{	if(num <= 0) return null;
+		GD.Randomize();     //Nu este necesar. Godot face asta de fiecare data cand deschizi aplicatia
 		Godot.Collections.Array<Godot.Collections.Array> _list = new Godot.Collections.Array<Godot.Collections.Array>();
 		int i, lesson, number;
 		bool ok = false;
@@ -226,7 +227,7 @@ public partial class DefaultData : Node
 		number = (int)Mathf.Round(GD.RandRange(1, (int)questionList[lesson].Count));
 		_list.Add((Godot.Collections.Array)questionList[lesson][number]);
 		GD.Print("Adaugat o intrebare. Este din lectia nr" + lesson + ", intrebarea " + number);   //Pentru prima intrebare nu este necesara verificarea daca se repeta, atata timp cat respecta conditiile de mai sus
-		for(i=2;i<=10;i++)
+		for(i=2;i<=num;i++)
 		{	while(!ok)
 			{	//Se repeta ce am facut mai sus
 				ok = true;

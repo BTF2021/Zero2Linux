@@ -28,7 +28,7 @@ public partial class Quizztime : Node2D
 		GetAnswers += SendAnswers;
 		Skip += SkipQuestion;
 		Next += NextQuestion;
-		_list = _data.GenerateQuestionSet();
+		_list = _data.GenerateQuestionSet(total);
 		GD.Print(_list);
 		if(_data.questiontype == 1)
 		{	GetNode<Label>("Body/Title").Text = "Test";
@@ -198,7 +198,7 @@ public partial class Quizztime : Node2D
 						return;
 					}
 				}
-				intrebari=10;
+				intrebari=total;
 				var name1 = (String)GetChild(-1).Name;
 				if(name1.Contains("Quizitem")) GetChild(-1).QueueFree();
 				_finished();

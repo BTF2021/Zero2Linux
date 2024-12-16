@@ -12,88 +12,63 @@ public partial class Incarcare : Node2D
 		GetNode<RichTextLabel>("Tip").Text = "[center]";
 		done = false;
 		GD.Print(target);
-		var tip = (int)GD.RandRange(1, 21);
-		switch(tip)
-		{	case 1:
-				GetNode<RichTextLabel>("Tip").Text = GetNode<RichTextLabel>("Tip").Text + "Se incarca...";
-				break;
-			case 2:
-				GetNode<RichTextLabel>("Tip").Text = GetNode<RichTextLabel>("Tip").Text + "E GNU/Linux";
-				break;
-			case 3:
-				GetNode<RichTextLabel>("Tip").Text = GetNode<RichTextLabel>("Tip").Text + "Eu folosesc Arch Linux (by the way)";
-				break;
-			case 4:
-				GetNode<RichTextLabel>("Tip").Text = GetNode<RichTextLabel>("Tip").Text + "Viziteaza alternativeto.net pentru a vedea o lista de alternative pentru programe";
-				break;
-			case 5:
-				GetNode<RichTextLabel>("Tip").Text = GetNode<RichTextLabel>("Tip").Text + "Fun fact: Android este bazat pe un kernel modificat de linux";
-				break;
-			case 6:
-				GetNode<RichTextLabel>("Tip").Text = GetNode<RichTextLabel>("Tip").Text + "Fun fact: Majoritatea serverelor folosesc Linux";
-				break;
-			case 7:
-				var name = "";
-				switch(OS.GetName())
-				{	case "Windows":
-						name = "Poti incerca o distributie de linux intr-o masina virtuala sau intr-un container";
-						break;
-					case "Linux":
-						name = "Nu uita sa-ti actualizezi periodic programele instalate!";
-						break;
-					case "Android":
-						name = "Fun fact: Se poate rula Linux si pe dispozitive cu procesoare ARM";
-						break;
-				}
-				GetNode<RichTextLabel>("Tip").Text = GetNode<RichTextLabel>("Tip").Text + name;
-				break;
-			case 8:
-				GetNode<RichTextLabel>("Tip").Text = GetNode<RichTextLabel>("Tip").Text + "Este cumva " + Time.GetDateStringFromSystem().Substr(0, 4) + " anul Linux?";
-				break;
-			case 9:
-				GetNode<RichTextLabel>("Tip").Text = GetNode<RichTextLabel>("Tip").Text + "Daca nu stii cum se utilizeaza un program, exista intotdeauna manualul/wikiul";
-				break;
-			case 10:
-				GetNode<RichTextLabel>("Tip").Text = GetNode<RichTextLabel>("Tip").Text + "Vim, Nano, Emacs... nu conteaza atata timp cat poti edita un fisier text";
-				break;
-			case 11:
-				GetNode<RichTextLabel>("Tip").Text = GetNode<RichTextLabel>("Tip").Text + ":q + Enter pentru a iesi din Vim";
-				break;
-			case 12:
-				GetNode<RichTextLabel>("Tip").Text = GetNode<RichTextLabel>("Tip").Text + "Fun fact: Linux Mint este derivat dintr-o derivata a Debian";
-				break;
-			case 13:
-				GetNode<RichTextLabel>("Tip").Text = GetNode<RichTextLabel>("Tip").Text + "Viziteaza pagina de Github al acestui proiect pentru noi actualizari";
-				break;
-			case 14:
-				GetNode<RichTextLabel>("Tip").Text = GetNode<RichTextLabel>("Tip").Text + "Fun fact: Linux Torvalds foloseste Fedora";
-				break;
-			case 15:
-				GetNode<RichTextLabel>("Tip").Text = GetNode<RichTextLabel>("Tip").Text + "Ai auzit de Justin Bieber Linux?";
-				break;
-			case 16:
-				GetNode<RichTextLabel>("Tip").Text = GetNode<RichTextLabel>("Tip").Text + "Ai auzit de Hannah Montana Linux?";
-				break;
-			case 17:
-				GetNode<RichTextLabel>("Tip").Text = GetNode<RichTextLabel>("Tip").Text + "Insereaza un text aici";
-				break;
-			case 18:
-				GetNode<RichTextLabel>("Tip").Text = GetNode<RichTextLabel>("Tip").Text + "Fun Fact: Freax era numele oficial pentru Linux";
-				break;
-			case 19:
-				GetNode<RichTextLabel>("Tip").Text = GetNode<RichTextLabel>("Tip").Text + "[wave amp=45.0 freq=7.0 connected=1]<ooooooooooooooooooooooooooooooooooooooooooooooooooooe[/wave]";    //Ar trebui sa arate a sarpe
-				break;
-			case 20:
-				GetNode<RichTextLabel>("Tip").Text = GetNode<RichTextLabel>("Tip").Text + "Fun fact: Probabil ai mai multe dispozitive Linux decat crezi";
-				break;
-			case 21:
-				GetNode<RichTextLabel>("Tip").Text = GetNode<RichTextLabel>("Tip").Text + "[i]Read the friendly manual[/i]";
-				break;
+		Godot.Collections.Array<string> splash = new Godot.Collections.Array<string>(){
+			"Se incarca...",
+			"Insereaza un text aici",
+			"Acest text este [i]pseudo[/i]-aleatoriu",
+			"Viziteaza pagina de Github al acestui proiect pentru noi actualizari",
+			"Fun fact: Android este bazat pe un kernel modificat de linux",
+			"Fun fact: Majoritatea serverelor folosesc Linux",
+			"Fun fact: Linux Mint este derivat dintr-o derivata a Debian",
+			"Fun fact: Linux Torvalds foloseste Fedora",
+			"Fun Fact: Freax era numele oficial pentru Linux",
+			"Fun fact: Probabil ai mai multe dispozitive Linux decat crezi",
+			"Fun fact: Exista un antivirus open-source pentru Linux",
+			"Fun fact: Poti folosi Linux si pe un stick usb",
+			"Viziteaza alternativeto.net pentru a vedea o lista de alternative pentru programe",
+			"Daca nu stii cum se utilizeaza un program, exista intotdeauna manualul/wikiul",
+			"Vim, Nano, Emacs... nu conteaza atata timp cat poti edita un fisier text",
+			":q + Enter pentru a iesi din Vim",
+			"E GNU/Linux",
+			"[i]Read the friendly manual[/i]",
+			"Eu folosesc Arch Linux (by the way)",
+			"Este cumva " + Time.GetDateStringFromSystem().Substr(0, 4) + " anul Linux?",
+			"Ai auzit de Justin Bieber Linux?",
+			"Ai auzit de Hannah Montana Linux?",
+			"[wave amp=45.0 freq=7.0 connected=1]<ooooooooooooooooooooooooooooooooooooooooooooooooooooe[/wave]",    //Ar trebui sa arate a sarpe
+			"[i]Conform tuturor legilor cunoscute ale aviatie, o albina nu ar trebui sa poata zbura[/i]",
+			"[rainbow freq=0.2 sat=0.5 val=0.8]Curcubeu[/rainbow]",
+			"[i]Poate sa ruleze Windows Defender?[/i]",
+			"[i]Pur si simplu functioneaza[/i] - Absolut nimeni",
+			"[i]Nu uita sa respiri. Foarte important[/i]",
+			"Nu am spus ca acest text o sa fie util...",
+			"Segmentation fault (core dumped)"
+		};
+		int size = splash.Count;
+		var tip = (int)GD.RandRange(0, size);
+		if(tip==size)
+		{
+			var name = "";
+			switch(OS.GetName())
+			{	case "Windows":
+					name = "Poti incerca o distributie de linux intr-o masina virtuala sau intr-un container";
+					break;
+				case "Linux":
+					name = "Nu uita sa-ti actualizezi periodic programele instalate!";
+					break;
+				case "Android":
+					name = "Fun fact: Se poate rula Linux si pe dispozitive cu procesoare ARM";
+					break;
+			}
+			GetNode<RichTextLabel>("Tip").Text = GetNode<RichTextLabel>("Tip").Text + name + "[/center]";
+		}
+		else
+		{
+			GetNode<RichTextLabel>("Tip").Text = GetNode<RichTextLabel>("Tip").Text + splash[tip] + "[/center]";
 		}
 		//Easter Egg bazat pe data sistemului :)
-		if(Time.GetDatetimeStringFromSystem().Find("09", 4) == 5 && Time.GetDatetimeStringFromSystem().Find("17", 7) == 8) GetNode<RichTextLabel>("Tip").Text = "[center]La multi ani Linux!";
-		else if(Time.GetDatetimeStringFromSystem().Find("12", 4) == 5 && Time.GetDatetimeStringFromSystem().Find("28", 7) == 8) GetNode<RichTextLabel>("Tip").Text = "[center]La multi ani Linus Torvalds!";
-		GetNode<RichTextLabel>("Tip").Text = GetNode<RichTextLabel>("Tip").Text + "[/center]";
+		if(Time.GetDatetimeStringFromSystem().Find("09", 4) == 5 && Time.GetDatetimeStringFromSystem().Find("17", 7) == 8) GetNode<RichTextLabel>("Tip").Text = "[center]La multi ani Linux![/center]";
+		else if(Time.GetDatetimeStringFromSystem().Find("12", 4) == 5 && Time.GetDatetimeStringFromSystem().Find("28", 7) == 8) GetNode<RichTextLabel>("Tip").Text = "[center]La multi ani Linus Torvalds![/center]";
 
 		GetNode<ProgressBar>("Bara").Value = 0;
 		ResourceLoader.LoadThreadedRequest(target);

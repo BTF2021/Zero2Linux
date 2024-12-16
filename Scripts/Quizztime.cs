@@ -329,7 +329,7 @@ public partial class Quizztime : Node2D
 		tween = GetTree().CreateTween();
 		GetNode<Label>("Feedback").Show();
 		if(corecte == 10) 
-		switch((int)GD.RandRange(1, 3))
+		switch((int)GD.RandRange(1, 5))
 		{	case 1:
 				GetNode<Label>("Feedback").Text = "Nicio greseala. Felicitari!";
 				break;
@@ -338,19 +338,36 @@ public partial class Quizztime : Node2D
 				break;
 			case 3:
 				if(_data.questiontype == 0)GetNode<Label>("Feedback").Text = "Felicitari! Cu siguranta te vei descurca si la test!";
-				else GetNode<Label>("Feedback").Text = "Felicitari! Continua asa!";
+				else GetNode<Label>("Feedback").Text = "Felicitari! Continua tot asa!";
+				break;
+			case 4:
+				GetNode<Label>("Feedback").Text = "Uimitor!";
+				break;
+			case 5:
+				GetNode<Label>("Feedback").Text = "Nu am cuvinte!";
 				break;
 		}
-		else if(corecte >= 7) GetNode<Label>("Feedback").Text = "Te-ai descurcat foarte bine!";
+		else if(corecte >= 7) 
+			switch((int)GD.RandRange(1, 2))
+			{	case 1:
+					GetNode<Label>("Feedback").Text = "Foarte bine!";
+					break;
+				case 2:
+					GetNode<Label>("Feedback").Text = "Bravo!";
+					break;
+			}
 		else if(corecte >= 5) GetNode<Label>("Feedback").Text = "Te-ai descurcat destul de bine, dar stiu ca poti sa faci si mai bine!";
 		else if(corecte >= 3) GetNode<Label>("Feedback").Text = "Stiu ca poti si mai bine!";
 		else 
-		switch((int)GD.RandRange(1, 2))
+		switch((int)GD.RandRange(1, 3))
 		{	case 1:
 				GetNode<Label>("Feedback").Text = "Te rog consulta lectiile.";
 				break;
 			case 2:
 				GetNode<Label>("Feedback").Text = "Citeste cu atentie intrebarile.";
+				break;
+			case 3:
+				GetNode<Label>("Feedback").Text = ":(";
 				break;
 		}
 		GetNode<Button>("Exit").Visible = true;

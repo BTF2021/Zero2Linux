@@ -219,9 +219,22 @@ public partial class DefaultData : Node
 		//if(currentStats.version < )
 	}
 	public void LoadScene(string target)
-	{	//Incarcam Incarcare.tscn, dam valoare scena pe care vrem sa o incarcam, impachetam la loc si o incarcam ca scena principala
+	{	//Verificam daca fisierele exista
+		if(!ResourceLoader.Exists(target))
+		{	GD.Print("Incarcare esuata: Fisier invalid");
+			return;
+		}
+		//Daca scena pe care o incarcam este si o lectie, verificam si continutul pe care vrem sa-l incarcam
+		if(target == "res://Scenes/Lesson.tscn")
+			if(!ResourceLoader.Exists("res://Courses/Lesson_" + CurrentLesson + "/Lesson.tscn"))
+			{	GD.Print("Incarcare esuata: Fisier invalid");
+				return;
+			}
+		//Incarcam Incarcare.tscn, dam locatia scenei si (dupa caz) continutul lectie pe care vrem sa o incarcam, impachetam la loc si o incarcam ca scena principala
+		//Facem acest lucru ca sa nu ne folosim de DefaultData pentru locatiile scenelor
 		var scene = (Incarcare)GD.Load<PackedScene>("res://Scenes/Incarcare.tscn").Instantiate();
 		scene.target = target;
+		if(target == "res://Scenes/Lesson.tscn") scene.targetlesson = "res://Courses/Lesson_" + CurrentLesson + "/Lesson.tscn";
 		PackedScene pack = new PackedScene();
 		pack.Pack(scene);
 		GetTree().ChangeSceneToPacked(pack);

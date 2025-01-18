@@ -5,14 +5,17 @@ using System;
 public partial class Incarcare : Node2D
 {
 	private DefaultData _data;
-	[Export]public string target;			//Scena incarcata
-	private bool done;						//Pentru avertizarile legate de Tweenuri
-	public Godot.Collections.Array progress;	//Progresul
+	public string target, targetlesson;			//Scena incarcata
+	private bool done;						//Ca sa invocam tranzitia finala doar o data
+	public Godot.Collections.Array progress, progresslesson;	//Progresul
 	public override async void _Ready()
 	{	_data = (DefaultData)GetNode("/root/DefaultData");
 		GetNode<RichTextLabel>("Tip").Text = "[center]";
 		done = false;
 		GD.Print(target);
+		//Initializam aici vectorii pentru progres, ca sa nu avem erori la primele frame-uri ale scenei
+		progress = new Godot.Collections.Array(){0};
+		progresslesson = new Godot.Collections.Array(){0};
 		Godot.Collections.Array<string> splash = new Godot.Collections.Array<string>(){		//Mesajele de mai jos. Se alege unul la intamplare
 			"Se incarca...",
 			"Insereaza un text aici",
@@ -38,9 +41,9 @@ public partial class Incarcare : Node2D
 			"Ai auzit de Hannah Montana Linux?",
 			"[wave amp=45.0 freq=7.0 connected=1]<ooooooooooooooooooooooooooooooooooooooooooooooooooooe[/wave]",    //Ar trebui sa arate a sarpe
 			"[i]Conform tuturor legilor cunoscute ale aviatie, o albina nu ar trebui sa poata zbura[/i]",
-			"[rainbow freq=0.2 sat=0.5 val=0.8]Curcubeu[/rainbow]",
+			"                             Ha ha! Textul nu mai este centrat",
 			"[i]Poate sa ruleze Windows Defender?[/i]",
-			"[i]Pur si simplu functioneaza[/i] - Absolut nimeni",
+			"[i]Pur si simplu functioneaza[/i]    -Absolut nimeni",
 			"[i]Nu uita sa respiri. Foarte important[/i]",
 			"Nu am spus ca acest text o sa fie util...",
 			"Segmentation fault (core dumped)"
@@ -72,7 +75,10 @@ public partial class Incarcare : Node2D
 		else if(Time.GetDatetimeStringFromSystem().Find("12", 4) == 5 && Time.GetDatetimeStringFromSystem().Find("28", 7) == 8) GetNode<RichTextLabel>("Tip").Text = "[center]La multi ani Linus Torvalds![/center]";
 
 		GetNode<ProgressBar>("Bara").Value = 0;
-		ResourceLoader.LoadThreadedRequest(target);	//Cere incarcarea scenei pe un alt thread
+		if(ResourceLoader.Exists(target)) ResourceLoader.LoadThreadedRequest(target);	//Cere incarcarea scenei pe un alt thread
+		//Daca scena incarcata e lectie, incarca si continutul pe un alt thread
+		if(target == "res://Scenes/Lesson.tscn" && ResourceLoader.Exists(targetlesson))
+			ResourceLoader.LoadThreadedRequest(targetlesson);
 		if(_data.currentStats.Anims)
 		{	GetNode<Node2D>(".").Modulate = new Color(1, 1, 1, 0);
 			var tween = GetTree().CreateTween();
@@ -83,26 +89,56 @@ public partial class Incarcare : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{	if(!GetNode<AnimationPlayer>("Icon/Animation").IsPlaying()) GetNode<AnimationPlayer>("Icon/Animation").Play("Rotate");	//Roteste iconita
+		//Daca am incarcat complet scena ceruta si (daca este cazul) continutul lectiei
+		bool ok1 = false;
+		bool ok2 = false;
+		if(target != "res://Scenes/Lesson.tscn") ok2 = true;
+		//Preluam statutul threadului
 		var status = ResourceLoader.LoadThreadedGetStatus(target, progress);
-		switch(status)
-		{
-			case (ResourceLoader.ThreadLoadStatus)1:
+		ResourceLoader.ThreadLoadStatus statuslesson = (ResourceLoader.ThreadLoadStatus)0;
+		if(target == "res://Scenes/Lesson.tscn") statuslesson = ResourceLoader.LoadThreadedGetStatus(targetlesson, progresslesson);
+		//In functie de statutul scenei cerute
+		if(status != (ResourceLoader.ThreadLoadStatus)0)
+			switch(status)
+			{
+				case (ResourceLoader.ThreadLoadStatus)1:
 				//In progress
-				GetNode<ProgressBar>("Bara").Value = ((int)progress[0]) * 100;
+				if(target != "res://Scenes/Lesson.tscn") GetNode<ProgressBar>("Bara").Value = ((float)progress[0]) * 100;
+				else GetNode<ProgressBar>("Bara").Value = ((float)progress[0]) * 50;
 				break;
 			case (ResourceLoader.ThreadLoadStatus)3:
 				//Incarcat
-				if(!done)
-				{	GetNode<ProgressBar>("Bara").Value = 100;
-					ChangeScene(100);
-				}
-				done = true;
+				ok1 =  true;
 				break;
 			case (ResourceLoader.ThreadLoadStatus)2:
 				//Eroare
-				GD.Print("Nu se poate incarca scena");
+				GD.Print("Incarcare esuata: Eroare in timp ce se incarca");
+				GetTree().ChangeSceneToFile("res://Scenes/Main.tscn");
 				break;
-			
+			}
+		//In functie de statutul continutului lectiei
+		if(statuslesson != (ResourceLoader.ThreadLoadStatus)0)
+			switch(statuslesson)
+			{
+				case (ResourceLoader.ThreadLoadStatus)1:
+				//In progress
+				GetNode<ProgressBar>("Bara").Value = GetNode<ProgressBar>("Bara").Value + ((float)progresslesson[0]) * 50;
+				break;
+			case (ResourceLoader.ThreadLoadStatus)3:
+				//Incarcat
+				ok2 =  true;
+				break;
+			case (ResourceLoader.ThreadLoadStatus)2:
+				//Eroare
+				GD.Print("Incarcare esuata: Eroare in timp ce se incarca");
+				GetTree().ChangeSceneToFile("res://Scenes/Main.tscn");
+				break;
+			}
+		//Daca sunt incarcate scena si (dupa caz) continutul lectiei cerute, trecem la tranzitia finala
+		if(!done && ok1 == ok2 && ok1)
+		{	GetNode<ProgressBar>("Bara").Value = 100;
+			ChangeScene(100);
+			done = true;
 		}
 	}
 	private async void ChangeScene(float value)

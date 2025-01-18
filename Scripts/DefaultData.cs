@@ -220,7 +220,7 @@ public partial class DefaultData : Node
 	}
 	public void LoadScene(string target)
 	{	//Verificam daca fisierele exista
-		if(!ResourceLoader.Exists(target))
+		if(!ResourceLoader.Exists(target) && target.Length != 0)
 		{	GD.Print("Incarcare esuata: Fisier invalid");
 			return;
 		}

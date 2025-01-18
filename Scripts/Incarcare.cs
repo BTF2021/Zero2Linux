@@ -5,7 +5,7 @@ using System;
 public partial class Incarcare : Node2D
 {
 	private DefaultData _data;
-	public string target, targetlesson;			//Scena incarcata
+	[Export]public string target, targetlesson;			//Scena incarcata
 	private bool done;						//Ca sa invocam tranzitia finala doar o data
 	public Godot.Collections.Array progress, progresslesson;	//Progresul
 	public override async void _Ready()

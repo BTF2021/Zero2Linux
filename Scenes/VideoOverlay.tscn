@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b5r4kq07nfvp1"]
+[gd_scene load_steps=16 format=3 uid="uid://b5r4kq07nfvp1"]
 
 [ext_resource type="Script" uid="uid://chnjwc7yjanfc" path="res://Scripts/VideoOverlay.cs" id="1_8kp3d"]
 [ext_resource type="Texture2D" uid="uid://cuv7m0o2p7huh" path="res://Sprites/Back.png" id="2_5ji7h"]
@@ -15,6 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://b1fm5c1pp08qn" path="res://Sprites/VolumeLow.png" id="9_x7xu5"]
 
 [sub_resource type="FFmpegVideoStream" id="FFmpegVideoStream_l8t6t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x7xu5"]
 
 [node name="VideoOverlay" type="Node2D"]
 script = ExtResource("1_8kp3d")
@@ -124,10 +126,11 @@ mouse_filter = 1
 texture_normal = ExtResource("9_x7xu5")
 
 [node name="Panel" type="Panel" parent="ControlsTint/Controls/Volum"]
-clip_children = 2
+clip_children = 1
 custom_minimum_size = Vector2(0.01, 0)
 layout_mode = 2
 mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_x7xu5")
 
 [node name="Slider" type="HSlider" parent="ControlsTint/Controls/Volum/Panel"]
 custom_minimum_size = Vector2(110, 0)
@@ -137,7 +140,6 @@ offset_top = 9.0
 offset_right = 110.5
 offset_bottom = 25.0
 focus_mode = 0
-mouse_filter = 1
 theme_override_styles/slider = ExtResource("8_ew0bt")
 min_value = -60.0
 max_value = 0.0
@@ -169,7 +171,7 @@ layout_mode = 2
 offset_right = 48.0
 offset_bottom = 46.0
 scale = Vector2(1.5, 1.5)
-color = Color(0, 0, 0, 1)
+color = Color(0, 0, 0, 0)
 
 [node name="Back" type="TextureButton" parent="BackTint"]
 layout_mode = 0

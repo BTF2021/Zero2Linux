@@ -197,9 +197,11 @@ public partial class VideoOverlay : Node2D
 	private void _on_volum_mouse_entered()
 	{	var tween = GetTree().CreateTween();
 		tween.TweenProperty(GetNode<Panel>("ControlsTint/Controls/Volum/Panel"), "custom_minimum_size", new Vector2(110, 0), 0.15);
+		_volume.MouseFilter = (Godot.Control.MouseFilterEnum)1;
 	}
 	private void _on_volum_mouse_exited()
 	{	var tween = GetTree().CreateTween();
 		tween.TweenProperty(GetNode<Panel>("ControlsTint/Controls/Volum/Panel"), "custom_minimum_size", new Vector2(0.01f, 0), 0.15);
+		_volume.MouseFilter = (Godot.Control.MouseFilterEnum)0;
 	}
 }

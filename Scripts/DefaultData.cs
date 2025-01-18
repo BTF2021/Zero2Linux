@@ -192,7 +192,7 @@ public partial class DefaultData : Node
 		currentStats = content;		//Punem ce am citit in currentStats, ca sa nu citim de mai multe ori pentru o singura variabila
 		if(currentStats.version < defaultStats.version) UpgradeSaveFile(user);
 		//Pentru Fullscreen si VSync
-		if(currentStats.FullScr) DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
+		if(currentStats.FullScr) DisplayServer.WindowSetMode(DisplayServer.WindowMode.ExclusiveFullscreen);
 		else DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
 		if(currentStats.VSync) DisplayServer.WindowSetVsyncMode(DisplayServer.VSyncMode.Enabled);
 		else DisplayServer.WindowSetVsyncMode(DisplayServer.VSyncMode.Disabled);

@@ -72,7 +72,7 @@ public partial class Settings : Control
 	//Fullscreen
 	private void _on_fullscreen_pressed()
 	{	_data.currentStats.FullScr = !_data.currentStats.FullScr;
-		if(_data.currentStats.FullScr) DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
+		if(_data.currentStats.FullScr) DisplayServer.WindowSetMode(DisplayServer.WindowMode.ExclusiveFullscreen);
 		else DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
 		_data.WriteSave(_data.LoggedUser);
 	}

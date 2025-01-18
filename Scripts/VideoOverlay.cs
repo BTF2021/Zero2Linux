@@ -149,7 +149,7 @@ public partial class VideoOverlay : Node2D
 	//Butonul de fullscreen
 	private void _on_fullscr_pressed()
 	{	if(DisplayServer.WindowGetMode() == DisplayServer.WindowMode.Windowed)
-		{	DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
+		{	DisplayServer.WindowSetMode(DisplayServer.WindowMode.ExclusiveFullscreen);
 			_data.currentStats.FullScr = true;
 			GetNode<TextureButton>("ControlsTint/Controls/Fullscr").TextureNormal = GD.Load<CompressedTexture2D>("res://Sprites/Winscr.png");
 			GetNode<TextureButton>("ControlsTint/Controls/Fullscr").TexturePressed = GD.Load<CompressedTexture2D>("res://Sprites/WinscrHighlight.png");

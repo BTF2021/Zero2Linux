@@ -161,7 +161,7 @@ visible = false
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 texture = ExtResource("6_qcky1")
-stretch_mode = 2
+stretch_mode = 3
 
 [node name="MarginContainer3" type="MarginContainer" parent="Panel/Panel/ScrollContainer/VBoxContainer/Item/Panel/Contents"]
 custom_minimum_size = Vector2(10, 0)

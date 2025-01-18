@@ -58,7 +58,7 @@ public partial class Logare : Node2D
 		if(GetNode<Control>("Create").Visible)	//Pentru previzualizarea iconitei de utilizator
 		{	GetNode<Label>("Create/Preview/Name").Text = GetNode<LineEdit>("Create/Nume/Nume").Text;
 			GetNode<Label>("Create/Preview/BigLetter").Text = GetNode<LineEdit>("Create/Nume/Nume").Text;
-			GetNode<Sprite2D>("Create/Preview/Bg").SelfModulate = GetNode<ColorPicker>("Create/Culoare/Panel/CuloarePicker").Color;
+			GetNode<Sprite2D>("Create/Preview/Bg").SelfModulate = GetNode<ColorPicker>("Create/Culoare/Panel/ColorPicker").Color;
 		}
 	}
 	public override void _Notification(int what)
@@ -99,13 +99,13 @@ public partial class Logare : Node2D
 			if(ok)
 			{	//Aici este partea unde cream un fisier folosind numele si culoarea deja date de utilizator
 				_data.currentStats.UsrName = GetNode<LineEdit>("Create/Nume/Nume").Text;
-				_data.currentStats.FavColor = GetNode<ColorPicker>("Create/Culoare/Panel/CuloarePicker").Color;
+				_data.currentStats.FavColor = GetNode<ColorPicker>("Create/Culoare/Panel/ColorPicker").Color;
 				var file = FileAccess.Open("user://" + _data.currentStats.UsrName +"_save.json", FileAccess.ModeFlags.Write);
 				if (file == null) GD.Print("Nu se poate deschide fisierul. Eroare: " + FileAccess.GetOpenError());
 				file.StoreString(JsonConvert.SerializeObject(_data.currentStats));
 				file.Close();
 				GetNode<LineEdit>("Create/Nume/Nume").Text = "";
-				GetNode<ColorPicker>("Create/Culoare/Panel/CuloarePicker").Color = new Color(1, 1, 1, 1);
+				GetNode<ColorPicker>("Create/Culoare/Panel/ColorPicker").Color = new Color(1, 1, 1, 1);
 				_data.currentStats = new stats();
 				GetNode<Button>("Create/Back").Disabled = true;
 				GetNode<Control>("Create").Visible = false;

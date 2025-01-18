@@ -219,6 +219,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Panel" type="Panel" parent="Create/Culoare"]
+clip_contents = true
 layout_mode = 0
 offset_left = 141.0
 offset_top = -3.0
@@ -226,12 +227,12 @@ offset_right = 444.0
 offset_bottom = 266.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_b6rum")
 
-[node name="CuloarePicker" type="ColorPicker" parent="Create/Culoare/Panel"]
+[node name="ColorPicker" type="ColorPicker" parent="Create/Culoare/Panel"]
 layout_mode = 0
 offset_left = 3.0
 offset_top = 3.0
 offset_right = 301.0
-offset_bottom = 275.0
+offset_bottom = 303.0
 alignment = 1
 edit_alpha = false
 can_add_swatches = false

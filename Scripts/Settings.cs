@@ -1,45 +1,55 @@
 //Pentru fereastra de setari
 using Godot;
 using System;
-[Tool]
 public partial class Settings : Control
 {
 	private DefaultData _data;
-	private HSlider _slider;	//sliderul pentru volum
+	private HSlider _slider;	//Sliderul pentru volum
+	public int ypos;		//Variabila pentru semnalul _on_category_toggled sa redirectioneze la containerul potrivit
+	//[TODO] Poate merge si fara variabila de mai sus. Asa poate mai reducem din numarul de linii
+	public Godot.Collections.Array<int> containerpos;		//Vector pentru pozitiile containerelor in ScrollContainer-ul "Settings"
+	bool animated;		//Pentru a ne asigura ca nu se schimba starea butoanelor in timpul tranzitiei catre o anumita categorie
 	private Vector2 mousepos;
 	private bool inputgrab;
 	private Vector2 dif;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{	_data = (DefaultData)GetNode("/root/DefaultData");
-		_slider = (HSlider)GetNode("Panel/Settings/Lectii/VBoxContainer/VideoVolume/VideoVolumeSlide");
+		_slider = (HSlider)GetNode("Panel/Settings/VBoxContainer/Lectii/VideoVolume/VideoVolumeSlide");
 		_slider.Value = _data.currentStats.VideoVolume;
-		GetNode<LineEdit>("Panel/Settings/Altele/VBoxContainer/Name/NameEdit").Text = _data.currentStats.UsrName;
-		GetNode<ColorPickerButton>("Panel/Settings/Altele/VBoxContainer/FavColour/ColorButton").Color = _data.currentStats.FavColor;
+		GetNode<LineEdit>("Panel/Settings/VBoxContainer/Cont/Name/NameEdit").Text = _data.currentStats.UsrName;
+		GetNode<ColorPickerButton>("Panel/Settings/VBoxContainer/Cont/FavColour/ColorButton").Color = _data.currentStats.FavColor;
 
 		//Daca nu putem reda videoclipurile, ascundem tot ce este legat de videoclipuri
 		if(!_data.isvideoavailable)
-		{	GetNode<Label>("Panel/Settings/Lectii/VBoxContainer/VideoVolume").QueueFree();
-			GetNode<Label>("Panel/Settings/Lectii/VBoxContainer/VideoVolume").Modulate = new Color((float)0.6, (float)0.6, (float)0.6, 1);
+		{	GetNode<Label>("Panel/Settings/VBoxContainer/Lectii/VideoVolume").QueueFree();
+			GetNode<Label>("Panel/Settings/VBoxContainer/Lectii/VideoVolume").Modulate = new Color((float)0.6, (float)0.6, (float)0.6, 1);
 			GetNode<RichTextLabel>("Panel/Settings/Despre/VBoxContainer/Notice").Visible = false;
 			_slider.Editable = false;
 		}
 
 		#if GODOT_ANDROID
-			GetNode<Label>("Panel/Settings/Grafica/VBoxContainer/Fullscreen").QueueFree();
+			GetNode<Label>("Panel/Settings/VBoxContainer/Grafica/Fullscreen").QueueFree();
 		#endif
 		
 		//Pur si simplu verificam daca optiunile sunt true
-		if(_data.currentStats.FullScr) GetNode<CheckButton>("Panel/Settings/Grafica/VBoxContainer/Fullscreen/FullscreenButton").SetPressedNoSignal(true);
-		if(_data.currentStats.VSync) GetNode<CheckButton>("Panel/Settings/Grafica/VBoxContainer/VSync/VSyncButton").SetPressedNoSignal(true);
-		if(_data.currentStats.Anims) GetNode<CheckButton>("Panel/Settings/Grafica/VBoxContainer/Animations/AnimationsButton").SetPressedNoSignal(true);
-		if(_data.currentStats.Adv) GetNode<CheckButton>("Panel/Settings/Lectii/VBoxContainer/Advanced/AdvancedButton").SetPressedNoSignal(true);
-		if(_data.currentStats.Spc) GetNode<CheckButton>("Panel/Settings/Lectii/VBoxContainer/Special/SpecialButton").SetPressedNoSignal(true);
-		if(_data.currentStats.QNumOnly) GetNode<CheckButton>("Panel/Settings/Lectii/VBoxContainer/ShowNumOnlyTest/SNTButton").SetPressedNoSignal(true);
-		if(_data.currentStats.AdvQ) GetNode<CheckButton>("Panel/Settings/Lectii/VBoxContainer/IncludeAdvQ/IAQButton").SetPressedNoSignal(true);
-		GetNode<Label>("Panel/Settings/Despre/VBoxContainer/Version").Text = "Versiune: " + (String)ProjectSettings.GetSetting("application/config/version");
-		if(_data.currentStats.ChkUpdates) GetNode<CheckButton>("Panel/Settings/Altele/VBoxContainer/GetUpdates/GetUpdatesButton").SetPressedNoSignal(true);
+		if(_data.currentStats.FullScr) GetNode<CheckButton>("Panel/Settings/VBoxContainer/Grafica/Fullscreen/FullscreenButton").SetPressedNoSignal(true);
+		if(_data.currentStats.VSync) GetNode<CheckButton>("Panel/Settings/VBoxContainer/Grafica/VSync/VSyncButton").SetPressedNoSignal(true);
+		if(_data.currentStats.Anims) GetNode<CheckButton>("Panel/Settings/VBoxContainer/Grafica/Animations/AnimationsButton").SetPressedNoSignal(true);
+		if(_data.currentStats.Adv) GetNode<CheckButton>("Panel/Settings/VBoxContainer/Lectii/Advanced/AdvancedButton").SetPressedNoSignal(true);
+		if(_data.currentStats.Spc) GetNode<CheckButton>("Panel/Settings/VBoxContainer/Lectii/Special/SpecialButton").SetPressedNoSignal(true);
+		if(_data.currentStats.QNumOnly) GetNode<CheckButton>("Panel/Settings/VBoxContainer/Lectii/ShowNumOnlyTest/SNTButton").SetPressedNoSignal(true);
+		if(_data.currentStats.AdvQ) GetNode<CheckButton>("Panel/Settings/VBoxContainer/Lectii/IncludeAdvQ/IAQButton").SetPressedNoSignal(true);
+		GetNode<Label>("Panel/Settings/VBoxContainer/Despre/Version").Text = "Versiune: " + (String)ProjectSettings.GetSetting("application/config/version");
+		if(_data.currentStats.ChkUpdates) GetNode<CheckButton>("Panel/Settings/VBoxContainer/Cont/GetUpdates/GetUpdatesButton").SetPressedNoSignal(true);
 
+		//Initializa butoanele de pe partea stanga (conectam semnalul, facem vectorul de pozitii ale containerelor)
+		animated = false;
+		containerpos = new Godot.Collections.Array<int>();
+		containerpos.Add(0);
+		for(int i = 1; i < GetNode("Panel/SidePanel/VBoxContainer").GetChildCount(); i++) InitializeSideButtons(i, ypos);
+
+		//Animatie
 		if(_data.currentStats.Anims)
 		{
 			var tween = GetTree().CreateTween();
@@ -56,7 +66,24 @@ public partial class Settings : Control
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
-	{	//Pentru miscarea ferestrei
+	{	//Schimbam starea butoanelor in functie de valoarea ScrollBar-ului
+		//Acest lucru trebuie sa se intample cand NU apasam pe unul dintre butoanele de pe partea din stanga
+		if(!animated)
+		{
+			var scroll = GetNode<ScrollContainer>("Panel/Settings/").ScrollVertical;
+			for(int i = 0; i < containerpos.Count; i++)
+				if(scroll >= containerpos[i] && scroll < containerpos[i+1])
+				{	//Ne asiguram ca numai un singur buton ramane apasat
+					for(int j = 1; j < GetNode("Panel/SidePanel/VBoxContainer").GetChildCount(); j++)
+					{
+						if(GetNode("Panel/SidePanel/VBoxContainer").GetChild<Button>(j).ButtonPressed == true && j != i+1)
+						GetNode("Panel/SidePanel/VBoxContainer").GetChild<Button>(j).ButtonPressed = false;
+					else if(j == i+1) GetNode("Panel/SidePanel/VBoxContainer").GetChild<Button>(j).ButtonPressed = true;
+				}
+			}
+		}
+		
+		//Pentru miscarea ferestrei
 		mousepos = GetViewport().GetMousePosition();
 		var winpos = GetNode<Sprite2D>("Panel").Position;
 		var newpos = Position;
@@ -68,6 +95,49 @@ public partial class Settings : Control
 		}
 	}
 
+	//Functie pentru conectarea semnalului la buton
+	//Puteam sa facem acelasi lucru si in _Ready daca nu redirectionau butoanele la acelasi container (A se vedea Courses.cs)
+	private void InitializeSideButtons(int index, int position)
+	{
+		GD.Print(GetNode("Panel/SidePanel/VBoxContainer").GetChild(index).Name);
+		GetNode("Panel/SidePanel/VBoxContainer").GetChild<Button>(index).Pressed += () => _on_category_toggled(index, position);
+		var pos = GetNode("Panel/Settings/VBoxContainer").GetChild<VBoxContainer>(index-1).Size;
+		ypos += (int)pos.Y;
+		containerpos.Add(ypos);
+	}
+
+	//Semnalul butonului
+	private async void _on_category_toggled(int index, int position)
+	{	
+		//Daca am schimbat starea butonului in "Pressed"
+		if(GetNode("Panel/SidePanel/VBoxContainer").GetChild<Button>(index).ButtonPressed == true) 
+		{	
+			//Ne asiguram ca nu mai exista alte butoane apasate
+			for(int i = 1; i < GetNode("Panel/SidePanel/VBoxContainer").GetChildCount(); i++)
+			{
+				if(GetNode("Panel/SidePanel/VBoxContainer").GetChild<Button>(i).ButtonPressed == true && i != index)
+					GetNode("Panel/SidePanel/VBoxContainer").GetChild<Button>(i).ButtonPressed = false;
+			}
+			//Incepem tranzitia catre categoria dorita
+			animated = true;
+			var tween = GetTree().CreateTween();
+			tween.TweenProperty(GetNode<ScrollContainer>("Panel/Settings/"), "scroll_vertical", position, 0.2).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.Out);
+			await ToSignal(tween, Tween.SignalName.Finished);
+			animated = false;
+		}
+		//Nu elibera butonul (Nu-l schimba starea din "Pressed")
+		//Readucem utilizatorul la categoria dorita
+		else 
+		{
+			GetNode("Panel/SidePanel/VBoxContainer").GetChild<Button>(index).ButtonPressed = true;
+			//Incepem tranzitia catre categoria dorita
+			animated = true;
+			var tween = GetTree().CreateTween();
+			tween.TweenProperty(GetNode<ScrollContainer>("Panel/Settings/"), "scroll_vertical", position, 0.2).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.Out);
+			await ToSignal(tween, Tween.SignalName.Finished);
+			animated = false;
+		}
+	}
 	private void _on_back_pressed() => QueueFree();
 	//Fullscreen
 	private void _on_fullscreen_pressed()
@@ -123,7 +193,7 @@ public partial class Settings : Control
 	//Daca verificam pentru o versiune noua sau nu
 	private void _on_updates_button_pressed()
 	{	_data.currentStats.ChkUpdates = !_data.currentStats.ChkUpdates;
-		GetNode<CheckButton>("Panel/Settings/Altele/VBoxContainer/GetUpdates/GetUpdatesButton").SetPressedNoSignal(_data.currentStats.ChkUpdates);
+		GetNode<CheckButton>("Panel/Settings/VBoxContainer/Cont/GetUpdates/GetUpdatesButton").SetPressedNoSignal(_data.currentStats.ChkUpdates);
 		_data.WriteSave(_data.LoggedUser);
 	}
 	//Daca s-a schimbat numele
@@ -137,18 +207,18 @@ public partial class Settings : Control
 		if(new_text.IndexOf("'") >= 0) new_text = new_text.Remove(new_text.IndexOf("'"));
 		if(new_text.IndexOf("%") >= 0) new_text = new_text.Remove(new_text.IndexOf("%"));
 		if(new_text.IndexOf('"') >= 0) new_text = new_text.Remove(new_text.IndexOf('"'));
-		GetNode<LineEdit>("Panel/Settings/Altele/VBoxContainer/Name/NameEdit").Text = new_text;
-		GetNode<LineEdit>("Panel/Settings/Altele/VBoxContainer/Name/NameEdit").CaretColumn = new_text.Length;
+		GetNode<LineEdit>("Panel/Settings/VBoxContainer/Cont/Name/NameEdit").Text = new_text;
+		GetNode<LineEdit>("Panel/Settings/VBoxContainer/Cont/Name/NameEdit").CaretColumn = new_text.Length;
 	}
 	//Functie pentru salvarea noului nume
 	private void _on_name_submitted(string new_text)
 	{
 		if(new_text.Length <= 0)
 		{	GD.Print("Nu se poate creea utilizator: Nu exista nume");
-			GetNode<LineEdit>("Panel/Settings/Altele/VBoxContainer/Name/NameEdit").SelfModulate = new Color(1, (float)0.05, (float)0.05, 1);
+			GetNode<LineEdit>("Panel/Settings/VBoxContainer/Cont/Name/NameEdit").SelfModulate = new Color(1, (float)0.05, (float)0.05, 1);
 			var tween = GetTree().CreateTween();
-			tween.TweenProperty(GetNode<LineEdit>("Panel/Settings/Altele/VBoxContainer/Name/NameEdit"), "self_modulate", new Color(1, 1, 1, 1), 0.5);
-			GetNode<LineEdit>("Panel/Settings/Altele/VBoxContainer/Name/NameEdit").Text = _data.currentStats.UsrName;
+			tween.TweenProperty(GetNode<LineEdit>("Panel/Settings/VBoxContainer/Cont/Name/NameEdit"), "self_modulate", new Color(1, 1, 1, 1), 0.5);
+			GetNode<LineEdit>("Panel/Settings/VBoxContainer/Cont/Name/NameEdit").Text = _data.currentStats.UsrName;
 		}
 		else
 		{	var ok = true;
@@ -156,7 +226,7 @@ public partial class Settings : Control
 			for (int i = 0; i< names.Length; i++) if(new_text == (string)names.GetValue(i)) ok = false;
 			GD.Print(ok);
 			if(ok)
-			{	GetNode<LineEdit>("Panel/Settings/Altele/VBoxContainer/Name/NameEdit").Text = new_text;
+			{	GetNode<LineEdit>("Panel/Settings/VBoxContainer/Cont/Name/NameEdit").Text = new_text;
 				_data.currentStats.UsrName = new_text;
 				DirAccess.RenameAbsolute("user://" + _data.LoggedUser + "_save.json", "user://" + new_text + "_save.json");
 				_data.LoggedUser = new_text;
@@ -165,10 +235,10 @@ public partial class Settings : Control
 			}
 			else 
 			{	GD.Print("Nu se poate creea utilizator: Deja exista un user cu acel nume");
-				GetNode<LineEdit>("Panel/Settings/Altele/VBoxContainer/Name/NameEdit").SelfModulate = new Color(1, (float)0.05, (float)0.05, 1);
+				GetNode<LineEdit>("Panel/Settings/VBoxContainer/Cont/Name/NameEdit").SelfModulate = new Color(1, (float)0.05, (float)0.05, 1);
 				var tween = GetTree().CreateTween();
-				tween.TweenProperty(GetNode<LineEdit>("Panel/Settings/Altele/VBoxContainer/Name/NameEdit"), "self_modulate", new Color(1, 1, 1, 1), 0.5);
-				GetNode<LineEdit>("Panel/Settings/Altele/VBoxContainer/Name/NameEdit").Text = _data.currentStats.UsrName;
+				tween.TweenProperty(GetNode<LineEdit>("Panel/Settings/VBoxContainer/Cont/Name/NameEdit"), "self_modulate", new Color(1, 1, 1, 1), 0.5);
+				GetNode<LineEdit>("Panel/Settings/VBoxContainer/Cont/Name/NameEdit").Text = _data.currentStats.UsrName;
 			}
 		}
 	}

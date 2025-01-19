@@ -13,6 +13,7 @@ script = ExtResource("1_bnupo")
 
 [node name="Panel" type="Sprite2D" parent="."]
 position = Vector2(645, 339)
+scale = Vector2(0.88, 0.88)
 texture = ExtResource("3_thy4c")
 
 [node name="Drag" type="Button" parent="Panel"]

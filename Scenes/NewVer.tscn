@@ -30,6 +30,7 @@ script = ExtResource("1_udx85")
 
 [node name="Panel" type="Sprite2D" parent="."]
 position = Vector2(636, 325)
+scale = Vector2(0.88, 0.88)
 texture = ExtResource("2_e1pjj")
 
 [node name="Drag" type="Button" parent="Panel"]

@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://dkrwuagt06eee"]
+[gd_scene load_steps=8 format=3 uid="uid://dkrwuagt06eee"]
 
 [ext_resource type="Script" uid="uid://bythsftiqouw2" path="res://Scripts/Quizzes.cs" id="1_2xhny"]
 [ext_resource type="Texture2D" uid="uid://dherg8j0a21h2" path="res://Sprites/CoursePanel.png" id="2_l88yu"]
 [ext_resource type="Texture2D" uid="uid://bqd1321xxqoej" path="res://Sprites/CloseButton.png" id="3_1ijik"]
 [ext_resource type="Texture2D" uid="uid://c1cjk57xd8mq2" path="res://Sprites/CloseButtonHighlight.png" id="4_tdx1f"]
+[ext_resource type="StyleBox" uid="uid://di87pu5wmffgt" path="res://Sprites/UINoHover.stylebox" id="5_0imjv"]
 [ext_resource type="StyleBox" uid="uid://c8ip85nk5v8ds" path="res://Sprites/UIButtons.stylebox" id="5_6ssof"]
+[ext_resource type="StyleBox" uid="uid://dm740p3cvnrwa" path="res://Sprites/UIButtonsPressed.stylebox" id="6_2hcxi"]
 
 [node name="Quizzes" type="Control"]
 layout_mode = 3
@@ -113,6 +115,8 @@ offset_bottom = 160.0
 layout_mode = 2
 size_flags_vertical = 3
 tooltip_text = "Genereaza un chestionar din lectiile deja parcurse"
+theme_override_styles/focus = ExtResource("5_0imjv")
+theme_override_styles/pressed = ExtResource("6_2hcxi")
 theme_override_styles/normal = ExtResource("5_6ssof")
 text = "Antrenament"
 
@@ -128,6 +132,8 @@ visible = false
 layout_mode = 2
 size_flags_vertical = 3
 tooltip_text = "Alege lectiile din care vrei sa fi intrebat"
+theme_override_styles/focus = ExtResource("5_0imjv")
+theme_override_styles/pressed = ExtResource("6_2hcxi")
 theme_override_styles/normal = ExtResource("5_6ssof")
 disabled = true
 text = "Chestionar personalizat"

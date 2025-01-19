@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b4gdupblxidyf"]
+[gd_scene load_steps=14 format=3 uid="uid://b4gdupblxidyf"]
 
 [ext_resource type="Script" uid="uid://dgx4lrx3pggyr" path="res://Scripts/Main.cs" id="1_c7d67"]
 [ext_resource type="StyleBox" uid="uid://di87pu5wmffgt" path="res://Sprites/UINoHover.stylebox" id="2_0hv5f"]
@@ -7,6 +7,7 @@
 [ext_resource type="VideoStream" uid="uid://bojvvr7rcdaw8" path="res://Sprites/bgvid.ogv" id="3_v0gny"]
 [ext_resource type="StyleBox" uid="uid://c8ip85nk5v8ds" path="res://Sprites/UIButtons.stylebox" id="4_ja7mp"]
 [ext_resource type="Texture2D" uid="uid://2k0tqngjaab8" path="res://Sprites/Power.png" id="4_q207a"]
+[ext_resource type="StyleBox" uid="uid://dm740p3cvnrwa" path="res://Sprites/UIButtonsPressed.stylebox" id="5_frkhe"]
 [ext_resource type="Texture2D" uid="uid://hbrqsdt4laac" path="res://Sprites/Logout.png" id="6_8su00"]
 [ext_resource type="Texture2D" uid="uid://drgkb2u3g5c1c" path="res://Sprites/PowerHighlight.png" id="6_kgrc2"]
 [ext_resource type="Texture2D" uid="uid://e5veq36hyvl8" path="res://Sprites/LogoutHighlight.png" id="8_mufyl"]
@@ -90,6 +91,7 @@ size_flags_vertical = 3
 tooltip_text = "Incepe o lectie"
 theme_override_font_sizes/font_size = 20
 theme_override_styles/focus = ExtResource("2_0hv5f")
+theme_override_styles/pressed = ExtResource("5_frkhe")
 theme_override_styles/normal = ExtResource("4_ja7mp")
 text = "Lectii"
 
@@ -100,6 +102,7 @@ tooltip_text = "Testeaza-ti cunostiintele dobandite pe parcursul lectiilor.
 Necesita terminarea a cel putin doua lectii."
 theme_override_font_sizes/font_size = 20
 theme_override_styles/focus = ExtResource("2_0hv5f")
+theme_override_styles/pressed = ExtResource("5_frkhe")
 theme_override_styles/normal = ExtResource("4_ja7mp")
 text = "Chestionare"
 
@@ -109,6 +112,7 @@ size_flags_vertical = 3
 tooltip_text = "Vezi intregul tau progres de pe acest profil"
 theme_override_font_sizes/font_size = 20
 theme_override_styles/focus = ExtResource("2_0hv5f")
+theme_override_styles/pressed = ExtResource("5_frkhe")
 theme_override_styles/normal = ExtResource("4_ja7mp")
 text = "Statistici"
 
@@ -118,6 +122,7 @@ size_flags_vertical = 3
 tooltip_text = "Regleaza-ti setarile legate de imagine, lectii, etc"
 theme_override_font_sizes/font_size = 20
 theme_override_styles/focus = ExtResource("2_0hv5f")
+theme_override_styles/pressed = ExtResource("5_frkhe")
 theme_override_styles/normal = ExtResource("4_ja7mp")
 text = "Setari"
 

@@ -79,6 +79,7 @@ public partial class Incarcare : Node2D
 		//Daca scena incarcata e lectie, incarca si continutul pe un alt thread
 		if(target == "res://Scenes/Lesson.tscn" && ResourceLoader.Exists(targetlesson))
 			ResourceLoader.LoadThreadedRequest(targetlesson);
+		//Animatie. Este facuta prin tween-uri in loc de AnimationPlayer, deoarece animatia prin AnimationPlayer nu ruleaza cum trebuie
 		if(_data.currentStats.Anims)
 		{	GetNode<Node2D>(".").Modulate = new Color(1, 1, 1, 0);
 			var tween = GetTree().CreateTween();
@@ -144,14 +145,9 @@ public partial class Incarcare : Node2D
 	private async void ChangeScene(float value)
 	{	
 		if(value == 100)
-		{	var tween = GetTree().CreateTween();
-			tween.TweenProperty(GetNode<ProgressBar>("Bara"), "value", 120, 1.5);
-			await ToSignal(tween, Tween.SignalName.Finished);
-			tween.Stop();
-			tween = GetTree().CreateTween();
-			tween.TweenProperty(GetNode<Node2D>("."), "modulate", new Color(1, 1, 1, 0), 0.5);
-			await ToSignal(tween, Tween.SignalName.Finished);
-			tween.Stop(); 
+		{	GetNode<AnimationPlayer>("AnimationPlayer").Play("Out");
+			var timer = GetTree().CreateTimer(2);
+			await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
 			//Dupa multe incercari am reusit sa nu mai am erori de genul "Object reference not set to an instance of an object" in aceasta functie
 			//Era nevoie doar de un if
 			var packed = (PackedScene)(ResourceLoader.LoadThreadedGet(target));

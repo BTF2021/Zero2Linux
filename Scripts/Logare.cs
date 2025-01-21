@@ -25,30 +25,12 @@ public partial class Logare : Node2D
 		//Daca nu sunt utilizatori existenti, atunci trimite-i la ecranul de bun venit. Altfel, trimite-i la lista de utilizatori
 		if(!profilespresent)
 		{
-			GetNode<Control>("Profiles").Visible = false;
 			GetNode<Control>("NoUser").Visible = true;
-
-			var pos = Position;
-			pos.X = 0;
-			pos.Y = 78 - 30;
-			GetNode<Control>("NoUser").Position = pos;
-			pos.Y = 78;
-			GetNode<Control>("NoUser").SelfModulate = new Color(1, 1, 1, 0);
-			var tween = GetTree().CreateTween();
-			tween.TweenProperty(GetNode<Control>("NoUser"), "modulate", new Color(1, 1, 1, 1), 0.25);
-			tween.Parallel().TweenProperty(GetNode<Control>("NoUser"), "position", pos, 0.25);
+			GetNode<AnimationPlayer>("AnimationPlayer").Play("NoUser");
 		}
 		else
 		{	GetNode<Control>("Profiles").Visible = true;
-			var pos = Position;
-			pos.X = 0;
-			pos.Y = 254 - 30;
-			GetNode<Control>("Profiles").Position = pos;
-			pos.Y = 254;
-			GetNode<Control>("Profiles").Modulate = new Color(1, 1, 1, 0);
-			var tween = GetTree().CreateTween();
-			tween.TweenProperty(GetNode<Control>("Profiles"), "modulate", new Color(1, 1, 1, 1), 0.4);
-			tween.Parallel().TweenProperty(GetNode<Control>("Profiles"), "position", pos, 0.4);
+			GetNode<AnimationPlayer>("AnimationPlayer").Play("In");
 		}
 	}
 
@@ -112,16 +94,7 @@ public partial class Logare : Node2D
 				GetNode<Control>("Profiles").Visible = true;
 				
 				CheckUsers();
-
-				var pos = Position;
-				pos.X = 0;
-				pos.Y = 254 - 30;
-				GetNode<Control>("Profiles").Position = pos;
-				pos.Y = 254;
-				GetNode<Control>("Profiles").Modulate = new Color(1, 1, 1, 0);
-				var tween = GetTree().CreateTween();
-				tween.TweenProperty(GetNode<Control>("Profiles"), "modulate", new Color(1, 1, 1, 1), 0.25);
-				tween.Parallel().TweenProperty(GetNode<Control>("Profiles"), "position", pos, 0.25);
+				GetNode<AnimationPlayer>("AnimationPlayer").Play("Profiles");
 			}
 			else
 			{	GD.Print("Nu se poate creea utilizator: Deja exista un utilizator cu acel nume");
@@ -138,18 +111,7 @@ public partial class Logare : Node2D
 
 		GetNode<Button>("Create/Back").Disabled = true;
 		GetNode<Button>("Create/Back").Hide();
-		var pos = Position;
-		pos.X = 0 + 30;
-		pos.Y = 87;
-		GetNode<Control>("Create").Position = pos;
-		pos.X = 0;
-		GetNode<Control>("Create").Modulate = new Color(1, 1, 1, 0);
-		var tween = GetTree().CreateTween();
-		GetNode<Button>("Create/Back").Disabled = true;
-		GetNode<Button>("Create/Back").Hide();
-		GetNode<Label>("Create/Eroare").Hide();
-		tween.TweenProperty(GetNode<Control>("Create"), "modulate", new Color(1, 1, 1, 1), 0.25);
-		tween.Parallel().TweenProperty(GetNode<Control>("Create"), "position", pos, 0.25);
+		GetNode<AnimationPlayer>("AnimationPlayer").Play("Create");
 	}
 	//Butonul pentru creearea unui nou utilizator. Diferenta dintre cele doua este ca, in prima functie, nu se poate da inapoi la ecranul de bun venit
 	private void _on_createuser_pressed()
@@ -159,30 +121,13 @@ public partial class Logare : Node2D
 		GetNode<Button>("Create/Back").Disabled = false;
 		GetNode<Button>("Create/Back").Show();
 		GetNode<Label>("Create/Eroare").Hide();
-		var pos = Position;
-		pos.X = 0 + 30;
-		pos.Y = 87;
-		GetNode<Control>("Create").Position = pos;
-		pos.X = 0;
-		GetNode<Control>("Create").Modulate = new Color(1, 1, 1, 0);
-		var tween = GetTree().CreateTween();
-		tween.TweenProperty(GetNode<Control>("Create"), "modulate", new Color(1, 1, 1, 1), 0.25);
-		tween.Parallel().TweenProperty(GetNode<Control>("Create"), "position", pos, 0.25);
+		GetNode<AnimationPlayer>("AnimationPlayer").Play("Create");
 	}
 	//Butonul de iesire din meniul de creeare a utilizatorului
 	private void _on_back_pressed()
 	{	GetNode<Control>("Create").Visible = false;
 		GetNode<Control>("Profiles").Visible = true;
-
-		var pos = Position;
-		pos.X = 0;
-		pos.Y = 254 - 30;
-		GetNode<Control>("Profiles").Position = pos;
-		pos.Y = 254;
-		GetNode<Control>("Profiles").Modulate = new Color(1, 1, 1, 0);
-		var tween = GetTree().CreateTween();
-		tween.TweenProperty(GetNode<Control>("Profiles"), "modulate", new Color(1, 1, 1, 1), 0.25);
-		tween.Parallel().TweenProperty(GetNode<Control>("Profiles"), "position", pos, 0.25);
+		GetNode<AnimationPlayer>("AnimationPlayer").Play("Profiles");
 		CheckUsers();
 	}
 	//Pur si simplu pentru refacerea listei de utilizatori in meniu
@@ -224,23 +169,12 @@ public partial class Logare : Node2D
 			for(int j = 0; j< GetNode<VBoxContainer>("Profiles/Square/Vlist").GetChild(i).GetChildCount(); j++)
 				GetNode<VBoxContainer>("Profiles/Square/Vlist").GetChild(i).GetChild<Button>(j).Disabled = true;
 		
-		var pos = Position;
-		pos.X = 0;
-		pos.Y = 254;
-		GetNode<Control>("Profiles").Position = pos;
-		pos.Y = 254 - 30;
-		GetNode<Control>("Profiles").Modulate = new Color(1, 1, 1, 1);
-		var tween = GetTree().CreateTween();
-		tween.TweenProperty(GetNode<Control>("Profiles"), "modulate", new Color(1, 1, 1, 0), 0.3);
-		tween.Parallel().TweenProperty(GetNode<Control>("Profiles"), "position", pos, 0.3);
-		var pos1 = GetNode<Label>("Bg/Time").Position;
-		pos1.Y = pos1.Y - 30;
-		tween.Parallel().TweenProperty(GetNode<Label>("Bg/Time"), "position", pos1, 0.3);
-		tween.Parallel().TweenProperty(GetNode<Label>("Bg/Time"), "modulate", new Color(1, 1, 1, 0), 0.3);
-		//Aceasta instructiune este motivul pentru care exista o alta scena in Autoload
+		GetNode<AnimationPlayer>("AnimationPlayer").Play("Logging");
+		var timer = GetTree().CreateTimer(0.3);
+		//Aceasta instructiune (ChangeSceneToFile) este motivul pentru care exista o alta scena in Autoload
 		//In timpul in care Godot a eliberat din memorie aceasta scena si incarca scena Main, o sa apara gri
 		//De aceea aratam scena Transition in _Ready()
-		tween.Finished += () => GetTree().ChangeSceneToFile("res://Scenes/Main.tscn");
+		timer.Timeout += () => GetTree().ChangeSceneToFile("res://Scenes/Main.tscn");
 	}
 	
 	//Functie pentru adaugarea profilelor existente

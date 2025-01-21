@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b7wco08t5r116"]
+[gd_scene load_steps=12 format=3 uid="uid://b7wco08t5r116"]
 
 [ext_resource type="Script" uid="uid://uv54kthamir" path="res://Scripts/NewVer.cs" id="1_udx85"]
 [ext_resource type="Texture2D" uid="uid://dherg8j0a21h2" path="res://Sprites/CoursePanel.png" id="2_e1pjj"]
@@ -23,13 +23,76 @@ gradient = SubResource("Gradient_s4jnk")
 width = 673
 height = 40
 
+[sub_resource type="Animation" id="Animation_uicp1"]
+resource_name = "In"
+length = 0.15
+step = 0.0168
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 0.1),
+"update": 0,
+"values": [Vector2(645, 314), Vector2(645, 339)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 0.1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_nte5v"]
+length = 0.001
+step = 0.0168
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(645, 339)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y88ff"]
+_data = {
+&"In": SubResource("Animation_uicp1"),
+&"RESET": SubResource("Animation_nte5v")
+}
+
 [node name="NewVer" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_udx85")
 
 [node name="Panel" type="Sprite2D" parent="."]
-position = Vector2(636, 325)
+position = Vector2(645, 339)
 scale = Vector2(0.88, 0.88)
 texture = ExtResource("2_e1pjj")
 
@@ -235,6 +298,11 @@ layout_mode = 2
 custom_minimum_size = Vector2(730, 0)
 layout_mode = 2
 autowrap_mode = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_y88ff")
+}
 
 [connection signal="button_down" from="Panel/Drag" to="." method="_on_drag_down"]
 [connection signal="button_up" from="Panel/Drag" to="." method="_on_drag_up"]

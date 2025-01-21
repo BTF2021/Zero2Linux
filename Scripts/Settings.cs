@@ -50,18 +50,7 @@ public partial class Settings : Control
 		for(int i = 1; i < GetNode("Panel/SidePanel/VBoxContainer").GetChildCount(); i++) InitializeSideButtons(i, ypos);
 
 		//Animatie
-		if(_data.currentStats.Anims)
-		{
-			var tween = GetTree().CreateTween();
-			GetNode<Sprite2D>("Panel").Modulate = new Color(1, 1, 1, 0);
-			var pos = Position;
-			pos.X = 645;
-			pos.Y = 339 - 25;
-			GetNode<Sprite2D>("Panel").Position = pos;
-			pos.Y = 339;
-			tween.TweenProperty(GetNode<Sprite2D>("Panel"), "modulate", new Color(1, 1, 1, 1), 0.15).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.Out);
-			tween.Parallel().TweenProperty(GetNode<Sprite2D>("Panel"), "position", pos, 0.15).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.Out);
-		}
+		if(_data.currentStats.Anims) GetNode<AnimationPlayer>("AnimationPlayer").Play("In");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

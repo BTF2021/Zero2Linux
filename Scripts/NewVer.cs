@@ -18,18 +18,7 @@ public partial class NewVer : Control
 		request = new HttpRequest();
 		AddChild(request);
 		request.RequestCompleted += OnRequestCompleted;                  //Cand se apeleaza Request => functia OnRequestCompleted
-		if(_data.currentStats.Anims)
-		{
-			var tween = GetTree().CreateTween();
-			GetNode<Sprite2D>("Panel").Modulate = new Color(1, 1, 1, 0);
-			var pos = Position;
-			pos.X = 645;
-			pos.Y = 339 - 25;
-			GetNode<Sprite2D>("Panel").Position = pos;
-			pos.Y = 339;
-			tween.TweenProperty(GetNode<Sprite2D>("Panel"), "modulate", new Color(1, 1, 1, 1), 0.15);
-			tween.Parallel().TweenProperty(GetNode<Sprite2D>("Panel"), "position", pos, 0.15);
-		}
+		if(_data.currentStats.Anims) GetNode<AnimationPlayer>("AnimationPlayer").Play("In");
 
 		#if GODOT_LINUXBSD || GODOT_WINDOWS
 			GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/Title4").Text = (GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/Title4").Text).TrimEnd('.') + " (Un fisier zip o sa apara in acelasi folder cu executabilul)";

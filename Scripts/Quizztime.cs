@@ -50,7 +50,14 @@ public partial class Quizztime : Node2D
 		}
 		else if(_data.currentStats.QNumOnly && _data.questiontype == 1)
 		{	GetNode<RichTextLabel>("Body/Correct").Hide();
+			var rand = new Godot.Collections.Array(){(string)chars[GD.RandRange(0, 11)], (string)chars[GD.RandRange(0, 11)]};
+			randomstr = String.Join("", rand);
+			GetNode<RichTextLabel>("Body/Correct").Text = "Corecte: [shake rate=100.0 level=20 connected=1][color=#e5e5e5]" + randomstr  + "[/color][/shake]";
 			GetNode<RichTextLabel>("Body/Wrong").Hide();
+			rand = new Godot.Collections.Array(){(string)chars[GD.RandRange(0, 11)], (string)chars[GD.RandRange(0, 11)]};
+			randomstr = String.Join("", rand);
+			GetNode<RichTextLabel>("Body/Wrong").Text = "Gresite: [shake rate=100.0 level=20 connected=1][color=#e5e5e5]" + randomstr  + "[/color][/shake]";
+			GetNode<RichTextLabel>("Body/Wrong").SelfModulate = new Color(1, 1, 1, 0);
 			var pos = GetNode<Label>("Body/Number").Position;
 			pos.X = 456;
 			GetNode<Label>("Body/Number").Position = pos;
@@ -75,16 +82,9 @@ public partial class Quizztime : Node2D
 			await ToSignal(tween, Tween.SignalName.Finished);
 			var timer = GetTree().CreateTimer(1);
 			await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
-			tween.Stop();
-			tween = GetTree().CreateTween();
-			GetNode<Node2D>("Body").Show();
-			GetNode<TextureButton>("Back").Show();
-			GetNode<Node2D>("Body").SelfModulate = new Color(1, 1, 1, 0);
-			GetNode<TextureButton>("Back").SelfModulate = new Color(1, 1, 1, 0);
-			tween.TweenProperty(GetNode<Label>("Transition/Title"), "modulate", new Color(1, 1, 1, 0), 0.25);
-			tween.Parallel().TweenProperty(GetNode<Node2D>("Body"), "self_modulate", new Color(1, 1, 1, 1), 0.25);
-			tween.Parallel().TweenProperty(GetNode<TextureButton>("Back"), "self_modulate", new Color(1, 1, 1, 1), 0.25);
-			await ToSignal(tween, Tween.SignalName.Finished);
+			GetNode<AnimationPlayer>("AnimationPlayer").Play("Part 2");
+			timer = GetTree().CreateTimer(0.25);
+			await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
 			if(_data.questiontype == 1) timp_ramas.Paused = false;
 		}
 		NextQuestion();	//Treci la prima intrebare
@@ -161,11 +161,11 @@ public partial class Quizztime : Node2D
 	//Functie pentru generarea unui nou string pentru efectul de glitch
 	public void _timeout()
 	{	randomstr = "";
-		var rand = new Godot.Collections.Array(){(string)chars[GD.RandRange(0, 11)], (string)chars[GD.RandRange(0, 11)]};
+		var rand = new Godot.Collections.Array(){(string)chars[GD.RandRange(0, chars.Count - 1)], (string)chars[GD.RandRange(0, chars.Count - 1)]};
 		randomstr = String.Join("", rand);
 		if(_data.questiontype == 1) GetNode<RichTextLabel>("Body/Correct").Text = "Corecte: [shake rate=100.0 level=20 connected=1][color=#e5e5e5]" + randomstr  + "[/color][/shake]";
 		randomstr = "";
-		rand = new Godot.Collections.Array(){(string)chars[GD.RandRange(0, 11)], (string)chars[GD.RandRange(0, 11)]};
+		rand = new Godot.Collections.Array(){(string)chars[GD.RandRange(0, chars.Count - 1)], (string)chars[GD.RandRange(0, chars.Count - 1)]};
 		randomstr = String.Join("", rand);
 		if(_data.questiontype == 1) GetNode<RichTextLabel>("Body/Wrong").Text = "Gresite: [shake rate=100.0 level=20 connected=1][color=#e5e5e5]" + randomstr + "[/color][/shake]";
 	}
@@ -242,7 +242,7 @@ public partial class Quizztime : Node2D
 			//Animatie
 			if(_data.currentStats.Anims)
 			{	var tween = GetTree().CreateTween();
-				_panel.SelfModulate = new Color(1, 1, 1, (float)0.2);
+				_panel.SelfModulate = new Color(1, 1, 1, 0.2f);
 				tween.TweenProperty(_panel, "self_modulate", new Color(1, 1, 1, 1), 0.2);
 				await ToSignal(tween, Tween.SignalName.Finished);
 			}
@@ -277,6 +277,7 @@ public partial class Quizztime : Node2D
 		QuestionFinished();
 	}
 	//Functia pentru afisarea rezultatului si cele doua butoane de jos
+	//Majoritatea Tween-urilor sunt foarte greu de inlocuit cu AnimationPlayer, deoarece ele nu tin cont de mod sau de setari (daca sunt ascunse nr de raspunsuri corecte si gresite)
 	private async void QuestionFinished()
 	{	GetNode<Timer>("Timp").Stop();
 		GetNode<Timer>("ShakeTimer").Stop();
@@ -293,23 +294,10 @@ public partial class Quizztime : Node2D
 		pos.X = 157;
 		tween.TweenProperty(GetNode<Label>("Body/Number"), "position", pos, 1).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
 		pos.X = 562;
-		if(_data.questiontype == 1)
-		{	var rand = new Godot.Collections.Array(){(string)chars[GD.RandRange(0, 11)], (string)chars[GD.RandRange(0, 11)]};
-			randomstr = String.Join("", rand);
-			GetNode<RichTextLabel>("Body/Correct").Text = "Corecte: [shake rate=100.0 level=20 connected=1][color=#e5e5e5]" + randomstr  + "[/color][/shake]";
-			GetNode<RichTextLabel>("Body/Correct").SelfModulate = new Color(1, 1, 1, 0);
-		}
 		GetNode<RichTextLabel>("Body/Correct").Show();
 		tween.Parallel().TweenProperty(GetNode<RichTextLabel>("Body/Correct"), "self_modulate", new Color(1, 1, 1, 1), 1).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
 		tween.Parallel().TweenProperty(GetNode<RichTextLabel>("Body/Correct"), "position", pos, 1).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
 		pos.X = 863;
-		
-		if(_data.questiontype == 1)
-		{	var rand = new Godot.Collections.Array(){(string)chars[GD.RandRange(0, 11)], (string)chars[GD.RandRange(0, 11)]};
-			randomstr = String.Join("", rand);
-			GetNode<RichTextLabel>("Body/Wrong").Text = "Gresite: [shake rate=100.0 level=20 connected=1][color=#e5e5e5]" + randomstr  + "[/color][/shake]";
-			GetNode<RichTextLabel>("Body/Wrong").SelfModulate = new Color(1, 1, 1, 0);
-		}
 		GetNode<RichTextLabel>("Body/Wrong").Show();
 		tween.Parallel().TweenProperty(GetNode<RichTextLabel>("Body/Wrong"), "self_modulate", new Color(1, 1, 1, 1), 1).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
 		tween.Parallel().TweenProperty(GetNode<RichTextLabel>("Body/Wrong"), "position", pos, 1).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);

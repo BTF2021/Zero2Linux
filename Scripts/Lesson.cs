@@ -119,7 +119,8 @@ public partial class Lesson : Node2D
 
 		//Tranzitie
 		if(_data.currentStats.Anims)
-		{	GetNode<Panel>("Panel").Hide();
+		{	//Prima parte o facem cu Tween-uri, deoarece, cu AnimationPlayer, se vede in primul frame pozitiile initiale ale elementelor scenei
+			GetNode<Panel>("Panel").Hide();
 			GetNode<TextureButton>("Back").Hide();
 			GetNode<Node2D>("Transition").Show();
 			GetNode<Label>("Transition/Title").Text = GetNode<Label>("Panel/ScrollContainer/MarginContainer/Body/Title").Text;
@@ -135,52 +136,23 @@ public partial class Lesson : Node2D
 			await ToSignal(tween, Tween.SignalName.Finished);
 			var timer = GetTree().CreateTimer(1);
 			await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
+			//De aici, folosim AnimationPlayer-ul
 			GD.Print("Partea a doua");
-			tween.Stop();
-			var scale = Scale;
-			scale.X = (float)0.72;
-			scale.Y = (float)0.72;
-			var size = Position;
-			size.X = 1210;
-			size.Y = 96;
-			tween = GetTree().CreateTween();
-			pos.X = -173 - 10;
-			pos.Y = -1;
-			GetNode<ScrollContainer>("Panel/ScrollContainer").VerticalScrollMode = (ScrollContainer.ScrollMode)3;
-			//Daca se seteaza la Disabled ((ScrollContainer.ScrollMode)0), cand se reactiveaza, nu mai poti da scroll
-			//Probabil nu se activeaza cum trebuie
-			GetNode<ScrollContainer>("Panel/ScrollContainer").Position = pos;
-			pos.X = 190;
-			pos.Y = -1;
-			GetNode<Panel>("Panel").Show();
-			GetNode<TextureButton>("Back").Show();
-			GetNode<Panel>("Panel").Modulate = new Color(1, 1, 1, 0);
-			GetNode<TextureButton>("Back").Modulate = new Color(1, 1, 1, 0);
-			GetNode<Label>("Panel/ScrollContainer/MarginContainer/Body/Title").SelfModulate = new Color(1, 1, 1, 0);
-			tween.TweenProperty(GetNode<Label>("Transition/Title"), "position", pos, 0.75).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
-			tween.Parallel().TweenProperty(GetNode<Label>("Transition/Title"), "scale", scale, 0.75).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
-			tween.Parallel().TweenProperty(GetNode<Label>("Transition/Title"), "size", size, 0.75).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
-			tween.Parallel().TweenProperty(GetNode<Panel>("Panel"), "modulate", new Color(1, 1, 1, 1), 0.75);
-			tween.Parallel().TweenProperty(GetNode<TextureButton>("Back"), "modulate", new Color(1, 1, 1, 1), 0.75);
+			GetNode<AnimationPlayer>("AnimationPlayer").Play("Part 2");
 			timer = GetTree().CreateTimer(0.75);
 			await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
-			tween.Stop();
-			pos.X = -173;
-			pos.Y = -1;
-			GetNode<ScrollContainer>("Panel/ScrollContainer").VerticalScrollMode = (ScrollContainer.ScrollMode)1;
-			GetNode<ScrollContainer>("Panel/ScrollContainer").Position = pos;
-			GetNode<Label>("Panel/ScrollContainer/MarginContainer/Body/Title").SelfModulate = new Color(1, 1, 1, 1);
-			GetNode<Label>("Transition/Title").Hide();
 			GetNode<Node2D>("Transition").QueueFree();
 		}
 		else	GetNode<Node2D>("Transition").Hide();
 	}
 
-	/*Called every frame. 'delta' is the elapsed time since the previous frame.
+	//"Hack" pentru faptul ca ScrollBar-ul vertical nu isi mai revine la normal dupa ce a fost dezactivat
+	//Pur si simplu fortam ScrollBar-ul sa ramana la pozitia lui initiala in timp ce animatia este in progres
 	public override void _Process(double delta)
 	{
+		if(GetNode<AnimationPlayer>("AnimationPlayer").IsPlaying()) GetNode<ScrollContainer>("Panel/ScrollContainer").ScrollVertical = 0;
 	}
-	*/
+	
 
 	//Aceasta functie arata partile din lectie pana la o intrebare la care nu sa raspuns/ nu sa raspuns corect
 	private async void ShowObjects(int index)

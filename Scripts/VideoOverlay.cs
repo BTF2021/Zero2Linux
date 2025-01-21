@@ -113,7 +113,8 @@ public partial class VideoOverlay : Node2D
 		else _stream.StreamPosition = _stream.StreamPosition + 10;
 	}
 	private void _on_back_pressed()
-	{	_slider.Value = 0; //Daca nu-l setezi la 0, cand iesi si reintrii, o sa inceapa de unde a ramas
+	{	DisplayServer.MouseSetMode(DisplayServer.MouseMode.Visible);
+		_slider.Value = 0; //Daca nu-l setezi la 0, cand iesi si reintrii, o sa inceapa de unde a ramas
 		_stream.Stop();
 		_stream.Paused = false;
 		GetNode<TextureButton>("ControlsTint/Controls/Play").TextureNormal = GD.Load<CompressedTexture2D>("res://Sprites/Play.png");
@@ -164,7 +165,7 @@ public partial class VideoOverlay : Node2D
 	}
 	//Functiile de mai jos sunt pentru a ascunde butoanele atunci cand cursorul nu s-a miscat
 	private void _on_timer_timeout()
-	{
+	{	DisplayServer.MouseSetMode(DisplayServer.MouseMode.Hidden);
 		var tween = GetTree().CreateTween();
 		tween.Parallel().TweenProperty(GetNode<ColorRect>("ControlsTint"), "modulate", new Color(1, 1, 1, 0), 0.15);
 		tween.Parallel().TweenProperty(GetNode<ColorRect>("BackTint"), "modulate", new Color(1, 1, 1, 0), 0.15);
@@ -174,6 +175,7 @@ public partial class VideoOverlay : Node2D
 	}
 	private void _on_mouse_moved()
 	{	_timer.Stop();
+		DisplayServer.MouseSetMode(DisplayServer.MouseMode.Visible);
 		var tween = GetTree().CreateTween();
 		tween.Parallel().TweenProperty(GetNode<ColorRect>("ControlsTint"), "modulate", new Color(1, 1, 1, 1), 0.15);
 		tween.Parallel().TweenProperty(GetNode<ColorRect>("BackTint"), "modulate", new Color(1, 1, 1, 1), 0.15);

@@ -20,7 +20,8 @@ public partial class ConfigUser : Node2D
         }
         else if(mode == 1)
         {   
-			 GetNode<Label>("Create/Panel/Title").Text = "Modifica utilizatorul " + _data.currentStats.UsrName;
+			GetNode<Label>("Create/Panel/Title").Text = "Modifica utilizatorul " + _data.currentStats.UsrName;
+			GetNode<Button>("Create/Panel/Create").Text = "Modifica";
             GetNode<LineEdit>("Create/Panel/Nume/Nume").Text = _data.currentStats.UsrName;
 		    GetNode<ColorPicker>("Create/Panel/Culoare/Panel/ColorPicker").Color = _data.currentStats.FavColor;
         }

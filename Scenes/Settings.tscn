@@ -467,13 +467,15 @@ alignment = 1
 [node name="ModifySave" type="Button" parent="Panel/Settings/VBoxContainer/Cont/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 4
-tooltip_text = "Sterge profilul curent"
+tooltip_text = "Modifica profilul curent"
+theme_override_font_sizes/font_size = 20
 text = "Modifica datele"
 
 [node name="DeleteSave" type="Button" parent="Panel/Settings/VBoxContainer/Cont/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 4
 tooltip_text = "Sterge profilul curent"
+theme_override_font_sizes/font_size = 20
 text = "Sterge acest utilizator"
 
 [node name="MarginContainer3" type="MarginContainer" parent="Panel/Settings/VBoxContainer/Cont"]

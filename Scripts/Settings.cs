@@ -17,8 +17,9 @@ public partial class Settings : Control
 	{	_data = (DefaultData)GetNode("/root/DefaultData");
 		_slider = (HSlider)GetNode("Panel/Settings/VBoxContainer/Lectii/VideoVolume/VideoVolumeSlide");
 		_slider.Value = _data.currentStats.VideoVolume;
-		GetNode<LineEdit>("Panel/Settings/VBoxContainer/Cont/Name/NameEdit").Text = _data.currentStats.UsrName;
-		GetNode<ColorPickerButton>("Panel/Settings/VBoxContainer/Cont/FavColour/ColorButton").Color = _data.currentStats.FavColor;
+		GetNode<Label>("Panel/Settings/VBoxContainer/Cont/Preview/Name").Text = _data.currentStats.UsrName;
+		GetNode<Label>("Panel/Settings/VBoxContainer/Cont/Preview/BigLetter").Text = _data.currentStats.UsrName;
+		GetNode<Sprite2D>("Panel/Settings/VBoxContainer/Cont/Preview/Bg").SelfModulate = _data.currentStats.FavColor;
 
 		//Daca nu putem reda videoclipurile, ascundem tot ce este legat de videoclipuri
 		if(!_data.isvideoavailable)
@@ -185,57 +186,28 @@ public partial class Settings : Control
 		GetNode<CheckButton>("Panel/Settings/VBoxContainer/Cont/GetUpdates/GetUpdatesButton").SetPressedNoSignal(_data.currentStats.ChkUpdates);
 		_data.WriteSave(_data.LoggedUser);
 	}
-	//Daca s-a schimbat numele
-	private void _on_name_changed(string new_text)
-	{	if(new_text.IndexOf(" ") >= 0) new_text = new_text.Remove(new_text.IndexOf(" "));
-		if(new_text.IndexOf("/") >= 0) new_text = new_text.Remove(new_text.IndexOf("/"));
-		if(new_text.IndexOf(".") >= 0) new_text = new_text.Remove(new_text.IndexOf("."));
-		if(new_text.IndexOf(":") >= 0) new_text = new_text.Remove(new_text.IndexOf(":"));
-		if(new_text.IndexOf(",") >= 0) new_text = new_text.Remove(new_text.IndexOf(","));
-		if(new_text.IndexOf("@") >= 0) new_text = new_text.Remove(new_text.IndexOf("@"));
-		if(new_text.IndexOf("'") >= 0) new_text = new_text.Remove(new_text.IndexOf("'"));
-		if(new_text.IndexOf("%") >= 0) new_text = new_text.Remove(new_text.IndexOf("%"));
-		if(new_text.IndexOf('"') >= 0) new_text = new_text.Remove(new_text.IndexOf('"'));
-		GetNode<LineEdit>("Panel/Settings/VBoxContainer/Cont/Name/NameEdit").Text = new_text;
-		GetNode<LineEdit>("Panel/Settings/VBoxContainer/Cont/Name/NameEdit").CaretColumn = new_text.Length;
-	}
-	//Functie pentru salvarea noului nume
-	private void _on_name_submitted(string new_text)
+	//Butonul pentru modificarea utilizatorului
+	private void _on_modify_save_pressed()
 	{
-		if(new_text.Length <= 0)
-		{	GD.Print("Nu se poate creea utilizator: Nu exista nume");
-			GetNode<LineEdit>("Panel/Settings/VBoxContainer/Cont/Name/NameEdit").SelfModulate = new Color(1, (float)0.05, (float)0.05, 1);
-			var tween = GetTree().CreateTween();
-			tween.TweenProperty(GetNode<LineEdit>("Panel/Settings/VBoxContainer/Cont/Name/NameEdit"), "self_modulate", new Color(1, 1, 1, 1), 0.5);
-			GetNode<LineEdit>("Panel/Settings/VBoxContainer/Cont/Name/NameEdit").Text = _data.currentStats.UsrName;
-		}
-		else
-		{	var ok = true;
-			var names = _data.GetSaves();
-			for (int i = 0; i< names.Length; i++) if(new_text == (string)names.GetValue(i)) ok = false;
-			GD.Print(ok);
-			if(ok)
-			{	GetNode<LineEdit>("Panel/Settings/VBoxContainer/Cont/Name/NameEdit").Text = new_text;
-				_data.currentStats.UsrName = new_text;
-				DirAccess.RenameAbsolute("user://" + _data.LoggedUser + "_save.json", "user://" + new_text + "_save.json");
-				_data.LoggedUser = new_text;
-				_data.WriteSave(_data.LoggedUser);
-				GD.Print("Changed");
-			}
-			else 
-			{	GD.Print("Nu se poate creea utilizator: Deja exista un user cu acel nume");
-				GetNode<LineEdit>("Panel/Settings/VBoxContainer/Cont/Name/NameEdit").SelfModulate = new Color(1, (float)0.05, (float)0.05, 1);
-				var tween = GetTree().CreateTween();
-				tween.TweenProperty(GetNode<LineEdit>("Panel/Settings/VBoxContainer/Cont/Name/NameEdit"), "self_modulate", new Color(1, 1, 1, 1), 0.5);
-				GetNode<LineEdit>("Panel/Settings/VBoxContainer/Cont/Name/NameEdit").Text = _data.currentStats.UsrName;
-			}
-		}
+		var scene = (ConfigUser)GD.Load<PackedScene>("res://Scenes/ConfigUser.tscn").Instantiate();
+		scene.mode = 1;
+		AddChild(scene);
 	}
-	//Pentru schimbarea culorii iconitei
-	private void _on_color_button(Color color)
+	//Functie apelata dupa ce fereastra a fost inchisa (stearsa din memorie prin QueueFree())
+	public void ConfigFinished(int code)
 	{
-		_data.currentStats.FavColor = color;
-		_data.WriteSave(_data.LoggedUser);
+		switch(code)
+		{	
+			//Nu s-a creat/modificat utilizatorul
+			case 0:
+				break;
+			//Utilizatorul a fost creat/modificat
+			case 1:
+				GetNode<Label>("Panel/Settings/VBoxContainer/Cont/Preview/Name").Text = _data.currentStats.UsrName;
+				GetNode<Label>("Panel/Settings/VBoxContainer/Cont/Preview/BigLetter").Text = _data.currentStats.UsrName;
+				GetNode<Sprite2D>("Panel/Settings/VBoxContainer/Cont/Preview/Bg").SelfModulate = _data.currentStats.FavColor;
+				break;
+		}
 	}
 	//Pentru stergerea progresului. Apare o fereastra de confirmare
 	private void _on_delete_pressed()

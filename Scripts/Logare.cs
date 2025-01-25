@@ -21,7 +21,6 @@ public partial class Logare : Node2D
 		CheckUsers();
 		GetNode<Control>("Profiles").Visible = false;
 		GetNode<Control>("NoUser").Visible = false;
-		GetNode<Control>("Create").Visible = false;
 		//Daca nu sunt utilizatori existenti, atunci trimite-i la ecranul de bun venit. Altfel, trimite-i la lista de utilizatori
 		if(!profilespresent)
 		{
@@ -37,98 +36,35 @@ public partial class Logare : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{	GetNode<Label>("Bg/Time").Text = Time.GetTimeStringFromSystem();	//Ceasul
-		if(GetNode<Control>("Create").Visible)	//Pentru previzualizarea iconitei de utilizator
-		{	GetNode<Label>("Create/Preview/Name").Text = GetNode<LineEdit>("Create/Nume/Nume").Text;
-			GetNode<Label>("Create/Preview/BigLetter").Text = GetNode<LineEdit>("Create/Nume/Nume").Text;
-			GetNode<Sprite2D>("Create/Preview/Bg").SelfModulate = GetNode<ColorPicker>("Create/Culoare/Panel/ColorPicker").Color;
-		}
 	}
 	public override void _Notification(int what)
 	{	//Daca dai inapoi pe Android
-		if (what == NotificationWMGoBackRequest && GetNode<Control>("Profiles").Visible == true)
+		if (what == NotificationWMGoBackRequest)
         	GetTree().Quit();
 	}
-	private void _on_nume_text_changed(string new_text)
-	{	//Aici este partea unde eliminam caracterele interzise din nume
-		if(new_text.IndexOf(" ") >= 0) new_text = new_text.Remove(new_text.IndexOf(" "));
-		if(new_text.IndexOf("/") >= 0) new_text = new_text.Remove(new_text.IndexOf("/"));
-		if(new_text.IndexOf(".") >= 0) new_text = new_text.Remove(new_text.IndexOf("."));
-		if(new_text.IndexOf(":") >= 0) new_text = new_text.Remove(new_text.IndexOf(":"));
-		if(new_text.IndexOf(",") >= 0) new_text = new_text.Remove(new_text.IndexOf(","));
-		if(new_text.IndexOf("@") >= 0) new_text = new_text.Remove(new_text.IndexOf("@"));
-		if(new_text.IndexOf("'") >= 0) new_text = new_text.Remove(new_text.IndexOf("'"));
-		if(new_text.IndexOf("%") >= 0) new_text = new_text.Remove(new_text.IndexOf("%"));
-		if(new_text.IndexOf('"') >= 0) new_text = new_text.Remove(new_text.IndexOf('"'));
-		var caret = GetNode<LineEdit>("Create/Nume/Nume").CaretColumn;	//Salveaza pozitia caretului inainte de a salva textul
-		GetNode<LineEdit>("Create/Nume/Nume").Text = new_text;
-		GetNode<LineEdit>("Create/Nume/Nume").CaretColumn = caret;
-	}
-	private void _on_create_pressed()
+	//Butoanele pentru creearea unui nou utilizator.
+	private void _on_createuser_pressed()
 	{
-		if(GetNode<LineEdit>("Create/Nume/Nume").Text.Length <= 0) 	//Daca numele nu exista
-		{	GD.Print("Nu se poate creea utilizator: Nu exista nume");
-			GetNode<Label>("Create/Eroare").Show();
-			GetNode<Label>("Create/Eroare").Text = "Nu se poate creea utilizator: Nu exista nume";
-			return;
-		}
-		else
-		{	var ok = true;
-			var names = _data.GetSaves();
-			//Verificam daca deja exista nume
-			if(names != null)
-				for (int i = 0; i< names.Length; i++) if(GetNode<LineEdit>("Create/Nume/Nume").Text == (string)names.GetValue(i)) ok = false;
-			GD.Print(ok);
-			if(ok)
-			{	//Aici este partea unde cream un fisier folosind numele si culoarea deja date de utilizator
-				_data.currentStats.UsrName = GetNode<LineEdit>("Create/Nume/Nume").Text;
-				_data.currentStats.FavColor = GetNode<ColorPicker>("Create/Culoare/Panel/ColorPicker").Color;
-				var file = FileAccess.Open("user://" + _data.currentStats.UsrName +"_save.json", FileAccess.ModeFlags.Write);
-				if (file == null) GD.Print("Nu se poate deschide fisierul. Eroare: " + FileAccess.GetOpenError());
-				file.StoreString(JsonConvert.SerializeObject(_data.currentStats));
-				file.Close();
-				GetNode<LineEdit>("Create/Nume/Nume").Text = "";
-				GetNode<ColorPicker>("Create/Culoare/Panel/ColorPicker").Color = new Color(1, 1, 1, 1);
-				_data.currentStats = new stats();
-				GetNode<Button>("Create/Back").Disabled = true;
-				GetNode<Control>("Create").Visible = false;
+		var scene = (ConfigUser)GD.Load<PackedScene>("res://Scenes/ConfigUser.tscn").Instantiate();
+		scene.mode = 0;
+		AddChild(scene);
+	}
+	//Functie apelata dupa ce fereastra a fost inchisa (stearsa din memorie prin QueueFree())
+	public void ConfigFinished(int code)
+	{
+		switch(code)
+		{	
+			//Nu s-a creat/modificat utilizatorul
+			case 0:
+				break;
+			//Utilizatorul a fost creat/modificat
+			case 1:
+				GetNode<Control>("NoUser").Visible = false;
 				GetNode<Control>("Profiles").Visible = true;
-				
 				CheckUsers();
 				GetNode<AnimationPlayer>("AnimationPlayer").Play("Profiles");
-			}
-			else
-			{	GD.Print("Nu se poate creea utilizator: Deja exista un utilizator cu acel nume");
-				GetNode<Label>("Create/Eroare").Show();
-				GetNode<Label>("Create/Eroare").Text = "Nu se poate creea utilizator: Deja exista un utilizator cu acel nume";
-				return;
-			}
+				break;
 		}
-	}
-	//Butonu "Continua ->" din meniul de bun venit
-	private void _on_intro_pressed()
-	{	GetNode<Control>("NoUser").Visible = false;
-		GetNode<Control>("Create").Visible = true;
-
-		GetNode<Button>("Create/Back").Disabled = true;
-		GetNode<Button>("Create/Back").Hide();
-		GetNode<AnimationPlayer>("AnimationPlayer").Play("Create");
-	}
-	//Butonul pentru creearea unui nou utilizator. Diferenta dintre cele doua este ca, in prima functie, nu se poate da inapoi la ecranul de bun venit
-	private void _on_createuser_pressed()
-	{	GetNode<Control>("Profiles").Visible = false;
-		GetNode<Control>("Create").Visible = true;
-
-		GetNode<Button>("Create/Back").Disabled = false;
-		GetNode<Button>("Create/Back").Show();
-		GetNode<Label>("Create/Eroare").Hide();
-		GetNode<AnimationPlayer>("AnimationPlayer").Play("Create");
-	}
-	//Butonul de iesire din meniul de creeare a utilizatorului
-	private void _on_back_pressed()
-	{	GetNode<Control>("Create").Visible = false;
-		GetNode<Control>("Profiles").Visible = true;
-		GetNode<AnimationPlayer>("AnimationPlayer").Play("Profiles");
-		CheckUsers();
 	}
 	//Pur si simplu pentru refacerea listei de utilizatori in meniu
 	private void CheckUsers()

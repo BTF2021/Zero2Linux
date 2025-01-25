@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b5r4kq07nfvp1"]
+[gd_scene load_steps=15 format=3 uid="uid://b5r4kq07nfvp1"]
 
 [ext_resource type="Script" uid="uid://chnjwc7yjanfc" path="res://Scripts/VideoOverlay.cs" id="1_8kp3d"]
 [ext_resource type="Texture2D" uid="uid://cuv7m0o2p7huh" path="res://Sprites/Back.png" id="2_5ji7h"]
@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://covos5p0vtxt" path="res://Sprites/Fullscr.png" id="5_4p4g7"]
 [ext_resource type="Texture2D" uid="uid://dm63bhlfvpsr7" path="res://Sprites/PlayHighlight.png" id="5_tisoe"]
 [ext_resource type="Texture2D" uid="uid://ce7r8ib5refvj" path="res://Sprites/Frwrd10sHighlight.png" id="7_pggls"]
-[ext_resource type="StyleBox" uid="uid://dhjub7y84wcpf" path="res://Sprites/Slider.stylebox" id="8_ew0bt"]
 [ext_resource type="Texture2D" uid="uid://0cx1a0sumavq" path="res://Sprites/FullscrHighlight.png" id="9_tshvh"]
 [ext_resource type="Texture2D" uid="uid://b1fm5c1pp08qn" path="res://Sprites/VolumeLow.png" id="9_x7xu5"]
 
@@ -47,7 +46,7 @@ offset_top = 660.0
 offset_right = 1066.0
 offset_bottom = 710.0
 scale = Vector2(1.2, 1.2)
-color = Color(0.0313726, 0.0313726, 0.0313726, 0.607843)
+color = Color(0.117647, 0.117647, 0.180392, 1)
 
 [node name="Seekbar" type="Control" parent="ControlsTint"]
 anchors_preset = 0
@@ -58,7 +57,7 @@ offset_bottom = 40.0
 points = PackedVector2Array(0, 0, 1066.67, 0)
 closed = true
 width = 8.0
-default_color = Color(0.374139, 0.374139, 0.374139, 1)
+default_color = Color(0.192157, 0.196078, 0.266667, 1)
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
@@ -67,7 +66,7 @@ end_cap_mode = 2
 points = PackedVector2Array(0, 0, 1066.67, 0)
 closed = true
 width = 8.0
-default_color = Color(0.117647, 0.4, 0.960784, 1)
+default_color = Color(0.537255, 0.705882, 0.980392, 1)
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
@@ -80,7 +79,6 @@ offset_right = 1072.0
 offset_bottom = 18.0
 focus_mode = 0
 mouse_filter = 1
-theme_override_styles/slider = ExtResource("8_ew0bt")
 scrollable = false
 
 [node name="Controls" type="HBoxContainer" parent="ControlsTint"]
@@ -140,7 +138,6 @@ offset_top = 9.0
 offset_right = 110.5
 offset_bottom = 25.0
 focus_mode = 0
-theme_override_styles/slider = ExtResource("8_ew0bt")
 min_value = -60.0
 max_value = 0.0
 scrollable = false

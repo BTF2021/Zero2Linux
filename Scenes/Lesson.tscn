@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://cseipsy3u81k3"]
+[gd_scene load_steps=10 format=3 uid="uid://cseipsy3u81k3"]
 
 [ext_resource type="Texture2D" uid="uid://cuv7m0o2p7huh" path="res://Sprites/Back.png" id="1_0rts7"]
 [ext_resource type="Script" uid="uid://cl1p3ty2a2l1y" path="res://Scripts/Lesson.cs" id="1_4ktg6"]
-[ext_resource type="Theme" uid="uid://c3r51fw2bo66h" path="res://Sprites/CourseUI.theme" id="2_3hak8"]
 [ext_resource type="Texture2D" uid="uid://rsq42q4qde3" path="res://Sprites/BackHighlight.png" id="2_y1bgk"]
 [ext_resource type="Texture2D" uid="uid://dmkypoj2doa4m" path="res://Sprites/LoadingBg.png" id="3_f7gdh"]
 [ext_resource type="Texture2D" uid="uid://bud38ywfs5qnt" path="res://Sprites/Play.png" id="5_edb0t"]
@@ -358,7 +357,6 @@ offset_left = -173.0
 offset_top = -1.0
 offset_right = 1107.0
 offset_bottom = 719.0
-theme = ExtResource("2_3hak8")
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 

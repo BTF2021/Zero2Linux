@@ -1,20 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://dp66hckm2wrqb"]
+[gd_scene load_steps=7 format=3 uid="uid://dp66hckm2wrqb"]
 
 [ext_resource type="Script" uid="uid://wlp14h7s40pr" path="res://Scripts/Confirm.cs" id="1_o4va3"]
 [ext_resource type="Material" uid="uid://bl5ra5x2dyfgr" path="res://Sprites/Blur.material" id="2_dltu8"]
 [ext_resource type="StyleBox" uid="uid://jov22gqerob3" path="res://Sprites/UIConfirmPanel.stylebox" id="3_63gs6"]
-[ext_resource type="StyleBox" uid="uid://c8ip85nk5v8ds" path="res://Sprites/UIButtons.stylebox" id="3_ufrb6"]
 [ext_resource type="StyleBox" uid="uid://di87pu5wmffgt" path="res://Sprites/UINoHover.stylebox" id="4_q4w62"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3myx1"]
-bg_color = Color(0.364706, 0, 0, 0.917647)
+bg_color = Color(0.436059, 0, 0, 0.917647)
 corner_radius_top_left = 6
 corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3x8ak"]
-bg_color = Color(0.670588, 0, 0, 1)
+bg_color = Color(0.822127, 0, 0, 1)
 corner_radius_top_left = 6
 corner_radius_top_right = 6
 corner_radius_bottom_right = 6
@@ -80,7 +79,6 @@ offset_left = 120.0
 offset_top = 128.0
 offset_right = 199.0
 offset_bottom = 168.0
-theme_override_styles/normal = ExtResource("3_ufrb6")
 text = "Anuleaza"
 
 [node name="Bar" type="ProgressBar" parent="Subpanels/Delete/Panel"]
@@ -153,7 +151,6 @@ offset_left = 74.6663
 offset_top = 74.0003
 offset_right = 153.666
 offset_bottom = 114.0
-theme_override_styles/normal = ExtResource("3_ufrb6")
 text = "Anuleaza"
 
 [node name="Confirm" type="Button" parent="Subpanels/Exit/Panel"]
@@ -162,7 +159,6 @@ offset_left = 173.0
 offset_top = 74.0
 offset_right = 259.0
 offset_bottom = 114.0
-theme_override_styles/normal = ExtResource("3_ufrb6")
 text = "Confirma"
 
 [node name="Link" type="Control" parent="Subpanels"]
@@ -216,7 +212,6 @@ offset_left = 74.6667
 offset_top = 166.667
 offset_right = 153.667
 offset_bottom = 206.667
-theme_override_styles/normal = ExtResource("3_ufrb6")
 text = "Anuleaza"
 
 [node name="Confirm" type="Button" parent="Subpanels/Link/Panel"]
@@ -225,7 +220,6 @@ offset_left = 173.333
 offset_top = 167.333
 offset_right = 252.333
 offset_bottom = 207.333
-theme_override_styles/normal = ExtResource("3_ufrb6")
 text = "Continua"
 
 [node name="timer" type="Timer" parent="."]

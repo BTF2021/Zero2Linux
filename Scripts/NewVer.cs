@@ -70,8 +70,8 @@ public partial class NewVer : Control
 		GetNode<Panel>("Panel/Download").Position = Position with { X = -372, Y = 250 };
 		GetNode<Panel>("Panel/Download").Size = Size with { X = 745, Y = 55 };
 		GetNode<Panel>("Panel/Panel").Position = Position with { X = -372, Y = -258 };
-		GetNode<Panel>("Panel/Panel").Size = Size with { X = 745, Y = 508 };
-		GetNode<ScrollContainer>("Panel/Panel/ScrollContainer").Size = Size with { X = 752, Y = 509 };
+		GetNode<Panel>("Panel/Panel").Size = Size with { X = 744, Y = 503 };
+		GetNode<ScrollContainer>("Panel/Panel/ScrollContainer").Size = Size with { X = 752, Y = 504 };
 
 		GetNode("/root").GetChild(-1).EmitSignal("Download", 0);
 		GetNode<Label>("Panel/Download/VBoxContainer/Info").Visible = false;
@@ -100,9 +100,9 @@ public partial class NewVer : Control
 
 		GetNode<Panel>("Panel/Download").Position = Position with { X = -372, Y = 105 };
 		GetNode<Panel>("Panel/Download").Size = Size with { X = 745, Y = 200 };
-		GetNode<Panel>("Panel/Panel").Position = Position with { X = -372, Y = -258 };
-		GetNode<Panel>("Panel/Panel").Size = Size with { X = 745, Y = 363 };
-		GetNode<ScrollContainer>("Panel/Panel/ScrollContainer").Size = Size with { X = 752, Y = 364 };
+		GetNode<Panel>("Panel/Panel").Position = Position with { X = -372, Y = -253 };
+		GetNode<Panel>("Panel/Panel").Size = Size with { X = 745, Y = 353 };
+		GetNode<ScrollContainer>("Panel/Panel/ScrollContainer").Size = Size with { X = 752, Y = 359 };
 
 		GetNode<Button>("Panel/Download/VBoxContainer/HBoxContainer/Download").Disabled = true;
 		GetNode<CanvasItem>("Panel/Download/VBoxContainer/HBoxContainer/Download").Hide();

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://qc1o5l6rijo6"]
+[gd_scene load_steps=9 format=3 uid="uid://qc1o5l6rijo6"]
 
 [ext_resource type="Script" uid="uid://6knrikuvguf2" path="res://Scripts/Incarcare.cs" id="1_16o33"]
 [ext_resource type="Texture2D" uid="uid://dmkypoj2doa4m" path="res://Sprites/LoadingBg.png" id="1_ucu8g"]
@@ -24,20 +24,6 @@ tracks/0/keys = {
 _data = {
 &"Rotate": SubResource("Animation_a4q1u")
 }
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v8yql"]
-bg_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_to4hx"]
-bg_color = Color(0.0980392, 0.678431, 0, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
 
 [sub_resource type="Animation" id="Animation_15432"]
 resource_name = "Out"
@@ -125,8 +111,6 @@ offset_left = 456.0
 offset_top = 471.0
 offset_right = 824.0
 offset_bottom = 498.0
-theme_override_styles/background = SubResource("StyleBoxFlat_v8yql")
-theme_override_styles/fill = SubResource("StyleBoxFlat_to4hx")
 max_value = 120.0
 value = 50.0
 show_percentage = false

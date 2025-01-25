@@ -1,11 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://dsrtl4q4of7qd"]
+[gd_scene load_steps=11 format=3 uid="uid://dsrtl4q4of7qd"]
 
 [ext_resource type="Script" uid="uid://cayqnr6o66y7v" path="res://Scripts/Quizztime.cs" id="1_uw27w"]
 [ext_resource type="Texture2D" uid="uid://cuv7m0o2p7huh" path="res://Sprites/Back.png" id="2_ix61e"]
 [ext_resource type="Texture2D" uid="uid://rsq42q4qde3" path="res://Sprites/BackHighlight.png" id="3_ea8q5"]
 [ext_resource type="PackedScene" uid="uid://duiw5l0ody1l" path="res://Scenes/Quizitem.tscn" id="4_jaieg"]
-[ext_resource type="StyleBox" uid="uid://c8ip85nk5v8ds" path="res://Sprites/UIButtons.stylebox" id="4_t31no"]
-[ext_resource type="StyleBox" uid="uid://di87pu5wmffgt" path="res://Sprites/UINoHover.stylebox" id="5_g1hxa"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_siul7"]
 lifetime_randomness = 0.3
@@ -348,8 +346,6 @@ offset_right = 740.0
 offset_bottom = 560.0
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 30
-theme_override_styles/focus = ExtResource("5_g1hxa")
-theme_override_styles/normal = ExtResource("4_t31no")
 text = "Continua"
 
 [node name="Exit" type="Button" parent="."]
@@ -362,8 +358,6 @@ offset_right = 603.0
 offset_bottom = 560.0
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 30
-theme_override_styles/focus = ExtResource("5_g1hxa")
-theme_override_styles/normal = ExtResource("4_t31no")
 text = "Iesire"
 
 [node name="Retry" type="Button" parent="."]
@@ -376,8 +370,6 @@ offset_right = 962.0
 offset_bottom = 560.0
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 30
-theme_override_styles/focus = ExtResource("5_g1hxa")
-theme_override_styles/normal = ExtResource("4_t31no")
 text = "Incearca alt chestionar"
 
 [node name="Reference" type="Control" parent="."]

@@ -52,11 +52,11 @@ public partial class Quizztime : Node2D
 		{	GetNode<RichTextLabel>("Body/Correct").Hide();
 			var rand = new Godot.Collections.Array(){(string)chars[GD.RandRange(0, 11)], (string)chars[GD.RandRange(0, 11)]};
 			randomstr = String.Join("", rand);
-			GetNode<RichTextLabel>("Body/Correct").Text = "Corecte: [shake rate=100.0 level=20 connected=1][color=#e5e5e5]" + randomstr  + "[/color][/shake]";
+			GetNode<RichTextLabel>("Body/Correct").Text = "Corecte: [shake rate=100.0 level=20 connected=1]" + randomstr  + "[/shake]";
 			GetNode<RichTextLabel>("Body/Wrong").Hide();
 			rand = new Godot.Collections.Array(){(string)chars[GD.RandRange(0, 11)], (string)chars[GD.RandRange(0, 11)]};
 			randomstr = String.Join("", rand);
-			GetNode<RichTextLabel>("Body/Wrong").Text = "Gresite: [shake rate=100.0 level=20 connected=1][color=#e5e5e5]" + randomstr  + "[/color][/shake]";
+			GetNode<RichTextLabel>("Body/Wrong").Text = "Gresite: [shake rate=100.0 level=20 connected=1]" + randomstr  + "/shake]";
 			GetNode<RichTextLabel>("Body/Wrong").SelfModulate = new Color(1, 1, 1, 0);
 			var pos = GetNode<Label>("Body/Number").Position;
 			pos.X = 456;
@@ -163,11 +163,11 @@ public partial class Quizztime : Node2D
 	{	randomstr = "";
 		var rand = new Godot.Collections.Array(){(string)chars[GD.RandRange(0, chars.Count - 1)], (string)chars[GD.RandRange(0, chars.Count - 1)]};
 		randomstr = String.Join("", rand);
-		if(_data.questiontype == 1) GetNode<RichTextLabel>("Body/Correct").Text = "Corecte: [shake rate=100.0 level=20 connected=1][color=#e5e5e5]" + randomstr  + "[/color][/shake]";
+		if(_data.questiontype == 1) GetNode<RichTextLabel>("Body/Correct").Text = "Corecte: [shake rate=100.0 level=20 connected=1]" + randomstr  + "[/shake]";
 		randomstr = "";
 		rand = new Godot.Collections.Array(){(string)chars[GD.RandRange(0, chars.Count - 1)], (string)chars[GD.RandRange(0, chars.Count - 1)]};
 		randomstr = String.Join("", rand);
-		if(_data.questiontype == 1) GetNode<RichTextLabel>("Body/Wrong").Text = "Gresite: [shake rate=100.0 level=20 connected=1][color=#e5e5e5]" + randomstr + "[/color][/shake]";
+		if(_data.questiontype == 1) GetNode<RichTextLabel>("Body/Wrong").Text = "Gresite: [shake rate=100.0 level=20 connected=1]" + randomstr + "[/shake]";
 	}
 	public void _timp_scurs()
 	{	GD.Print("TIMPUL S-A SCURS!");
@@ -242,8 +242,8 @@ public partial class Quizztime : Node2D
 			//Animatie
 			if(_data.currentStats.Anims)
 			{	var tween = GetTree().CreateTween();
-				_panel.SelfModulate = new Color(1, 1, 1, 0.2f);
-				tween.TweenProperty(_panel, "self_modulate", new Color(1, 1, 1, 1), 0.2);
+				_panel.Modulate = new Color(1, 1, 1, 0.2f);
+				tween.TweenProperty(_panel, "modulate", new Color(1, 1, 1, 1), 0.2);
 				await ToSignal(tween, Tween.SignalName.Finished);
 			}
 		}

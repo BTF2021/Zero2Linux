@@ -38,6 +38,10 @@ project/assembly_name="Zero2Linux"
 
 naming/node_name_casing=1
 
+[gui]
+
+theme/custom="uid://c3r51fw2bo66h"
+
 [input]
 
 click={
@@ -54,3 +58,4 @@ renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
 anti_aliasing/screen_space_roughness_limiter/enabled=false
+environment/node_name_casing=1

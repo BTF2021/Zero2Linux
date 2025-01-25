@@ -1,27 +1,16 @@
-[gd_scene load_steps=18 format=3 uid="uid://bkx0p2po0iq6n"]
+[gd_scene load_steps=13 format=3 uid="uid://bkx0p2po0iq6n"]
 
 [ext_resource type="Texture2D" uid="uid://c311u78gq8dn" path="res://Sprites/Bg.png" id="1_acc6r"]
 [ext_resource type="Script" uid="uid://he3o72220x3i" path="res://Scripts/Logare.cs" id="1_avx0j"]
-[ext_resource type="StyleBox" uid="uid://drod6m1sbtikq" path="res://Sprites/UISettingsButton.stylebox" id="3_03oal"]
-[ext_resource type="Theme" uid="uid://c3r51fw2bo66h" path="res://Sprites/CourseUI.theme" id="3_llrmv"]
 [ext_resource type="StyleBox" uid="uid://di87pu5wmffgt" path="res://Sprites/UINoHover.stylebox" id="3_rxovc"]
 [ext_resource type="Texture2D" uid="uid://ddhgftxfvqe6s" path="res://Sprites/Profile.png" id="4_f0vrj"]
-[ext_resource type="StyleBox" uid="uid://c8ip85nk5v8ds" path="res://Sprites/UIButtons.stylebox" id="5_c51ni"]
-[ext_resource type="StyleBox" uid="uid://dm740p3cvnrwa" path="res://Sprites/UIButtonsPressed.stylebox" id="7_d2s1t"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y087x"]
-bg_color = Color(0.215686, 0.215686, 0.215686, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b6rum"]
-bg_color = Color(0.215427, 0.215427, 0.215427, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g5vcv"]
+bg_color = Color(0.192157, 0.196078, 0.266667, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [sub_resource type="Animation" id="Animation_p0ffc"]
 resource_name = "Create"
@@ -302,7 +291,6 @@ text = "Zero2LInux Ver"
 vertical_alignment = 1
 
 [node name="Profiles" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_top = 254.0
@@ -326,14 +314,11 @@ scroll_active = false
 shortcut_keys_enabled = false
 
 [node name="Panel" type="Panel" parent="Profiles"]
-visible = false
-self_modulate = Color(0.707967, 0.707967, 0.707967, 0.631373)
 layout_mode = 0
 offset_left = 97.0
 offset_top = -83.0
 offset_right = 1192.0
 offset_bottom = 296.0
-theme_override_styles/panel = ExtResource("3_03oal")
 
 [node name="Square" type="ScrollContainer" parent="Profiles"]
 custom_minimum_size = Vector2(0, 200)
@@ -342,7 +327,6 @@ offset_left = 102.0
 offset_top = -83.0
 offset_right = 1192.0
 offset_bottom = 296.0
-theme = ExtResource("3_llrmv")
 scroll_vertical_custom_step = 400.0
 horizontal_scroll_mode = 0
 
@@ -376,10 +360,11 @@ texture = ExtResource("4_f0vrj")
 layout_mode = 0
 offset_left = -5.0
 offset_top = 158.0
-offset_right = 166.0
+offset_right = 205.0
 offset_bottom = 193.0
+scale = Vector2(0.8, 0.8)
 theme_override_font_sizes/font_size = 25
-text = "123456789abc"
+text = "123456789abcdef"
 horizontal_alignment = 1
 
 [node name="BigLetter" type="Label" parent="Profiles/Square/Vlist/List/>,,<"]
@@ -388,6 +373,7 @@ offset_left = 3.0
 offset_top = 17.0
 offset_right = 158.0
 offset_bottom = 145.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 70
 text = "T"
 horizontal_alignment = 1
@@ -401,9 +387,6 @@ offset_top = 314.0
 offset_right = 800.0
 offset_bottom = 357.0
 theme_override_font_sizes/font_size = 25
-theme_override_styles/focus = ExtResource("3_rxovc")
-theme_override_styles/pressed = ExtResource("7_d2s1t")
-theme_override_styles/normal = ExtResource("5_c51ni")
 text = "Creeaza un nou utilizator"
 
 [node name="Create" type="Control" parent="."]
@@ -452,8 +435,6 @@ si nu poate contine spatiu si urmatoarele
 caractere:
  / . :  , @ ' % \""
 theme_override_font_sizes/font_size = 30
-theme_override_styles/focus = ExtResource("3_rxovc")
-theme_override_styles/normal = SubResource("StyleBoxFlat_y087x")
 placeholder_text = "John_1233453"
 alignment = 1
 max_length = 12
@@ -480,7 +461,7 @@ offset_left = 141.0
 offset_top = -3.0
 offset_right = 444.0
 offset_bottom = 266.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_b6rum")
+theme_override_styles/panel = SubResource("StyleBoxFlat_g5vcv")
 
 [node name="ColorPicker" type="ColorPicker" parent="Create/Culoare/Panel"]
 layout_mode = 0
@@ -552,9 +533,6 @@ offset_top = 521.0
 offset_right = 770.0
 offset_bottom = 564.0
 theme_override_font_sizes/font_size = 25
-theme_override_styles/focus = ExtResource("3_rxovc")
-theme_override_styles/pressed = ExtResource("7_d2s1t")
-theme_override_styles/normal = ExtResource("5_c51ni")
 text = "Creeaza"
 
 [node name="Back" type="Button" parent="Create"]
@@ -564,9 +542,6 @@ offset_top = 520.0
 offset_right = 502.0
 offset_bottom = 563.0
 theme_override_font_sizes/font_size = 25
-theme_override_styles/focus = ExtResource("3_rxovc")
-theme_override_styles/pressed = ExtResource("7_d2s1t")
-theme_override_styles/normal = ExtResource("5_c51ni")
 text = "<"
 
 [node name="NoUser" type="Control" parent="."]
@@ -614,9 +589,6 @@ offset_top = 504.0
 offset_right = 805.0
 offset_bottom = 546.0
 theme_override_font_sizes/font_size = 30
-theme_override_styles/focus = ExtResource("3_rxovc")
-theme_override_styles/pressed = ExtResource("7_d2s1t")
-theme_override_styles/normal = ExtResource("5_c51ni")
 text = "Continua ->"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

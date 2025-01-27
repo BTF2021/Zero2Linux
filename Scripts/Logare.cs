@@ -1,7 +1,7 @@
 //Pentru meniul de logare
 using Godot;
 using System;
-using Newtonsoft.Json;                           //Pentru culoarea cercului (in AddProfiles())
+using Newtonsoft.Json;
 
 public partial class Logare : Node2D
 {
@@ -14,9 +14,8 @@ public partial class Logare : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{	_data = (DefaultData)GetNode("/root/DefaultData");
-		_profile = GetNode<Button>("Profiles/Square/Vlist/List/>,,<");	//butonul-model are un nume considerat de aplicatie invalid
+		_profile = GetNode<Button>("Profiles/SidePanel/ScrollContainer/List/>,,<");	//butonul-model are un nume considerat de aplicatie invalid
 		_names = new string[101];	//vectori pentru numele utilizatorilor
-		GetNode<Label>("Bg/Version").Text = "Zero2Linux Ver " + (String)ProjectSettings.GetSetting("application/config/version");
 		GetNode<CanvasItem>("/root/Transition").Show(); //A se vedea funtia logging
 		CheckUsers();
 		GetNode<Control>("Profiles").Visible = false;
@@ -35,13 +34,32 @@ public partial class Logare : Node2D
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
-	{	GetNode<Label>("Bg/Time").Text = Time.GetTimeStringFromSystem();	//Ceasul
+	{	GetNode<Label>("Profiles/Time").Text = Time.GetTimeStringFromSystem().Substring(0, 5);	//Ceasul
+		GetNode<Label>("Profiles/Time/Date").Text = Time.GetDateStringFromSystem();	//Calendarul
 	}
 	public override void _Notification(int what)
 	{	//Daca dai inapoi pe Android
 		if (what == NotificationWMGoBackRequest)
         	GetTree().Quit();
 	}
+	//Butonul de inchidere a aplicatiei
+	private void _on_quit_pressed() => GetTree().Quit(0);
+
+	//Functie pentru primul buton, atunci cand nu exista utilizator
+	private void _on_continue_pressed()
+	{
+		GetNode<TabContainer>("NoUser/TabContainer").CurrentTab = 1;
+		GetNode<TabContainer>("NoUser/TabContainer").Modulate = new Color(1, 1, 1, 0);
+		var pos = GetNode<TabContainer>("NoUser/TabContainer").Position;
+		pos.X = pos.X + 90;
+		GetNode<TabContainer>("NoUser/TabContainer").Position = pos;
+		pos.X = pos.X - 90;
+		var tween = GetTree().CreateTween();
+		tween.TweenProperty(GetNode<TabContainer>("NoUser/TabContainer"), "modulate", new Color(1, 1, 1, 1), 0.25);
+		tween.Parallel().TweenProperty(GetNode<TabContainer>("NoUser/TabContainer"), "position", pos, 0.25);
+	}
+	//Functie pentru ultimul buton, atunci cand nu exista utilizator
+	private void _on_finish_pressed() => GetNode<AnimationPlayer>("AnimationPlayer").Play("Finish");
 	//Butoanele pentru creearea unui nou utilizator.
 	private void _on_createuser_pressed()
 	{
@@ -59,37 +77,40 @@ public partial class Logare : Node2D
 				break;
 			//Utilizatorul a fost creat/modificat
 			case 1:
-				GetNode<Control>("NoUser").Visible = false;
-				GetNode<Control>("Profiles").Visible = true;
+				if(GetNode<Control>("NoUser").Visible)
+				{	GetNode<TabContainer>("NoUser/TabContainer").CurrentTab = 2;
+					GetNode<TabContainer>("NoUser/TabContainer").Modulate = new Color(1, 1, 1, 0);
+					var pos = GetNode<TabContainer>("NoUser/TabContainer").Position;
+					pos.X = pos.X + 90;
+					GetNode<TabContainer>("NoUser/TabContainer").Position = pos;
+					pos.X = pos.X - 90;
+					var tween = GetTree().CreateTween();
+					tween.TweenProperty(GetNode<TabContainer>("NoUser/TabContainer"), "modulate", new Color(1, 1, 1, 1), 0.25);
+					tween.Parallel().TweenProperty(GetNode<TabContainer>("NoUser/TabContainer"), "position", pos, 0.25);
+				}
 				CheckUsers();
-				GetNode<AnimationPlayer>("AnimationPlayer").Play("Profiles");
 				break;
 		}
 	}
 	//Pur si simplu pentru refacerea listei de utilizatori in meniu
 	private void CheckUsers()
-	{	//Stergem toate iconitele care nu sunt model
-		for(int i = 0; i< GetNode<VBoxContainer>("Profiles/Square/Vlist").GetChildCount(); i++) 
-		{	for(int j = 0; j< GetNode<VBoxContainer>("Profiles/Square/Vlist").GetChild(i).GetChildCount(); j++)
-			{	if(GetNode<VBoxContainer>("Profiles/Square/Vlist").GetChild(i).GetChild<Node>(j).Name != (StringName)">,,<")
-					GetNode<VBoxContainer>("Profiles/Square/Vlist").GetChild(i).GetChild<Node>(j).QueueFree();
-			}
-		}
+	{	for(int i = 0; i< GetNode<VBoxContainer>("Profiles/SidePanel/ScrollContainer/List").GetChildCount(); i++)
+			if(GetNode<VBoxContainer>("Profiles/SidePanel/ScrollContainer/List").GetChild(i).Name != (StringName)">,,<")
+				GetNode<VBoxContainer>("Profiles/SidePanel/ScrollContainer/List").GetChild(i).QueueFree();
+		
 		if(!_data.SaveExists()) profilespresent = false;
 		else
 		{	ListLenght = _data.GetSaves().Length;
 			profilespresent = true;
-			if(ListLenght >= 13)GetNode<Panel>("Profiles/Panel").Visible = true;	//Daca lista trebuie afisata pe mai mult de o linie
-			else GetNode<Panel>("Profiles/Panel").Visible = false;
 			System.Array.Copy(_data.GetSaves(), 0, _names, 0, ListLenght);
-			if(ListLenght == 100) 
+			if(ListLenght == 100)
 			{	if(_names.GetValue(99) != null)
-				{	GetNode<Button>("Profiles/Create").Disabled = true;
-					GetNode<Button>("Profiles/Create").TooltipText = "Nu se pot creea noi utilizatori.\nVa rugam sa stergeti un utilizator pentru a creea altul";
+				{	GetNode<TextureButton>("Profiles/ToolPanel/HBoxContainer/Create").Disabled = true;
+					GetNode<TextureButton>("Profiles/ToolPanel/HBoxContainer/Create").TooltipText = "Nu se pot creea noi utilizatori.\nVa rugam sa stergeti un utilizator pentru a creea altul";
 				}
-				else GetNode<Button>("Profiles/Create").TooltipText = "Creeaza un utilizator nou";
+				else GetNode<TextureButton>("Profiles/ToolPanel/HBoxContainer/Create").TooltipText = "Creeaza un utilizator nou";
 			}
-			else GetNode<Button>("Profiles/Create").TooltipText = "Creeaza un utilizator nou";
+			else GetNode<TextureButton>("Profiles/ToolPanel/HBoxContainer/Create").TooltipText = "Creeaza un utilizator nou";
 			//Adaugam iconitele utilizatorilor
 			for(int i = 0; i< _names.Length; i++) 
 				if(_names.GetValue(i) != null) AddProfiles(i);
@@ -100,13 +121,10 @@ public partial class Logare : Node2D
 	{	_data.LoggedUser = name;
 		GD.Print("Logat in: " + name);
 		
-		//Dezactiveaza toate butoanele
-		for(int i = 0; i< GetNode<VBoxContainer>("Profiles/Square/Vlist").GetChildCount(); i++) 
-			for(int j = 0; j< GetNode<VBoxContainer>("Profiles/Square/Vlist").GetChild(i).GetChildCount(); j++)
-				GetNode<VBoxContainer>("Profiles/Square/Vlist").GetChild(i).GetChild<Button>(j).Disabled = true;
-		
+		for(int i = 0; i< GetNode<VBoxContainer>("Profiles/SidePanel/ScrollContainer/List").GetChildCount(); i++)
+			GetNode<VBoxContainer>("Profiles/SidePanel/ScrollContainer/List").GetChild<Button>(i).Disabled = true;
 		GetNode<AnimationPlayer>("AnimationPlayer").Play("Logging");
-		var timer = GetTree().CreateTimer(0.3);
+		var timer = GetTree().CreateTimer(0.6);
 		//Aceasta instructiune (ChangeSceneToFile) este motivul pentru care exista o alta scena in Autoload
 		//In timpul in care Godot a eliberat din memorie aceasta scena si incarca scena Main, o sa apara gri
 		//De aceea aratam scena Transition in _Ready()
@@ -128,17 +146,7 @@ public partial class Logare : Node2D
 		button.GetNode<Label>("BigLetter").Text = content.UsrName;
 		button.GetNode<Sprite2D>("Bg").SelfModulate = content.FavColor;
 		button.Show();
-		//Aici este partea unde plasam iconita pe un anumit rand
-		if(index % 6 == 0 && index > 0 && GetNode<VBoxContainer>("Profiles/Square/Vlist").GetChildCount() != (index / 6) + 1)
-		{	//Duplicam randul si-l punem ca child in VList, dar stergem iconitele din acea lista
-			Node list = GetNode<HBoxContainer>("Profiles/Square/Vlist/List").Duplicate(8);
-			int count = list.GetChildCount();
-			for(int i = 0; i < count; i++) 
-				list.GetChild(i).QueueFree();
-			GetNode<VBoxContainer>("Profiles/Square/Vlist").AddChild(list);
-		}
-		GetNode<VBoxContainer>("Profiles/Square/Vlist").GetChild((index / 6)).AddChild(button);
-		GD.Print("Adaugat " + content.UsrName + " cu indexul " + index + " in " + GetNode<VBoxContainer>("Profiles/Square/Vlist").GetChild((index / 6)).Name);
+		GetNode<VBoxContainer>("Profiles/SidePanel/ScrollContainer/List").AddChild(button);
 		button.Pressed += () => logging(content.UsrName);	//Conectam functia logging ca sa stim cine se logheaza
 	}
 }

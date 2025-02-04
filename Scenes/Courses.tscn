@@ -1,9 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://bcd574anctpct"]
+[gd_scene load_steps=12 format=3 uid="uid://bcd574anctpct"]
 
 [ext_resource type="Script" uid="uid://cst72vonavcxa" path="res://Scripts/Courses.cs" id="1_bnupo"]
 [ext_resource type="Texture2D" uid="uid://bqd1321xxqoej" path="res://Sprites/CloseButton.png" id="3_ixxbh"]
 [ext_resource type="Texture2D" uid="uid://dherg8j0a21h2" path="res://Sprites/CoursePanel.png" id="3_thy4c"]
 [ext_resource type="Texture2D" uid="uid://c1cjk57xd8mq2" path="res://Sprites/CloseButtonHighlight.png" id="4_n2rmg"]
+[ext_resource type="Texture2D" uid="uid://dggmaqo3m8tdm" path="res://Sprites/Adv.png" id="5_nte5v"]
+[ext_resource type="Texture2D" uid="uid://cpswweuho8b08" path="res://Sprites/Normal.png" id="5_y88ff"]
+[ext_resource type="Texture2D" uid="uid://dtf04r0xxc0j0" path="res://Sprites/Spc.png" id="6_y88ff"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g7vcl"]
+bg_color = Color(0.117647, 0.117647, 0.180392, 1)
 
 [sub_resource type="Animation" id="Animation_uicp1"]
 resource_name = "In"
@@ -105,15 +111,77 @@ text = "Selecteaza o lectie"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
-offset_left = -373.0
-offset_top = -257.0
-offset_right = 372.0
-offset_bottom = 305.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+offset_left = -371.0
+offset_top = -258.0
+offset_right = 371.0
+offset_bottom = 303.0
+
+[node name="Panel" type="Panel" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g7vcl")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Panel"]
+layout_mode = 0
+offset_right = 742.0
+offset_bottom = 52.0
+theme_override_constants/separation = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="Panel/VBoxContainer/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(444, 0)
+layout_mode = 2
+size_flags_vertical = 4
+placeholder_text = "Cauta lectiile dupa nume"
+alignment = 1
+clear_button_enabled = true
+drag_and_drop_selection_enabled = false
+
+[node name="MarginContainer2" type="MarginContainer" parent="Panel/VBoxContainer/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="Normal" type="TextureButton" parent="Panel/VBoxContainer/Panel/HBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("5_y88ff")
+stretch_mode = 5
+
+[node name="MarginContainer3" type="MarginContainer" parent="Panel/VBoxContainer/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+
+[node name="Avansat" type="TextureButton" parent="Panel/VBoxContainer/Panel/HBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("5_nte5v")
+stretch_mode = 5
+
+[node name="MarginContainer4" type="MarginContainer" parent="Panel/VBoxContainer/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+
+[node name="Special" type="TextureButton" parent="Panel/VBoxContainer/Panel/HBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("6_y88ff")
+stretch_mode = 5
+
+[node name="MarginContainer5" type="MarginContainer" parent="Panel/VBoxContainer/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 follow_focus = true
 horizontal_scroll_mode = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 2
@@ -126,3 +194,7 @@ libraries = {
 [connection signal="button_down" from="Panel/Drag" to="." method="_on_drag_down"]
 [connection signal="button_up" from="Panel/Drag" to="." method="_on_drag_up"]
 [connection signal="pressed" from="Panel/Back" to="." method="_on_back_pressed"]
+[connection signal="text_changed" from="Panel/VBoxContainer/Panel/HBoxContainer/LineEdit" to="." method="_on_line_edit_text_changed"]
+[connection signal="toggled" from="Panel/VBoxContainer/Panel/HBoxContainer/Normal" to="." method="_on_normal_toggled"]
+[connection signal="toggled" from="Panel/VBoxContainer/Panel/HBoxContainer/Avansat" to="." method="_on_avansat_toggled"]
+[connection signal="toggled" from="Panel/VBoxContainer/Panel/HBoxContainer/Special" to="." method="_on_special_toggled"]

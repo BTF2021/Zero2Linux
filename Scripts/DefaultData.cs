@@ -28,8 +28,8 @@ public class stats
 	public int goodtests = 0;         //Nr teste peste 5
 	public int greattest = 0;         //Nr teste peste 7
 	public int flawlesstests = 0;     //Nr teste fara greseli
-	public bool Adv = true;			  //Daca lectiile avansate sunt prezente in lista de lectii sau nu
-	public bool Spc = true;			  //Daca lectiile speciale sunt prezente in lista de lectii sau nu
+	public bool Adv = true;			  //Daca lectiile avansate sunt afisate initial in lista de lectii sau nu
+	public bool Spc = true;			  //Daca lectiile speciale sunt afisate initial in lista de lectii sau nu
 	public float VideoVolume = 0;	  //Intre -60 si 0
 	public bool QNumOnly = false;	  //Daca nr de raspunse corecte si gresite sa fie afisate in modul test sau nu
 	public bool AdvQ = true;		  //Daca intrebariile din lectiile avansate sa fie incluse in chestionare sau nu

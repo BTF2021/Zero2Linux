@@ -1,18 +1,19 @@
+//Folosit pentru lectii
 using Godot;
 using System;
 
 public partial class Lesson : Node2D
 {
 	private DefaultData _data;
-	public Node _node;
-	public Godot.Collections.Array<Quizitem> _questions;
+	public Node _node;	//Containerul in care sunt puse elementele lectiei (text, intrebari,...)
+	public Godot.Collections.Array<Quizitem> _questions;	//Vector cu toate intrebarile din lectie
 	public int lessonid = 0;
-	private int totalquestioncount;    //Nr total de intrebari din lectie
-	private int totallessonblocks;	   //Nr total de blocuri din lectie
-	private int questionansw;          //Nr de intrebari deja raspunse
-	private int blocksread;			   //Nr de blocuri deja vazute
-	private int percent;               //Procentul progresului
-	[Signal] public delegate void GetAnswersEventHandler(bool correct, bool ignore, int index);
+	private int totalquestioncount;		//Nr total de intrebari din lectie
+	private int totallessonblocks;		//Nr total de blocuri din lectie (Un bloc poate contine text, imagini, separatoare etc). Separatoarele se pot pune si intre blocuri si intrebari
+	private int questionansw;		//Nr de intrebari deja raspunse
+	private int blocksread;			//Nr de blocuri deja vazute
+	private int percent;		//Procentul progresului
+	[Signal] public delegate void GetAnswersEventHandler(bool correct, bool ignore, int index);	//Semnal pentru intrebarile din lectie
 
 	public async void _Treeentered() => _Ready();
 	// Called when the node enters the scene tree for the first time.
@@ -20,19 +21,19 @@ public partial class Lesson : Node2D
 	{
 		_data = (DefaultData)GetNode("/root/DefaultData");
 		lessonid = _data.CurrentLesson;
-		GetNode<Control>("Panel/ScrollContainer/MarginContainer/Body").AddChild((GD.Load<PackedScene>("res://Courses/Lesson_" + lessonid + "/Lesson.tscn")).Instantiate());
+		//Incarcam continutul lectiei
+		GetNode<Control>("Panel/ScrollContainer/MarginContainer/Body").AddChild(((PackedScene)ResourceLoader.LoadThreadedGet("res://Courses/Lesson_" + lessonid + "/Lesson.tscn")).Instantiate());	//Lectia propriu-zisa
 		_questions = new Godot.Collections.Array<Quizitem>{};
 		_node = GetNode<VBoxContainer>("Panel/ScrollContainer/MarginContainer/Body/Content");
-		GetAnswers += SendAnswers;
+		GetAnswers += SendAnswers;	//Conecteaza semnalul la functie
 
-		//Daca nu putem reda videoclipurile, ramane doar imaginea cu blur
+		//Daca nu putem reda videoclipurile, ramane doar imaginea
 		if(!ResourceLoader.Exists("res://Courses/Lesson_" + lessonid + "/VidBg.png"))
 		{	GetNode<HSeparator>("Panel/ScrollContainer/MarginContainer/Body/HSeparator2").QueueFree();
 			GetNode<ColorRect>("Panel/ScrollContainer/MarginContainer/Body/VideoPreview/Spoiler").QueueFree();
 			GetNode<Sprite2D>("Panel/ScrollContainer/MarginContainer/Body/VideoPreview/textureRect").QueueFree();
 			GetNode<TextureRect>("Panel/ScrollContainer/MarginContainer/Body/VideoPreview").QueueFree();
 		}
-		else if(!ResourceLoader.Exists("res://Courses/Lesson_" + lessonid + "/Video.webm") || !_data.isvideoavailable) GetNode<Sprite2D>("Panel/ScrollContainer/MarginContainer/Body/VideoPreview/textureRect").QueueFree();
 		GetNode<TextureRect>("Panel/ScrollContainer/MarginContainer/Body/VideoPreview").Texture = GD.Load<CompressedTexture2D>("res://Courses/Lesson_" + lessonid + "/VidBg.png");
 
 		//Titlu si rearanjarea elementelor
@@ -92,7 +93,7 @@ public partial class Lesson : Node2D
 				//Daca am ajuns la progresul din save.json
 				if(calc == _data.currentStats.LessonCompletion[lessonid])
 				{
-					showobjects(i);
+					ShowObjects(i);
 					break;
 				}
 				GD.Print(questionansw + "/" + totalquestioncount + " " + blocksread + "/" + totallessonblocks + " " + (questionansw + blocksread) * 100 / (totalquestioncount + totallessonblocks));
@@ -117,7 +118,8 @@ public partial class Lesson : Node2D
 
 		//Tranzitie
 		if(_data.currentStats.Anims)
-		{	GetNode<Panel>("Panel").Hide();
+		{	//Prima parte o facem cu Tween-uri, deoarece, cu AnimationPlayer, se vede in primul frame pozitiile initiale ale elementelor scenei
+			GetNode<Panel>("Panel").Hide();
 			GetNode<TextureButton>("Back").Hide();
 			GetNode<Node2D>("Transition").Show();
 			GetNode<Label>("Transition/Title").Text = GetNode<Label>("Panel/ScrollContainer/MarginContainer/Body/Title").Text;
@@ -133,55 +135,26 @@ public partial class Lesson : Node2D
 			await ToSignal(tween, Tween.SignalName.Finished);
 			var timer = GetTree().CreateTimer(1);
 			await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
+			//De aici, folosim AnimationPlayer-ul
 			GD.Print("Partea a doua");
-			tween.Stop();
-			var scale = Scale;
-			scale.X = (float)0.72;
-			scale.Y = (float)0.72;
-			var size = Position;
-			size.X = 1210;
-			size.Y = 96;
-			tween = GetTree().CreateTween();
-			pos.X = -173 - 10;
-			pos.Y = -1;
-			GetNode<ScrollContainer>("Panel/ScrollContainer").VerticalScrollMode = (ScrollContainer.ScrollMode)3;
-			//Daca se seteaza la Disabled ((ScrollContainer.ScrollMode)0), cand se reactiveaza, nu mai poti da scroll
-			//Probabil nu se activeaza cum trebuie
-			GetNode<ScrollContainer>("Panel/ScrollContainer").Position = pos;
-			pos.X = 190;
-			pos.Y = -1;
-			GetNode<Panel>("Panel").Show();
-			GetNode<TextureButton>("Back").Show();
-			GetNode<Panel>("Panel").Modulate = new Color(1, 1, 1, 0);
-			GetNode<TextureButton>("Back").Modulate = new Color(1, 1, 1, 0);
-			GetNode<Label>("Panel/ScrollContainer/MarginContainer/Body/Title").SelfModulate = new Color(1, 1, 1, 0);
-			tween.TweenProperty(GetNode<Label>("Transition/Title"), "position", pos, 0.75).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
-			tween.Parallel().TweenProperty(GetNode<Label>("Transition/Title"), "scale", scale, 0.75).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
-			tween.Parallel().TweenProperty(GetNode<Label>("Transition/Title"), "size", size, 0.75).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
-			tween.Parallel().TweenProperty(GetNode<Panel>("Panel"), "modulate", new Color(1, 1, 1, 1), 0.75);
-			tween.Parallel().TweenProperty(GetNode<TextureButton>("Back"), "modulate", new Color(1, 1, 1, 1), 0.75);
+			GetNode<AnimationPlayer>("AnimationPlayer").Play("Part 2");
 			timer = GetTree().CreateTimer(0.75);
 			await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
-			tween.Stop();
-			pos.X = -173;
-			pos.Y = -1;
-			GetNode<ScrollContainer>("Panel/ScrollContainer").VerticalScrollMode = (ScrollContainer.ScrollMode)1;
-			GetNode<ScrollContainer>("Panel/ScrollContainer").Position = pos;
-			GetNode<Label>("Panel/ScrollContainer/MarginContainer/Body/Title").SelfModulate = new Color(1, 1, 1, 1);
-			GetNode<Label>("Transition/Title").Hide();
 			GetNode<Node2D>("Transition").QueueFree();
 		}
 		else	GetNode<Node2D>("Transition").Hide();
 	}
 
-	/*Called every frame. 'delta' is the elapsed time since the previous frame.
+	//"Hack" pentru faptul ca ScrollBar-ul vertical nu isi mai revine la normal dupa ce a fost dezactivat
+	//Pur si simplu fortam ScrollBar-ul sa ramana la pozitia lui initiala in timp ce animatia este in progres
 	public override void _Process(double delta)
 	{
+		if(GetNode<AnimationPlayer>("AnimationPlayer").IsPlaying()) GetNode<ScrollContainer>("Panel/ScrollContainer").ScrollVertical = 0;
 	}
-	*/
+	
 
 	//Aceasta functie arata partile din lectie pana la o intrebare la care nu sa raspuns/ nu sa raspuns corect
-	private async void showobjects(int index)
+	private async void ShowObjects(int index)
 	{	var foundquestion = false;
 		for (int i = index; i <= _node.GetChildCount()-1; i++)
 		{	if(foundquestion) _node.GetChild<CanvasItem>(i).Visible = false;
@@ -205,7 +178,7 @@ public partial class Lesson : Node2D
 		{	//Daca nu a fost deja raspuns
 			if(!_node.GetChild<Quizitem>(index).Complete)
 			{
-				showobjects(index+1);
+				ShowObjects(index+1);
 				_node.GetChild<Quizitem>(index).Complete = true;
 
 				//Calculam cat la suta din lectie a fost citita si-l salvam progresul
@@ -231,19 +204,16 @@ public partial class Lesson : Node2D
 			tween.TweenProperty(_node.GetChild<CanvasItem>(index), "modulate", new Color(1, 1, 1, 1), 0.5);
 		}
 	}
+	//Butonul pentru intoarcerea in meniul principal
 	private void _on_back_pressed()
 	{	GD.Print("Pressed");
+		_data.CurrentLesson = 0;
 		GetTree().ChangeSceneToFile("res://Scenes/Main.tscn");
-	}
-	private void _on_watch_pressed()
-	{	var _video = (ResourceLoader.Load<PackedScene>("res://Scenes/VideoOverlay.tscn")).Instantiate();
-		_video.GetNode<VideoStreamPlayer>("Panel/VideoStreamPlayer").Stream.File = "res://Courses/Lesson_" + lessonid + "/Video.webm";
-		_video.GetNode<Sprite2D>("Bg").Texture = GD.Load<CompressedTexture2D>("res://Courses/Lesson_" + lessonid + "/VidBg.png");
-		AddChild(_video);
 	}
 	//Pentru linkurile din text
 	private void _on_text_link(Variant meta)
-	{	var scene = (Confirm)GD.Load<PackedScene>("res://Scenes/Confirm.tscn").Instantiate();
+	{	//Creeaza o fereastra de confirmare
+		var scene = (Confirm)GD.Load<PackedScene>("res://Scenes/Confirm.tscn").Instantiate();
 		scene.reason = 2;
 		scene.link = (string)meta;
 		AddChild(scene);

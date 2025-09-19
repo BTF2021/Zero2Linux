@@ -1,26 +1,511 @@
-[gd_scene load_steps=10 format=3 uid="uid://bkx0p2po0iq6n"]
+[gd_scene load_steps=18 format=3 uid="uid://bkx0p2po0iq6n"]
 
-[ext_resource type="Texture2D" uid="uid://c311u78gq8dn" path="res://Sprites/Bg.png" id="1_acc6r"]
 [ext_resource type="Script" path="res://Scripts/Logare.cs" id="1_avx0j"]
-[ext_resource type="StyleBox" uid="uid://drod6m1sbtikq" path="res://Sprites/UISettingsButton.stylebox" id="3_03oal"]
-[ext_resource type="Theme" uid="uid://c3r51fw2bo66h" path="res://Sprites/CourseUI.theme" id="3_llrmv"]
-[ext_resource type="StyleBox" uid="uid://di87pu5wmffgt" path="res://Sprites/UINoHover.stylebox" id="3_rxovc"]
+[ext_resource type="Texture2D" uid="uid://c6sdb5r6qr4mr" path="res://Sprites/Backrounds/BgMountains.png" id="2_g5vcv"]
 [ext_resource type="Texture2D" uid="uid://ddhgftxfvqe6s" path="res://Sprites/Profile.png" id="4_f0vrj"]
-[ext_resource type="StyleBox" uid="uid://c8ip85nk5v8ds" path="res://Sprites/UIButtons.stylebox" id="5_c51ni"]
+[ext_resource type="Texture2D" uid="uid://dgy3ipr3y6sq2" path="res://Sprites/AddUser.png" id="4_tlnpy"]
+[ext_resource type="Texture2D" uid="uid://2k0tqngjaab8" path="res://Sprites/Power.png" id="5_g5vcv"]
+[ext_resource type="Texture2D" uid="uid://bwpg7wa5hydva" path="res://Sprites/AddUserDisabled.png" id="5_v1fqv"]
+[ext_resource type="Texture2D" uid="uid://drgkb2u3g5c1c" path="res://Sprites/PowerHighlight.png" id="6_v1fqv"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y087x"]
-bg_color = Color(0.215686, 0.215686, 0.215686, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bfwv7"]
+bg_color = Color(0.167177, 0.167212, 0.247361, 1)
 corner_radius_top_left = 6
 corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b6rum"]
-bg_color = Color(0.215427, 0.215427, 0.215427, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d2s1t"]
+bg_color = Color(0.0941176, 0.0941176, 0.145098, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g5vcv"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v1fqv"]
+bg_color = Color(0, 0, 0, 1)
+border_width_right = 20
+border_color = Color(0.8, 0.8, 0.8, 0)
+border_blend = true
+
+[sub_resource type="Animation" id="Animation_g5vcv"]
+resource_name = "Finish"
+length = 0.75
+step = 0.0168
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NoUser:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Profiles:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NoUser:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(0.435, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hpvyq"]
+resource_name = "In"
+step = 0.0168
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bg/Color:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.435275, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Profiles:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.435, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Profiles/SidePanel:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.435, 0.435),
+"update": 0,
+"values": [Vector2(-358, 0), Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Profiles/ToolPanel:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.435, 1),
+"update": 0,
+"values": [Vector2(1290, 605), Vector2(1222, 605)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Profiles/Time:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.435, 1),
+"update": 0,
+"values": [Vector2(358, 130), Vector2(358, 198)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Bg/Sprite2D:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.435, 1),
+"update": 0,
+"values": [Vector2(1.05, 1.05), Vector2(1.15, 1.15)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Profiles:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_t07m8"]
+resource_name = "Logging"
+length = 0.6
+step = 0.0168
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Profiles:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(0.435, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Profiles/Time:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(358, 198), Vector2(358, 158)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Profiles/SidePanel:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(0.435, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-358, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Profiles/ToolPanel:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(0.435, 1),
+"update": 0,
+"values": [Vector2(1222, 605), Vector2(1290, 605)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Bg/Sprite2D:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(0.435, 1),
+"update": 0,
+"values": [Vector2(1.15, 1.15), Vector2(1.05, 1.05)]
+}
+
+[sub_resource type="Animation" id="Animation_leydp"]
+resource_name = "NoUser"
+length = 2.5
+step = 0.0168
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NoUser/TabContainer/Hi/Clip:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(0.84949, 1),
+"update": 0,
+"values": [Vector2(0.001, 112), Vector2(1280, 112)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NoUser/TabContainer/Hi/Clip:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2, 2.5),
+"transitions": PackedFloat32Array(0.459479, 1),
+"update": 0,
+"values": [Vector2(0, 250), Vector2(0, 65)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NoUser/TabContainer/Hi/Thanks:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("NoUser/TabContainer/Hi/Info:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(2, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("NoUser/TabContainer/Hi/Continue:self_modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(2, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("NoUser/TabContainer/Hi/Continue:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("NoUser:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_pb5m4"]
+length = 0.001
+step = 0.0168
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Profiles:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Profiles/Time:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(358, 198), Vector2(358, 198)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Profiles/SidePanel:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("NoUser/TabContainer/Hi/Clip:size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1280, 112)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("NoUser/TabContainer/Hi/Clip:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 65)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("NoUser/TabContainer/Hi/Thanks:self_modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("NoUser/TabContainer/Hi/Info:self_modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("NoUser/TabContainer/Hi/Continue:self_modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("NoUser/TabContainer/Hi/Continue:disabled")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Profiles:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("NoUser:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Bg/Color:self_modulate")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Profiles/ToolPanel:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1222, 605)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("NoUser:modulate")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Bg/Sprite2D:scale")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.15, 1.15)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p0ffc"]
+_data = {
+"Finish": SubResource("Animation_g5vcv"),
+"In": SubResource("Animation_hpvyq"),
+"Logging": SubResource("Animation_t07m8"),
+"NoUser": SubResource("Animation_leydp"),
+"RESET": SubResource("Animation_pb5m4")
+}
 
 [node name="Logare" type="Node2D"]
 script = ExtResource("1_avx0j")
@@ -29,336 +514,352 @@ script = ExtResource("1_avx0j")
 position = Vector2(640, 360)
 
 [node name="Sprite2D" type="Sprite2D" parent="Bg"]
-texture = ExtResource("1_acc6r")
+scale = Vector2(1.15, 1.15)
+texture = ExtResource("2_g5vcv")
 
-[node name="Time" type="Label" parent="Bg"]
+[node name="Color" type="ColorRect" parent="Bg"]
 offset_left = -640.0
-offset_top = -359.0
+offset_top = -360.0
 offset_right = 640.0
-offset_bottom = -300.0
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 40
-text = "Timp"
-horizontal_alignment = 1
-
-[node name="Version" type="Label" parent="Bg"]
-offset_left = -633.0
-offset_top = 330.0
-offset_right = -353.0
-offset_bottom = 353.0
-text = "Zero2LInux Ver"
-vertical_alignment = 1
+offset_bottom = 360.0
+color = Color(0.105882, 0.270588, 0.301961, 0.470588)
 
 [node name="Profiles" type="Control" parent="."]
 visible = false
 layout_mode = 3
 anchors_preset = 0
-offset_top = 254.0
 offset_right = 1280.0
 offset_bottom = 720.0
 
-[node name="Title" type="RichTextLabel" parent="Profiles"]
+[node name="Time" type="Label" parent="Profiles"]
 layout_mode = 0
-offset_top = -168.0
+offset_left = 358.0
+offset_top = 198.0
 offset_right = 1280.0
-offset_bottom = -109.0
+offset_bottom = 403.0
 size_flags_horizontal = 3
-theme_override_font_sizes/bold_italics_font_size = 40
-theme_override_font_sizes/italics_font_size = 40
-theme_override_font_sizes/mono_font_size = 40
-theme_override_font_sizes/normal_font_size = 40
-theme_override_font_sizes/bold_font_size = 40
+theme_override_font_sizes/font_size = 150
+text = "Timp"
+horizontal_alignment = 1
+
+[node name="Date" type="Label" parent="Profiles/Time"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 173.0
+offset_right = 923.0
+offset_bottom = 215.0
+theme_override_font_sizes/font_size = 30
+text = "YYYY-MM-DD"
+horizontal_alignment = 1
+
+[node name="SidePanel" type="Panel" parent="Profiles"]
+self_modulate = Color(1, 1, 1, 0.588235)
+layout_mode = 0
+offset_right = 358.0
+offset_bottom = 719.0
+
+[node name="label" type="RichTextLabel" parent="Profiles/SidePanel"]
+layout_mode = 0
+offset_top = 21.0
+offset_right = 358.0
+offset_bottom = 63.0
+theme_override_font_sizes/bold_italics_font_size = 30
+theme_override_font_sizes/italics_font_size = 30
+theme_override_font_sizes/mono_font_size = 30
+theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/bold_font_size = 30
 bbcode_enabled = true
-text = "[center][wave amp=50.0 freq=1.9 connected=1]Logare[/wave][/center]"
+text = "[center][wave amp=25.0 freq=2 connected=1]Alege un utilizator[/wave][/center]"
+fit_content = true
 scroll_active = false
+autowrap_mode = 2
 shortcut_keys_enabled = false
 
-[node name="Panel" type="Panel" parent="Profiles"]
-visible = false
-self_modulate = Color(0.707967, 0.707967, 0.707967, 0.631373)
+[node name="hSeparator" type="HSeparator" parent="Profiles/SidePanel"]
 layout_mode = 0
-offset_left = 97.0
-offset_top = -83.0
-offset_right = 1192.0
-offset_bottom = 296.0
-theme_override_styles/panel = ExtResource("3_03oal")
+offset_left = 1.0
+offset_top = 74.0
+offset_right = 357.0
+offset_bottom = 75.0
 
-[node name="Square" type="ScrollContainer" parent="Profiles"]
-custom_minimum_size = Vector2(0, 200)
+[node name="ScrollContainer" type="ScrollContainer" parent="Profiles/SidePanel"]
 layout_mode = 0
-offset_left = 102.0
-offset_top = -83.0
-offset_right = 1192.0
-offset_bottom = 296.0
-theme = ExtResource("3_llrmv")
-scroll_vertical_custom_step = 400.0
+offset_left = 1.0
+offset_top = 77.0
+offset_right = 358.0
+offset_bottom = 720.0
 horizontal_scroll_mode = 0
 
-[node name="Vlist" type="VBoxContainer" parent="Profiles/Square"]
-custom_minimum_size = Vector2(1060, 0)
+[node name="List" type="VBoxContainer" parent="Profiles/SidePanel/ScrollContainer"]
 layout_mode = 2
-size_flags_vertical = 6
-theme_override_constants/separation = -1
-
-[node name="List" type="HBoxContainer" parent="Profiles/Square/Vlist"]
-custom_minimum_size = Vector2(0, 190)
-layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = 20
+theme_override_constants/separation = 2
 alignment = 1
 
-[node name=">,,<" type="Button" parent="Profiles/Square/Vlist/List"]
+[node name=">,,<" type="Button" parent="Profiles/SidePanel/ScrollContainer/List"]
 visible = false
-custom_minimum_size = Vector2(160, 0)
+custom_minimum_size = Vector2(0, 105)
 layout_mode = 2
 tooltip_text = "Logheaza-te ca "
 mouse_filter = 1
-theme_override_styles/focus = ExtResource("3_rxovc")
 flat = true
 
-[node name="Bg" type="Sprite2D" parent="Profiles/Square/Vlist/List/>,,<"]
-position = Vector2(80, 80)
+[node name="Panel" type="Panel" parent="Profiles/SidePanel/ScrollContainer/List/>,,<"]
+layout_mode = 0
+offset_right = 357.0
+offset_bottom = 105.0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_bfwv7")
+
+[node name="Bg" type="Sprite2D" parent="Profiles/SidePanel/ScrollContainer/List/>,,<"]
+position = Vector2(60, 52)
+scale = Vector2(0.65, 0.65)
 texture = ExtResource("4_f0vrj")
 
-[node name="Name" type="Label" parent="Profiles/Square/Vlist/List/>,,<"]
+[node name="Name" type="Label" parent="Profiles/SidePanel/ScrollContainer/List/>,,<"]
 layout_mode = 0
-offset_left = -5.0
-offset_top = 158.0
-offset_right = 166.0
-offset_bottom = 193.0
-theme_override_font_sizes/font_size = 25
-text = "123456789abc"
-horizontal_alignment = 1
-
-[node name="BigLetter" type="Label" parent="Profiles/Square/Vlist/List/>,,<"]
-layout_mode = 0
-offset_left = 3.0
-offset_top = 17.0
-offset_right = 158.0
-offset_bottom = 145.0
-theme_override_font_sizes/font_size = 70
-text = "T"
-horizontal_alignment = 1
-vertical_alignment = 1
-visible_characters = 1
-
-[node name="Create" type="Button" parent="Profiles"]
-layout_mode = 0
-offset_left = 488.0
-offset_top = 314.0
-offset_right = 800.0
-offset_bottom = 357.0
-theme_override_font_sizes/font_size = 25
-text = "Creeaza un nou utilizator"
-
-[node name="Create" type="Control" parent="."]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_top = 87.0
-offset_right = 1280.0
-offset_bottom = 720.0
-
-[node name="Title" type="RichTextLabel" parent="Create"]
-layout_mode = 0
-offset_top = -2.0
-offset_right = 1280.0
-offset_bottom = 57.0
-size_flags_horizontal = 3
-theme_override_font_sizes/bold_italics_font_size = 40
-theme_override_font_sizes/italics_font_size = 40
-theme_override_font_sizes/mono_font_size = 40
-theme_override_font_sizes/normal_font_size = 40
-theme_override_font_sizes/bold_font_size = 40
-bbcode_enabled = true
-text = "[center][wave amp=50.0 freq=1.9 connected=1]Creeaza un nou user[/wave][/center]"
-scroll_active = false
-shortcut_keys_enabled = false
-
-[node name="Nume" type="Label" parent="Create"]
-layout_mode = 0
-offset_left = 531.0
-offset_top = 160.0
-offset_right = 663.0
-offset_bottom = 209.0
-theme_override_font_sizes/font_size = 35
-text = "Numele"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Nume" type="LineEdit" parent="Create/Nume"]
-layout_mode = 0
-offset_left = 142.0
-offset_right = 404.0
-offset_bottom = 50.0
-tooltip_text = "Introdu aici numele.
-Numarul maxim de caractere este de 12
-si nu poate contine spatiu si urmatoarele
-caractere:
- / . :  , @ ' % \""
+offset_left = 132.0
+offset_top = 38.0
+offset_right = 386.0
+offset_bottom = 80.0
+scale = Vector2(0.8, 0.8)
 theme_override_font_sizes/font_size = 30
-theme_override_styles/focus = ExtResource("3_rxovc")
-theme_override_styles/normal = SubResource("StyleBoxFlat_y087x")
-placeholder_text = "John_1233453"
-alignment = 1
-max_length = 12
-context_menu_enabled = false
-clear_button_enabled = true
-shortcut_keys_enabled = false
-caret_blink = true
+text = "123456789abcdef"
 
-[node name="Culoare" type="Label" parent="Create"]
+[node name="BigLetter" type="Label" parent="Profiles/SidePanel/ScrollContainer/List/>,,<"]
 layout_mode = 0
-offset_left = 531.0
-offset_top = 219.0
-offset_right = 663.0
-offset_bottom = 268.0
-theme_override_font_sizes/font_size = 35
-text = "Culoare"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Panel" type="Panel" parent="Create/Culoare"]
-layout_mode = 0
-offset_left = 141.0
-offset_top = -3.0
-offset_right = 444.0
-offset_bottom = 266.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_b6rum")
-
-[node name="CuloarePicker" type="ColorPicker" parent="Create/Culoare/Panel"]
-layout_mode = 0
-offset_left = 3.0
-offset_top = 3.0
-offset_right = 301.0
-offset_bottom = 275.0
-alignment = 1
-edit_alpha = false
-can_add_swatches = false
-sampler_visible = false
-color_modes_visible = false
-sliders_visible = false
-hex_visible = false
-presets_visible = false
-
-[node name="Preview" type="Control" parent="Create"]
-custom_minimum_size = Vector2(160, 0)
-anchors_preset = 0
-offset_left = 261.0
-offset_top = 154.0
-offset_right = 421.0
-offset_bottom = 378.0
-scale = Vector2(1.5, 1.5)
-tooltip_text = "Logheaza-te ca "
-
-[node name="Bg" type="Sprite2D" parent="Create/Preview"]
-position = Vector2(80, 100)
-texture = ExtResource("4_f0vrj")
-
-[node name="Name" type="Label" parent="Create/Preview"]
-layout_mode = 0
-offset_left = -5.0
-offset_top = 186.0
-offset_right = 164.0
-offset_bottom = 221.0
-theme_override_font_sizes/font_size = 25
-text = "123456789abc"
-horizontal_alignment = 1
-
-[node name="BigLetter" type="Label" parent="Create/Preview"]
-layout_mode = 0
-offset_left = 3.0
-offset_top = 22.0
-offset_right = 158.0
-offset_bottom = 178.0
-theme_override_font_sizes/font_size = 70
+offset_left = 27.0
+offset_top = 14.0
+offset_right = 95.0
+offset_bottom = 93.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 50
 text = "T"
 horizontal_alignment = 1
 vertical_alignment = 1
 visible_characters = 1
 
-[node name="Eroare" type="Label" parent="Create"]
-visible = false
+[node name="ToolPanel" type="Panel" parent="Profiles"]
+self_modulate = Color(1, 1, 1, 0.588235)
 layout_mode = 0
-offset_left = 288.0
-offset_top = 497.0
-offset_right = 984.0
-offset_bottom = 519.0
-theme_override_font_sizes/font_size = 15
-text = "Nu se poate creea acel user:"
-horizontal_alignment = 1
-vertical_alignment = 1
+offset_left = 1222.0
+offset_top = 605.0
+offset_right = 1272.0
+offset_bottom = 712.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_d2s1t")
 
-[node name="Create" type="Button" parent="Create"]
+[node name="HBoxContainer" type="VBoxContainer" parent="Profiles/ToolPanel"]
 layout_mode = 0
-offset_left = 512.0
-offset_top = 521.0
-offset_right = 770.0
-offset_bottom = 564.0
-theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = ExtResource("5_c51ni")
-text = "Creeaza"
+offset_top = 5.0
+offset_right = 50.0
+offset_bottom = 107.0
+theme_override_constants/separation = 9
 
-[node name="Back" type="Button" parent="Create"]
-layout_mode = 0
-offset_left = 458.0
-offset_top = 520.0
-offset_right = 502.0
-offset_bottom = 563.0
-theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = ExtResource("5_c51ni")
-text = "<"
+[node name="Create" type="TextureButton" parent="Profiles/ToolPanel/HBoxContainer"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+tooltip_text = "Creeaza un nou utilizator"
+texture_normal = ExtResource("4_tlnpy")
+texture_disabled = ExtResource("5_v1fqv")
+stretch_mode = 5
+
+[node name="Power" type="TextureButton" parent="Profiles/ToolPanel/HBoxContainer"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+tooltip_text = "Opreste aplicatia"
+texture_normal = ExtResource("5_g5vcv")
+texture_pressed = ExtResource("6_v1fqv")
+stretch_mode = 5
 
 [node name="NoUser" type="Control" parent="."]
 visible = false
 layout_mode = 3
 anchors_preset = 0
-offset_top = 78.0
 offset_right = 1280.0
 offset_bottom = 720.0
 
-[node name="Hi" type="RichTextLabel" parent="NoUser"]
+[node name="Color" type="ColorRect" parent="NoUser"]
 layout_mode = 0
-offset_top = 2.0
 offset_right = 1280.0
-offset_bottom = 114.0
-size_flags_horizontal = 3
-theme_override_font_sizes/bold_italics_font_size = 40
-theme_override_font_sizes/italics_font_size = 40
-theme_override_font_sizes/mono_font_size = 40
-theme_override_font_sizes/normal_font_size = 40
-theme_override_font_sizes/bold_font_size = 40
-bbcode_enabled = true
-text = "[rainbow freq=0.1 sat=0.7 val=0.8][wave amp=50.0 freq=2 connected=1][center]Salut[/center]
-[center]Multumim ca ai ales Zero2Linux[/center][/wave][/rainbow]"
-scroll_active = false
-shortcut_keys_enabled = false
+offset_bottom = 720.0
+color = Color(0.0897051, 4.45691e-05, 0.320272, 1)
 
-[node name="Text" type="Label" parent="NoUser"]
+[node name="TabContainer" type="TabContainer" parent="NoUser"]
 layout_mode = 0
-offset_left = 403.0
-offset_top = 239.0
-offset_right = 880.0
-offset_bottom = 387.0
-theme_override_font_sizes/font_size = 30
-text = "Pentru a continua,
-Un nou utilizator trebuie creat.
-Apasa butonul pentru a continua"
-horizontal_alignment = 1
-vertical_alignment = 1
+offset_right = 1280.0
+offset_bottom = 720.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_g5vcv")
+current_tab = 0
+tabs_visible = false
 
-[node name="Continue" type="Button" parent="NoUser"]
+[node name="Hi" type="Control" parent="NoUser/TabContainer"]
+custom_minimum_size = Vector2(1280, 0)
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Clip" type="Panel" parent="NoUser/TabContainer/Hi"]
+clip_children = 1
+layout_mode = 0
+offset_top = 65.0
+offset_right = 1280.0
+offset_bottom = 177.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_v1fqv")
+
+[node name="Hello" type="RichTextLabel" parent="NoUser/TabContainer/Hi/Clip"]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 112.0
+theme_override_font_sizes/bold_italics_font_size = 80
+theme_override_font_sizes/italics_font_size = 80
+theme_override_font_sizes/mono_font_size = 80
+theme_override_font_sizes/normal_font_size = 80
+theme_override_font_sizes/bold_font_size = 80
+bbcode_enabled = true
+text = "[center][rainbow freq=0.2 sat=0.8 val=0.8][wave amp=45.0 freq=2.0 connected=1]Buna[/wave][/rainbow][/center]"
+scroll_active = false
+
+[node name="Thanks" type="Label" parent="NoUser/TabContainer/Hi"]
+layout_mode = 0
+offset_top = 215.811
+offset_right = 1280.0
+offset_bottom = 264.811
+theme_override_font_sizes/font_size = 35
+text = "Multumim ca ai instalat Zero2Linux!"
+horizontal_alignment = 1
+
+[node name="Info" type="Label" parent="NoUser/TabContainer/Hi"]
+layout_mode = 0
+offset_top = 363.0
+offset_right = 1280.0
+offset_bottom = 450.0
+theme_override_font_sizes/font_size = 30
+text = "Pentru a incepe, trebuie sa trecem prin cativa pasi.
+Apasa pe butonul \"Continua\" pentru a trece mai departe."
+horizontal_alignment = 1
+
+[node name="Continue" type="Button" parent="NoUser/TabContainer/Hi"]
 layout_mode = 0
 offset_left = 478.0
-offset_top = 504.0
+offset_top = 582.0
 offset_right = 805.0
-offset_bottom = 546.0
+offset_bottom = 632.0
 theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = ExtResource("5_c51ni")
-text = "Continua ->"
+text = "Continua"
 
-[connection signal="pressed" from="Profiles/Create" to="." method="_on_createuser_pressed"]
-[connection signal="text_changed" from="Create/Nume/Nume" to="." method="_on_nume_text_changed"]
-[connection signal="pressed" from="Create/Create" to="." method="_on_create_pressed"]
-[connection signal="pressed" from="Create/Back" to="." method="_on_back_pressed"]
-[connection signal="pressed" from="NoUser/Continue" to="." method="_on_intro_pressed"]
+[node name="User" type="Control" parent="NoUser/TabContainer"]
+visible = false
+custom_minimum_size = Vector2(1280, 0)
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Account" type="Node2D" parent="NoUser/TabContainer/User"]
+position = Vector2(555, 107)
+
+[node name="Bg" type="Sprite2D" parent="NoUser/TabContainer/User/Account"]
+self_modulate = Color(0.537255, 0.705882, 0.980392, 1)
+position = Vector2(80, 100)
+texture = ExtResource("4_f0vrj")
+
+[node name="BigLetter" type="Label" parent="NoUser/TabContainer/User/Account"]
+offset_left = 3.0
+offset_top = 22.0
+offset_right = 158.0
+offset_bottom = 178.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 70
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+visible_characters = 1
+
+[node name="Title" type="RichTextLabel" parent="NoUser/TabContainer/User"]
+layout_mode = 0
+offset_top = 41.0
+offset_right = 1280.0
+offset_bottom = 124.0
+theme_override_font_sizes/bold_italics_font_size = 50
+theme_override_font_sizes/italics_font_size = 50
+theme_override_font_sizes/mono_font_size = 50
+theme_override_font_sizes/normal_font_size = 50
+theme_override_font_sizes/bold_font_size = 50
+bbcode_enabled = true
+text = "[center][wave amp=45.0 freq=2.0 connected=1]Creeaza un nou utilizator[/wave][/center]"
+
+[node name="Info" type="Label" parent="NoUser/TabContainer/User"]
+layout_mode = 0
+offset_top = 313.0
+offset_right = 1280.0
+offset_bottom = 535.0
+theme_override_font_sizes/font_size = 30
+text = "Utilizatorii sunt pentru a salva progresul,
+cum ar fi progresul lectiilor si numarul de chestionare facute.
+Se pot creea si alti utilizatori mai tarziu."
+horizontal_alignment = 1
+
+[node name="Info2" type="Label" parent="NoUser/TabContainer/User"]
+layout_mode = 0
+offset_top = 556.0
+offset_right = 1280.0
+offset_bottom = 603.0
+theme_override_font_sizes/font_size = 30
+text = "Apasa pe buton pentru a creea un nou utilizator."
+horizontal_alignment = 1
+
+[node name="Continue" type="Button" parent="NoUser/TabContainer/User"]
+layout_mode = 0
+offset_left = 478.0
+offset_top = 616.0
+offset_right = 805.0
+offset_bottom = 666.0
+theme_override_font_sizes/font_size = 30
+text = "Creeaza un utilizator"
+
+[node name="Done" type="Control" parent="NoUser/TabContainer"]
+visible = false
+custom_minimum_size = Vector2(1280, 0)
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="Title" type="RichTextLabel" parent="NoUser/TabContainer/Done"]
+layout_mode = 0
+offset_top = 68.0
+offset_right = 1280.0
+offset_bottom = 153.0
+theme_override_font_sizes/bold_italics_font_size = 50
+theme_override_font_sizes/italics_font_size = 50
+theme_override_font_sizes/mono_font_size = 50
+theme_override_font_sizes/normal_font_size = 50
+theme_override_font_sizes/bold_font_size = 50
+bbcode_enabled = true
+text = "[center][wave amp=45.0 freq=2.0 connected=1]Acum esti gata[/wave][/center]"
+
+[node name="Info" type="Label" parent="NoUser/TabContainer/Done"]
+layout_mode = 0
+offset_top = 330.0
+offset_right = 1280.0
+offset_bottom = 372.0
+theme_override_font_sizes/font_size = 30
+text = "Apasa pe butonul de mai jos
+pentru a trece la meniul de logare."
+horizontal_alignment = 1
+
+[node name="Continue" type="Button" parent="NoUser/TabContainer/Done"]
+layout_mode = 0
+offset_left = 478.0
+offset_top = 582.0
+offset_right = 805.0
+offset_bottom = 632.0
+theme_override_font_sizes/font_size = 30
+text = "Continua"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_p0ffc")
+}
+
+[connection signal="pressed" from="Profiles/ToolPanel/HBoxContainer/Create" to="." method="_on_createuser_pressed"]
+[connection signal="pressed" from="Profiles/ToolPanel/HBoxContainer/Power" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="NoUser/TabContainer/Hi/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="NoUser/TabContainer/User/Continue" to="." method="_on_createuser_pressed"]
+[connection signal="pressed" from="NoUser/TabContainer/Done/Continue" to="." method="_on_finish_pressed"]

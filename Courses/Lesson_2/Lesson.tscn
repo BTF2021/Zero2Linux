@@ -13,15 +13,15 @@ layout_mode = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Block"]
 layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
 theme_override_font_sizes/normal_font_size = 25
 theme_override_font_sizes/bold_font_size = 25
-theme_override_font_sizes/italics_font_size = 25
-theme_override_font_sizes/bold_italics_font_size = 25
-theme_override_font_sizes/mono_font_size = 25
 bbcode_enabled = true
 text = "	Una dintre problemele pe care un nou utilizator este de a alege o distributie Linux. Datorita naturii open-source a kernelului, sunt [b]o multime[/b] de distributii. In aceasta lectie vom prezenta patru distributii considerate \"prietenoase\" cu noii utilizatori.
 
-	O distributie Linux este un sistem de operare ce contine kernelul Linux si o serie de aplicatii, majoritatea aplicatiilor fiind parte din proiectul GNU. De asemenea, majoritatea distributiilor includ si un package manager pentru instalarea si actualizarea programelor. Aplicatiile pot fi instalate printr-o aplicatie grafica (package manager), dar si prin terminal.
+	O distributie Linux este un sistem de operare ce contine kernelul Linux si o serie de aplicatii, majoritatea aplicatiilor fiind parte din proiectul GNU. De asemenea, majoritatea distributiilor includ si un program special pentru instalarea si actualizarea programelor. Aplicatiile pot fi instalate printr-o aplicatie grafica (package manager), dar si prin terminal.
 	Desi aceasta lectie este dedicata prezentarii a patru distributii specifice, trebuie mentionat faptul ca [b][i]orice distributie[/i][/b] este buna daca inca mai primeste actualizari."
 fit_content = true
 
@@ -63,11 +63,11 @@ expand_mode = 1
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="Block2"]
 layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
 theme_override_font_sizes/normal_font_size = 25
 theme_override_font_sizes/bold_font_size = 25
-theme_override_font_sizes/italics_font_size = 25
-theme_override_font_sizes/bold_italics_font_size = 25
-theme_override_font_sizes/mono_font_size = 25
 bbcode_enabled = true
 text = "[center][color=ffffff99][i]Desktopul principal Linux Mint (Cinnamon Edition)[/i][/color][/center]
 
@@ -116,11 +116,11 @@ expand_mode = 1
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="Block3"]
 layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
 theme_override_font_sizes/normal_font_size = 25
 theme_override_font_sizes/bold_font_size = 25
-theme_override_font_sizes/italics_font_size = 25
-theme_override_font_sizes/bold_italics_font_size = 25
-theme_override_font_sizes/mono_font_size = 25
 bbcode_enabled = true
 text = "[center][color=ffffff99][i]Desktopul principal Ubuntu[/i][/color][/center]
 
@@ -164,11 +164,11 @@ expand_mode = 1
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="Block4"]
 layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
 theme_override_font_sizes/normal_font_size = 25
 theme_override_font_sizes/bold_font_size = 25
-theme_override_font_sizes/italics_font_size = 25
-theme_override_font_sizes/bold_italics_font_size = 25
-theme_override_font_sizes/mono_font_size = 25
 bbcode_enabled = true
 text = "[center][color=ffffff99][i]Desktopul principal Debian[/i][/color][/center]
 
@@ -204,11 +204,11 @@ expand_mode = 1
 
 [node name="RichTextLabel3" type="RichTextLabel" parent="Block4"]
 layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
 theme_override_font_sizes/normal_font_size = 25
 theme_override_font_sizes/bold_font_size = 25
-theme_override_font_sizes/italics_font_size = 25
-theme_override_font_sizes/bold_italics_font_size = 25
-theme_override_font_sizes/mono_font_size = 25
 bbcode_enabled = true
 text = "[center][color=ffffff99][i]Desktopul principal Fedora[/i][/color][/center]
 
@@ -232,11 +232,11 @@ layout_mode = 2
 
 [node name="RichTextLabel4" type="RichTextLabel" parent="Block4"]
 layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
 theme_override_font_sizes/normal_font_size = 25
 theme_override_font_sizes/bold_font_size = 25
-theme_override_font_sizes/italics_font_size = 25
-theme_override_font_sizes/bold_italics_font_size = 25
-theme_override_font_sizes/mono_font_size = 25
 bbcode_enabled = true
 text = "	Oricare dintre cele patru distributii este buna. Este alegerea ta ce distributie vrei sa folosesti.
 	In opinia mea recomand Linux Mint, deoarece este destul de similar cu Windows, dar si pentru interfata ei prietenoasa cu utilizatorii.

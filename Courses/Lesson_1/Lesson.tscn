@@ -11,14 +11,14 @@ layout_mode = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Block"]
 layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
 theme_override_font_sizes/normal_font_size = 25
 theme_override_font_sizes/bold_font_size = 25
-theme_override_font_sizes/italics_font_size = 25
-theme_override_font_sizes/bold_italics_font_size = 25
-theme_override_font_sizes/mono_font_size = 25
 bbcode_enabled = true
 text = "	Probabil ai auzit cel putin de Linux, fie ca esti in domeniul IT, cel mai probabil legat de servere, fie pe Internet. Dar ce este acest \"Linux\" si de ce multi oameni il recomanda, desi alte sisteme de operare sunt (mult) mai populare?
-	De fapt, Linux nu este un sistem de operare propriu-zis. Este o combinatie intre kernel (Acesta este Linux) si aplicatiile software, majoritatea fiind parte de la GNU (Prescurtat din GNU's Not Linux) Project. De aceea este de preferat sa ii se spuna GNU/Linux.
+	De fapt, Linux nu este un sistem de operare propriu-zis. Este o combinatie intre kernel (Acesta este Linux) si aplicatiile software, majoritatea fiind parte de la GNU (Prescurtat din GNU's Not Unix) Project. De aceea este de preferat sa ii se spuna GNU/Linux.
 
 	[i]De-a lungul lectiilor, noi o sa ne referim la GNU/Linux prin Linux.[/i]
 
@@ -38,11 +38,11 @@ expand_mode = 1
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="Block"]
 layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
 theme_override_font_sizes/normal_font_size = 25
 theme_override_font_sizes/bold_font_size = 25
-theme_override_font_sizes/italics_font_size = 25
-theme_override_font_sizes/bold_italics_font_size = 25
-theme_override_font_sizes/mono_font_size = 25
 bbcode_enabled = true
 text = "[center][color=ffffff99][i]Un exemplu de distributie (Linux Mint). Nu toate distributiile au aceleasi programe si librarii[/i][/color][/center]"
 fit_content = true
@@ -79,11 +79,11 @@ layout_mode = 2
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="Block2"]
 layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
 theme_override_font_sizes/normal_font_size = 25
 theme_override_font_sizes/bold_font_size = 25
-theme_override_font_sizes/italics_font_size = 25
-theme_override_font_sizes/bold_italics_font_size = 25
-theme_override_font_sizes/mono_font_size = 25
 bbcode_enabled = true
 text = "	Linux fost creeat de Linus Torvalds pe 17 Septembrie 1991, initial pentru calculatoarele personale bazate pe arhitectura x86, dar de atunci a fost portat pe mai multe platforme, inclusiv sisteme incorporate (Rutere, dispozitive smart, console de jocuri video, televizoare, dispozitive de entertainment din automobile) [i]si telefoane[/i] (Android).
 	Acest lucru a fost posibil datorita limbajului de programare in care este scris (In mare parte in limbajul C, urmat de Assembly), dar si de faptul ca Linux este open-source (codul este valabil publicului si se poate contribui la acesta), fiind sub termenii licentei [url=https://ro.wikipedia.org/wiki/Licen%C8%9Ba_Public%C4%83_General%C4%83_GNU]Licenta Publica Generala GNU (GPL)[/url]."
@@ -97,11 +97,11 @@ texture = ExtResource("3_8ytbv")
 
 [node name="RichTextLabel4" type="RichTextLabel" parent="Block2"]
 layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
 theme_override_font_sizes/normal_font_size = 25
 theme_override_font_sizes/bold_font_size = 25
-theme_override_font_sizes/italics_font_size = 25
-theme_override_font_sizes/bold_italics_font_size = 25
-theme_override_font_sizes/mono_font_size = 25
 bbcode_enabled = true
 text = "[center][color=ffffff99][i]Linus Torvalds, dezvoltatorul principal al Linux[/i][/color][/center]"
 fit_content = true
@@ -112,11 +112,11 @@ layout_mode = 2
 
 [node name="RichTextLabel3" type="RichTextLabel" parent="Block2"]
 layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
 theme_override_font_sizes/normal_font_size = 25
 theme_override_font_sizes/bold_font_size = 25
-theme_override_font_sizes/italics_font_size = 25
-theme_override_font_sizes/bold_italics_font_size = 25
-theme_override_font_sizes/mono_font_size = 25
 bbcode_enabled = true
 text = "	In Martie 2024, Linux ocupa in jur de 4% din cota de piata a calculatoarelor desktop (De aceea Linux nu este prea cunoscut), dar in jur de 97% din top un milion servere web folosesc Linux.
 	De acea sunt importante cunostiintele de baza legate de utilizarea unui server Linux. Desi noi o sa lucram pe desktop, majoritatatea conceptelor (in special comenzile) se aplica si pentru servere."

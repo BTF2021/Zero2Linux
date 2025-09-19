@@ -1,78 +1,96 @@
-[gd_scene load_steps=6 format=3 uid="uid://bcd574anctpct"]
+[gd_scene load_steps=7 format=3 uid="uid://bcd574anctpct"]
 
 [ext_resource type="Script" path="res://Scripts/Courses.cs" id="1_bnupo"]
-[ext_resource type="Texture2D" uid="uid://bqd1321xxqoej" path="res://Sprites/CloseButton.png" id="3_ixxbh"]
-[ext_resource type="Texture2D" uid="uid://dherg8j0a21h2" path="res://Sprites/CoursePanel.png" id="3_thy4c"]
-[ext_resource type="Texture2D" uid="uid://c1cjk57xd8mq2" path="res://Sprites/CloseButtonHighlight.png" id="4_n2rmg"]
-[ext_resource type="Theme" uid="uid://c3r51fw2bo66h" path="res://Sprites/CourseUI.theme" id="4_wibqq"]
+[ext_resource type="PackedScene" uid="uid://bnl2o6s20upjw" path="res://Scenes/Window.tscn" id="2_uicp1"]
+[ext_resource type="Texture2D" uid="uid://dggmaqo3m8tdm" path="res://Sprites/Adv.png" id="5_nte5v"]
+[ext_resource type="Texture2D" uid="uid://cpswweuho8b08" path="res://Sprites/Normal.png" id="5_y88ff"]
+[ext_resource type="Texture2D" uid="uid://dtf04r0xxc0j0" path="res://Sprites/Spc.png" id="6_y88ff"]
 
-[node name="Courses" type="Control"]
-layout_mode = 3
-anchors_preset = 0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g7vcl"]
+bg_color = Color(0.117647, 0.117647, 0.180392, 1)
+
+[node name="Courses" type="Node2D"]
 script = ExtResource("1_bnupo")
 
-[node name="Panel" type="Sprite2D" parent="."]
-position = Vector2(645, 339)
-texture = ExtResource("3_thy4c")
+[node name="Window" parent="." instance=ExtResource("2_uicp1")]
+windowtitle = "Lectii"
 
-[node name="Drag" type="Button" parent="Panel"]
-self_modulate = Color(1, 1, 1, 0)
-offset_left = -363.0
-offset_top = -303.0
-offset_right = 365.0
-offset_bottom = -258.0
-flat = true
-
-[node name="Back" type="TextureButton" parent="Panel"]
-offset_left = 322.0
-offset_top = -301.0
-offset_right = 362.0
-offset_bottom = -263.0
-scale = Vector2(1.1, 1.1)
-texture_normal = ExtResource("3_ixxbh")
-texture_pressed = ExtResource("4_n2rmg")
-
-[node name="Label" type="Label" parent="Panel"]
-offset_left = -72.0
-offset_top = -293.0
-offset_right = 70.0
-offset_bottom = -270.0
-theme_override_font_sizes/font_size = 16
-text = "Selecteaza o lectie"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
-offset_left = -373.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Window"]
+offset_left = -371.0
 offset_top = -257.0
 offset_right = 372.0
-offset_bottom = 305.0
-theme = ExtResource("4_wibqq")
+offset_bottom = 304.0
+
+[node name="Panel" type="Panel" parent="Window/VBoxContainer"]
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g7vcl")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Window/VBoxContainer/Panel"]
+layout_mode = 0
+offset_right = 742.0
+offset_bottom = 52.0
+theme_override_constants/separation = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="Window/VBoxContainer/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="Window/VBoxContainer/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(444, 0)
+layout_mode = 2
+size_flags_vertical = 4
+placeholder_text = "Cauta lectiile dupa nume"
+alignment = 1
+clear_button_enabled = true
+drag_and_drop_selection_enabled = false
+
+[node name="MarginContainer2" type="MarginContainer" parent="Window/VBoxContainer/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="Normal" type="TextureButton" parent="Window/VBoxContainer/Panel/HBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("5_y88ff")
+stretch_mode = 5
+
+[node name="MarginContainer3" type="MarginContainer" parent="Window/VBoxContainer/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+
+[node name="Avansat" type="TextureButton" parent="Window/VBoxContainer/Panel/HBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("5_nte5v")
+stretch_mode = 5
+
+[node name="MarginContainer4" type="MarginContainer" parent="Window/VBoxContainer/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+
+[node name="Special" type="TextureButton" parent="Window/VBoxContainer/Panel/HBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("6_y88ff")
+stretch_mode = 5
+
+[node name="MarginContainer5" type="MarginContainer" parent="Window/VBoxContainer/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Window/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 follow_focus = true
 horizontal_scroll_mode = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Window/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 1
+theme_override_constants/separation = 2
 
-[node name="End" type="VBoxContainer" parent="Panel/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="Panel/ScrollContainer/VBoxContainer/End"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Panel/ScrollContainer/VBoxContainer/End"]
-layout_mode = 2
-text = "Verifica setarile daca sunt afisate lectiile avansate si speciale
-Urmareste pagina de Github pentru posibile noi lectii :)"
-horizontal_alignment = 1
-
-[node name="MarginContainer2" type="MarginContainer" parent="Panel/ScrollContainer/VBoxContainer/End"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-
-[connection signal="button_down" from="Panel/Drag" to="." method="_on_drag_down"]
-[connection signal="button_up" from="Panel/Drag" to="." method="_on_drag_up"]
-[connection signal="pressed" from="Panel/Back" to="." method="_on_back_pressed"]
+[connection signal="text_changed" from="Window/VBoxContainer/Panel/HBoxContainer/LineEdit" to="." method="_on_line_edit_text_changed"]
+[connection signal="toggled" from="Window/VBoxContainer/Panel/HBoxContainer/Normal" to="." method="_on_normal_toggled"]
+[connection signal="toggled" from="Window/VBoxContainer/Panel/HBoxContainer/Avansat" to="." method="_on_avansat_toggled"]
+[connection signal="toggled" from="Window/VBoxContainer/Panel/HBoxContainer/Special" to="." method="_on_special_toggled"]

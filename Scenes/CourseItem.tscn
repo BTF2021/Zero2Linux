@@ -1,31 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://c3cbtx2we3uxk"]
+[gd_scene load_steps=6 format=3 uid="uid://c3cbtx2we3uxk"]
 
-[ext_resource type="StyleBox" uid="uid://c8ip85nk5v8ds" path="res://Sprites/UIButtons.stylebox" id="1_govcc"]
 [ext_resource type="Script" path="res://Scripts/CourseItem.cs" id="1_jtknl"]
 [ext_resource type="Texture2D" uid="uid://dggmaqo3m8tdm" path="res://Sprites/Adv.png" id="2_a8x6h"]
 [ext_resource type="Texture2D" uid="uid://dtf04r0xxc0j0" path="res://Sprites/Spc.png" id="3_tdf33"]
 [ext_resource type="StyleBox" uid="uid://di87pu5wmffgt" path="res://Sprites/UINoHover.stylebox" id="5_untmr"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p6tin"]
-bg_color = Color(0.188235, 0.188235, 0.188235, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r6hri"]
-bg_color = Color(0, 0.721569, 0.427451, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ebws4"]
+bg_color = Color(0.160225, 0.162593, 0.227524, 1)
 
 [node name="CourseItem" type="PanelContainer"]
 custom_minimum_size = Vector2(100, 100)
 offset_right = 585.0
 offset_bottom = 80.0
 mouse_filter = 1
-theme_override_styles/panel = ExtResource("1_govcc")
+theme_override_styles/panel = SubResource("StyleBoxFlat_ebws4")
 script = ExtResource("1_jtknl")
 
 [node name="PanelContainer" type="HBoxContainer" parent="."]
@@ -64,8 +52,6 @@ theme_override_constants/margin_right = 0
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_styles/background = SubResource("StyleBoxFlat_p6tin")
-theme_override_styles/fill = SubResource("StyleBoxFlat_r6hri")
 value = 50.0
 
 [node name="marginContainer4" type="MarginContainer" parent="PanelContainer"]

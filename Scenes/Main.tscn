@@ -1,180 +1,476 @@
-[gd_scene load_steps=13 format=3 uid="uid://b4gdupblxidyf"]
+[gd_scene load_steps=24 format=3 uid="uid://b4gdupblxidyf"]
 
 [ext_resource type="Script" path="res://Scripts/Main.cs" id="1_c7d67"]
-[ext_resource type="StyleBox" uid="uid://di87pu5wmffgt" path="res://Sprites/UINoHover.stylebox" id="2_0hv5f"]
-[ext_resource type="Texture2D" uid="uid://c311u78gq8dn" path="res://Sprites/Bg.png" id="2_lj8l1"]
+[ext_resource type="Texture2D" uid="uid://c6sdb5r6qr4mr" path="res://Sprites/Backrounds/BgMountains.png" id="2_bmxlf"]
 [ext_resource type="Texture2D" uid="uid://bid2ssfeh2pfy" path="res://Sprites/Bar.png" id="3_ocyen"]
-[ext_resource type="VideoStream" path="res://Sprites/bgvid.ogv" id="3_v0gny"]
-[ext_resource type="StyleBox" uid="uid://c8ip85nk5v8ds" path="res://Sprites/UIButtons.stylebox" id="4_ja7mp"]
+[ext_resource type="Texture2D" uid="uid://dgfw4k5y4gvdk" path="res://Sprites/Logo.png" id="4_grg3l"]
 [ext_resource type="Texture2D" uid="uid://2k0tqngjaab8" path="res://Sprites/Power.png" id="4_q207a"]
 [ext_resource type="Texture2D" uid="uid://hbrqsdt4laac" path="res://Sprites/Logout.png" id="6_8su00"]
+[ext_resource type="Texture2D" uid="uid://ddhgftxfvqe6s" path="res://Sprites/Profile.png" id="6_grg3l"]
 [ext_resource type="Texture2D" uid="uid://drgkb2u3g5c1c" path="res://Sprites/PowerHighlight.png" id="6_kgrc2"]
+[ext_resource type="Texture2D" uid="uid://04d0nmw1dmbb" path="res://Sprites/Courses.png" id="6_mapdq"]
+[ext_resource type="Texture2D" uid="uid://dw8yk7allgkam" path="res://Sprites/Quizzes.png" id="7_erwvk"]
+[ext_resource type="Texture2D" uid="uid://dq0cwvbbf5hny" path="res://Sprites/Progress.png" id="8_6sv0n"]
 [ext_resource type="Texture2D" uid="uid://e5veq36hyvl8" path="res://Sprites/LogoutHighlight.png" id="8_mufyl"]
-[ext_resource type="Texture2D" uid="uid://ephkf4sqir17" path="res://Sprites/Notification.png" id="11_bert4"]
-[ext_resource type="Texture2D" uid="uid://bwxgn7nokfxs7" path="res://Sprites/NotificationHighlight.png" id="12_ie7en"]
+[ext_resource type="Texture2D" uid="uid://ephkf4sqir17" path="res://Sprites/Notification.png" id="9_bmxlf"]
+[ext_resource type="Texture2D" uid="uid://cgf2wywod06f4" path="res://Sprites/Tour.png" id="9_erwvk"]
+[ext_resource type="Texture2D" uid="uid://bwxgn7nokfxs7" path="res://Sprites/NotificationHighlight.png" id="10_4kpch"]
+[ext_resource type="Texture2D" uid="uid://dnaxd4pvfafmh" path="res://Sprites/Settings.png" id="13_frkhe"]
+
+[sub_resource type="Animation" id="Animation_grg3l"]
+resource_name = "In"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bar:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.245, 1),
+"update": 0,
+"values": [Vector2(640, 767), Vector2(640, 686)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bg:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.245, 1),
+"update": 0,
+"values": [Vector2(1.05, 1.05), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_1p5hy"]
+resource_name = "Panel"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bar/HBoxContainer/Logo/Panel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(0.245, 1),
+"update": 0,
+"values": [Vector2(-10, 0), Vector2(-10, -320)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bar/HBoxContainer/Logo/Panel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Bar/HBoxContainer/Logo/Panel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_frkhe"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bar:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(640, 767)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bg:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.05, 1.05)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Bar/HBoxContainer/Logo/Panel:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-10, -320)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Bar/HBoxContainer/Logo/Panel:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Bar/HBoxContainer/Logo/Panel:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_cuuru"]
+resource_name = "TutorialIn"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bg:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.245, 1),
+"update": 0,
+"values": [Vector2(1.05, 1.05), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1p5hy"]
+_data = {
+"In": SubResource("Animation_grg3l"),
+"Panel": SubResource("Animation_1p5hy"),
+"RESET": SubResource("Animation_frkhe"),
+"TutorialIn": SubResource("Animation_cuuru")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_grg3l"]
+bg_color = Color(0.133333, 0.141176, 0.219608, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.803922, 0.839216, 0.956863, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_346fj"]
+bg_color = Color(0.305882, 0.54902, 0.945098, 0.588235)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_c7d67")
 
-[node name="UI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1p5hy")
+}
+
+[node name="Bg" type="Sprite2D" parent="."]
+position = Vector2(640, 360)
+scale = Vector2(1.05, 1.05)
+texture = ExtResource("2_bmxlf")
+
+[node name="Pause" type="ColorRect" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+z_index = 99
 offset_right = 1280.0
 offset_bottom = 720.0
+mouse_filter = 2
+color = Color(0.207843, 0.207843, 0.207843, 0.819608)
 
-[node name="Bg" type="Node2D" parent="UI"]
-position = Vector2(640, 360)
-
-[node name="Sprite2D" type="Sprite2D" parent="UI/Bg"]
-texture = ExtResource("2_lj8l1")
-
-[node name="Bg" type="VideoStreamPlayer" parent="UI/Bg"]
-offset_left = -640.0
-offset_top = -360.0
-offset_right = 640.0
-offset_bottom = 359.0
-stream = ExtResource("3_v0gny")
-autoplay = true
-loop = true
-
-[node name="Name" type="RichTextLabel" parent="UI"]
-layout_mode = 0
-offset_top = 96.0
-offset_right = 1280.0
-offset_bottom = 165.0
-theme_override_font_sizes/bold_italics_font_size = 50
-theme_override_font_sizes/italics_font_size = 50
-theme_override_font_sizes/mono_font_size = 50
-theme_override_font_sizes/normal_font_size = 50
-theme_override_font_sizes/bold_font_size = 50
-bbcode_enabled = true
-text = "[center][rainbow freq=0.2 sat=0.8 val=0.8][wave amp=65.0 freq=2.0 connected=1]Zero2Linux[/wave][/rainbow][/center]"
-fit_content = true
-scroll_active = false
-shortcut_keys_enabled = false
-
-[node name="Subtitle" type="RichTextLabel" parent="UI"]
-self_modulate = Color(0.686739, 0.771303, 0.952505, 1)
-layout_mode = 0
-offset_top = 151.0
-offset_right = 1280.0
-offset_bottom = 220.0
-theme_override_font_sizes/bold_italics_font_size = 40
-theme_override_font_sizes/italics_font_size = 40
-theme_override_font_sizes/mono_font_size = 40
-theme_override_font_sizes/normal_font_size = 40
-theme_override_font_sizes/bold_font_size = 40
-bbcode_enabled = true
-text = "[center][wave amp=25.0 freq=2.0 connected=1]Invata Linux de la zero[/wave][/center]"
-fit_content = true
-scroll_active = false
-shortcut_keys_enabled = false
-
-[node name="Panel" type="Panel" parent="UI"]
-layout_mode = 2
-offset_left = 490.0
-offset_top = 337.0
-offset_right = 794.0
-offset_bottom = 592.0
-
-[node name="Buttons" type="VBoxContainer" parent="UI/Panel"]
-layout_mode = 0
-offset_right = 304.0
-offset_bottom = 255.0
-size_flags_vertical = 8
-theme_override_constants/separation = -1
-
-[node name="Course" type="Button" parent="UI/Panel/Buttons"]
-layout_mode = 2
-size_flags_vertical = 3
-tooltip_text = "Incepe o lectie"
-theme_override_font_sizes/font_size = 20
-theme_override_styles/focus = ExtResource("2_0hv5f")
-theme_override_styles/normal = ExtResource("4_ja7mp")
-text = "Lectii"
-
-[node name="Quizzes" type="Button" parent="UI/Panel/Buttons"]
-layout_mode = 2
-size_flags_vertical = 3
-tooltip_text = "Testeaza-ti cunostiintele dobandite pe parcursul lectiilor.
-Necesita terminarea a cel putin doua lectii."
-theme_override_font_sizes/font_size = 20
-theme_override_styles/focus = ExtResource("2_0hv5f")
-theme_override_styles/normal = ExtResource("4_ja7mp")
-text = "Chestionare"
-
-[node name="Progress" type="Button" parent="UI/Panel/Buttons"]
-layout_mode = 2
-size_flags_vertical = 3
-tooltip_text = "Vezi intregul tau progres de pe acest profil"
-theme_override_font_sizes/font_size = 20
-theme_override_styles/focus = ExtResource("2_0hv5f")
-theme_override_styles/normal = ExtResource("4_ja7mp")
-text = "Statistici"
-
-[node name="Settings" type="Button" parent="UI/Panel/Buttons"]
-layout_mode = 2
-size_flags_vertical = 3
-tooltip_text = "Regleaza-ti setarile legate de imagine, lectii, etc"
-theme_override_font_sizes/font_size = 20
-theme_override_styles/focus = ExtResource("2_0hv5f")
-theme_override_styles/normal = ExtResource("4_ja7mp")
-text = "Setari"
-
-[node name="Bar" type="Sprite2D" parent="UI"]
+[node name="Bar" type="Sprite2D" parent="."]
 top_level = true
 z_index = 98
-position = Vector2(640, 688)
+position = Vector2(640, 767)
+scale = Vector2(1.06, 1)
 texture = ExtResource("3_ocyen")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/Bar"]
-offset_left = -574.0
-offset_top = -21.0
+[node name="HBoxContainer" type="HBoxContainer" parent="Bar"]
+offset_left = -576.0
+offset_top = -27.0
 offset_right = 349.0
-offset_bottom = 11.0
+offset_bottom = 16.0
 scale = Vector2(1.25, 1.25)
 theme_override_constants/separation = 5
 
-[node name="Power" type="TextureButton" parent="UI/Bar/HBoxContainer"]
+[node name="Logo" type="TextureButton" parent="Bar/HBoxContainer"]
 layout_mode = 2
+tooltip_text = "Start"
+texture_normal = ExtResource("4_grg3l")
+stretch_mode = 5
+flip_h = true
+
+[node name="Panel" type="Panel" parent="Bar/HBoxContainer/Logo"]
+visible = false
+z_index = 97
+layout_mode = 0
+offset_left = -10.0
+offset_top = -320.0
+offset_right = 220.0
+offset_bottom = -6.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_grg3l")
+
+[node name="Account" type="Node2D" parent="Bar/HBoxContainer/Logo/Panel"]
+position = Vector2(77.5924, -54.4001)
+scale = Vector2(0.45, 0.45)
+
+[node name="Outline" type="Sprite2D" parent="Bar/HBoxContainer/Logo/Panel/Account"]
+modulate = Color(0.803922, 0.839216, 0.956863, 1)
+position = Vector2(80, 100)
+scale = Vector2(1.05, 1.05)
+texture = ExtResource("6_grg3l")
+
+[node name="Bg" type="Sprite2D" parent="Bar/HBoxContainer/Logo/Panel/Account"]
+position = Vector2(80, 100)
+texture = ExtResource("6_grg3l")
+
+[node name="BigLetter" type="Label" parent="Bar/HBoxContainer/Logo/Panel/Account"]
+offset_left = 3.0
+offset_top = 22.0
+offset_right = 158.0
+offset_bottom = 178.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 70
+text = "T"
+horizontal_alignment = 1
+vertical_alignment = 1
+visible_characters = 1
+
+[node name="Name" type="Label" parent="Bar/HBoxContainer/Logo/Panel/Account"]
+offset_left = -24.0
+offset_top = 183.0
+offset_right = 186.0
+offset_bottom = 218.0
+theme_override_font_sizes/font_size = 25
+text = "123456789abcdef"
+horizontal_alignment = 1
+
+[node name="Buttons" type="VBoxContainer" parent="Bar/HBoxContainer/Logo/Panel"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 47.0
+offset_right = 229.0
+offset_bottom = 268.0
+size_flags_vertical = 8
+theme_override_constants/separation = -1
+
+[node name="Lesson" type="Button" parent="Bar/HBoxContainer/Logo/Panel/Buttons"]
+custom_minimum_size = Vector2(200, 45)
+layout_mode = 2
+tooltip_text = "Incepe o lectie"
+mouse_filter = 1
+theme_override_styles/pressed = SubResource("StyleBoxFlat_346fj")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Bar/HBoxContainer/Logo/Panel/Buttons/Lesson"]
+layout_mode = 0
+offset_right = 228.0
+offset_bottom = 45.0
+theme_override_constants/separation = 10
+
+[node name="Margin" type="MarginContainer" parent="Bar/HBoxContainer/Logo/Panel/Buttons/Lesson/HBoxContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="Bar/HBoxContainer/Logo/Panel/Buttons/Lesson/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("6_mapdq")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Bar/HBoxContainer/Logo/Panel/Buttons/Lesson/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Lectii"
+
+[node name="Quizzes" type="Button" parent="Bar/HBoxContainer/Logo/Panel/Buttons"]
+custom_minimum_size = Vector2(200, 45)
+layout_mode = 2
+tooltip_text = "Testeaza-ti cunostiintele dobandite pe parcursul lectiilor"
+mouse_filter = 1
+theme_override_styles/pressed = SubResource("StyleBoxFlat_346fj")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Bar/HBoxContainer/Logo/Panel/Buttons/Quizzes"]
+layout_mode = 0
+offset_right = 228.0
+offset_bottom = 45.0
+theme_override_constants/separation = 10
+
+[node name="Margin" type="MarginContainer" parent="Bar/HBoxContainer/Logo/Panel/Buttons/Quizzes/HBoxContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="Bar/HBoxContainer/Logo/Panel/Buttons/Quizzes/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("7_erwvk")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Bar/HBoxContainer/Logo/Panel/Buttons/Quizzes/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Chestionare"
+
+[node name="Stats" type="Button" parent="Bar/HBoxContainer/Logo/Panel/Buttons"]
+custom_minimum_size = Vector2(200, 45)
+layout_mode = 2
+tooltip_text = "Vezi intregul tau progres de pe acest profil"
+mouse_filter = 1
+theme_override_styles/pressed = SubResource("StyleBoxFlat_346fj")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Bar/HBoxContainer/Logo/Panel/Buttons/Stats"]
+layout_mode = 0
+offset_right = 228.0
+offset_bottom = 45.0
+theme_override_constants/separation = 10
+
+[node name="Margin" type="MarginContainer" parent="Bar/HBoxContainer/Logo/Panel/Buttons/Stats/HBoxContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="Bar/HBoxContainer/Logo/Panel/Buttons/Stats/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("8_6sv0n")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Bar/HBoxContainer/Logo/Panel/Buttons/Stats/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Statistici"
+
+[node name="Settings" type="Button" parent="Bar/HBoxContainer/Logo/Panel/Buttons"]
+custom_minimum_size = Vector2(200, 45)
+layout_mode = 2
+tooltip_text = "Regleaza-ti setarile legate de imagine, lectii, etc"
+mouse_filter = 1
+theme_override_styles/pressed = SubResource("StyleBoxFlat_346fj")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Bar/HBoxContainer/Logo/Panel/Buttons/Settings"]
+layout_mode = 0
+offset_right = 228.0
+offset_bottom = 45.0
+theme_override_constants/separation = 10
+
+[node name="Margin" type="MarginContainer" parent="Bar/HBoxContainer/Logo/Panel/Buttons/Settings/HBoxContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="Bar/HBoxContainer/Logo/Panel/Buttons/Settings/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("13_frkhe")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Bar/HBoxContainer/Logo/Panel/Buttons/Settings/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Setari"
+
+[node name="Tour" type="Button" parent="Bar/HBoxContainer/Logo/Panel/Buttons"]
+custom_minimum_size = Vector2(200, 45)
+layout_mode = 2
+tooltip_text = "Invata cum se navigheaza interfata"
+mouse_filter = 1
+theme_override_styles/pressed = SubResource("StyleBoxFlat_346fj")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Bar/HBoxContainer/Logo/Panel/Buttons/Tour"]
+layout_mode = 0
+offset_right = 228.0
+offset_bottom = 45.0
+theme_override_constants/separation = 10
+
+[node name="Margin" type="MarginContainer" parent="Bar/HBoxContainer/Logo/Panel/Buttons/Tour/HBoxContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="Bar/HBoxContainer/Logo/Panel/Buttons/Tour/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("9_erwvk")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Bar/HBoxContainer/Logo/Panel/Buttons/Tour/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Tur"
+
+[node name="Power" type="TextureButton" parent="Bar/HBoxContainer/Logo/Panel"]
+layout_mode = 0
+offset_left = 9.66788
+offset_top = 273.6
+offset_right = 41.6679
+offset_bottom = 305.6
 tooltip_text = "Oprire calculator"
+mouse_filter = 1
 texture_normal = ExtResource("4_q207a")
 texture_pressed = ExtResource("6_kgrc2")
 
-[node name="Logout" type="TextureButton" parent="UI/Bar/HBoxContainer"]
-layout_mode = 2
+[node name="Logout" type="TextureButton" parent="Bar/HBoxContainer/Logo/Panel"]
+layout_mode = 0
+offset_left = 48.9132
+offset_top = 275.2
+offset_right = 80.9132
+offset_bottom = 307.2
 tooltip_text = "Delogare"
+mouse_filter = 1
 texture_normal = ExtResource("6_8su00")
 texture_pressed = ExtResource("8_mufyl")
 
-[node name="vSeparator" type="VSeparator" parent="UI/Bar/HBoxContainer"]
-visible = false
-layout_mode = 2
-
-[node name="Windows" type="MarginContainer" parent="UI/Bar/HBoxContainer"]
+[node name="Windows" type="MarginContainer" parent="Bar/HBoxContainer"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Notification" type="TextureButton" parent="UI/Bar/HBoxContainer"]
-visible = false
-layout_mode = 2
-tooltip_text = "Exista o versiune noua"
-disabled = true
-texture_normal = ExtResource("11_bert4")
-texture_pressed = ExtResource("12_ie7en")
-
-[node name="Time" type="Label" parent="UI/Bar/HBoxContainer"]
+[node name="Time" type="Label" parent="Bar/HBoxContainer"]
 layout_mode = 2
 mouse_filter = 1
 theme_override_font_sizes/font_size = 20
 text = "hh-mm-ss"
 horizontal_alignment = 2
 
-[connection signal="pressed" from="UI/Panel/Buttons/Course" to="." method="_on_course_pressed"]
-[connection signal="pressed" from="UI/Panel/Buttons/Quizzes" to="." method="_on_quizzes_pressed"]
-[connection signal="pressed" from="UI/Panel/Buttons/Progress" to="." method="_on_progress_pressed"]
-[connection signal="pressed" from="UI/Panel/Buttons/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="UI/Bar/HBoxContainer/Power" to="." method="_on_quit_pressed"]
-[connection signal="pressed" from="UI/Bar/HBoxContainer/Logout" to="." method="_on_logout_pressed"]
-[connection signal="pressed" from="UI/Bar/HBoxContainer/Notification" to="." method="_on_notification_pressed"]
+[node name="Notification" type="TextureButton" parent="Bar/HBoxContainer"]
+visible = false
+layout_mode = 2
+tooltip_text = "Exista o versiune noua"
+disabled = true
+texture_normal = ExtResource("9_bmxlf")
+texture_pressed = ExtResource("10_4kpch")
+stretch_mode = 3
+
+[connection signal="mouse_entered" from="Bar/HBoxContainer/Logo" to="." method="_on_menu_mouse_entered" binds= [true]]
+[connection signal="mouse_exited" from="Bar/HBoxContainer/Logo" to="." method="_on_menu_mouse_exited" binds= [true]]
+[connection signal="pressed" from="Bar/HBoxContainer/Logo" to="." method="_on_logo_pressed"]
+[connection signal="mouse_entered" from="Bar/HBoxContainer/Logo/Panel" to="." method="_on_menu_mouse_entered" binds= [false]]
+[connection signal="mouse_exited" from="Bar/HBoxContainer/Logo/Panel" to="." method="_on_menu_mouse_exited" binds= [false]]
+[connection signal="pressed" from="Bar/HBoxContainer/Logo/Panel/Buttons/Lesson" to="." method="_on_lesson_pressed"]
+[connection signal="pressed" from="Bar/HBoxContainer/Logo/Panel/Buttons/Quizzes" to="." method="_on_quizzes_pressed"]
+[connection signal="pressed" from="Bar/HBoxContainer/Logo/Panel/Buttons/Stats" to="." method="_on_stats_pressed"]
+[connection signal="pressed" from="Bar/HBoxContainer/Logo/Panel/Buttons/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Bar/HBoxContainer/Logo/Panel/Buttons/Tour" to="." method="_on_tour_pressed"]
+[connection signal="pressed" from="Bar/HBoxContainer/Logo/Panel/Power" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Bar/HBoxContainer/Logo/Panel/Logout" to="." method="_on_logout_pressed"]
+[connection signal="pressed" from="Bar/HBoxContainer/Notification" to="." method="_on_notification_pressed"]

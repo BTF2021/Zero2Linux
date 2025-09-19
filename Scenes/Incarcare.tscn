@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://qc1o5l6rijo6"]
 
-[ext_resource type="Script" uid="uid://6knrikuvguf2" path="res://Scripts/Incarcare.cs" id="1_16o33"]
+[ext_resource type="Script" path="res://Scripts/Incarcare.cs" id="1_16o33"]
 [ext_resource type="Texture2D" uid="uid://dmkypoj2doa4m" path="res://Sprites/LoadingBg.png" id="1_ucu8g"]
 [ext_resource type="Texture2D" uid="uid://dh8gnqru4wwpf" path="res://Sprites/LoadingCircle.png" id="2_71ad4"]
 
@@ -22,7 +22,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2vwim"]
 _data = {
-&"Rotate": SubResource("Animation_a4q1u")
+"Rotate": SubResource("Animation_a4q1u")
 }
 
 [sub_resource type="Animation" id="Animation_15432"]
@@ -83,8 +83,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bfjc8"]
 _data = {
-&"Out": SubResource("Animation_15432"),
-&"RESET": SubResource("Animation_hj6vt")
+"Out": SubResource("Animation_15432"),
+"RESET": SubResource("Animation_hj6vt")
 }
 
 [node name="Incarcare" type="Node2D"]
@@ -103,7 +103,7 @@ texture = ExtResource("2_71ad4")
 
 [node name="Animation" type="AnimationPlayer" parent="Icon"]
 libraries = {
-&"": SubResource("AnimationLibrary_2vwim")
+"": SubResource("AnimationLibrary_2vwim")
 }
 
 [node name="Bara" type="ProgressBar" parent="."]
@@ -149,7 +149,7 @@ shortcut_keys_enabled = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-&"": SubResource("AnimationLibrary_bfjc8")
+"": SubResource("AnimationLibrary_bfjc8")
 }
 
 [connection signal="value_changed" from="Bara" to="." method="ChangeScene"]

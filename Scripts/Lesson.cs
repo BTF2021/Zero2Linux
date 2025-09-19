@@ -34,7 +34,6 @@ public partial class Lesson : Node2D
 			GetNode<Sprite2D>("Panel/ScrollContainer/MarginContainer/Body/VideoPreview/textureRect").QueueFree();
 			GetNode<TextureRect>("Panel/ScrollContainer/MarginContainer/Body/VideoPreview").QueueFree();
 		}
-		else if(!ResourceLoader.Exists("res://Courses/Lesson_" + lessonid + "/Video.webm") || !_data.isvideoavailable) GetNode<Sprite2D>("Panel/ScrollContainer/MarginContainer/Body/VideoPreview/textureRect").QueueFree();
 		GetNode<TextureRect>("Panel/ScrollContainer/MarginContainer/Body/VideoPreview").Texture = GD.Load<CompressedTexture2D>("res://Courses/Lesson_" + lessonid + "/VidBg.png");
 
 		//Titlu si rearanjarea elementelor
@@ -210,13 +209,6 @@ public partial class Lesson : Node2D
 	{	GD.Print("Pressed");
 		_data.CurrentLesson = 0;
 		GetTree().ChangeSceneToFile("res://Scenes/Main.tscn");
-	}
-	//Cand apesi pe play
-	private void _on_watch_pressed()
-	{	var _video = (ResourceLoader.Load<PackedScene>("res://Scenes/VideoOverlay.tscn")).Instantiate();
-		_video.GetNode<VideoStreamPlayer>("Panel/VideoStreamPlayer").Stream.File = "res://Courses/Lesson_" + lessonid + "/Video.webm";	//Incarcam videoclipul dorit
-		_video.GetNode<Sprite2D>("Bg").Texture = GD.Load<CompressedTexture2D>("res://Courses/Lesson_" + lessonid + "/VidBg.png");	//Fundalul de dinainte sa dai play (VideoOverlay)
-		AddChild(_video);
 	}
 	//Pentru linkurile din text
 	private void _on_text_link(Variant meta)

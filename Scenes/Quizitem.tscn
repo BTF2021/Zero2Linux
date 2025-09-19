@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://duiw5l0ody1l"]
 
-[ext_resource type="Script" uid="uid://dnu1oiel21j2m" path="res://Scripts/Quizitem.cs" id="1_hrfcq"]
+[ext_resource type="Script" path="res://Scripts/Quizitem.cs" id="1_hrfcq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7iva6"]
 bg_color = Color(0.166904, 0.17022, 0.233705, 1)
@@ -14,12 +14,6 @@ offset_right = 676.0
 offset_bottom = 153.0
 mouse_filter = 1
 script = ExtResource("1_hrfcq")
-question = "Intrebare"
-answer1 = "Raspuns 1"
-answer2 = "Raspuns 2"
-answer3 = "Raspuns 3"
-answer4 = "Raspuns 4"
-explanation = "Explicatie"
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 2

@@ -16,20 +16,12 @@ public partial class Logare : Node2D
 	{	_data = (DefaultData)GetNode("/root/DefaultData");
 		_profile = GetNode<Button>("Profiles/SidePanel/ScrollContainer/List/>,,<");	//butonul-model are un nume considerat de aplicatie invalid
 		_names = new string[101];	//vectori pentru numele utilizatorilor
-		GetNode<CanvasItem>("/root/Transition").Show(); //A se vedea funtia logging
 		CheckUsers();
 		GetNode<Control>("Profiles").Visible = false;
 		GetNode<Control>("NoUser").Visible = false;
 		//Daca nu sunt utilizatori existenti, atunci trimite-i la ecranul de bun venit. Altfel, trimite-i la lista de utilizatori
-		if(!profilespresent)
-		{
-			GetNode<Control>("NoUser").Visible = true;
-			GetNode<AnimationPlayer>("AnimationPlayer").Play("NoUser");
-		}
-		else
-		{	GetNode<Control>("Profiles").Visible = true;
-			GetNode<AnimationPlayer>("AnimationPlayer").Play("In");
-		}
+		if(!profilespresent) GetNode<AnimationPlayer>("AnimationPlayer").Play("NoUser");
+		else GetNode<AnimationPlayer>("AnimationPlayer").Play("In");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -118,16 +110,11 @@ public partial class Logare : Node2D
 	}
 	//Functia pentru logare
 	private void logging(string name)
-	{	_data.LoggedUser = name;
-		GD.Print("Logat in: " + name);
-		
+	{	_data.LogIn(name);
 		for(int i = 0; i< GetNode<VBoxContainer>("Profiles/SidePanel/ScrollContainer/List").GetChildCount(); i++)
 			GetNode<VBoxContainer>("Profiles/SidePanel/ScrollContainer/List").GetChild<Button>(i).Disabled = true;
 		GetNode<AnimationPlayer>("AnimationPlayer").Play("Logging");
 		var timer = GetTree().CreateTimer(0.6);
-		//Aceasta instructiune (ChangeSceneToFile) este motivul pentru care exista o alta scena in Autoload
-		//In timpul in care Godot a eliberat din memorie aceasta scena si incarca scena Main, o sa apara gri
-		//De aceea aratam scena Transition in _Ready()
 		timer.Timeout += () => GetTree().ChangeSceneToFile("res://Scenes/Main.tscn");
 	}
 	

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://b4j44d3ur1dgg"]
 
-[ext_resource type="Script" uid="uid://dkctqp1e0yp5k" path="res://Scripts/ConfigUser.cs" id="1_4abg7"]
+[ext_resource type="Script" path="res://Scripts/ConfigUser.cs" id="1_4abg7"]
 [ext_resource type="Material" uid="uid://bl5ra5x2dyfgr" path="res://Sprites/Blur.material" id="2_74jb6"]
 [ext_resource type="Texture2D" uid="uid://ddhgftxfvqe6s" path="res://Sprites/Profile.png" id="3_p31oo"]
 [ext_resource type="StyleBox" uid="uid://jov22gqerob3" path="res://Sprites/UIConfirmPanel.stylebox" id="3_vwb7n"]
@@ -107,9 +107,9 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_4abg7")
 [node name="ColorPicker" type="ColorPicker" parent="Create/Panel/Culoare/Panel"]
 layout_mode = 0
 offset_left = 3.0
-offset_top = 3.0
+offset_top = 2.0
 offset_right = 301.0
-offset_bottom = 303.0
+offset_bottom = 266.0
 alignment = 1
 edit_alpha = false
 can_add_swatches = false
@@ -128,7 +128,6 @@ offset_top = 35.46
 offset_right = 179.0
 offset_bottom = 259.46
 scale = Vector2(0.6, 0.6)
-tooltip_text = "Logheaza-te ca "
 
 [node name="Bg" type="Sprite2D" parent="Create/Panel/Preview"]
 position = Vector2(80, 100)

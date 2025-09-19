@@ -3,14 +3,11 @@ using Godot;
 using System;
 using System.Text;
 
-public partial class NewVer : Control
+public partial class NewVer : Node2D
 {	
 	private DefaultData _data;
 	private HttpRequest request;	//Request http pentru descarcare
 	private bool debug;		//Daca vrei extra detalii privind descarcarea sau nu
-	private Vector2 mousepos;
-	private bool inputgrab;
-	private Vector2 dif;
 	private bool dwn;	//Daca se descarca sau nu
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -18,12 +15,11 @@ public partial class NewVer : Control
 		request = new HttpRequest();
 		AddChild(request);
 		request.RequestCompleted += OnRequestCompleted;                  //Cand se apeleaza Request => functia OnRequestCompleted
-		if(_data.currentStats.Anims) GetNode<AnimationPlayer>("AnimationPlayer").Play("In");
 
 		#if GODOT_LINUXBSD || GODOT_WINDOWS
-			GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/Title4").Text = (GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/Title4").Text).TrimEnd('.') + " (Un fisier zip o sa apara in acelasi folder cu executabilul)";
+			GetNode<Label>("Window/Panel/ScrollContainer/VBoxContainer/Title4").Text = (GetNode<Label>("Window/Panel/ScrollContainer/VBoxContainer/Title4").Text).TrimEnd('.') + " (Un fisier zip o sa apara in acelasi folder cu executabilul)";
 		#elif GODOT_ANDROID
-			GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/Title4").Text = (GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/Title4").Text).TrimEnd('.') + " (Necesita permisiunea de a instala noua aplicatie. Actualizarea va fi salvata in folderul Download)";
+			GetNode<Label>("Window/Panel/ScrollContainer/VBoxContainer/Title4").Text = (GetNode<Label>("Window/Panel/ScrollContainer/VBoxContainer/Title4").Text).TrimEnd('.') + " (Necesita permisiunea de a instala noua aplicatie. Actualizarea va fi salvata in folderul Download)";
 		#endif
 	}
 
@@ -31,27 +27,14 @@ public partial class NewVer : Control
 	public override void _Process(double delta)
 	{	//Daca se descarca
 		if(dwn) 
-		{	GetNode<TextureProgressBar>("Panel/Download/VBoxContainer/Download/Bar/ProgressBar").Value = request.GetDownloadedBytes();
-			GetNode<TextureProgressBar>("Panel/Download/VBoxContainer/Download/Bar/ProgressBar").MaxValue = request.GetBodySize();
-			GetNode<Label>("Panel/Download/VBoxContainer/Download/Bar/ProgressBar/Text").Text = Math.Round(((float)(request.GetDownloadedBytes()) / 1048576), 1) + " MiB / " + Math.Round(((float)(request.GetBodySize()) / 1048576), 1) + " MiB";
+		{	GetNode<TextureProgressBar>("Window/Download/VBoxContainer/Download/Bar/ProgressBar").Value = request.GetDownloadedBytes();
+			GetNode<TextureProgressBar>("Window/Download/VBoxContainer/Download/Bar/ProgressBar").MaxValue = request.GetBodySize();
+			GetNode<Label>("Window/Download/VBoxContainer/Download/Bar/ProgressBar/Text").Text = Math.Round(((float)(request.GetDownloadedBytes()) / 1048576), 1) + " MiB / " + Math.Round(((float)(request.GetBodySize()) / 1048576), 1) + " MiB";
 			if(request.GetBodySize() == -1)
-			{	GetNode<TextureProgressBar>("Panel/Download/VBoxContainer/Download/Bar/ProgressBar").MaxValue = 100;
-				GetNode<Label>("Panel/Download/VBoxContainer/Download/Bar/ProgressBar/Text").Text = "Se pregateste descarcarea...";
+			{	GetNode<TextureProgressBar>("Window/Download/VBoxContainer/Download/Bar/ProgressBar").MaxValue = 100;
+				GetNode<Label>("Window/Download/VBoxContainer/Download/Bar/ProgressBar/Text").Text = "Se pregateste descarcarea...";
 			}
 		}
-		//Pentru miscarea ferestrei
-		mousepos = GetViewport().GetMousePosition();
-		var winpos = GetNode<Sprite2D>("Panel").Position;
-		var newpos = Position;
-		//Pozitia este raportata la centrul ferestrei
-		newpos.X = Mathf.Clamp(Mathf.Lerp(winpos.X, mousepos.X + dif.X, 1), 0, 1280);
-		newpos.Y = Mathf.Clamp(Mathf.Lerp(winpos.Y, mousepos.Y + dif.Y, 1), 279, 920);
-		if(inputgrab)
-		{	GetNode<Sprite2D>("Panel").Position = newpos;
-		}
-	}
-	private void _on_skip_pressed()
-	{	QueueFree();
 	}
 	//functie pentru anularea descarcarii
 	private void _on_cancel_pressed()
@@ -67,19 +50,19 @@ public partial class NewVer : Control
 				DirAccess.RemoveAbsolute("/storage/emulated/0/Download/Zero2Linux v" + (string)_data.newversion[0] + ".apk");
 				break;
 		}
-		GetNode<Panel>("Panel/Download").Position = Position with { X = -372, Y = 250 };
-		GetNode<Panel>("Panel/Download").Size = Size with { X = 745, Y = 55 };
-		GetNode<Panel>("Panel/Panel").Position = Position with { X = -372, Y = -258 };
-		GetNode<Panel>("Panel/Panel").Size = Size with { X = 744, Y = 503 };
-		GetNode<ScrollContainer>("Panel/Panel/ScrollContainer").Size = Size with { X = 752, Y = 504 };
+		GetNode<Panel>("Window/Download").Position = Position with { X = -372, Y = 250 };
+		GetNode<Panel>("Window/Download").Size = Scale with { X = 745, Y = 55 };
+		GetNode<Panel>("Window/Panel").Position = Position with { X = -372, Y = -258 };
+		GetNode<Panel>("Window/Panel").Size = Scale with { X = 744, Y = 503 };
+		GetNode<ScrollContainer>("Window/Panel/ScrollContainer").Size = Scale with { X = 752, Y = 504 };
 
 		GetNode("/root").GetChild(-1).EmitSignal("Download", 0);
-		GetNode<Label>("Panel/Download/VBoxContainer/Info").Visible = false;
-		GetNode<CanvasItem>("Panel/Download/VBoxContainer/Download").Visible = false;
-		GetNode<Button>("Panel/Download/VBoxContainer/HBoxContainer/Download").Disabled = false;
-		GetNode<CanvasItem>("Panel/Download/VBoxContainer/HBoxContainer/Download").Show();
-		GetNode<TextureButton>("Panel/Skip").Disabled = false;
-		GetNode<CanvasItem>("Panel/Skip").Visible = true;
+		GetNode<Label>("Window/Download/VBoxContainer/Info").Visible = false;
+		GetNode<CanvasItem>("Window/Download/VBoxContainer/Download").Visible = false;
+		GetNode<Button>("Window/Download/VBoxContainer/HBoxContainer/Download").Disabled = false;
+		GetNode<CanvasItem>("Window/Download/VBoxContainer/HBoxContainer/Download").Show();
+		GetTree().Paused = false;
+		GetNode<Window>("Window").ExitButton(true);
 	}
 	//Functie pentru linkul catre pagina de Github
 	private void _on_go_pressed()
@@ -88,26 +71,23 @@ public partial class NewVer : Control
 	//Functie pentru checkboxul de debug
 	private void _on_debug_pressed()
 	{	debug = !debug;
-		GetNode<CanvasItem>("Panel/Download/VBoxContainer/Download/Log").Visible = debug;
+		GetNode<CanvasItem>("Window/Download/VBoxContainer/Download/Log").Visible = debug;
 	}
 	//Functie pentru butonul de descarcare
 	public void _on_download_pressed()
-	{	GetNode<CanvasItem>("Panel/Download/VBoxContainer/Download").Visible = true;
-		GetNode<TextureProgressBar>("Panel/Download/VBoxContainer/Download/Bar/ProgressBar").MaxValue = 100;
-		GetNode<Label>("Panel/Download/VBoxContainer/Info").Visible = true;
-		GetNode<Label>("Panel/Download/VBoxContainer/Info").Text = "Descarcarea este in desfasurare. Va rugam sa nu inchideti aplicatia";
-		GetNode<Label>("Panel/Download/VBoxContainer/Download/Bar/ProgressBar/Text").Text = "Pregatire descarcarea...";
+	{	GetNode<CanvasItem>("Window/Download/VBoxContainer/Download").Visible = true;
+		GetNode<TextureProgressBar>("Window/Download/VBoxContainer/Download/Bar/ProgressBar").MaxValue = 100;
+		GetNode<Label>("Window/Download/VBoxContainer/Info").Visible = true;
+		GetNode<Label>("Window/Download/VBoxContainer/Info").Text = "Descarcarea este in desfasurare. Va rugam sa nu inchideti aplicatia";
+		GetNode<Label>("Window/Download/VBoxContainer/Download/Bar/ProgressBar/Text").Text = "Pregatire descarcarea...";
 
-		GetNode<Panel>("Panel/Download").Position = Position with { X = -372, Y = 105 };
-		GetNode<Panel>("Panel/Download").Size = Size with { X = 745, Y = 200 };
-		GetNode<Panel>("Panel/Panel").Position = Position with { X = -372, Y = -253 };
-		GetNode<Panel>("Panel/Panel").Size = Size with { X = 745, Y = 353 };
-		GetNode<ScrollContainer>("Panel/Panel/ScrollContainer").Size = Size with { X = 752, Y = 359 };
-
-		GetNode<Button>("Panel/Download/VBoxContainer/HBoxContainer/Download").Disabled = true;
-		GetNode<CanvasItem>("Panel/Download/VBoxContainer/HBoxContainer/Download").Hide();
-		GetNode<TextureButton>("Panel/Skip").Disabled = true;
-		GetNode<CanvasItem>("Panel/Skip").Visible = false;
+		GetNode<Panel>("Window/Download").Position = Position with { X = -372, Y = 105 };
+		GetNode<Panel>("Window/Download").Size = Scale with { X = 745, Y = 200 };
+		GetNode<Panel>("Window/Panel").Position = Position with { X = -372, Y = -253 };
+		GetNode<Panel>("Window/Panel").Size = Scale with { X = 745, Y = 353 };
+		GetNode<Button>("Window/Download/VBoxContainer/HBoxContainer/Download").Disabled = true;
+		GetNode<CanvasItem>("Window/Download/VBoxContainer/HBoxContainer/Download").Hide();
+		GetNode<Window>("Window").ExitButton(false);
 		GetNode("/root").GetChild(-1).EmitSignal("Download", 1);
 		
 		//Mai intai construim linkul catre Github in functie de versiunea noua, platforma si daca este Full sau Lite
@@ -135,22 +115,22 @@ public partial class NewVer : Control
 		//Descarcam arhiva/apkul
 		request.RequestRaw(linktosite.ToString(), new string[] {});
 		dwn = true;
-		GetNode<Label>("Panel/Download/VBoxContainer/Download/Log/LogText").Text = linktosite.ToString();
+		GetNode<Label>("Window/Download/VBoxContainer/Download/Log/LogText").Text = linktosite.ToString();
 	}
 	//Daca a fost descarcat cu succes sau nu
 	private void OnRequestCompleted(long result, long responseCode, string[] headers, byte[] body)
 	{	dwn = false;
 		if(result == 0)
-		{	GetNode<TextureButton>("Panel/Download/VBoxContainer/Download/Bar/Cancel").Disabled = true;
-			GetNode<CanvasItem>("Panel/Download/VBoxContainer/Download/Bar/Cancel").Hide();
-			GD.Print("Descarcat");
-			GetNode<Label>("Panel/Download/VBoxContainer/Download/Log/LogText").Text = "Descarcat";
+		{	GetNode<TextureButton>("Window/Download/VBoxContainer/Download/Bar/Cancel").Disabled = true;
+			GetNode<CanvasItem>("Window/Download/VBoxContainer/Download/Bar/Cancel").Hide();
+			GD.Print("Descarcat in " + OS.GetExecutablePath().GetBaseDir());
+			GetNode<Label>("Window/Download/VBoxContainer/Download/Log/LogText").Text = "Descarcat in " + OS.GetExecutablePath().GetBaseDir();
 
 			//In principal, procesul pentru toate platformele este acelasi
 			//Creeam un fisier in care stocam rezultatul descarcarii (adica variabila body), iar, in cazul platformei Android, putem executa direct fisierul
 			#if GODOT_ANDROID
-				GetNode<Label>("Panel/Download/VBoxContainer/Download/Bar/ProgressBar/Text").Text = "Executarea apk-ului...";
-				GetNode<Label>("Panel/Download/VBoxContainer/Download/Log/LogText").Text = "Executarea apk-ului /storage/emulated/0/Download/Zero2Linux v" + (string)_data.newversion[0] + ".apk";
+				GetNode<Label>("Window/Download/VBoxContainer/Download/Bar/ProgressBar/Text").Text = "Executarea apk-ului...";
+				GetNode<Label>("Window/Download/VBoxContainer/Download/Log/LogText").Text = "Executarea apk-ului /storage/emulated/0/Download/Zero2Linux v" + (string)_data.newversion[0] + ".apk";
 				//NOTA: aplicatia necesita permisiunea android.permission.REQUEST_INSTALL_PACKAGES in custom permissions
 				OS.ShellOpen("/storage/emulated/0/Download/Zero2Linux v" + (string)_data.newversion[0] + ".apk");
 				
@@ -162,45 +142,26 @@ public partial class NewVer : Control
 				//Mi-ar trebui o aplicatie extra pentru actualizari pentru desktop, dar nu are sens daca asta este tot ce face.
 				//In viitor s-ar putea sa dezvolt aceasta aplicatie extra, dar pana atunci, avem acest cod de mai jos.
 			#endif
-			GetNode<Label>("Panel/Download/VBoxContainer/Download/Bar/ProgressBar/Text").Text = "Gata :D";
-			GetNode<Label>("Panel/Download/VBoxContainer/Info").Text = "Descarcarea a fost finalizata cu succes.";
+			GetNode<Label>("Window/Download/VBoxContainer/Download/Bar/ProgressBar/Text").Text = "Gata :D";
+			GetNode<Label>("Window/Download/VBoxContainer/Info").Text = "Descarcarea a fost finalizata cu succes.";
 
 			#if GODOT_LINUXBSD || GODOT_WINDOWS
-				GetNode<Label>("Panel/Download/VBoxContainer/Info").Text = (GetNode<Label>("Panel/Download/VBoxContainer/Info").Text).TrimEnd('.') + "\nNoua versiune ar trebui sa fie in acelasi folder cu executabilul";
+				GetNode<Label>("Window/Download/VBoxContainer/Info").Text = (GetNode<Label>("Window/Download/VBoxContainer/Info").Text).TrimEnd('.') + "\nNoua versiune ar trebui sa fie in acelasi folder cu executabilul";
 			#elif GODOT_ANDROID
-				GetNode<Label>("Panel/Download/VBoxContainer/Info").Text = (GetNode<Label>("Panel/Download/VBoxContainer/Info").Text).TrimEnd('.') + "\nNoua versiune este in folderul Download";
+				GetNode<Label>("Window/Download/VBoxContainer/Info").Text = (GetNode<Label>("Window/Download/VBoxContainer/Info").Text).TrimEnd('.') + "\nNoua versiune este in folderul Download";
 			#endif
-			GetNode<CanvasItem>("Panel/Download/VBoxContainer/Download/Log").Visible = false;
-			GetNode<CanvasItem>("Panel/Download/VBoxContainer/Download/Debug").Visible = false;
-			GetNode<TextureButton>("Panel/Skip").Disabled = false;
-			GetNode<CanvasItem>("Panel/Skip").Visible = true;
+			GetNode<CanvasItem>("Window/Download/VBoxContainer/Download/Log").Visible = false;
+			GetNode<CanvasItem>("Window/Download/VBoxContainer/Download/Debug").Visible = false;
+			GetNode<Window>("Window").ExitButton(true);
 			debug = false;
+			GetTree().Paused = false;
 			GetNode("/root").GetChild(-1).EmitSignal("Download", 0);
 		}
 		else
 		{	GD.Print("Eroare HttpRequest: " + (HttpRequest.Result)result);
-			GetNode<Label>("Panel/Download/VBoxContainer/Download/Log/LogText").Text = "Eroare HttpRequest: " + (HttpRequest.Result)result;
+			GetNode<Label>("Window/Download/VBoxContainer/Download/Log/LogText").Text = "Eroare HttpRequest: " + (HttpRequest.Result)result;
 			return;
 		}
 		request.QueueFree();       //Nu mai e nevoie de HttpRequest. Putem sterge
-	}
-	private void _on_drag_down()	//Cand partea de sus a ferestrei este apasata
-	{	GD.Print("Hi");
-		#if GODOT_ANDROID
-			//Desi mousepos este preluat in _Proccess(), mousepos ramane aceeasi valoare dupa ce ecranul a fost atins
-			//Presupun ca ii ia un frame ca sa proceseze noua pozitie, ceea ce nu este de ajuns pentru aceasta functie
-			//Asa ca il actualizam acum mousepos
-			mousepos = GetViewport().GetMousePosition();
-		#endif
-		var winpos = GetNode<Sprite2D>("Panel").Position;
-		dif.X = winpos.X - mousepos.X;
-		dif.Y = winpos.Y - mousepos.Y;
-		GD.Print(dif);
-		inputgrab = true;
-		GetParent().MoveChild(this, -1);
-	}
-	private void _on_drag_up()	//Cand partea de sus a ferestrei nu mai este apasata
-	{	GD.Print("Bye");
-		inputgrab = false;
 	}
 }

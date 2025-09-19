@@ -1,9 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://bcd574anctpct"]
+[gd_scene load_steps=7 format=3 uid="uid://bcd574anctpct"]
 
-[ext_resource type="Script" uid="uid://cst72vonavcxa" path="res://Scripts/Courses.cs" id="1_bnupo"]
-[ext_resource type="Texture2D" uid="uid://bqd1321xxqoej" path="res://Sprites/CloseButton.png" id="3_ixxbh"]
-[ext_resource type="Texture2D" uid="uid://dherg8j0a21h2" path="res://Sprites/CoursePanel.png" id="3_thy4c"]
-[ext_resource type="Texture2D" uid="uid://c1cjk57xd8mq2" path="res://Sprites/CloseButtonHighlight.png" id="4_n2rmg"]
+[ext_resource type="Script" path="res://Scripts/Courses.cs" id="1_bnupo"]
+[ext_resource type="PackedScene" uid="uid://bnl2o6s20upjw" path="res://Scenes/Window.tscn" id="2_uicp1"]
 [ext_resource type="Texture2D" uid="uid://dggmaqo3m8tdm" path="res://Sprites/Adv.png" id="5_nte5v"]
 [ext_resource type="Texture2D" uid="uid://cpswweuho8b08" path="res://Sprites/Normal.png" id="5_y88ff"]
 [ext_resource type="Texture2D" uid="uid://dtf04r0xxc0j0" path="res://Sprites/Spc.png" id="6_y88ff"]
@@ -11,128 +9,34 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g7vcl"]
 bg_color = Color(0.117647, 0.117647, 0.180392, 1)
 
-[sub_resource type="Animation" id="Animation_uicp1"]
-resource_name = "In"
-length = 0.15
-step = 0.0168
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Panel:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15),
-"transitions": PackedFloat32Array(1, 0.1),
-"update": 0,
-"values": [Vector2(645, 314), Vector2(645, 339)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Panel:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.15),
-"transitions": PackedFloat32Array(1, 0.1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_nte5v"]
-length = 0.001
-step = 0.0168
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Panel:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(645, 339)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Panel:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_y88ff"]
-_data = {
-&"In": SubResource("Animation_uicp1"),
-&"RESET": SubResource("Animation_nte5v")
-}
-
-[node name="Courses" type="Control"]
-layout_mode = 3
-anchors_preset = 0
+[node name="Courses" type="Node2D"]
 script = ExtResource("1_bnupo")
 
-[node name="Panel" type="Sprite2D" parent="."]
-position = Vector2(645, 339)
-scale = Vector2(0.88, 0.88)
-texture = ExtResource("3_thy4c")
+[node name="Window" parent="." instance=ExtResource("2_uicp1")]
+windowtitle = "Lectii"
 
-[node name="Drag" type="Button" parent="Panel"]
-self_modulate = Color(1, 1, 1, 0)
-offset_left = -363.0
-offset_top = -303.0
-offset_right = 365.0
-offset_bottom = -258.0
-flat = true
-
-[node name="Back" type="TextureButton" parent="Panel"]
-offset_left = 322.0
-offset_top = -301.0
-offset_right = 362.0
-offset_bottom = -263.0
-scale = Vector2(1.1, 1.1)
-texture_normal = ExtResource("3_ixxbh")
-texture_pressed = ExtResource("4_n2rmg")
-
-[node name="Label" type="Label" parent="Panel"]
-offset_left = -72.0
-offset_top = -293.0
-offset_right = 70.0
-offset_bottom = -270.0
-theme_override_font_sizes/font_size = 16
-text = "Selecteaza o lectie"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Window"]
 offset_left = -371.0
-offset_top = -258.0
-offset_right = 371.0
-offset_bottom = 303.0
+offset_top = -257.0
+offset_right = 372.0
+offset_bottom = 304.0
 
-[node name="Panel" type="Panel" parent="Panel/VBoxContainer"]
+[node name="Panel" type="Panel" parent="Window/VBoxContainer"]
 custom_minimum_size = Vector2(0, 55)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_g7vcl")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Panel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Window/VBoxContainer/Panel"]
 layout_mode = 0
 offset_right = 742.0
 offset_bottom = 52.0
 theme_override_constants/separation = 5
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer/Panel/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Window/VBoxContainer/Panel/HBoxContainer"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
-[node name="LineEdit" type="LineEdit" parent="Panel/VBoxContainer/Panel/HBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="Window/VBoxContainer/Panel/HBoxContainer"]
 custom_minimum_size = Vector2(444, 0)
 layout_mode = 2
 size_flags_vertical = 4
@@ -141,60 +45,52 @@ alignment = 1
 clear_button_enabled = true
 drag_and_drop_selection_enabled = false
 
-[node name="MarginContainer2" type="MarginContainer" parent="Panel/VBoxContainer/Panel/HBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="Window/VBoxContainer/Panel/HBoxContainer"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
-[node name="Normal" type="TextureButton" parent="Panel/VBoxContainer/Panel/HBoxContainer"]
+[node name="Normal" type="TextureButton" parent="Window/VBoxContainer/Panel/HBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("5_y88ff")
 stretch_mode = 5
 
-[node name="MarginContainer3" type="MarginContainer" parent="Panel/VBoxContainer/Panel/HBoxContainer"]
+[node name="MarginContainer3" type="MarginContainer" parent="Window/VBoxContainer/Panel/HBoxContainer"]
 custom_minimum_size = Vector2(5, 0)
 layout_mode = 2
 
-[node name="Avansat" type="TextureButton" parent="Panel/VBoxContainer/Panel/HBoxContainer"]
+[node name="Avansat" type="TextureButton" parent="Window/VBoxContainer/Panel/HBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("5_nte5v")
 stretch_mode = 5
 
-[node name="MarginContainer4" type="MarginContainer" parent="Panel/VBoxContainer/Panel/HBoxContainer"]
+[node name="MarginContainer4" type="MarginContainer" parent="Window/VBoxContainer/Panel/HBoxContainer"]
 custom_minimum_size = Vector2(5, 0)
 layout_mode = 2
 
-[node name="Special" type="TextureButton" parent="Panel/VBoxContainer/Panel/HBoxContainer"]
+[node name="Special" type="TextureButton" parent="Window/VBoxContainer/Panel/HBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("6_y88ff")
 stretch_mode = 5
 
-[node name="MarginContainer5" type="MarginContainer" parent="Panel/VBoxContainer/Panel/HBoxContainer"]
+[node name="MarginContainer5" type="MarginContainer" parent="Window/VBoxContainer/Panel/HBoxContainer"]
 custom_minimum_size = Vector2(5, 0)
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Window/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 follow_focus = true
 horizontal_scroll_mode = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Window/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_y88ff")
-}
-
-[connection signal="button_down" from="Panel/Drag" to="." method="_on_drag_down"]
-[connection signal="button_up" from="Panel/Drag" to="." method="_on_drag_up"]
-[connection signal="pressed" from="Panel/Back" to="." method="_on_back_pressed"]
-[connection signal="text_changed" from="Panel/VBoxContainer/Panel/HBoxContainer/LineEdit" to="." method="_on_line_edit_text_changed"]
-[connection signal="toggled" from="Panel/VBoxContainer/Panel/HBoxContainer/Normal" to="." method="_on_normal_toggled"]
-[connection signal="toggled" from="Panel/VBoxContainer/Panel/HBoxContainer/Avansat" to="." method="_on_avansat_toggled"]
-[connection signal="toggled" from="Panel/VBoxContainer/Panel/HBoxContainer/Special" to="." method="_on_special_toggled"]
+[connection signal="text_changed" from="Window/VBoxContainer/Panel/HBoxContainer/LineEdit" to="." method="_on_line_edit_text_changed"]
+[connection signal="toggled" from="Window/VBoxContainer/Panel/HBoxContainer/Normal" to="." method="_on_normal_toggled"]
+[connection signal="toggled" from="Window/VBoxContainer/Panel/HBoxContainer/Avansat" to="." method="_on_avansat_toggled"]
+[connection signal="toggled" from="Window/VBoxContainer/Panel/HBoxContainer/Special" to="." method="_on_special_toggled"]

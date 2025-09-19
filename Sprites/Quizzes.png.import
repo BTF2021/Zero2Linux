@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bgdcdehp7orv6"
-path="res://.godot/imported/Circle.png-0c45e21435093ae348e4b37cb96ba5fa.ctex"
+uid="uid://dw8yk7allgkam"
+path="res://.godot/imported/Quizzes.png-c46c44cdea378ea458c07c8d353727d8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Circle.png"
-dest_files=["res://.godot/imported/Circle.png-0c45e21435093ae348e4b37cb96ba5fa.ctex"]
+source_file="res://Sprites/Quizzes.png"
+dest_files=["res://.godot/imported/Quizzes.png-c46c44cdea378ea458c07c8d353727d8.ctex"]
 
 [params]
 

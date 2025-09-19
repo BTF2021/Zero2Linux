@@ -1,4 +1,4 @@
-//Pentru videoplayer
+//Pentru videoplayer (Deprecated)
 using Godot;
 using System;
 

@@ -7,60 +7,56 @@ public partial class Main : Node2D
 	private DefaultData _data;
 	private HttpRequest request;	//Request http pentru verificarea unei noi versiuni a programului
 	[Signal] public delegate void DownloadEventHandler(int mode);	//Semnal trimis de NewVer.cs atunci cand se descarca o noua versiune
+	[Signal] public delegate void TutorialEventHandler(int mode);   //Semnal trimis de Tour.cs in timpul tutorialului
+	bool mouseOverPanel;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{	_data = (DefaultData)GetNode("/root/DefaultData");
-		_data.ReadSave(_data.LoggedUser);	//Aici citim ce este salvat pentru utilizator. Cred ca este singurul apel a functiei in tot programul
-		GetNode<CanvasItem>("/root/Transition").Hide(); //A se vedea funtia logging din Logare.cs
 		Download += down;	//Conectam semnalul la functie
-		if(!_data.currentStats.Anims)
-		{	GetNode("UI/Bg/Bg").QueueFree();
-		}
-		#if GODOT_ANDROID
-			GetNode<TextureButton>("UI/Bar/HBoxContainer/Power").QueueFree();
-		#endif
-		//Preluam de pe Github fisierul version.txt
-		if(!_data.verifiedver)
-		{	request = new HttpRequest();
-			AddChild(request);
-			request.RequestCompleted += OnRequestCompleted;                                           //Cand se apeleaza Request => functia OnRequestCompleted
-			request.Request("https://raw.githubusercontent.com/BTF2021/Zero2Linux/main/version.txt"); //version.txt de pe Github
-		}
+		Tutorial += BeginTutorial;
+
+		//Pentru meniu
+		GetNode<Label>("Bar/HBoxContainer/Logo/Panel/Account/BigLetter").Text = _data.currentStats.UsrName;
+		GetNode<Label>("Bar/HBoxContainer/Logo/Panel/Account/Name").Text = _data.currentStats.UsrName;
+		GetNode<Sprite2D>("Bar/HBoxContainer/Logo/Panel/Account/Bg").SelfModulate = _data.currentStats.FavColor;
 		
-		if(_data.currentStats.Anims)
-		{	var pos = Position;
-			pos.X = 490;
-			pos.Y = 352;
-			GetNode<Panel>("UI/Panel").Position = pos;
-			pos.Y = 337;
-			GetNode<Panel>("UI/Panel").Modulate = new Color(1, 1, 1, 0);
-			var tween = GetTree().CreateTween();
-			tween.TweenProperty(GetNode<Panel>("UI/Panel"), "modulate", new Color(1, 1, 1, 1), 0.25);
-			tween.Parallel().TweenProperty(GetNode<Panel>("UI/Panel"), "position", pos, 0.25);
-			pos.X = 643;
-			pos.Y = 740;
-			GetNode<Sprite2D>("UI/Bar").Position = pos;
-			pos.Y = 686;
-			tween.TweenProperty(GetNode<Sprite2D>("UI/Bar"), "position", pos, 0.25);
+		if(!_data.currentStats.ShowTutorial)
+		{
+			//Preluam de pe Github fisierul version.txt
+			if(!_data.verifiedver)
+			{	request = new HttpRequest();
+				AddChild(request);
+				request.RequestCompleted += OnRequestCompleted;                                           //Cand se apeleaza Request => functia OnRequestCompleted
+				request.Request("https://raw.githubusercontent.com/BTF2021/Zero2Linux/main/version.txt"); //version.txt de pe Github
+			}
+			//Tranzitie
+			if(_data.currentStats.Anims) GetNode<AnimationPlayer>("AnimationPlayer").Play("In");
+			else 
+			{		GetNode<Sprite2D>("Bar").Position = Position with { X = 640, Y = 686 };
+					GetNode<Node2D>("Bg").Scale = Scale with { X = 1.0f, Y = 1.0f};
+			}
 		}
-		else 
-		{	
-			#if GODOT_WINDOWS || GODOT_LINUXBSD
-				GetNode<VideoStreamPlayer>("UI/Bg/Bg").Paused = true;
-			#endif
+		else
+		{
+			//Tutorial
+			if(_data.currentStats.Anims) GetNode<AnimationPlayer>("AnimationPlayer").Play("TutorialIn");
+			else 
+			{
+					GetNode<Node2D>("Bg").Scale = Scale with { X = 1.0f, Y = 1.0f};
+			}
+			BeginTutorial(0);
 		}
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
-	{	//Ceasul
-		if(HasNode("UI/Bar")) 
-		{
-			GetNode<Label>("UI/Bar/HBoxContainer/Time").Text = Time.GetTimeStringFromSystem();
-			GetNode<Label>("UI/Bar/HBoxContainer/Time").TooltipText = Time.GetDateStringFromSystem();
-		}
+	{
+		//Pentru meniul de start ca sa dispara atunci cand se da click in alta parte
+		if(Input.IsActionPressed("click") && !mouseOverPanel) GetNode<Panel>("Bar/HBoxContainer/Logo/Panel").Visible = false;
+		MoveChild(GetNode("Bar"), -1);
+		//Ceasul
+		if(HasNode("Bar")) GetNode<Label>("Bar/HBoxContainer/Time").Text = Time.GetTimeStringFromSystem();
 	}
-
 	public override void _Notification(int what)
 	{	//Daca dai inapoi pe Android
 		if (what == NotificationWMGoBackRequest)
@@ -71,55 +67,86 @@ public partial class Main : Node2D
 	private void down(int mode)
 	{	if(mode ==1)	//Descarcarea este in desfasurare
 		{	
-			#if GODOT_LINUXBSD || GODOT_WINDOWS
-				GetNode<TextureButton>("UI/Bar/HBoxContainer/Power").Disabled = true;
-				GetNode<TextureButton>("UI/Bar/HBoxContainer/Power").Hide();
-			#endif
-			GetNode<TextureButton>("UI/Bar/HBoxContainer/Logout").Disabled = true;
-			GetNode<TextureButton>("UI/Bar/HBoxContainer/Logout").Hide();
-			GetNode<Button>("UI/Panel/Buttons/Course").Disabled = true;
-			GetNode<Button>("UI/Panel/Buttons/Quizzes").Disabled = true;
-			GetNode<Button>("UI/Panel/Buttons/Settings").Disabled = true;
+			GetNode<Node2D>("NewVer").ZIndex = 100;
+			var tween = GetTree().CreateTween();
+			tween.SetPauseMode((Tween.TweenPauseMode)2);	//Ca sa fie procesat chiar si daca SceneTree este in pauza
+			tween.TweenProperty(GetNode<ColorRect>("Pause"), "self_modulate", new Color(1, 1, 1, 1), 0.5).SetTrans(Tween.TransitionType.Expo).SetEase(Tween.EaseType.Out);
+			GetTree().Paused = true;
 		}
 		else	//Descarcarea s-a terminat
 		{	
-			#if GODOT_LINUXBSD || GODOT_WINDOWS
-				GetNode<TextureButton>("UI/Bar/HBoxContainer/Power").Disabled = false;
-				GetNode<TextureButton>("UI/Bar/HBoxContainer/Power").Show();
-			#endif
-			GetNode<TextureButton>("UI/Bar/HBoxContainer/Logout").Disabled = false;
-			GetNode<TextureButton>("UI/Bar/HBoxContainer/Logout").Show();
-			GetNode<Button>("UI/Panel/Buttons/Course").Disabled = false;
-			GetNode<Button>("UI/Panel/Buttons/Quizzes").Disabled = false;
-			GetNode<Button>("UI/Panel/Buttons/Settings").Disabled = false;
+			GetNode<Node2D>("NewVer").ZIndex = 0;
+			GetNode<ColorRect>("Pause").SelfModulate = new Color(1, 1, 1, 0);
 		}
 	}
 
-	private void _on_quit_pressed() => GetTree().Quit(0);
-	private void _on_logout_pressed()	//Delogare
+	//Cand se apasa pe logo
+	private void _on_logo_pressed()
 	{
-		GD.Print("Delogare: " + _data.LoggedUser);
-		_data.verifiedver = false;
-		_data.WriteSave(_data.LoggedUser);
-		_data.LoggedUser = " ";
-		_data.currentStats = new stats();
-		DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
-		DisplayServer.WindowSetVsyncMode(DisplayServer.VSyncMode.Enabled);
-		GetTree().ChangeSceneToFile("res://Scenes/Logare.tscn");
+		if(GetNode<Panel>("Bar/HBoxContainer/Logo/Panel").Visible) CloseMenu();
+		else
+		{
+			if(_data.currentStats.Anims) GetNode<AnimationPlayer>("AnimationPlayer").Play("Panel");
+			else GetNode<Panel>("Bar/HBoxContainer/Logo/Panel").Visible = true;
+			mouseOverPanel = true;
+		}
 	}
+	//Incepe tutorialul
+	private async void BeginTutorial(int step)
+	{
+		switch(step)
+		{
+			case 0:
+				//Creeam un timer ca sa apara fereastra DUPA ce se termina animatia
+				var timer = GetTree().CreateTimer(0.6);
+				await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
+				AddChild((GD.Load<PackedScene>("res://Scenes/Tour.tscn")).Instantiate());
+				break;
+			case 1:
+				//Apare bara atunci cand ajungem sa vorbim despre aceasta
+				if(_data.currentStats.Anims)
+				{
+					var tween = GetTree().CreateTween();
+					tween.TweenProperty(GetNode<Sprite2D>("Bar"), "position", Position with { X = 640, Y = 686 }, 0.5).SetTrans(Tween.TransitionType.Expo).SetEase(Tween.EaseType.Out);
+				}
+				else GetNode<Sprite2D>("Bar").Position = Position with { X = 640, Y = 686 };
+				break;
+		}
+	}
+	//Inchidere meniu
+	private async void CloseMenu()
+	{	var timer = GetTree().CreateTimer(0.01);
+		await ToSignal(timer, SceneTreeTimer.SignalName.Timeout);
+		GetNode<Panel>("Bar/HBoxContainer/Logo/Panel").Visible = false;
+		mouseOverPanel = false;
+	}
+	//Functii pentru detectarea cursorului pe iconita
+	private void _on_menu_mouse_entered(bool icon)
+	{
+		if(GetNode<Panel>("Bar/HBoxContainer/Logo/Panel").Visible || icon) mouseOverPanel = true;
+	}
+	private void _on_menu_mouse_exited(bool icon)
+	{
+		if(GetNode<Panel>("Bar/HBoxContainer/Logo/Panel").Visible || icon) mouseOverPanel = false;
+	}
+
+	private void _on_quit_pressed() => GetTree().Quit(0);
+	private void _on_logout_pressed() => _data.LogOut(_data.LoggedUser);
 	private void _on_notification_pressed()	//Apare fereastra pentru o noua versiune
-	{	var newver = (GD.Load<PackedScene>("res://Scenes/NewVer.tscn")).Instantiate();
-		newver.GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/Title2").Text = newver.GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/Title2").Text + (String)ProjectSettings.GetSetting("application/config/version") + "\nVersiunea actuala este: " + _data.newversion[0] + "\n ";
-		newver.GetNode<Label>("Panel/Panel/ScrollContainer/VBoxContainer/HBoxContainer2/Title3").Text = _data.newversion[1];
-		AddChild(newver);
+	{	if(!HasNode("NewVer"))
+		{
+			var newver = (GD.Load<PackedScene>("res://Scenes/NewVer.tscn")).Instantiate();
+			newver.GetNode<Label>("Window/Panel/ScrollContainer/VBoxContainer/Title2").Text = newver.GetNode<Label>("Window/Panel/ScrollContainer/VBoxContainer/Title2").Text + (String)ProjectSettings.GetSetting("application/config/version") + "\nVersiunea actuala este: " + _data.newversion[0] + "\n ";
+			newver.GetNode<Label>("Window/Panel/ScrollContainer/VBoxContainer/HBoxContainer2/Title3").Text = _data.newversion[1];
+			AddChild(newver);
+		}
 	}
-	//Cele patru functii corespund celor patru butoane din centru
-	private void _on_course_pressed() => AddChild((GD.Load<PackedScene>("res://Scenes/Courses.tscn")).Instantiate());
-
-	private void _on_settings_pressed() => AddChild((GD.Load<PackedScene>("res://Scenes/Settings.tscn")).Instantiate());
-
-	private void _on_quizzes_pressed() => AddChild((GD.Load<PackedScene>("res://Scenes/Quizzes.tscn")).Instantiate());
-	private void _on_progress_pressed() => AddChild((GD.Load<PackedScene>("res://Scenes/Progress.tscn")).Instantiate());
+	//Cele patru functii corespund celor patru butoane din meniu
+	private void _on_lesson_pressed() { AddChild((GD.Load<PackedScene>("res://Scenes/Courses.tscn")).Instantiate()); CloseMenu(); }
+	private void _on_settings_pressed() { AddChild((GD.Load<PackedScene>("res://Scenes/Settings.tscn")).Instantiate()); CloseMenu(); }
+	private void _on_quizzes_pressed() { AddChild((GD.Load<PackedScene>("res://Scenes/Quizzes.tscn")).Instantiate()); CloseMenu(); }
+	private void _on_stats_pressed() { AddChild((GD.Load<PackedScene>("res://Scenes/Progress.tscn")).Instantiate()); CloseMenu(); }
+	private void _on_tour_pressed() { AddChild((GD.Load<PackedScene>("res://Scenes/Tour.tscn")).Instantiate()); CloseMenu(); }
 
 	//Daca a fost primit un raspuns de la _request
 	private void OnRequestCompleted(long result, long responseCode, string[] headers, byte[] body)
@@ -131,8 +158,8 @@ public partial class Main : Node2D
 			if(!((String)ProjectSettings.GetSetting("application/config/version")).Contains(_data.newversion[0]) && _data.currentStats.ChkUpdates) //Daca versiunea programului corespunde cu versiunea din version.txt
 			{
 				GD.Print("Versiune veche");
-				GetNode<TextureButton>("UI/Bar/HBoxContainer/Notification").Disabled = false;
-				GetNode<TextureButton>("UI/Bar/HBoxContainer/Notification").Visible = true;
+				GetNode<TextureButton>("Bar/HBoxContainer/Notification").Disabled = false;
+				GetNode<TextureButton>("Bar/HBoxContainer/Notification").Visible = true;
 			}
 			else GD.Print("Mergem in continuare");
 		}

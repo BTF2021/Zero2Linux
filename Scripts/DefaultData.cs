@@ -9,7 +9,7 @@ public class stats
 {
 	public int version = 5;		//"Versiunea" fisierului. Mai mult pentru compatibilitate atunci cand se actualizeaza la o versiune noua care schimba clasa stats
 	public string UsrName = " ";	//Numele utilizatorului
-	public Color FavColor = new Color(1, 1, 1, 1);	//Culoarea fundalului
+	public Color FavColor = Colors.Black;	//Culoarea fundalului
 	public bool FullScr = false;	//Daca programul este Fullscreen sau nu
 	public bool VSync = true;	//Daca VSync este activat sau nu
 	public bool Anims = true;	//Daca majoritatea animatiilor sunt prezente sau nu
@@ -33,15 +33,16 @@ public class stats
 	public float VideoVolume = 0;	  //Intre -60 si 0
 	public bool QNumOnly = false;	  //Daca nr de raspunse corecte si gresite sa fie afisate in modul test sau nu
 	public bool AdvQ = true;		  //Daca intrebariile din lectiile avansate sa fie incluse in chestionare sau nu
+	public bool ShowTutorial = true;  //Daca fereastra de tur trebuie sa apara la logare sau nu
 	public bool ChkUpdates = false;	  //Daca doresti sa verifici daca exista o noua versiune a programului
 }
 public partial class DefaultData : Node
 {
 	//De aici vor fi accesate si salvate setarile si progresul
 	public stats currentStats = new stats();		  //Variabila in care punem statisticile unui anumit user
-	private stats defaultStats = new stats();         //Duplicat pentru currentStats (Mai mult pentru versiune)
+	private readonly stats defaultStats = new stats();         //Duplicat pentru currentStats (Mai mult pentru versiune)
 
-	public Godot.Collections.Dictionary<int, Godot.Collections.Array> lessonList = new Godot.Collections.Dictionary<int, Godot.Collections.Array>() 
+	public readonly Godot.Collections.Dictionary<int, Godot.Collections.Array> lessonList = new Godot.Collections.Dictionary<int, Godot.Collections.Array>() 
 	{	//structura vectorului este urmatoarea: numele lectiei, tipul lectiei(tag). Progresul a fost mutat in clasa stats
 		{1, new Godot.Collections.Array{"Lectia 1: Ce este Linux?", 0}},
 		{2, new Godot.Collections.Array{"Lectia 2: Distributii Linux", 0}},
@@ -50,7 +51,7 @@ public partial class DefaultData : Node
 		{5, new Godot.Collections.Array{"Repos si Package managers", 0}},
 		{6, new Godot.Collections.Array{"Format pachete", 1}}
 	};
-	public Godot.Collections.Dictionary<int, Godot.Collections.Dictionary<int, Godot.Collections.Array>> questionList = new Godot.Collections.Dictionary<int, Godot.Collections.Dictionary<int, Godot.Collections.Array>>() 
+	public readonly Godot.Collections.Dictionary<int, Godot.Collections.Dictionary<int, Godot.Collections.Array>> questionList = new Godot.Collections.Dictionary<int, Godot.Collections.Dictionary<int, Godot.Collections.Array>>() 
 	{	//structura vectorului este urmatoarea: nr lectie, iar inauntru nr intrebari, rasp corect, cele 4 raspunsuri posibile, explicatie
 		{1, new Godot.Collections.Dictionary<int, Godot.Collections.Array>{
 			{1, new Godot.Collections.Array{3, 2, "Ce este Linux?", "Un program", "Un kernel", "O aplicatie pentru web", "", "Linux este kernelul. Majoritatea programelor sunt parte din GNU Project"}},
@@ -99,48 +100,9 @@ public partial class DefaultData : Node
 	//Vector pentru retinerea informatiilor privind versiunea noua de pe Github
 	public Godot.Collections.Array<String> newversion = new Godot.Collections.Array<String>{};
 
-    public override void _Ready()
+    /*public override void _Ready()
 	{	
-		//Determinam daca putem reda videoclipuri. Daca nu, (incercam sa) dezactivam optiunea
-		#if GODOT_LINUXBSD
-			#if TOOLS
-				if(DirAccess.DirExistsAbsolute("res://addons/ffmpeg/linux64"))isvideoavailable=true;
-			#else
-				GD.Print(OS.GetExecutablePath().GetBaseDir());
-				if(FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("libavcodec.so.60"))
-				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("libavfilter.so.9"))
-				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("libavformat.so.60"))
-				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("libavutil.so.58"))
-				&& (FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("libgdffmpeg.linux.template_debug.x86_64.so"))
-				|| FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("libgdffmpeg.linux.template_release.x86_64.so")))
-				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("libswresample.so.4"))
-				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("libswscale.so.7"))
-				)isvideoavailable=true;
-				else GDExtensionManager.UnloadExtension("res://addons/ffmpeg/ffmpeg.gdextension");
-			#endif
-		#elif GODOT_WINDOWS
-			#if TOOLS
-				if(DirAccess.DirExistsAbsolute("res://addons/ffmpeg/win64"))isvideoavailable=true;
-			#else
-				GD.Print(OS.GetExecutablePath().GetBaseDir());
-				if(FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("avcodec-60.dll"))
-				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("avfilter-9.dll"))
-				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("avformat-60.dll"))
-				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("avutil-58.dll"))
-				&& (FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("libgdffmpeg.windows.template_debug.x86_64.dll"))
-				|| FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("libgdffmpeg.windows.template_release.x86_64.dll")))
-				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("swresample-4.dll"))
-				&& FileAccess.FileExists(OS.GetExecutablePath().GetBaseDir().PathJoin("swscale-7.dll"))
-				)isvideoavailable=true;
-				else GDExtensionManager.UnloadExtension("res://addons/ffmpeg/ffmpeg.gdextension");
-			#endif
-		#elif GODOT_ANDROID
-			GDExtensionManager.UnloadExtension("res://addons/ffmpeg/ffmpeg.gdextension");
-			isvideoavailable=false;
-		#endif
-
-		GD.Print("Videouri disponibile: " + isvideoavailable);
-	}
+	}*/
 	//Verificam daca exista un utilizator
 	public bool SaveExists()
 	{	System.Array filearray = DirAccess.GetFilesAt("user://");
@@ -183,10 +145,16 @@ public partial class DefaultData : Node
 		file.Close();
 	}
 	//Functie pentru citirea progresului unui utilizator
-	public void ReadSave(string user)
+	public void LogIn(string user)
 	{	//Citim fisierul
 		var file = FileAccess.Open("user://" + user + "_save.json", FileAccess.ModeFlags.Read);
-		if (file == null) GD.Print("Nu se poate deschide fisierul. Eroare: " + FileAccess.GetOpenError());
+		if (file == null) 
+		{
+			GD.Print("Nu se poate deschide fisierul. Eroare: " + FileAccess.GetOpenError());
+			return;
+		}
+		LoggedUser = user;
+		GD.Print("Logat in: " + user);
 		stats content = JsonConvert.DeserializeObject<stats>(file.GetAsText());
 		file.Close();
 		currentStats = content;		//Punem ce am citit in currentStats, ca sa nu citim de mai multe ori pentru o singura variabila
@@ -196,6 +164,17 @@ public partial class DefaultData : Node
 		else DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
 		if(currentStats.VSync) DisplayServer.WindowSetVsyncMode(DisplayServer.VSyncMode.Enabled);
 		else DisplayServer.WindowSetVsyncMode(DisplayServer.VSyncMode.Disabled);
+	}
+	public void LogOut(string user)
+	{
+		GD.Print("Delogare: " + user);
+		verifiedver = false;
+		WriteSave(user);
+		LoggedUser = " ";
+		currentStats = new stats();
+		DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
+		DisplayServer.WindowSetVsyncMode(DisplayServer.VSyncMode.Enabled);
+		GetTree().ChangeSceneToFile("res://Scenes/Logare.tscn");
 	}
 	//Functie pentru stergerea progresului unui utilizator
 	public void DeleteSave(string user)
@@ -209,7 +188,7 @@ public partial class DefaultData : Node
 		GetTree().ChangeSceneToFile("res://Scenes/Logare.tscn");	//Treci inapoi la ecranul de logare
 	}
 	//Functie pentru actualizarea progresului in functie de versiunea fisierului
-	public void UpgradeSaveFile(string user)
+	private void UpgradeSaveFile(string user)
 	{	if(currentStats.version < 5)
 		{	currentStats.goodtests = currentStats.flawlesstests;
 			currentStats.greattest = currentStats.flawlesstests;

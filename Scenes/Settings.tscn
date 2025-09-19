@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bnl2o6s20upjw" path="res://Scenes/Window.tscn" id="2_4eoc7"]
 [ext_resource type="Texture2D" uid="uid://dn730lu6ocugv" path="res://Sprites/Graphics.png" id="3_4eoc7"]
 [ext_resource type="StyleBox" uid="uid://c8t1bry4g1vn0" path="res://Sprites/UISettingsSideButtonPressed.tres" id="3_ys4a0"]
-[ext_resource type="Texture2D" uid="uid://hqx525xwjghr" path="res://Sprites/Lesson.png" id="5_74x7w"]
+[ext_resource type="Texture2D" uid="uid://04d0nmw1dmbb" path="res://Sprites/Courses.png" id="5_uuggh"]
 [ext_resource type="Texture2D" uid="uid://clfyj3icpkw2n" path="res://Sprites/Account.png" id="6_ys4a0"]
 [ext_resource type="Texture2D" uid="uid://cj0xpn0m3iicc" path="res://Sprites/Info.png" id="7_eaxjk"]
 [ext_resource type="Theme" uid="uid://c3r51fw2bo66h" path="res://Sprites/CourseUI.theme" id="9_eaxjk"]
@@ -83,7 +83,7 @@ layout_mode = 2
 
 [node name="Icon" type="TextureRect" parent="Window/SidePanel/VBoxContainer/Lectii/HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("5_74x7w")
+texture = ExtResource("5_uuggh")
 stretch_mode = 3
 
 [node name="Label" type="Label" parent="Window/SidePanel/VBoxContainer/Lectii/HBoxContainer"]

@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bid2ssfeh2pfy" path="res://Sprites/Bar.png" id="3_iihvl"]
 [ext_resource type="Texture2D" uid="uid://dgfw4k5y4gvdk" path="res://Sprites/Logo.png" id="4_ecjg1"]
 [ext_resource type="Texture2D" uid="uid://ddhgftxfvqe6s" path="res://Sprites/Profile.png" id="5_hgxmm"]
-[ext_resource type="Texture2D" uid="uid://hqx525xwjghr" path="res://Sprites/Lesson.png" id="6_ihxcl"]
+[ext_resource type="Texture2D" uid="uid://04d0nmw1dmbb" path="res://Sprites/Courses.png" id="6_26vfa"]
 [ext_resource type="Texture2D" uid="uid://cgf2wywod06f4" path="res://Sprites/Tour.png" id="10_in6cj"]
 [ext_resource type="Texture2D" uid="uid://2k0tqngjaab8" path="res://Sprites/Power.png" id="11_tuqs6"]
 [ext_resource type="Texture2D" uid="uid://drgkb2u3g5c1c" path="res://Sprites/PowerHighlight.png" id="12_u4bcu"]
@@ -287,7 +287,7 @@ layout_mode = 2
 
 [node name="Icon" type="TextureRect" parent="Window/TabContainer/Lesson/Clip/Panel/Buttons/Lesson/HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("6_ihxcl")
+texture = ExtResource("6_26vfa")
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="Window/TabContainer/Lesson/Clip/Panel/Buttons/Lesson/HBoxContainer"]

@@ -5,10 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://bid2ssfeh2pfy" path="res://Sprites/Bar.png" id="3_ocyen"]
 [ext_resource type="Texture2D" uid="uid://dgfw4k5y4gvdk" path="res://Sprites/Logo.png" id="4_grg3l"]
 [ext_resource type="Texture2D" uid="uid://2k0tqngjaab8" path="res://Sprites/Power.png" id="4_q207a"]
-[ext_resource type="Texture2D" uid="uid://hqx525xwjghr" path="res://Sprites/Lesson.png" id="5_h1m7h"]
 [ext_resource type="Texture2D" uid="uid://hbrqsdt4laac" path="res://Sprites/Logout.png" id="6_8su00"]
 [ext_resource type="Texture2D" uid="uid://ddhgftxfvqe6s" path="res://Sprites/Profile.png" id="6_grg3l"]
 [ext_resource type="Texture2D" uid="uid://drgkb2u3g5c1c" path="res://Sprites/PowerHighlight.png" id="6_kgrc2"]
+[ext_resource type="Texture2D" uid="uid://04d0nmw1dmbb" path="res://Sprites/Courses.png" id="6_mapdq"]
 [ext_resource type="Texture2D" uid="uid://dw8yk7allgkam" path="res://Sprites/Quizzes.png" id="7_erwvk"]
 [ext_resource type="Texture2D" uid="uid://dq0cwvbbf5hny" path="res://Sprites/Progress.png" id="8_6sv0n"]
 [ext_resource type="Texture2D" uid="uid://e5veq36hyvl8" path="res://Sprites/LogoutHighlight.png" id="8_mufyl"]
@@ -306,7 +306,7 @@ layout_mode = 2
 
 [node name="Icon" type="TextureRect" parent="Bar/HBoxContainer/Logo/Panel/Buttons/Lesson/HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("5_h1m7h")
+texture = ExtResource("6_mapdq")
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="Bar/HBoxContainer/Logo/Panel/Buttons/Lesson/HBoxContainer"]

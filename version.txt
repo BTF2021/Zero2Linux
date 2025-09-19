@@ -1,36 +1,33 @@
-1.1;
-- 3 lectii noi (dintre care doua sunt avansate)
-- Intrebarile din lectiile avansate pot fi omise din chestionare in setari
-- Ferestre de confirmare pentru deschiderea unui link in lectii si pentru a iesi din chestionare
-- Posibilitatea de a incerca un alt chestionar dupa ce s-a rezolvat unul
-- Icon pentru aplicatie
-- Confeti
+1.2;
+ATENTIE: Nu mai exista varianta Full! Descarca versiunea noua de pe Github!
+
+Aceasta versiune se concentreaza pe imbunatatirea interfetei si a experientei
+
+- O interfata consistenta, impreuna cu o paleta de culoare noua (Catppuccin)
+- Tutoriale noi
+- Iconite
 
 [Imbunatatiri]
-- Limita utilizatorilor a fost marita la 100. De asemenea, layoutul ecranului de logare a fost schimbat.
-- O tranzitie pentru logare
-- Fundalul poate fi animat indiferent daca se pot reda videoclipuri sau nu
-- Verificarea actualizarilor este acum dezactivata pentru utilizatorii noi
-- Fereastra pentru actualizari nu mai apare automat. In schimb, exista un buton in bara de jos pentru a arata ca exista o noua versiune
-- Layoutul pentru versiunea noua a fost schimbat astfel incat butoanele si bara de descarcate sa nu fie legate de text
-- Fereastra de progres a devenit acum statistici
-- In fereastra de statistici, subcategoriile anumitor statistici pot fi aratate apasand pe categorie
-- Ecranul de incarcare are rol de a incarca in backround scena (daca ai crezut ca deja facea acest lucru, gresesti)
-- Optiunea de a arata lectiile avansate in lista a fost reintrodusa
-- Ai acum doau minute pentru a raspunde la un test in loc de un minut
-- La terminarea unui chestionar, butonul de intoarcere dispare, fiind inlocuit cu un alt buton sub text
-- Nu se poate raspunde la o intrebare daca nu a fost pusa un raspuns
-- Fereastra de stergere a unui utilizator a fost imbunatatita
-- Proiectul a fost migrat pe Godot 4.3
-- Noi imagini pentru lectii
-- Si alte imbunatatiri legate de UI
+- Un nou meniu de logare, impreuna cu un nou meniu de introducere
+- Creearile si modificarile utilizatorilor sunt facute intr-o singura fereastra
+- Ferestrele sunt mai mici
+- Ferestrele ies in fata atunci cand sunt mutate
+
+- Meniul principal a fost imbunatatit semnificativ, facandu-l sa para mai mult a sistem de operare
+- Exista un meniu "start" (activat prin iconita de pe bara), unde se pot deschide celelalte ferestre
+
+- In meniul de lectii, lectiile se pot filtra dupa tipul si denumirea acestora
+- Fereastra de setari a fost refacuta complet
+- Ecranul de incarcare isi face treaba, incarcand meniul urmator + lectia, unde e cazul (in sfarsit)
+- Tooltipul are o intarziere de 0.1 secunde
 
 [Rezolvat]
-- Sterge aplicatia daca descarcarea a fost anulata
-- Butonul Test avea tooltip gresit
-- Descrierea modului Test era gresita
-- Controlarea videoclipurilor cu tastatura ar trebui sa functioneze cum trebuie
-- Marimea aplicatie descarcate avea unitatea de masura gresita (megabytes in loc de mebibytes)
-- Android: Aplicatia nu mai este una debug. Acum are un keystore
+- Nu poate fi mai mult de o singura fereastra de actualizare
+- In timpul actualizarilor, fereastra de noua versiune este singura fereastra activa
+- Iconul din fereastra de progres nu se mai misca in stanga atunci cand apare scrollbarul
+- Sageata din fereastra de progres este centrata
+- Ferestrele sunt restrictionate intr-un chenar pentru a nu se duce in afara ecranului
 
-NOTA PENTRU ANDROID: Nu se poate actualiza aplicatia din cauza semnaturii diferite folosite. Pentru a migra, este necesara STERGEREA DATELOR.
+[Eliminat]
+- Mesajul de la finalul listei de lectii
+- Videoplayerul + videoclipuri

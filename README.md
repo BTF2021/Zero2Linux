@@ -1,4 +1,7 @@
 ![Invata Linux de la zero](https://github.com/BTF2021/Zero2Linux/blob/main/githubassets/Banner.gif)
+
+**Nota: Acest repo a fost migrat pe [Codeberg](https://codeberg.org/BTFDev/Zero2Linux)**
+
 Zero2Linux este un proiect personal, creat pentru a-i invata pe cei mai putini familiarizati cu ecosistemul Linux sa foloseasca un desktop Linux.
 
 Dezvoltat in Godot folosind C#.
